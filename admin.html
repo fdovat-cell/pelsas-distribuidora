@@ -337,8 +337,8 @@ function renderSidebar() {
   const alBrands = data.brands.filter(b => b.sid === 'alimentos');
   const fumBrands = data.brands.filter(b => b.sid === 'fumadores');
   let html = '';
-  html += renderBrandGroup('🍬 Alimentos', alBrands);
-  html += renderBrandGroup('🚬 Fumadores', fumBrands);
+  html += renderBrandGroup('&#127851; Alimentos', alBrands);
+html += renderBrandGroup('&#128680; Fumadores', fumBrands);
   document.getElementById('sidebar').innerHTML = html;
 }
 function renderBrandGroup(label, brands) {
