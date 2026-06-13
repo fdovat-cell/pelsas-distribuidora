@@ -179,6 +179,15 @@
       "desc": "Caramelos con sabor a cáñamo",
       "logo": "img/logo-candelkush.webp",
       "activo": true
+    },
+    {
+      "id": "pitstop",
+      "sid": "alimentos",
+      "name": "Pit Stop",
+      "emoji": "📦",
+      "desc": "Galletas",
+      "logo": "img/pitstop.webp",
+      "activo": true
     }
   ],
   "products": {
@@ -3329,7 +3338,7 @@
         "venta": 1,
         "activo": true
       }
-    ]
+    ],
+    "pitstop": []
   }
 }
-
