@@ -235,6 +235,18 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <!-- STATUS BAR -->
 <div class="status-bar" id="status-bar"></div>
 
+<!-- MODAL elegir qué agregar -->
+<div class="modal-bg" id="choice-modal-bg">
+  <div class="modal" style="max-width:340px;text-align:center">
+    <div class="modal-title">¿Qué querés agregar?</div>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <button class="modal-save" onclick="closeChoiceModal();openModal(null)">+ Producto en esta marca</button>
+      <button class="modal-save" style="background:var(--cream2);color:var(--ink)" onclick="closeChoiceModal();openBrandModal(null, currentBrand ? (data.brands.find(b=>b.id===currentBrand)||{}).sid : 'alimentos')">+ Marca nueva</button>
+    </div>
+    <button class="modal-cancel" style="margin-top:10px;width:100%" onclick="closeChoiceModal()">Cancelar</button>
+  </div>
+</div>
+
 <!-- MODAL crear/editar marca -->
 <div class="modal-bg" id="brand-modal-bg">
   <div class="modal">
@@ -397,7 +409,6 @@ function renderBrandGroup(label, brands, sid) {
         <span class="b-count">${count}/${total}</span>
       </button>`;
     }).join('')}
-    <button class="brand-btn" style="color:var(--mid);font-style:italic" onclick="openBrandModal(null,'${sid}')">+ Nueva marca</button>
   </div>`;
 }
 
@@ -426,7 +437,7 @@ function renderContent() {
         <button class="toggle-inactive-btn${showInactive?' on':''}" onclick="toggleInactive()">
           ${showInactive ? 'Ocultar inactivos' : 'Ver inactivos'}
         </button>
-        <button class="add-btn" onclick="openModal(null)">+ Agregar</button>
+        <button class="add-btn" onclick="openAddChoice()">+ Agregar</button>
       </div>
     </div>
 
@@ -597,6 +608,15 @@ function saveProduct() {
   renderSidebar();
 }
 
+// ── Modal de elección ────────────────────────────────────────────────────────
+function openAddChoice() {
+  if (!currentBrand) { openModal(null); return; }
+  document.getElementById('choice-modal-bg').classList.add('open');
+}
+function closeChoiceModal() {
+  document.getElementById('choice-modal-bg').classList.remove('open');
+}
+
 // ── Modal de marca ───────────────────────────────────────────────────────────
 let editingBrandId = null;
 let newBrandSid = 'alimentos';
@@ -701,6 +721,9 @@ document.getElementById('modal-bg').addEventListener('click', e => {
 });
 document.getElementById('brand-modal-bg').addEventListener('click', e => {
   if (e.target === document.getElementById('brand-modal-bg')) closeBrandModal();
+});
+document.getElementById('choice-modal-bg').addEventListener('click', e => {
+  if (e.target === document.getElementById('choice-modal-bg')) closeChoiceModal();
 });
 
 // Recuperar credenciales guardadas
