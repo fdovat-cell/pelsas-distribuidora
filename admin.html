@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PelSAS · Admin</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -133,6 +134,20 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
   .content{padding:1rem}
   .form-grid{grid-template-columns:1fr}
 }
+
+/* TOOLS */
+.tool-drop{border:2px dashed var(--border);border-radius:14px;padding:2.5rem;text-align:center;background:#fff;cursor:pointer;transition:border-color .15s;margin-bottom:1.25rem}
+.tool-drop.over{border-color:var(--red)}
+.tool-drop p{color:var(--mid);font-size:14px;margin-top:.5rem}
+.tool-item{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid var(--border);border-radius:10px;padding:10px 14px;margin-bottom:10px}
+.tool-item img{width:48px;height:48px;object-fit:contain;background:var(--cream);border-radius:6px}
+.tool-item .info{flex:1;min-width:0}
+.tool-item .name{font-size:13px;font-weight:500;word-break:break-all}
+.tool-item .size{font-size:11px;color:var(--mid)}
+.tool-item .name input{font-size:12px;padding:4px 6px;border:1px solid var(--border);border-radius:5px;width:100%;margin-top:4px;font-family:monospace}
+.tool-item a{font-size:12px;background:var(--green);color:#fff;border-radius:6px;padding:6px 12px;text-decoration:none;white-space:nowrap}
+.fichas-preview{max-width:100%;border:1px solid var(--border);border-radius:10px;margin-top:1.25rem;background:#fff}
+
 </style>
 </head>
 <body>
@@ -213,7 +228,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
       <input type="text" id="f-present" placeholder="Ej: Caja x 12 bolsas 700g">
     </div>
     <div class="form-grid">
-      <div class="form-row">
+      <div class="form-row" style="display:none">
         <label>Emoji</label>
         <input type="text" id="f-emoji" placeholder="🐻">
       </div>
@@ -273,7 +288,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
       <input type="text" id="fb-desc" placeholder="Ej: Golosinas y maní">
     </div>
     <div class="form-grid">
-      <div class="form-row">
+      <div class="form-row" style="display:none">
         <label>Emoji</label>
         <input type="text" id="fb-emoji" placeholder="🍬">
       </div>
@@ -294,6 +309,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 let GH_OWNER = '', GH_REPO = '', GH_TOKEN = '', GH_SHA = '';
 let data = null;       // { brands, products }
 let currentBrand = null;
+let view = 'brand';
 let editingId = null;
 let showInactive = false;
 let hasUnsaved = false;
@@ -390,7 +406,15 @@ function markUnsaved() {
 function renderSidebar() {
   const alBrands = data.brands.filter(b => b.sid === 'alimentos');
   const fumBrands = data.brands.filter(b => b.sid === 'fumadores');
-  let html = '';
+  let html = `<div class="sidebar-section">
+    <span class="sidebar-label">🛠️ Herramientas</span>
+    <button class="brand-btn${view==='webp'?' active':''}" onclick="goTool('webp')">
+      <span>🖼️</span><span>Convertir a WebP</span>
+    </button>
+    <button class="brand-btn${view==='fichas'?' active':''}" onclick="goTool('fichas')">
+      <span>📋</span><span>Generador de fichas</span>
+    </button>
+  </div>`;
   html += renderBrandGroup('&#127851; Alimentos', alBrands, 'alimentos');
   html += renderBrandGroup('&#128680; Fumadores', fumBrands, 'fumadores');
   document.getElementById('sidebar').innerHTML = html;
@@ -491,6 +515,323 @@ function renderRow(p, bid) {
       <button class="del-btn" onclick="deleteProduct('${p.id}')">Borrar</button>
     </div></td>
   </tr>`;
+}
+
+// ── Herramientas ──────────────────────────────────────────────────────────────
+function goTool(t) {
+  view = t;
+  currentBrand = null;
+  renderSidebar();
+  if (t === 'webp') renderToolWebp();
+  else if (t === 'fichas') renderToolFichas();
+}
+
+function renderToolWebp() {
+  document.getElementById('content').innerHTML = `
+    <div class="content-hdr">
+      <div class="content-title">🖼️ Convertir imágenes a WebP</div>
+    </div>
+    <div style="padding:0 2rem 2rem">
+      <p style="font-size:13px;color:var(--mid);margin-bottom:1.25rem">
+        Arrastrá o seleccioná imágenes JPG/PNG. Se convierten a .webp listas para subir a <code>img/</code>.<br>
+        <strong>Logos de marca:</strong> nombralos <code>logo-{id}.webp</code> (ej: <code>logo-dori.webp</code>)<br>
+        <strong>Fotos de producto:</strong> nombralos con el código de artículo (ej: <code>9100.webp</code>)
+      </p>
+      <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-bottom:1.25rem">
+        <label style="font-size:12px;color:var(--mid);display:flex;align-items:center;gap:6px">
+          Calidad
+          <input type="range" id="wq" min="0.5" max="1" step="0.05" value="0.85" oninput="document.getElementById('wqv').textContent=Math.round(this.value*100)+'%'">
+          <span id="wqv">85%</span>
+        </label>
+        <label style="font-size:12px;color:var(--mid);display:flex;align-items:center;gap:6px">
+          Tamaño máx.
+          <select id="wmx" style="padding:5px 8px;border:1px solid var(--border);border-radius:6px;background:#fff">
+            <option value="0">Original</option>
+            <option value="1500" selected>1500px</option>
+            <option value="1000">1000px</option>
+            <option value="600">600px</option>
+          </select>
+        </label>
+      </div>
+      <div class="tool-drop" id="wdrop" onclick="document.getElementById('wfile').click()">
+        <div style="font-size:32px">📂</div>
+        <p>Tocá para elegir imágenes o arrastralas aquí</p>
+        <input type="file" id="wfile" accept="image/*" multiple style="display:none">
+      </div>
+      <div style="display:flex;gap:10px;margin-bottom:1rem" id="wactions" style="display:none">
+        <button class="add-btn" id="wdlall" style="background:var(--green)">⬇️ Descargar todas (.zip)</button>
+        <button class="toggle-inactive-btn" id="wclear">Limpiar</button>
+      </div>
+      <div id="wlist"></div>
+    </div>`;
+  initWebpTool();
+}
+
+function initWebpTool() {
+  const drop=document.getElementById('wdrop');
+  const input=document.getElementById('wfile');
+  const list=document.getElementById('wlist');
+  const actions=document.getElementById('wactions');
+  let items=[];
+
+  drop.ondragover=e=>{e.preventDefault();drop.classList.add('over')};
+  drop.ondragleave=()=>drop.classList.remove('over');
+  drop.ondrop=e=>{e.preventDefault();drop.classList.remove('over');handle(e.dataTransfer.files)};
+  input.onchange=()=>handle(input.files);
+
+  function handle(files){
+    [...files].forEach(f=>{
+      if(!f.type.startsWith('image/'))return;
+      const id='w'+Date.now()+Math.random().toString(36).slice(2);
+      const base=f.name.replace(/\.[^.]+$/,'').toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9-]/g,'');
+      const it={id,file:f,base,blob:null};
+      items.push(it);
+      const div=document.createElement('div');
+      div.className='tool-item';div.id=id;
+      div.innerHTML=`<img src="${URL.createObjectURL(f)}">
+        <div class="info">
+          <div class="name"><input value="${base}.webp" data-id="${id}"></div>
+          <div class="size">Convirtiendo…</div>
+        </div>
+        <span id="dl-${id}">⏳</span>`;
+      list.prepend(div);
+      convert(it);
+    });
+    actions.style.display=items.length?'flex':'none';
+  }
+
+  function convert(it){
+    const img=new Image();
+    img.onload=()=>{
+      let w=img.width,h=img.height;
+      const mx=parseInt(document.getElementById('wmx').value);
+      if(mx&&Math.max(w,h)>mx){const r=mx/Math.max(w,h);w=Math.round(w*r);h=Math.round(h*r);}
+      const cv=document.createElement('canvas');cv.width=w;cv.height=h;
+      cv.getContext('2d').drawImage(img,0,0,w,h);
+      cv.toBlob(blob=>{
+        it.blob=blob;
+        const kb=(blob.size/1024).toFixed(1);
+        document.getElementById(it.id).querySelector('.size').textContent=`${w}×${h}px · ${kb} KB`;
+        const url=URL.createObjectURL(blob);
+        document.getElementById('dl-'+it.id).outerHTML=`<a id="dl-${it.id}" download="${it.base}.webp" href="${url}" style="font-size:12px;background:var(--green);color:#fff;border-radius:6px;padding:6px 12px;text-decoration:none">⬇️ webp</a>`;
+      },'image/webp',parseFloat(document.getElementById('wq').value));
+    };
+    img.src=URL.createObjectURL(it.file);
+  }
+
+  document.getElementById('wclear').onclick=()=>{items=[];list.innerHTML='';actions.style.display='none'};
+  document.getElementById('wdlall').onclick=async()=>{
+    const zip=new JSZip();
+    for(const it of items){
+      if(!it.blob)continue;
+      const ni=document.querySelector(`input[data-id="${it.id}"]`);
+      let name=ni?ni.value.trim():it.base+'.webp';
+      if(!name.toLowerCase().endsWith('.webp'))name+='.webp';
+      zip.file(name,it.blob);
+    }
+    const blob=await zip.generateAsync({type:'blob'});
+    const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='imagenes-webp.zip';a.click();
+  };
+}
+
+function renderToolFichas() {
+  const brandOpts = data.brands.filter(b=>b.activo!==false)
+    .map(b=>`<option value="${b.id}">${b.name}</option>`).join('');
+
+  document.getElementById('content').innerHTML = `
+    <div class="content-hdr">
+      <div class="content-title">📋 Generador de fichas</div>
+    </div>
+    <div style="padding:0 2rem 2rem">
+      <p style="font-size:13px;color:var(--mid);margin-bottom:1.25rem">
+        Elegí una o varias marcas para generar la ficha con fotos y precios. Descargá la imagen y subila a <code>img/fichas/{id}.jpg</code>
+      </p>
+
+      <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:flex-end;margin-bottom:1.5rem">
+        <div>
+          <label style="font-size:11px;color:var(--mid);display:block;margin-bottom:4px">MARCAS A INCLUIR</label>
+          <select id="fg-brand" multiple size="5" style="padding:8px;border:1px solid var(--border);border-radius:8px;background:#fff;min-width:200px">
+            ${brandOpts}
+          </select>
+          <div style="font-size:11px;color:var(--mid);margin-top:3px">Ctrl+click para seleccionar varias</div>
+        </div>
+        <div>
+          <label style="font-size:11px;color:var(--mid);display:block;margin-bottom:4px">NOMBRE DE ARCHIVO</label>
+          <input id="fg-filename" type="text" placeholder="mazarena" style="padding:8px 12px;border:1px solid var(--border);border-radius:8px;width:180px;font-size:13px">
+          <div style="font-size:11px;color:var(--mid);margin-top:3px">Sin extensión — se guarda como .jpg</div>
+        </div>
+        <button class="add-btn" onclick="generateFicha()">Generar ficha</button>
+      </div>
+
+      <div id="fg-preview"></div>
+    </div>`;
+}
+
+async function generateFicha() {
+  const sel = [...document.getElementById('fg-brand').selectedOptions].map(o=>o.value);
+  if (!sel.length) { alert('Seleccioná al menos una marca'); return; }
+
+  const filename = (document.getElementById('fg-filename').value.trim() || sel[0]) + '.jpg';
+
+  // Collect products from selected brands
+  let allProds = [];
+  sel.forEach(bid => {
+    const b = data.brands.find(x=>x.id===bid);
+    const ps = (data.products[bid]||[]).filter(p=>p.activo!==false);
+    ps.forEach(p => allProds.push({...p, _brand: b}));
+  });
+
+  if (!allProds.length) { alert('Las marcas seleccionadas no tienen productos activos'); return; }
+
+  const preview = document.getElementById('fg-preview');
+  preview.innerHTML = '<div style="color:var(--mid);font-size:13px">Generando ficha…</div>';
+
+  // Canvas dimensions — A4 landscape proportions at 96dpi
+  const COLS = 3;
+  const PW = 1400; // canvas width
+  const HEADER_H = 120;
+  const CELL_W = Math.floor(PW / COLS);
+  const CELL_H = 340;
+  const rows = Math.ceil(allProds.length / COLS);
+  const PH = HEADER_H + rows * CELL_H + 40;
+
+  const canvas = document.createElement('canvas');
+  canvas.width = PW; canvas.height = PH;
+  const ctx = canvas.getContext('2d');
+
+  // Background
+  ctx.fillStyle = '#F5F0E8';
+  ctx.fillRect(0, 0, PW, PH);
+
+  // Header bar
+  ctx.fillStyle = '#1A1A18';
+  ctx.fillRect(0, 0, PW, HEADER_H);
+
+  // Header text — brand names
+  const headerText = sel.map(bid => data.brands.find(b=>b.id===bid)?.name || bid).join(' · ');
+  ctx.fillStyle = '#FFFFFF';
+  ctx.font = 'bold 42px sans-serif';
+  ctx.textAlign = 'left';
+  ctx.textBaseline = 'middle';
+  ctx.fillText(headerText, 36, HEADER_H / 2);
+
+  // PelSAS tag top right
+  ctx.fillStyle = '#B02020';
+  ctx.fillRect(PW - 260, 20, 240, 80);
+  ctx.fillStyle = '#FFFFFF';
+  ctx.font = 'bold 28px sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('PEL SAS', PW - 140, 50);
+  ctx.font = '20px sans-serif';
+  ctx.fillText('096 190002', PW - 140, 82);
+
+  // Products grid
+  const loadImg = src => new Promise(res => {
+    const i = new Image();
+    i.crossOrigin = 'anonymous';
+    i.onload = () => res(i);
+    i.onerror = () => res(null);
+    i.src = src;
+  });
+
+  for (let i = 0; i < allProds.length; i++) {
+    const p = allProds[i];
+    const col = i % COLS;
+    const row = Math.floor(i / COLS);
+    const x = col * CELL_W;
+    const y = HEADER_H + row * CELL_H;
+
+    // Cell background alternating
+    ctx.fillStyle = col % 2 === 0 ? '#FFFFFF' : '#F5F0E8';
+    ctx.fillRect(x, y, CELL_W, CELL_H);
+
+    // Border
+    ctx.strokeStyle = '#D8D2C6';
+    ctx.lineWidth = 1;
+    ctx.strokeRect(x, y, CELL_W, CELL_H);
+
+    // Product image
+    const img = await loadImg(`img/${p.art}.webp`);
+    const IMG_SIZE = 180;
+    const ix = x + (CELL_W - IMG_SIZE) / 2;
+    const iy = y + 16;
+    if (img) {
+      // fit image proportionally
+      const scale = Math.min(IMG_SIZE/img.width, IMG_SIZE/img.height);
+      const dw = img.width * scale, dh = img.height * scale;
+      ctx.drawImage(img, ix + (IMG_SIZE-dw)/2, iy + (IMG_SIZE-dh)/2, dw, dh);
+    } else {
+      ctx.fillStyle = '#E0DAD0';
+      ctx.fillRect(ix, iy, IMG_SIZE, IMG_SIZE);
+      ctx.fillStyle = '#7A7468';
+      ctx.font = '14px sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('sin foto', ix + IMG_SIZE/2, iy + IMG_SIZE/2);
+    }
+
+    const tx = x + CELL_W / 2;
+    let ty = y + IMG_SIZE + 28;
+
+    // Prices box
+    ctx.fillStyle = '#1A1A18';
+    ctx.fillRect(x + 20, ty - 4, CELL_W - 40, 44);
+    ctx.fillStyle = '#FFFFFF';
+    ctx.font = 'bold 18px sans-serif';
+    ctx.textAlign = 'left';
+    ctx.fillText(`PRECIO UNIT.   PRECIO CAJA`, x + 28, ty + 5);
+    ctx.font = 'bold 22px sans-serif';
+    ctx.fillStyle = '#FFFFFF';
+    const unitStr = `$${Number(p.unit).toLocaleString('es-UY',{minimumFractionDigits:0,maximumFractionDigits:2})}`;
+    const cajaStr = `$${Number(p.caja).toLocaleString('es-UY',{minimumFractionDigits:0,maximumFractionDigits:2})}`;
+    ctx.fillText(`${unitStr}          ${cajaStr}`, x + 28, ty + 32);
+    ty += 58;
+
+    // Art code
+    ctx.fillStyle = '#B02020';
+    ctx.font = 'bold 28px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText(p.art, tx, ty);
+    ty += 30;
+
+    // Product name
+    ctx.fillStyle = '#1A1A18';
+    ctx.font = 'bold 16px sans-serif';
+    ctx.textAlign = 'center';
+    const words = p.name.split(' ');
+    let line = '', lines = [];
+    for (const w of words) {
+      const test = line + (line?' ':'') + w;
+      if (ctx.measureText(test).width > CELL_W - 30) { lines.push(line); line = w; }
+      else line = test;
+    }
+    if (line) lines.push(line);
+    lines.slice(0,2).forEach((l,li) => {
+      ctx.fillText(l, tx, ty + li * 20);
+    });
+    ty += lines.slice(0,2).length * 20 + 6;
+
+    // Presentacion
+    ctx.fillStyle = '#7A7468';
+    ctx.font = '14px sans-serif';
+    ctx.fillText(p.present, tx, ty);
+  }
+
+  // Watermark bottom
+  ctx.fillStyle = '#B0AA9E';
+  ctx.font = '13px sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('PelSAS Distribuidora · pelsas-distribuidora.pages.dev', PW/2, PH - 14);
+
+  // Show preview and download
+  canvas.toBlob(blob => {
+    const url = URL.createObjectURL(blob);
+    preview.innerHTML = `
+      <div style="margin-bottom:12px;display:flex;gap:10px;align-items:center">
+        <a href="${url}" download="${filename}" class="add-btn" style="background:var(--green);text-decoration:none;display:inline-block">⬇️ Descargar ${filename}</a>
+        <span style="font-size:12px;color:var(--mid)">Guardala en <code>img/fichas/</code> del repo</span>
+      </div>
+      <img src="${url}" style="max-width:100%;border:1px solid var(--border);border-radius:10px">`;
+  }, 'image/jpeg', 0.92);
 }
 
 // ── Acciones ─────────────────────────────────────────────────────────────────
