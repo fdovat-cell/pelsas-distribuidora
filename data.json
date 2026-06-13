@@ -4,8 +4,8 @@
       "id": "dori",
       "sid": "alimentos",
       "name": "Dori",
-      "emoji": "🍬",
-      "desc": "Golosinas y maní",
+      "emoji": "ð¬",
+      "desc": "Golosinas y manÃ­",
       "logo": "img/logo-dori.webp",
       "activo": true
     },
@@ -13,7 +13,7 @@
       "id": "mazarena",
       "sid": "alimentos",
       "name": "Mazarena",
-      "emoji": "🥮",
+      "emoji": "ð¥®",
       "desc": "Alfajores artesanales",
       "logo": "img/logo-mazarena.webp",
       "activo": true
@@ -22,7 +22,7 @@
       "id": "agridulce",
       "sid": "alimentos",
       "name": "Agridulce",
-      "emoji": "🌾",
+      "emoji": "ð¾",
       "desc": "Barras de cereal",
       "logo": "img/logo-agridulce.webp",
       "activo": true
@@ -31,7 +31,7 @@
       "id": "rebelnut",
       "sid": "alimentos",
       "name": "Rebel Nut",
-      "emoji": "🥑",
+      "emoji": "ð¥",
       "desc": "Barras veganas",
       "logo": "img/logo-rebelnut.webp",
       "activo": true
@@ -40,7 +40,7 @@
       "id": "granolate",
       "sid": "alimentos",
       "name": "Granolate",
-      "emoji": "🍫",
+      "emoji": "ð«",
       "desc": "Alfajores de granola",
       "logo": "img/logo-granolate.webp",
       "activo": true
@@ -49,8 +49,8 @@
       "id": "santaelena",
       "sid": "alimentos",
       "name": "Santa Elena",
-      "emoji": "🥜",
-      "desc": "Variedades de maní",
+      "emoji": "ð¥",
+      "desc": "Variedades de manÃ­",
       "logo": "img/logo-santaelena.webp",
       "activo": true
     },
@@ -58,8 +58,8 @@
       "id": "raw",
       "sid": "fumadores",
       "name": "RAW",
-      "emoji": "🌿",
-      "desc": "Hojillas clásicas y especiales",
+      "emoji": "ð¿",
+      "desc": "Hojillas clÃ¡sicas y especiales",
       "logo": "img/logo-raw.webp",
       "activo": false
     },
@@ -67,7 +67,7 @@
       "id": "smoking",
       "sid": "fumadores",
       "name": "Smoking",
-      "emoji": "🚬",
+      "emoji": "ð¬",
       "desc": "Hojillas y filtros",
       "logo": "img/logo-smoking.webp",
       "activo": false
@@ -76,7 +76,7 @@
       "id": "darkhorse",
       "sid": "fumadores",
       "name": "Dark Horse",
-      "emoji": "🐴",
+      "emoji": "ð´",
       "desc": "Hojillas y filtros",
       "logo": "img/logo-darkHorse.webp",
       "activo": false
@@ -85,7 +85,7 @@
       "id": "elements",
       "sid": "fumadores",
       "name": "Elements",
-      "emoji": "🌊",
+      "emoji": "ð",
       "desc": "Hojillas ultra finas de arroz",
       "logo": "img/logo-elements.webp",
       "activo": false
@@ -94,7 +94,7 @@
       "id": "clipper",
       "sid": "fumadores",
       "name": "Clipper",
-      "emoji": "🔥",
+      "emoji": "ð¥",
       "desc": "Encendedores y gas",
       "logo": "img/logo-clipper.webp",
       "activo": false
@@ -103,7 +103,7 @@
       "id": "sanosinharina",
       "sid": "alimentos",
       "name": "Sanosinharina",
-      "emoji": "🌾",
+      "emoji": "ð¾",
       "desc": "Productos sin harina y sin gluten",
       "logo": "img/logo-sanosinharina.webp",
       "activo": true
@@ -112,7 +112,7 @@
       "id": "celisano",
       "sid": "alimentos",
       "name": "Celisano",
-      "emoji": "🌾",
+      "emoji": "ð¾",
       "desc": "Alfajores sin gluten y sin lactosa",
       "logo": "img/logo-celisano.webp",
       "activo": true
@@ -121,8 +121,8 @@
       "id": "smams",
       "sid": "alimentos",
       "name": "Smams",
-      "emoji": "🍪",
-      "desc": "Galletas sin gluten y sin azúcar",
+      "emoji": "ðª",
+      "desc": "Galletas sin gluten y sin azÃºcar",
       "logo": "img/logo-smams.webp",
       "activo": true
     },
@@ -130,7 +130,7 @@
       "id": "molinosala",
       "sid": "alimentos",
       "name": "Molinos Ala",
-      "emoji": "🌾",
+      "emoji": "ð¾",
       "desc": "Tostaditas de arroz",
       "logo": "img/logo-molinosala.webp",
       "activo": true
@@ -139,8 +139,8 @@
       "id": "suavipan",
       "sid": "alimentos",
       "name": "Suavipan",
-      "emoji": "🍰",
-      "desc": "Budines zero azúcar",
+      "emoji": "ð°",
+      "desc": "Budines zero azÃºcar",
       "logo": "img/logo-suavipan.webp",
       "activo": true
     },
@@ -148,8 +148,8 @@
       "id": "nutsbar",
       "sid": "alimentos",
       "name": "Nutsbar",
-      "emoji": "🌿",
-      "desc": "Barras y bombones sin gluten, sin azúcares agregados",
+      "emoji": "ð¿",
+      "desc": "Barras y bombones sin gluten, sin azÃºcares agregados",
       "logo": "img/logo-nutsbar.webp",
       "activo": true
     },
@@ -157,7 +157,7 @@
       "id": "lorenz",
       "sid": "alimentos",
       "name": "Lorenz",
-      "emoji": "🥔",
+      "emoji": "ð¥",
       "desc": "Papas naturals artesanales",
       "logo": "img/logo-lorenz.webp",
       "activo": true
@@ -166,7 +166,7 @@
       "id": "go",
       "sid": "alimentos",
       "name": "GO! Papas",
-      "emoji": "🍟",
+      "emoji": "ð",
       "desc": "Snacks a base de papas",
       "logo": "img/logo-go.webp",
       "activo": true
@@ -176,7 +176,7 @@
       "sid": "alimentos",
       "name": "Candel Kush",
       "emoji": "",
-      "desc": "Caramelos con sabor a cáñamo",
+      "desc": "Caramelos con sabor a cÃ¡Ã±amo",
       "logo": "img/logo-candelkush.webp",
       "activo": true
     }
@@ -191,7 +191,7 @@
         "art": "5820",
         "unit": 123.89,
         "caja": 2973.3,
-        "emoji": "🍬",
+        "emoji": "ð¬",
         "venta": 2,
         "activo": true
       },
@@ -203,7 +203,7 @@
         "art": "5881",
         "unit": 108.7,
         "caja": 2608.65,
-        "emoji": "🍬",
+        "emoji": "ð¬",
         "venta": 2,
         "activo": true
       },
@@ -215,7 +215,7 @@
         "art": "5364",
         "unit": 123.89,
         "caja": 2973.3,
-        "emoji": "🍬",
+        "emoji": "ð¬",
         "venta": 2,
         "activo": true
       },
@@ -227,7 +227,7 @@
         "art": "6179",
         "unit": 125.06,
         "caja": 3001.35,
-        "emoji": "🍯",
+        "emoji": "ð¯",
         "venta": 2,
         "activo": true
       },
@@ -239,7 +239,7 @@
         "art": "6180",
         "unit": 125.06,
         "caja": 3001.35,
-        "emoji": "🍬",
+        "emoji": "ð¬",
         "venta": 2,
         "activo": true
       },
@@ -251,7 +251,7 @@
         "art": "6181",
         "unit": 125.06,
         "caja": 3001.35,
-        "emoji": "🍓",
+        "emoji": "ð",
         "venta": 2,
         "activo": true
       },
@@ -263,7 +263,7 @@
         "art": "5392",
         "unit": 142.59,
         "caja": 1711.05,
-        "emoji": "🍭",
+        "emoji": "ð­",
         "venta": 2,
         "activo": true
       },
@@ -275,7 +275,7 @@
         "art": "5732",
         "unit": 183.5,
         "caja": 2201.93,
-        "emoji": "🐻",
+        "emoji": "ð»",
         "venta": 2,
         "activo": true
       },
@@ -287,7 +287,7 @@
         "art": "5408",
         "unit": 22.79,
         "caja": 683.73,
-        "emoji": "🐻",
+        "emoji": "ð»",
         "venta": 1,
         "activo": true
       },
@@ -299,19 +299,19 @@
         "art": "6582",
         "unit": 29.23,
         "caja": 876.56,
-        "emoji": "🐻",
+        "emoji": "ð»",
         "venta": 1,
         "activo": true
       },
       {
         "id": "d11",
-        "name": "Gomitas Deliket ácidas",
+        "name": "Gomitas Deliket Ã¡cidas",
         "cat": "gomitas",
         "present": "Caja x 30 bolsitas 100g",
         "art": "6550",
         "unit": 29.23,
         "caja": 876.56,
-        "emoji": "🍋",
+        "emoji": "ð",
         "venta": 1,
         "activo": true
       },
@@ -323,7 +323,7 @@
         "art": "5377",
         "unit": 25.71,
         "caja": 771.38,
-        "emoji": "🍮",
+        "emoji": "ð®",
         "venta": 1,
         "activo": true
       },
@@ -335,19 +335,19 @@
         "art": "5378",
         "unit": 25.71,
         "caja": 771.38,
-        "emoji": "🐻",
+        "emoji": "ð»",
         "venta": 1,
         "activo": true
       },
       {
         "id": "d14",
-        "name": "Gomets aros ácidos",
+        "name": "Gomets aros Ã¡cidos",
         "cat": "gomitas",
         "present": "Caja x 30 bolsas 100g",
         "art": "5379",
         "unit": 25.71,
         "caja": 771.38,
-        "emoji": "⭕",
+        "emoji": "â­",
         "venta": 1,
         "activo": true
       },
@@ -359,19 +359,19 @@
         "art": "6748",
         "unit": 25.71,
         "caja": 771.38,
-        "emoji": "🐛",
+        "emoji": "ð",
         "venta": 1,
         "activo": true
       },
       {
         "id": "d16",
-        "name": "Gomets gusanos ácidos",
+        "name": "Gomets gusanos Ã¡cidos",
         "cat": "gomitas",
         "present": "Caja x 30 bolsas 100g",
         "art": "5388",
         "unit": 25.71,
         "caja": 771.38,
-        "emoji": "🐛",
+        "emoji": "ð",
         "venta": 1,
         "activo": true
       },
@@ -383,7 +383,7 @@
         "art": "5376",
         "unit": 139.09,
         "caja": 1947.14,
-        "emoji": "🐻",
+        "emoji": "ð»",
         "venta": 2,
         "activo": true
       },
@@ -395,7 +395,7 @@
         "art": "5876",
         "unit": 151.94,
         "caja": 1823.25,
-        "emoji": "🐻",
+        "emoji": "ð»",
         "venta": 2,
         "activo": true
       },
@@ -407,7 +407,7 @@
         "art": "5484",
         "unit": 188.18,
         "caja": 2258.03,
-        "emoji": "🍭",
+        "emoji": "ð­",
         "venta": 2,
         "activo": true
       },
@@ -419,7 +419,7 @@
         "art": "5819",
         "unit": 188.18,
         "caja": 2258.03,
-        "emoji": "🍭",
+        "emoji": "ð­",
         "venta": 2,
         "activo": true
       },
@@ -431,7 +431,7 @@
         "art": "6542",
         "unit": 30.18,
         "caja": 482.8,
-        "emoji": "🍌",
+        "emoji": "ð",
         "venta": 1,
         "activo": true
       },
@@ -443,19 +443,19 @@
         "art": "6543",
         "unit": 30.18,
         "caja": 482.8,
-        "emoji": "🫐",
+        "emoji": "ð«",
         "venta": 1,
         "activo": true
       },
       {
         "id": "d25",
-        "name": "Gelatinas gusanos ácidos 60g",
+        "name": "Gelatinas gusanos Ã¡cidos 60g",
         "cat": "gelatinas",
         "present": "Caja x 16 u 60g",
         "art": "6561",
         "unit": 30.18,
         "caja": 482.8,
-        "emoji": "🐛",
+        "emoji": "ð",
         "venta": 1,
         "activo": true
       },
@@ -467,19 +467,19 @@
         "art": "6553",
         "unit": 30.18,
         "caja": 482.8,
-        "emoji": "🐻",
+        "emoji": "ð»",
         "venta": 1,
         "activo": true
       },
       {
         "id": "d27",
-        "name": "Gelatinas ladrillos ácidos",
+        "name": "Gelatinas ladrillos Ã¡cidos",
         "cat": "gelatinas",
         "present": "Caja x 16 u 60g",
         "art": "6583",
         "unit": 30.18,
         "caja": 482.8,
-        "emoji": "🧱",
+        "emoji": "ð§±",
         "venta": 1,
         "activo": true
       },
@@ -491,7 +491,7 @@
         "art": "6333",
         "unit": 30.18,
         "caja": 482.8,
-        "emoji": "🌸",
+        "emoji": "ð¸",
         "venta": 1,
         "activo": true
       },
@@ -503,7 +503,7 @@
         "art": "6578",
         "unit": 30.18,
         "caja": 482.8,
-        "emoji": "🦷",
+        "emoji": "ð¦·",
         "venta": 1,
         "activo": true
       },
@@ -515,7 +515,7 @@
         "art": "6364",
         "unit": 133.24,
         "caja": 1598.85,
-        "emoji": "🍌",
+        "emoji": "ð",
         "venta": 2,
         "activo": true
       },
@@ -527,7 +527,7 @@
         "art": "6362",
         "unit": 133.24,
         "caja": 1598.85,
-        "emoji": "👄",
+        "emoji": "ð",
         "venta": 2,
         "activo": true
       },
@@ -539,151 +539,151 @@
         "art": "6372",
         "unit": 133.24,
         "caja": 1598.85,
-        "emoji": "🫐",
+        "emoji": "ð«",
         "venta": 2,
         "activo": true
       },
       {
         "id": "d33",
-        "name": "Gelatina gusanos ácidos 500g",
+        "name": "Gelatina gusanos Ã¡cidos 500g",
         "cat": "gelatinas",
         "present": "Caja x 12 u 500g",
         "art": "6373",
         "unit": 133.24,
         "caja": 1598.85,
-        "emoji": "🐛",
+        "emoji": "ð",
         "venta": 2,
         "activo": true
       },
       {
         "id": "d34",
-        "name": "Maní japonés 70g",
+        "name": "ManÃ­ japonÃ©s 70g",
         "cat": "mani",
         "present": "Caja x 30 bolsas 70g",
         "art": "5725",
         "unit": 22.09,
         "caja": 662.69,
-        "emoji": "🥜",
+        "emoji": "ð¥",
         "venta": 1,
         "activo": true
       },
       {
         "id": "d35",
-        "name": "Maní japonés 100g",
+        "name": "ManÃ­ japonÃ©s 100g",
         "cat": "mani",
         "present": "Caja x 30 bolsas 100g",
         "art": "5730",
         "unit": 29.8,
         "caja": 894.1,
-        "emoji": "🥜",
+        "emoji": "ð¥",
         "venta": 1,
         "activo": true
       },
       {
         "id": "d36",
-        "name": "Maní japonés 200g",
+        "name": "ManÃ­ japonÃ©s 200g",
         "cat": "mani",
         "present": "Caja x 36 bolsas 200g",
         "art": "5724",
         "unit": 54.16,
         "caja": 1949.99,
-        "emoji": "🥜",
+        "emoji": "ð¥",
         "venta": 2,
         "activo": true
       },
       {
         "id": "d37",
-        "name": "Maní japonés 500g",
+        "name": "ManÃ­ japonÃ©s 500g",
         "cat": "mani",
         "present": "Caja x 20 bolsas 500g",
         "art": "5731",
         "unit": 133.24,
         "caja": 2664.75,
-        "emoji": "🥜",
+        "emoji": "ð¥",
         "venta": 2,
         "activo": true
       },
       {
         "id": "d38",
-        "name": "Maní Petiz pimienta",
+        "name": "ManÃ­ Petiz pimienta",
         "cat": "mani",
         "present": "Caja x 36 u 120g",
         "art": "5795",
         "unit": 45.69,
         "caja": 1644.75,
-        "emoji": "🌶️",
+        "emoji": "ð¶ï¸",
         "venta": 2,
         "activo": true
       },
       {
         "id": "d39",
-        "name": "Maní Petiz Cebolla",
+        "name": "ManÃ­ Petiz Cebolla",
         "cat": "mani",
         "present": "Caja x 36 u 120g",
         "art": "6519",
         "unit": 45.69,
         "caja": 1644.75,
-        "emoji": "🧅",
+        "emoji": "ð§",
         "venta": 2,
         "activo": true
       },
       {
         "id": "d40",
-        "name": "Maní Petiz Natural",
+        "name": "ManÃ­ Petiz Natural",
         "cat": "mani",
         "present": "Caja x 36 u 120g",
         "art": "5738",
         "unit": 45.69,
         "caja": 1644.75,
-        "emoji": "🥜",
+        "emoji": "ð¥",
         "venta": 2,
         "activo": true
       },
       {
         "id": "d41",
-        "name": "Maní con chocolate 70g",
+        "name": "ManÃ­ con chocolate 70g",
         "cat": "mani",
         "present": "Caja x 30 u 70g",
         "art": "3642",
         "unit": 23.93,
         "caja": 717.83,
-        "emoji": "🍫",
+        "emoji": "ð«",
         "venta": 1,
         "activo": true
       },
       {
         "id": "d42",
-        "name": "Maní con chocolate 100g",
+        "name": "ManÃ­ con chocolate 100g",
         "cat": "mani",
         "present": "Caja x 30 u 100g",
         "art": "3644",
         "unit": 32.01,
         "caja": 960.4,
-        "emoji": "🍫",
+        "emoji": "ð«",
         "venta": 1,
         "activo": true
       },
       {
         "id": "d43",
-        "name": "Maní con chocolate 700g",
+        "name": "ManÃ­ con chocolate 700g",
         "cat": "mani",
         "present": "Caja x 12 u 700g",
         "art": "3945",
         "unit": 191.84,
         "caja": 2302.01,
-        "emoji": "🍫",
+        "emoji": "ð«",
         "venta": 2,
         "activo": true
       },
       {
         "id": "d44",
-        "name": "Maní confitado",
+        "name": "ManÃ­ confitado",
         "cat": "mani",
         "present": "Caja x 12 u 700g",
         "art": "3946",
         "unit": 191.84,
         "caja": 2302.01,
-        "emoji": "🍬",
+        "emoji": "ð¬",
         "venta": 2,
         "activo": true
       }
@@ -697,7 +697,7 @@
         "art": "9100",
         "unit": 40,
         "caja": 840,
-        "emoji": "🥮",
+        "emoji": "ð¥®",
         "venta": 1,
         "activo": true
       },
@@ -709,31 +709,31 @@
         "art": "9104",
         "unit": 26,
         "caja": 546,
-        "emoji": "🥮",
+        "emoji": "ð¥®",
         "venta": 1,
         "activo": true
       },
       {
         "id": "m3",
-        "name": "Alfajor Maicena Bañada 75g",
+        "name": "Alfajor Maicena BaÃ±ada 75g",
         "cat": "alfajores",
         "present": "Bandeja x 21",
         "art": "9103",
         "unit": 40,
         "caja": 840,
-        "emoji": "🥮",
+        "emoji": "ð¥®",
         "venta": 1,
         "activo": true
       },
       {
         "id": "m4",
-        "name": "Alfajor Maicena Bañada Chica 50g",
+        "name": "Alfajor Maicena BaÃ±ada Chica 50g",
         "cat": "alfajores",
         "present": "Bandeja x 21",
         "art": "9105",
         "unit": 26,
         "caja": 546,
-        "emoji": "🥮",
+        "emoji": "ð¥®",
         "venta": 1,
         "activo": true
       },
@@ -745,31 +745,31 @@
         "art": "9192",
         "unit": 52,
         "caja": 624,
-        "emoji": "⬜",
+        "emoji": "â¬",
         "venta": 1,
         "activo": true
       },
       {
         "id": "m6",
-        "name": "Alfajor Nieve Bañada 90g",
+        "name": "Alfajor Nieve BaÃ±ada 90g",
         "cat": "alfajores",
         "present": "Caja x 12",
         "art": "9114",
         "unit": 52,
         "caja": 624,
-        "emoji": "⬜",
+        "emoji": "â¬",
         "venta": 1,
         "activo": true
       },
       {
         "id": "m7",
-        "name": "Alfajor de Maní",
+        "name": "Alfajor de ManÃ­",
         "cat": "alfajores",
         "present": "Caja x 12",
         "art": "9194",
         "unit": 59,
         "caja": 708,
-        "emoji": "🥜",
+        "emoji": "ð¥",
         "venta": 1,
         "activo": true
       },
@@ -781,7 +781,7 @@
         "art": "9116",
         "unit": 26,
         "caja": 546,
-        "emoji": "⬛",
+        "emoji": "â¬",
         "venta": 1,
         "activo": true
       },
@@ -793,7 +793,7 @@
         "art": "9150",
         "unit": 37,
         "caja": 666,
-        "emoji": "🔴",
+        "emoji": "ð´",
         "venta": 1,
         "activo": true
       },
@@ -805,7 +805,7 @@
         "art": "9182",
         "unit": 52,
         "caja": 624,
-        "emoji": "🌀",
+        "emoji": "ð",
         "venta": 1,
         "activo": true
       },
@@ -817,7 +817,7 @@
         "art": "9152",
         "unit": 18,
         "caja": 594,
-        "emoji": "👀",
+        "emoji": "ð",
         "venta": 1,
         "activo": true
       },
@@ -829,7 +829,7 @@
         "art": "9154",
         "unit": 52,
         "caja": 624,
-        "emoji": "🥮",
+        "emoji": "ð¥®",
         "venta": 1,
         "activo": true
       },
@@ -841,7 +841,7 @@
         "art": "9211",
         "unit": 52,
         "caja": 624,
-        "emoji": "🍦",
+        "emoji": "ð¦",
         "venta": 1,
         "activo": true
       },
@@ -853,7 +853,7 @@
         "art": "9218",
         "unit": 26,
         "caja": 416,
-        "emoji": "🍪",
+        "emoji": "ðª",
         "venta": 1,
         "activo": true
       },
@@ -865,7 +865,7 @@
         "art": "9309",
         "unit": 16.3,
         "caja": 489,
-        "emoji": "🍫",
+        "emoji": "ð«",
         "venta": 1,
         "activo": true
       },
@@ -877,7 +877,7 @@
         "art": "5380",
         "unit": 176,
         "caja": 2112,
-        "emoji": "🍌",
+        "emoji": "ð",
         "venta": 2,
         "activo": true
       }
@@ -891,19 +891,19 @@
         "art": "2072",
         "unit": 46.15,
         "caja": 738.38,
-        "emoji": "🍫",
+        "emoji": "ð«",
         "venta": 1,
         "activo": true
       },
       {
         "id": "a2",
-        "name": "Barra cereal maní tostado",
+        "name": "Barra cereal manÃ­ tostado",
         "cat": "barras",
         "present": "Display x 16 u",
         "art": "2073",
         "unit": 46.15,
         "caja": 738.38,
-        "emoji": "🥜",
+        "emoji": "ð¥",
         "venta": 1,
         "activo": true
       },
@@ -915,7 +915,7 @@
         "art": "2074",
         "unit": 46.15,
         "caja": 738.38,
-        "emoji": "🍇",
+        "emoji": "ð",
         "venta": 1,
         "activo": true
       },
@@ -927,7 +927,7 @@
         "art": "2061",
         "unit": 47.62,
         "caja": 761.75,
-        "emoji": "🌰",
+        "emoji": "ð°",
         "venta": 1,
         "activo": true
       },
@@ -939,43 +939,43 @@
         "art": "2059",
         "unit": 46.15,
         "caja": 738.38,
-        "emoji": "🌾",
+        "emoji": "ð¾",
         "venta": 1,
         "activo": true
       },
       {
         "id": "a6",
-        "name": "Barra cereal maní sin azúcar",
+        "name": "Barra cereal manÃ­ sin azÃºcar",
         "cat": "sin azucar",
         "present": "Display x 16 u",
         "art": "6594",
         "unit": 46.15,
         "caja": 738.38,
-        "emoji": "🥜",
+        "emoji": "ð¥",
         "venta": 1,
         "activo": true
       },
       {
         "id": "a7",
-        "name": "Barra cereal pasas sin azúcar",
+        "name": "Barra cereal pasas sin azÃºcar",
         "cat": "sin azucar",
         "present": "Display x 16 u",
         "art": "6595",
         "unit": 46.15,
         "caja": 738.38,
-        "emoji": "🍇",
+        "emoji": "ð",
         "venta": 1,
         "activo": true
       },
       {
         "id": "a8",
-        "name": "Barra cereal surtidas sin azúcar",
+        "name": "Barra cereal surtidas sin azÃºcar",
         "cat": "sin azucar",
         "present": "Display x 16 u",
         "art": "6596",
         "unit": 46.15,
         "caja": 738.38,
-        "emoji": "🌾",
+        "emoji": "ð¾",
         "venta": 1,
         "activo": true
       }
@@ -989,7 +989,7 @@
         "art": "3638",
         "unit": 56.11,
         "caja": 1010,
-        "emoji": "🌰",
+        "emoji": "ð°",
         "venta": 1,
         "activo": true
       },
@@ -1001,7 +1001,7 @@
         "art": "3639",
         "unit": 56.11,
         "caja": 1010,
-        "emoji": "🥥",
+        "emoji": "ð¥¥",
         "venta": 1,
         "activo": true
       }
@@ -1009,25 +1009,25 @@
     "granolate": [
       {
         "id": "g1",
-        "name": "Alfajor Granolate clásico",
+        "name": "Alfajor Granolate clÃ¡sico",
         "cat": "alfajores",
         "present": "Display x 12 u",
         "art": "2066",
         "unit": 71.9,
         "caja": 862.79,
-        "emoji": "🍫",
+        "emoji": "ð«",
         "venta": 1,
         "activo": true
       },
       {
         "id": "g2",
-        "name": "Alfajor Granolate maní",
+        "name": "Alfajor Granolate manÃ­",
         "cat": "alfajores",
         "present": "Display x 12 u",
         "art": "2065",
         "unit": 71.9,
         "caja": 862.79,
-        "emoji": "🥜",
+        "emoji": "ð¥",
         "venta": 1,
         "activo": true
       },
@@ -1039,7 +1039,7 @@
         "art": "2092",
         "unit": 71.9,
         "caja": 862.79,
-        "emoji": "🥥",
+        "emoji": "ð¥¥",
         "venta": 1,
         "activo": true
       },
@@ -1051,7 +1051,7 @@
         "art": "2093",
         "unit": 71.9,
         "caja": 862.79,
-        "emoji": "🌰",
+        "emoji": "ð°",
         "venta": 1,
         "activo": true
       },
@@ -1063,19 +1063,19 @@
         "art": "2138",
         "unit": 71.9,
         "caja": 862.79,
-        "emoji": "⬜",
+        "emoji": "â¬",
         "venta": 1,
         "activo": true
       },
       {
         "id": "g6",
-        "name": "Bocadito Granolate Just Clásico",
+        "name": "Bocadito Granolate Just ClÃ¡sico",
         "cat": "bocaditos",
         "present": "Caja x 12u",
         "art": "215",
         "unit": 49,
         "caja": 588,
-        "emoji": "🍫",
+        "emoji": "ð«",
         "venta": 1,
         "activo": true
       },
@@ -1087,7 +1087,7 @@
         "art": "216",
         "unit": 49,
         "caja": 588,
-        "emoji": "🌰",
+        "emoji": "ð°",
         "venta": 1,
         "activo": true
       }
@@ -1095,169 +1095,169 @@
     "santaelena": [
       {
         "id": "se1",
-        "name": "Maní tostado salado 70g",
+        "name": "ManÃ­ tostado salado 70g",
         "cat": "mani",
         "present": "Caja x 30u 70g",
         "art": "5640",
         "unit": 14.5,
         "caja": 435,
-        "emoji": "🥜",
+        "emoji": "ð¥",
         "venta": 1,
         "activo": true
       },
       {
         "id": "se2",
-        "name": "Maní tostado salado 100g",
+        "name": "ManÃ­ tostado salado 100g",
         "cat": "mani",
         "present": "Caja x 30u 100g",
         "art": "5641",
         "unit": 19.5,
         "caja": 585,
-        "emoji": "🥜",
+        "emoji": "ð¥",
         "venta": 1,
         "activo": true
       },
       {
         "id": "se3",
-        "name": "Maní tostado salado 200g",
+        "name": "ManÃ­ tostado salado 200g",
         "cat": "mani",
         "present": "Caja x 20u 200g",
         "art": "5642",
         "unit": 34.5,
         "caja": 690,
-        "emoji": "🥜",
+        "emoji": "ð¥",
         "venta": 2,
         "activo": true
       },
       {
         "id": "se4",
-        "name": "Maní tostado salado 500g",
+        "name": "ManÃ­ tostado salado 500g",
         "cat": "mani",
         "present": "Caja x 12u 500g",
         "art": "5643",
         "unit": 79,
         "caja": 948,
-        "emoji": "🥜",
+        "emoji": "ð¥",
         "venta": 2,
         "activo": true
       },
       {
         "id": "se5",
-        "name": "Maní tostado sin sal 70g",
+        "name": "ManÃ­ tostado sin sal 70g",
         "cat": "mani",
         "present": "Caja x 30u 70g",
         "art": "5644",
         "unit": 14.5,
         "caja": 435,
-        "emoji": "🥜",
+        "emoji": "ð¥",
         "venta": 1,
         "activo": true
       },
       {
         "id": "se6",
-        "name": "Maní tostado sin sal 100g",
+        "name": "ManÃ­ tostado sin sal 100g",
         "cat": "mani",
         "present": "Caja x 30u 100g",
         "art": "5645",
         "unit": 19.5,
         "caja": 585,
-        "emoji": "🥜",
+        "emoji": "ð¥",
         "venta": 1,
         "activo": true
       },
       {
         "id": "se7",
-        "name": "Maní tostado sin sal 200g",
+        "name": "ManÃ­ tostado sin sal 200g",
         "cat": "mani",
         "present": "Caja x 20u 200g",
         "art": "5646",
         "unit": 34.5,
         "caja": 690,
-        "emoji": "🥜",
+        "emoji": "ð¥",
         "venta": 2,
         "activo": true
       },
       {
         "id": "se8",
-        "name": "Maní tostado sin sal 500g",
+        "name": "ManÃ­ tostado sin sal 500g",
         "cat": "mani",
         "present": "Caja x 12u 500g",
         "art": "5647",
         "unit": 79,
         "caja": 948,
-        "emoji": "🥜",
+        "emoji": "ð¥",
         "venta": 2,
         "activo": true
       },
       {
         "id": "se9",
-        "name": "Maní crocante pimienta 70g",
+        "name": "ManÃ­ crocante pimienta 70g",
         "cat": "crocante",
         "present": "Caja x 30u 70g",
         "art": "5650",
         "unit": 16.5,
         "caja": 495,
-        "emoji": "🌶️",
+        "emoji": "ð¶ï¸",
         "venta": 1,
         "activo": true
       },
       {
         "id": "se10",
-        "name": "Maní crocante pimienta 100g",
+        "name": "ManÃ­ crocante pimienta 100g",
         "cat": "crocante",
         "present": "Caja x 30u 100g",
         "art": "5651",
         "unit": 21.5,
         "caja": 645,
-        "emoji": "🌶️",
+        "emoji": "ð¶ï¸",
         "venta": 1,
         "activo": true
       },
       {
         "id": "se11",
-        "name": "Maní crocante pimienta 200g",
+        "name": "ManÃ­ crocante pimienta 200g",
         "cat": "crocante",
         "present": "Caja x 20u 200g",
         "art": "5652",
         "unit": 38,
         "caja": 760,
-        "emoji": "🌶️",
+        "emoji": "ð¶ï¸",
         "venta": 2,
         "activo": true
       },
       {
         "id": "se12",
-        "name": "Maní crocante BBQ 70g",
+        "name": "ManÃ­ crocante BBQ 70g",
         "cat": "crocante",
         "present": "Caja x 30u 70g",
         "art": "5655",
         "unit": 16.5,
         "caja": 495,
-        "emoji": "🍖",
+        "emoji": "ð",
         "venta": 1,
         "activo": true
       },
       {
         "id": "se13",
-        "name": "Maní crocante BBQ 100g",
+        "name": "ManÃ­ crocante BBQ 100g",
         "cat": "crocante",
         "present": "Caja x 30u 100g",
         "art": "5656",
         "unit": 21.5,
         "caja": 645,
-        "emoji": "🍖",
+        "emoji": "ð",
         "venta": 1,
         "activo": true
       },
       {
         "id": "se14",
-        "name": "Maní crocante BBQ 200g",
+        "name": "ManÃ­ crocante BBQ 200g",
         "cat": "crocante",
         "present": "Caja x 20u 200g",
         "art": "5657",
         "unit": 38,
         "caja": 760,
-        "emoji": "🍖",
+        "emoji": "ð",
         "venta": 2,
         "activo": true
       },
@@ -1269,31 +1269,31 @@
         "art": "6380",
         "unit": 52,
         "caja": 1040,
-        "emoji": "🥜",
+        "emoji": "ð¥",
         "venta": 1,
         "activo": true
       },
       {
         "id": "se16",
-        "name": "Mix maní y pasas 100g",
+        "name": "Mix manÃ­ y pasas 100g",
         "cat": "aperitivo",
         "present": "Caja x 20u 100g",
         "art": "6381",
         "unit": 45,
         "caja": 900,
-        "emoji": "🍇",
+        "emoji": "ð",
         "venta": 1,
         "activo": true
       },
       {
         "id": "se17",
-        "name": "Bandeja mix maní crokisimo",
+        "name": "Bandeja mix manÃ­ crokisimo",
         "cat": "aperitivo",
         "present": "Caja x 12u 360g",
         "art": "6387",
         "unit": 163.62,
         "caja": 1963.5,
-        "emoji": "🎁",
+        "emoji": "ð",
         "venta": 2,
         "activo": true
       },
@@ -1305,7 +1305,7 @@
         "art": "6386",
         "unit": 163.62,
         "caja": 1963.5,
-        "emoji": "🎁",
+        "emoji": "ð",
         "venta": 2,
         "activo": true
       },
@@ -1317,7 +1317,7 @@
         "art": "5670",
         "unit": 14.5,
         "caja": 290,
-        "emoji": "🥩",
+        "emoji": "ð¥©",
         "venta": 1,
         "activo": true
       },
@@ -1329,7 +1329,7 @@
         "art": "5671",
         "unit": 14.5,
         "caja": 290,
-        "emoji": "🌶️",
+        "emoji": "ð¶ï¸",
         "venta": 1,
         "activo": true
       },
@@ -1341,7 +1341,7 @@
         "art": "5672",
         "unit": 14.5,
         "caja": 290,
-        "emoji": "🥓",
+        "emoji": "ð¥",
         "venta": 1,
         "activo": true
       },
@@ -1353,7 +1353,7 @@
         "art": "5673",
         "unit": 14.5,
         "caja": 290,
-        "emoji": "🧀",
+        "emoji": "ð§",
         "venta": 1,
         "activo": true
       },
@@ -1365,31 +1365,31 @@
         "art": "5895",
         "unit": 14.5,
         "caja": 290,
-        "emoji": "🧅",
+        "emoji": "ð§",
         "venta": 1,
         "activo": true
       },
       {
         "id": "se24",
-        "name": "Bloquecito maní pacoquita",
+        "name": "Bloquecito manÃ­ pacoquita",
         "cat": "pacoquita",
         "present": "Display x 50u",
         "art": "6597",
         "unit": 5.21,
         "caja": 260.32,
-        "emoji": "🍬",
+        "emoji": "ð¬",
         "venta": 1,
         "activo": true
       },
       {
         "id": "se25",
-        "name": "Bloquecito maní pacoquita bañado",
+        "name": "Bloquecito manÃ­ pacoquita baÃ±ado",
         "cat": "pacoquita",
         "present": "Display x 24u",
         "art": "6603",
         "unit": 8.18,
         "caja": 196.25,
-        "emoji": "🍫",
+        "emoji": "ð«",
         "venta": 1,
         "activo": true
       }
@@ -1403,7 +1403,7 @@
         "art": "3000",
         "unit": 35,
         "caja": 420,
-        "emoji": "🌿",
+        "emoji": "ð¿",
         "venta": 1,
         "activo": true
       },
@@ -1415,7 +1415,7 @@
         "art": "3001",
         "unit": 60,
         "caja": 1500,
-        "emoji": "🌿",
+        "emoji": "ð¿",
         "venta": 1,
         "activo": true
       },
@@ -1427,7 +1427,7 @@
         "art": "3002",
         "unit": 140,
         "caja": 2100,
-        "emoji": "🌿",
+        "emoji": "ð¿",
         "venta": 1,
         "activo": true
       },
@@ -1439,7 +1439,7 @@
         "art": "3003",
         "unit": 90,
         "caja": 2160,
-        "emoji": "🌿",
+        "emoji": "ð¿",
         "venta": 1,
         "activo": true
       },
@@ -1451,7 +1451,7 @@
         "art": "3004",
         "unit": 40,
         "caja": 1000,
-        "emoji": "🌿",
+        "emoji": "ð¿",
         "venta": 1,
         "activo": true
       },
@@ -1463,7 +1463,7 @@
         "art": "3005",
         "unit": 65,
         "caja": 1560,
-        "emoji": "🌿",
+        "emoji": "ð¿",
         "venta": 1,
         "activo": true
       },
@@ -1475,7 +1475,7 @@
         "art": "3007",
         "unit": 150,
         "caja": 2250,
-        "emoji": "🌿",
+        "emoji": "ð¿",
         "venta": 1,
         "activo": true
       },
@@ -1487,7 +1487,7 @@
         "art": "3008",
         "unit": 95,
         "caja": 2280,
-        "emoji": "🌿",
+        "emoji": "ð¿",
         "venta": 1,
         "activo": true
       },
@@ -1499,7 +1499,7 @@
         "art": "3009",
         "unit": 75,
         "caja": 3750,
-        "emoji": "🌿",
+        "emoji": "ð¿",
         "venta": 1,
         "activo": true
       },
@@ -1511,7 +1511,7 @@
         "art": "3019",
         "unit": 75,
         "caja": 1800,
-        "emoji": "🖤",
+        "emoji": "ð¤",
         "venta": 1,
         "activo": true
       },
@@ -1523,7 +1523,7 @@
         "art": "3020",
         "unit": 80,
         "caja": 4000,
-        "emoji": "🖤",
+        "emoji": "ð¤",
         "venta": 1,
         "activo": true
       },
@@ -1535,7 +1535,7 @@
         "art": "3021",
         "unit": 95,
         "caja": 2280,
-        "emoji": "🖤",
+        "emoji": "ð¤",
         "venta": 1,
         "activo": true
       },
@@ -1547,7 +1547,7 @@
         "art": "3022",
         "unit": 120,
         "caja": 2880,
-        "emoji": "🖤",
+        "emoji": "ð¤",
         "venta": 1,
         "activo": true
       },
@@ -1559,7 +1559,7 @@
         "art": "3025",
         "unit": 55,
         "caja": 1320,
-        "emoji": "🔵",
+        "emoji": "ðµ",
         "venta": 1,
         "activo": true
       },
@@ -1571,7 +1571,7 @@
         "art": "3026",
         "unit": 65,
         "caja": 1560,
-        "emoji": "🔵",
+        "emoji": "ðµ",
         "venta": 1,
         "activo": true
       },
@@ -1583,7 +1583,7 @@
         "art": "3027",
         "unit": 60,
         "caja": 1440,
-        "emoji": "🔵",
+        "emoji": "ðµ",
         "venta": 1,
         "activo": true
       },
@@ -1595,7 +1595,7 @@
         "art": "3028",
         "unit": 70,
         "caja": 1680,
-        "emoji": "🔵",
+        "emoji": "ðµ",
         "venta": 1,
         "activo": true
       },
@@ -1607,7 +1607,7 @@
         "art": "3015",
         "unit": 120,
         "caja": 2880,
-        "emoji": "🌿",
+        "emoji": "ð¿",
         "venta": 1,
         "activo": true
       },
@@ -1619,7 +1619,7 @@
         "art": "3016",
         "unit": 130,
         "caja": 3120,
-        "emoji": "🌿",
+        "emoji": "ð¿",
         "venta": 1,
         "activo": true
       },
@@ -1631,7 +1631,7 @@
         "art": "3006",
         "unit": 165,
         "caja": 3960,
-        "emoji": "🌿",
+        "emoji": "ð¿",
         "venta": 1,
         "activo": true
       },
@@ -1643,7 +1643,7 @@
         "art": "3007b",
         "unit": 150,
         "caja": 2250,
-        "emoji": "🌿",
+        "emoji": "ð¿",
         "venta": 1,
         "activo": true
       },
@@ -1655,7 +1655,7 @@
         "art": "3010",
         "unit": 180,
         "caja": 9000,
-        "emoji": "🌿",
+        "emoji": "ð¿",
         "venta": 1,
         "activo": true
       },
@@ -1667,7 +1667,7 @@
         "art": "3011",
         "unit": 165,
         "caja": 3300,
-        "emoji": "🌿",
+        "emoji": "ð¿",
         "venta": 1,
         "activo": true
       },
@@ -1679,7 +1679,7 @@
         "art": "3012",
         "unit": 190,
         "caja": 7600,
-        "emoji": "🌿",
+        "emoji": "ð¿",
         "venta": 1,
         "activo": true
       },
@@ -1691,7 +1691,7 @@
         "art": "3013",
         "unit": 200,
         "caja": 4000,
-        "emoji": "🌿",
+        "emoji": "ð¿",
         "venta": 1,
         "activo": true
       },
@@ -1703,7 +1703,7 @@
         "art": "3014",
         "unit": 285,
         "caja": 5700,
-        "emoji": "🌿",
+        "emoji": "ð¿",
         "venta": 1,
         "activo": true
       }
@@ -1717,7 +1717,7 @@
         "art": "4000",
         "unit": 35,
         "caja": 1750,
-        "emoji": "🚬",
+        "emoji": "ð¬",
         "venta": 1,
         "activo": true
       },
@@ -1729,7 +1729,7 @@
         "art": "4001",
         "unit": 60,
         "caja": 1500,
-        "emoji": "🚬",
+        "emoji": "ð¬",
         "venta": 1,
         "activo": true
       },
@@ -1741,7 +1741,7 @@
         "art": "4002",
         "unit": 60,
         "caja": 1500,
-        "emoji": "🚬",
+        "emoji": "ð¬",
         "venta": 1,
         "activo": true
       },
@@ -1753,7 +1753,7 @@
         "art": "4003",
         "unit": 75,
         "caja": 1875,
-        "emoji": "🚬",
+        "emoji": "ð¬",
         "venta": 1,
         "activo": true
       },
@@ -1765,7 +1765,7 @@
         "art": "4004",
         "unit": 60,
         "caja": 1500,
-        "emoji": "🚬",
+        "emoji": "ð¬",
         "venta": 1,
         "activo": true
       },
@@ -1777,7 +1777,7 @@
         "art": "4005",
         "unit": 85,
         "caja": 2040,
-        "emoji": "🚬",
+        "emoji": "ð¬",
         "venta": 1,
         "activo": true
       },
@@ -1789,7 +1789,7 @@
         "art": "4006",
         "unit": 85,
         "caja": 2040,
-        "emoji": "🚬",
+        "emoji": "ð¬",
         "venta": 1,
         "activo": true
       },
@@ -1801,7 +1801,7 @@
         "art": "4007",
         "unit": 70,
         "caja": 3500,
-        "emoji": "🚬",
+        "emoji": "ð¬",
         "venta": 1,
         "activo": true
       },
@@ -1813,7 +1813,7 @@
         "art": "4008",
         "unit": 70,
         "caja": 3500,
-        "emoji": "🚬",
+        "emoji": "ð¬",
         "venta": 1,
         "activo": true
       },
@@ -1825,7 +1825,7 @@
         "art": "4009",
         "unit": 70,
         "caja": 3500,
-        "emoji": "🚬",
+        "emoji": "ð¬",
         "venta": 1,
         "activo": true
       },
@@ -1837,7 +1837,7 @@
         "art": "4010",
         "unit": 80,
         "caja": 4000,
-        "emoji": "🚬",
+        "emoji": "ð¬",
         "venta": 1,
         "activo": true
       },
@@ -1849,7 +1849,7 @@
         "art": "4011",
         "unit": 80,
         "caja": 4000,
-        "emoji": "🚬",
+        "emoji": "ð¬",
         "venta": 1,
         "activo": true
       },
@@ -1861,7 +1861,7 @@
         "art": "4012",
         "unit": 80,
         "caja": 4000,
-        "emoji": "🚬",
+        "emoji": "ð¬",
         "venta": 1,
         "activo": true
       },
@@ -1873,7 +1873,7 @@
         "art": "4013",
         "unit": 100,
         "caja": 2400,
-        "emoji": "🚬",
+        "emoji": "ð¬",
         "venta": 1,
         "activo": true
       },
@@ -1885,7 +1885,7 @@
         "art": "4014",
         "unit": 90,
         "caja": 2160,
-        "emoji": "🚬",
+        "emoji": "ð¬",
         "venta": 1,
         "activo": true
       },
@@ -1897,7 +1897,7 @@
         "art": "4015",
         "unit": 90,
         "caja": 2160,
-        "emoji": "🚬",
+        "emoji": "ð¬",
         "venta": 1,
         "activo": true
       },
@@ -1909,7 +1909,7 @@
         "art": "4016",
         "unit": 90,
         "caja": 2160,
-        "emoji": "🚬",
+        "emoji": "ð¬",
         "venta": 1,
         "activo": true
       },
@@ -1921,7 +1921,7 @@
         "art": "4020",
         "unit": 85,
         "caja": 2550,
-        "emoji": "🔺",
+        "emoji": "ðº",
         "venta": 1,
         "activo": true
       },
@@ -1933,7 +1933,7 @@
         "art": "4021",
         "unit": 80,
         "caja": 4000,
-        "emoji": "🔺",
+        "emoji": "ðº",
         "venta": 1,
         "activo": true
       },
@@ -1945,7 +1945,7 @@
         "art": "4030",
         "unit": 60,
         "caja": 1500,
-        "emoji": "🍓",
+        "emoji": "ð",
         "venta": 1,
         "activo": true
       },
@@ -1957,7 +1957,7 @@
         "art": "4031",
         "unit": 60,
         "caja": 1500,
-        "emoji": "🍓",
+        "emoji": "ð",
         "venta": 1,
         "activo": true
       },
@@ -1969,7 +1969,7 @@
         "art": "4032",
         "unit": 60,
         "caja": 1500,
-        "emoji": "🍇",
+        "emoji": "ð",
         "venta": 1,
         "activo": true
       },
@@ -1981,7 +1981,7 @@
         "art": "4033",
         "unit": 60,
         "caja": 1500,
-        "emoji": "🫐",
+        "emoji": "ð«",
         "venta": 1,
         "activo": true
       },
@@ -1993,7 +1993,7 @@
         "art": "4034",
         "unit": 60,
         "caja": 1500,
-        "emoji": "🍫",
+        "emoji": "ð«",
         "venta": 1,
         "activo": true
       },
@@ -2005,7 +2005,7 @@
         "art": "4050",
         "unit": 245,
         "caja": 2450,
-        "emoji": "⚫",
+        "emoji": "â«",
         "venta": 1,
         "activo": true
       },
@@ -2017,7 +2017,7 @@
         "art": "4051",
         "unit": 32,
         "caja": 1600,
-        "emoji": "⚫",
+        "emoji": "â«",
         "venta": 1,
         "activo": true
       },
@@ -2029,7 +2029,7 @@
         "art": "4052",
         "unit": 80,
         "caja": 2400,
-        "emoji": "⚫",
+        "emoji": "â«",
         "venta": 1,
         "activo": true
       },
@@ -2041,7 +2041,7 @@
         "art": "4053",
         "unit": 80,
         "caja": 800,
-        "emoji": "🟢",
+        "emoji": "ð¢",
         "venta": 1,
         "activo": true
       },
@@ -2053,7 +2053,7 @@
         "art": "4054",
         "unit": 80,
         "caja": 2400,
-        "emoji": "⚫",
+        "emoji": "â«",
         "venta": 1,
         "activo": true
       }
@@ -2067,7 +2067,7 @@
         "art": "2010",
         "unit": 20,
         "caja": 1000,
-        "emoji": "🐴",
+        "emoji": "ð´",
         "venta": 1,
         "activo": true
       },
@@ -2079,7 +2079,7 @@
         "art": "2011",
         "unit": 30,
         "caja": 750,
-        "emoji": "🐴",
+        "emoji": "ð´",
         "venta": 1,
         "activo": true
       },
@@ -2091,7 +2091,7 @@
         "art": "2012",
         "unit": 30,
         "caja": 750,
-        "emoji": "🐴",
+        "emoji": "ð´",
         "venta": 1,
         "activo": true
       },
@@ -2103,7 +2103,7 @@
         "art": "2013",
         "unit": 35,
         "caja": 875,
-        "emoji": "🐴",
+        "emoji": "ð´",
         "venta": 1,
         "activo": true
       },
@@ -2115,7 +2115,7 @@
         "art": "2014",
         "unit": 35,
         "caja": 875,
-        "emoji": "🐴",
+        "emoji": "ð´",
         "venta": 1,
         "activo": true
       },
@@ -2127,7 +2127,7 @@
         "art": "2015",
         "unit": 45,
         "caja": 1080,
-        "emoji": "🐴",
+        "emoji": "ð´",
         "venta": 1,
         "activo": true
       },
@@ -2139,19 +2139,19 @@
         "art": "2016",
         "unit": 50,
         "caja": 1200,
-        "emoji": "🐴",
+        "emoji": "ð´",
         "venta": 1,
         "activo": true
       },
       {
         "id": "dh8",
-        "name": "Filtros x 120 Rojos clásicos",
+        "name": "Filtros x 120 Rojos clÃ¡sicos",
         "cat": "filtros",
         "present": "Caja x 34u",
         "art": "2019",
         "unit": 62,
         "caja": 2108,
-        "emoji": "🔴",
+        "emoji": "ð´",
         "venta": 1,
         "activo": true
       },
@@ -2163,7 +2163,7 @@
         "art": "2020",
         "unit": 62,
         "caja": 620,
-        "emoji": "🟢",
+        "emoji": "ð¢",
         "venta": 1,
         "activo": true
       },
@@ -2175,55 +2175,55 @@
         "art": "2021",
         "unit": 62,
         "caja": 620,
-        "emoji": "🟢",
+        "emoji": "ð¢",
         "venta": 1,
         "activo": true
       },
       {
         "id": "dh11",
-        "name": "Filtros x 150 Rojos clásicos",
+        "name": "Filtros x 150 Rojos clÃ¡sicos",
         "cat": "filtros",
         "present": "Caja x 10u",
         "art": "2022",
         "unit": 70,
         "caja": 700,
-        "emoji": "🔴",
+        "emoji": "ð´",
         "venta": 1,
         "activo": true
       },
       {
         "id": "dh12",
-        "name": "Filtros x 1000 Rojos clásicos",
+        "name": "Filtros x 1000 Rojos clÃ¡sicos",
         "cat": "filtros",
         "present": "Caja x 1u",
         "art": "2023",
         "unit": 399,
         "caja": 399,
-        "emoji": "🔴",
+        "emoji": "ð´",
         "venta": 1,
         "activo": true
       },
       {
         "id": "dh13",
-        "name": "Filtros x 60 con cápsula mentol",
+        "name": "Filtros x 60 con cÃ¡psula mentol",
         "cat": "filtros",
         "present": "Caja x 16u",
         "art": "2024",
         "unit": 80,
         "caja": 1280,
-        "emoji": "🟢",
+        "emoji": "ð¢",
         "venta": 1,
         "activo": true
       },
       {
         "id": "dh14",
-        "name": "Filtros 8mm Rojos clásicos",
+        "name": "Filtros 8mm Rojos clÃ¡sicos",
         "cat": "filtros",
         "present": "Caja x 30u",
         "art": "2025",
         "unit": 62,
         "caja": 1860,
-        "emoji": "🔴",
+        "emoji": "ð´",
         "venta": 1,
         "activo": true
       },
@@ -2235,7 +2235,7 @@
         "art": "2026",
         "unit": 62,
         "caja": 1240,
-        "emoji": "⚫",
+        "emoji": "â«",
         "venta": 1,
         "activo": true
       },
@@ -2247,7 +2247,7 @@
         "art": "2027",
         "unit": 110,
         "caja": 550,
-        "emoji": "🔴",
+        "emoji": "ð´",
         "venta": 1,
         "activo": true
       },
@@ -2259,7 +2259,7 @@
         "art": "2028",
         "unit": 110,
         "caja": 550,
-        "emoji": "🔵",
+        "emoji": "ðµ",
         "venta": 1,
         "activo": true
       },
@@ -2271,7 +2271,7 @@
         "art": "2029",
         "unit": 110,
         "caja": 550,
-        "emoji": "⚫",
+        "emoji": "â«",
         "venta": 1,
         "activo": true
       },
@@ -2283,19 +2283,19 @@
         "art": "2030",
         "unit": 110,
         "caja": 550,
-        "emoji": "🟢",
+        "emoji": "ð¢",
         "venta": 1,
         "activo": true
       },
       {
         "id": "dh20",
-        "name": "Tubos x 100 con cápsula mentol",
+        "name": "Tubos x 100 con cÃ¡psula mentol",
         "cat": "baja rotacion",
         "present": "Caja x 5u",
         "art": "2031",
         "unit": 199,
         "caja": 995,
-        "emoji": "🟢",
+        "emoji": "ð¢",
         "venta": 1,
         "activo": true
       }
@@ -2309,7 +2309,7 @@
         "art": "3032",
         "unit": 60,
         "caja": 1500,
-        "emoji": "🌊",
+        "emoji": "ð",
         "venta": 1,
         "activo": true
       },
@@ -2321,7 +2321,7 @@
         "art": "3033",
         "unit": 50,
         "caja": 1250,
-        "emoji": "🌊",
+        "emoji": "ð",
         "venta": 1,
         "activo": true
       },
@@ -2333,7 +2333,7 @@
         "art": "3034",
         "unit": 55,
         "caja": 2750,
-        "emoji": "🌊",
+        "emoji": "ð",
         "venta": 1,
         "activo": true
       },
@@ -2345,7 +2345,7 @@
         "art": "3035",
         "unit": 75,
         "caja": 1800,
-        "emoji": "🌊",
+        "emoji": "ð",
         "venta": 1,
         "activo": true
       },
@@ -2357,7 +2357,7 @@
         "art": "3036",
         "unit": 80,
         "caja": 1920,
-        "emoji": "🌊",
+        "emoji": "ð",
         "venta": 1,
         "activo": true
       },
@@ -2369,7 +2369,7 @@
         "art": "3040",
         "unit": 50,
         "caja": 1250,
-        "emoji": "🍃",
+        "emoji": "ð",
         "venta": 1,
         "activo": true
       },
@@ -2381,7 +2381,7 @@
         "art": "3041",
         "unit": 55,
         "caja": 2750,
-        "emoji": "🍃",
+        "emoji": "ð",
         "venta": 1,
         "activo": true
       },
@@ -2393,7 +2393,7 @@
         "art": "3042",
         "unit": 80,
         "caja": 1920,
-        "emoji": "🍃",
+        "emoji": "ð",
         "venta": 1,
         "activo": true
       },
@@ -2405,7 +2405,7 @@
         "art": "3044",
         "unit": 50,
         "caja": 1250,
-        "emoji": "🌸",
+        "emoji": "ð¸",
         "venta": 1,
         "activo": true
       },
@@ -2417,7 +2417,7 @@
         "art": "3045",
         "unit": 55,
         "caja": 2750,
-        "emoji": "🌸",
+        "emoji": "ð¸",
         "venta": 1,
         "activo": true
       },
@@ -2429,7 +2429,7 @@
         "art": "3046",
         "unit": 80,
         "caja": 1920,
-        "emoji": "🌸",
+        "emoji": "ð¸",
         "venta": 1,
         "activo": true
       },
@@ -2441,7 +2441,7 @@
         "art": "3037",
         "unit": 110,
         "caja": 2640,
-        "emoji": "🌊",
+        "emoji": "ð",
         "venta": 1,
         "activo": true
       },
@@ -2453,7 +2453,7 @@
         "art": "3038",
         "unit": 125,
         "caja": 1250,
-        "emoji": "🌊",
+        "emoji": "ð",
         "venta": 1,
         "activo": true
       }
@@ -2461,25 +2461,25 @@
     "clipper": [
       {
         "id": "cl1",
-        "name": "Encendedor Clipper Clásico CP11",
+        "name": "Encendedor Clipper ClÃ¡sico CP11",
         "cat": "encendedores",
         "present": "Pack x 24u",
         "art": "11",
         "unit": 48,
         "caja": 1152,
-        "emoji": "🔥",
+        "emoji": "ð¥",
         "venta": 1,
         "activo": true
       },
       {
         "id": "cl2",
-        "name": "Encendedor Clipper Clásico CP11 blister",
+        "name": "Encendedor Clipper ClÃ¡sico CP11 blister",
         "cat": "encendedores",
         "present": "Pack x 48u",
         "art": "12",
         "unit": 48,
         "caja": 2304,
-        "emoji": "🔥",
+        "emoji": "ð¥",
         "venta": 1,
         "activo": true
       },
@@ -2491,19 +2491,19 @@
         "art": "22",
         "unit": 39,
         "caja": 936,
-        "emoji": "🔥",
+        "emoji": "ð¥",
         "venta": 1,
         "activo": true
       },
       {
         "id": "cl4",
-        "name": "Encendedor Clipper metálico",
+        "name": "Encendedor Clipper metÃ¡lico",
         "cat": "encendedores",
         "present": "Pack x 12u",
         "art": "24",
         "unit": 249,
         "caja": 2988,
-        "emoji": "🔥",
+        "emoji": "ð¥",
         "venta": 1,
         "activo": true
       },
@@ -2515,7 +2515,7 @@
         "art": "26",
         "unit": 89,
         "caja": 2136,
-        "emoji": "🔥",
+        "emoji": "ð¥",
         "venta": 1,
         "activo": true
       },
@@ -2527,31 +2527,31 @@
         "art": "28",
         "unit": 109,
         "caja": 1308,
-        "emoji": "🔥",
+        "emoji": "ð¥",
         "venta": 1,
         "activo": true
       },
       {
         "id": "cl7",
-        "name": "Encendedor Clipper plástico Catalítico",
+        "name": "Encendedor Clipper plÃ¡stico CatalÃ­tico",
         "cat": "encendedores",
         "present": "Pack x 48u",
         "art": "30",
         "unit": 60,
         "caja": 2880,
-        "emoji": "🔥",
+        "emoji": "ð¥",
         "venta": 1,
         "activo": true
       },
       {
         "id": "cl8",
-        "name": "Encendedor Clipper Catalítico metálico",
+        "name": "Encendedor Clipper CatalÃ­tico metÃ¡lico",
         "cat": "encendedores",
         "present": "Pack x 1u",
         "art": "32",
         "unit": 320,
         "caja": 320,
-        "emoji": "🔥",
+        "emoji": "ð¥",
         "venta": 1,
         "activo": true
       },
@@ -2563,7 +2563,7 @@
         "art": "34",
         "unit": 59,
         "caja": 1475,
-        "emoji": "💨",
+        "emoji": "ð¨",
         "venta": 1,
         "activo": true
       },
@@ -2575,7 +2575,7 @@
         "art": "36",
         "unit": 180,
         "caja": 180,
-        "emoji": "💨",
+        "emoji": "ð¨",
         "venta": 1,
         "activo": true
       },
@@ -2587,7 +2587,7 @@
         "art": "38",
         "unit": 180,
         "caja": 180,
-        "emoji": "💨",
+        "emoji": "ð¨",
         "venta": 1,
         "activo": true
       },
@@ -2599,7 +2599,7 @@
         "art": "40",
         "unit": 30,
         "caja": 30,
-        "emoji": "🔧",
+        "emoji": "ð§",
         "venta": 1,
         "activo": true
       },
@@ -2611,7 +2611,7 @@
         "art": "42",
         "unit": 850,
         "caja": 850,
-        "emoji": "🔧",
+        "emoji": "ð§",
         "venta": 1,
         "activo": true
       },
@@ -2623,7 +2623,7 @@
         "art": "44",
         "unit": 6552,
         "caja": 6552,
-        "emoji": "🏪",
+        "emoji": "ðª",
         "venta": 1,
         "activo": true
       }
@@ -2637,31 +2637,31 @@
         "art": "2132",
         "unit": 53.9,
         "caja": 646.8,
-        "emoji": "🥮",
+        "emoji": "ð¥®",
         "venta": 1,
         "activo": true
       },
       {
         "id": "ce2",
-        "name": "Alfajor bañado c/chocolate s/gluten",
+        "name": "Alfajor baÃ±ado c/chocolate s/gluten",
         "cat": "alfajores",
         "present": "Display x 12u 80g",
         "art": "2130",
         "unit": 60,
         "caja": 720,
-        "emoji": "🥮",
+        "emoji": "ð¥®",
         "venta": 1,
         "activo": true
       },
       {
         "id": "ce3",
-        "name": "Alfajor bañado c/choc blanco s/gluten",
+        "name": "Alfajor baÃ±ado c/choc blanco s/gluten",
         "cat": "alfajores",
         "present": "Display x 12u 80g",
         "art": "2128",
         "unit": 60,
         "caja": 720,
-        "emoji": "🥮",
+        "emoji": "ð¥®",
         "venta": 1,
         "activo": true
       },
@@ -2673,19 +2673,19 @@
         "art": "2134",
         "unit": 46.5,
         "caja": 558,
-        "emoji": "🥮",
+        "emoji": "ð¥®",
         "venta": 1,
         "activo": true
       },
       {
         "id": "ce5",
-        "name": "Bombita dulce de leche bañado chocolate",
+        "name": "Bombita dulce de leche baÃ±ado chocolate",
         "cat": "especiales",
         "present": "Display x 24u 30g",
         "art": "6621",
         "unit": 21,
         "caja": 504,
-        "emoji": "🍫",
+        "emoji": "ð«",
         "venta": 1,
         "activo": true
       }
@@ -2699,19 +2699,19 @@
         "art": "4691",
         "unit": 96,
         "caja": 2304,
-        "emoji": "🍪",
+        "emoji": "ðª",
         "venta": 2,
         "activo": true
       },
       {
         "id": "sm_2",
-        "name": "Galletas Smams Chips Chocolate SIN AZÚCAR 150g",
+        "name": "Galletas Smams Chips Chocolate SIN AZÃCAR 150g",
         "cat": "sin azucar",
         "present": "Caja x 24u",
         "art": "4781",
         "unit": 144,
         "caja": 3456,
-        "emoji": "🍪",
+        "emoji": "ðª",
         "venta": 2,
         "activo": true
       },
@@ -2723,7 +2723,7 @@
         "art": "4661",
         "unit": 110.5,
         "caja": 2652,
-        "emoji": "🍪",
+        "emoji": "ðª",
         "venta": 2,
         "activo": true
       },
@@ -2735,7 +2735,7 @@
         "art": "4664",
         "unit": 173,
         "caja": 2768,
-        "emoji": "🍪",
+        "emoji": "ðª",
         "venta": 2,
         "activo": true
       },
@@ -2747,19 +2747,19 @@
         "art": "4665",
         "unit": 89.5,
         "caja": 1611,
-        "emoji": "🍪",
+        "emoji": "ðª",
         "venta": 2,
         "activo": true
       },
       {
         "id": "sm_6",
-        "name": "Galletas Smams Crackers Clásica SIN GLUTEN 150g",
+        "name": "Galletas Smams Crackers ClÃ¡sica SIN GLUTEN 150g",
         "cat": "sin gluten",
         "present": "Caja x 18u",
         "art": "4662",
         "unit": 105,
         "caja": 1890,
-        "emoji": "🍪",
+        "emoji": "ðª",
         "venta": 2,
         "activo": true
       },
@@ -2771,7 +2771,7 @@
         "art": "4678",
         "unit": 120,
         "caja": 2160,
-        "emoji": "🍪",
+        "emoji": "ðª",
         "venta": 2,
         "activo": true
       },
@@ -2783,7 +2783,7 @@
         "art": "4659",
         "unit": 89.5,
         "caja": 1611,
-        "emoji": "🍪",
+        "emoji": "ðª",
         "venta": 2,
         "activo": true
       },
@@ -2795,7 +2795,7 @@
         "art": "4660",
         "unit": 89.5,
         "caja": 1611,
-        "emoji": "🍪",
+        "emoji": "ðª",
         "venta": 2,
         "activo": true
       },
@@ -2807,19 +2807,19 @@
         "art": "4803",
         "unit": 105,
         "caja": 2520,
-        "emoji": "🍪",
+        "emoji": "ðª",
         "venta": 2,
         "activo": true
       },
       {
         "id": "sm_11",
-        "name": "Polvorón Smams vainilla SIN AZÚCAR 115g",
+        "name": "PolvorÃ³n Smams vainilla SIN AZÃCAR 115g",
         "cat": "sin azucar",
         "present": "Caja x 24u",
         "art": "4783",
         "unit": 109,
         "caja": 2616,
-        "emoji": "🍪",
+        "emoji": "ðª",
         "venta": 2,
         "activo": true
       }
@@ -2827,13 +2827,13 @@
     "molinosala": [
       {
         "id": "ma1",
-        "name": "Tostaditas de arroz clásicas 150g",
+        "name": "Tostaditas de arroz clÃ¡sicas 150g",
         "cat": "tostaditas",
         "present": "Caja x 24u 150g",
         "art": "6356",
         "unit": 67.9,
         "caja": 1629.6,
-        "emoji": "🌾",
+        "emoji": "ð¾",
         "venta": 2,
         "activo": true
       },
@@ -2845,7 +2845,7 @@
         "art": "6354",
         "unit": 67.9,
         "caja": 1358,
-        "emoji": "🌾",
+        "emoji": "ð¾",
         "venta": 2,
         "activo": true
       },
@@ -2857,7 +2857,7 @@
         "art": "6355",
         "unit": 67.9,
         "caja": 1629.6,
-        "emoji": "🌾",
+        "emoji": "ð¾",
         "venta": 2,
         "activo": true
       },
@@ -2869,19 +2869,19 @@
         "art": "6357",
         "unit": 67.9,
         "caja": 1629.6,
-        "emoji": "🌾",
+        "emoji": "ð¾",
         "venta": 2,
         "activo": true
       },
       {
         "id": "ma5",
-        "name": "Tostaditas de arroz clásicas supercrocantes 120g",
+        "name": "Tostaditas de arroz clÃ¡sicas supercrocantes 120g",
         "cat": "tostaditas",
         "present": "Caja x 20u 120g",
         "art": "6353",
         "unit": 67.9,
         "caja": 1358,
-        "emoji": "🌾",
+        "emoji": "ð¾",
         "venta": 2,
         "activo": true
       },
@@ -2893,7 +2893,7 @@
         "art": "6511",
         "unit": 67.9,
         "caja": 1358,
-        "emoji": "🌾",
+        "emoji": "ð¾",
         "venta": 2,
         "activo": true
       }
@@ -2901,13 +2901,13 @@
     "sanosinharina": [
       {
         "id": "snh1",
-        "name": "Rebozador clásico",
+        "name": "Rebozador clÃ¡sico",
         "cat": "rebozadores",
         "present": "Caja x 12 350g",
         "art": "4830",
-        "unit": 132,
-        "caja": 1584,
-        "emoji": "🌾",
+        "unit": 134,
+        "caja": 1608,
+        "emoji": "ð¾",
         "venta": 2,
         "activo": true
       },
@@ -2919,7 +2919,7 @@
         "art": "4831",
         "unit": 148,
         "caja": 1776,
-        "emoji": "🌾",
+        "emoji": "ð¾",
         "venta": 2,
         "activo": true
       },
@@ -2931,7 +2931,7 @@
         "art": "4832",
         "unit": 148,
         "caja": 1776,
-        "emoji": "🌾",
+        "emoji": "ð¾",
         "venta": 2,
         "activo": true
       },
@@ -2943,31 +2943,31 @@
         "art": "6674",
         "unit": 229,
         "caja": 1832,
-        "emoji": "🍞",
+        "emoji": "ð",
         "venta": 2,
         "activo": true
       },
       {
         "id": "snh5",
-        "name": "Budín vainilla sin gluten",
+        "name": "BudÃ­n vainilla sin gluten",
         "cat": "sin gluten",
         "present": "Caja x 12 250g",
         "art": "6675",
         "unit": 195,
         "caja": 2340,
-        "emoji": "🍰",
+        "emoji": "ð°",
         "venta": 2,
         "activo": true
       },
       {
         "id": "snh6",
-        "name": "Budín de limón sin gluten",
+        "name": "BudÃ­n de limÃ³n sin gluten",
         "cat": "sin gluten",
         "present": "Caja x 12 250g",
         "art": "6676",
         "unit": 195,
         "caja": 2340,
-        "emoji": "🍋",
+        "emoji": "ð",
         "venta": 2,
         "activo": true
       },
@@ -2979,7 +2979,7 @@
         "art": "10635",
         "unit": 59,
         "caja": 708,
-        "emoji": "🎂",
+        "emoji": "ð",
         "venta": 1,
         "activo": true
       }
@@ -2993,7 +2993,7 @@
         "art": "3541",
         "unit": 34.8,
         "caja": 417.6,
-        "emoji": "🌿",
+        "emoji": "ð¿",
         "venta": 1,
         "activo": true
       },
@@ -3005,7 +3005,7 @@
         "art": "3551",
         "unit": 34.8,
         "caja": 417.6,
-        "emoji": "🥥",
+        "emoji": "ð¥¥",
         "venta": 1,
         "activo": true
       },
@@ -3017,7 +3017,7 @@
         "art": "3540",
         "unit": 34.8,
         "caja": 417.6,
-        "emoji": "🍫",
+        "emoji": "ð«",
         "venta": 1,
         "activo": true
       },
@@ -3029,7 +3029,7 @@
         "art": "3543",
         "unit": 34.8,
         "caja": 417.6,
-        "emoji": "🌱",
+        "emoji": "ð±",
         "venta": 1,
         "activo": true
       },
@@ -3041,19 +3041,19 @@
         "art": "3586",
         "unit": 34.8,
         "caja": 417.6,
-        "emoji": "🍒",
+        "emoji": "ð",
         "venta": 1,
         "activo": true
       },
       {
         "id": "nb6",
-        "name": "Barra cereales Proteínas Veganas 25g",
+        "name": "Barra cereales ProteÃ­nas Veganas 25g",
         "cat": "sin gluten",
         "present": "Caja x 12u",
         "art": "3965",
         "unit": 34.8,
         "caja": 417.6,
-        "emoji": "💪",
+        "emoji": "ðª",
         "venta": 1,
         "activo": true
       },
@@ -3065,43 +3065,43 @@
         "art": "3992",
         "unit": 34.8,
         "caja": 417.6,
-        "emoji": "🍓",
+        "emoji": "ð",
         "venta": 1,
         "activo": true
       },
       {
         "id": "nb8",
-        "name": "Bombón Nutsbar Chocolate Blanco",
+        "name": "BombÃ³n Nutsbar Chocolate Blanco",
         "cat": "bombones",
         "present": "Caja x 10u",
         "art": "35362",
         "unit": 89,
         "caja": 890,
-        "emoji": "⬜",
+        "emoji": "â¬",
         "venta": 1,
         "activo": true
       },
       {
         "id": "nb9",
-        "name": "Bombón Nutsbar Chocolate",
+        "name": "BombÃ³n Nutsbar Chocolate",
         "cat": "bombones",
         "present": "Caja x 10u",
         "art": "35366",
         "unit": 89,
         "caja": 890,
-        "emoji": "🍫",
+        "emoji": "ð«",
         "venta": 1,
         "activo": true
       },
       {
         "id": "nb10",
-        "name": "Bombón Nutsbar Chocolate Vegano",
+        "name": "BombÃ³n Nutsbar Chocolate Vegano",
         "cat": "bombones",
         "present": "Caja x 10u",
         "art": "35364",
         "unit": 89,
         "caja": 890,
-        "emoji": "🌱",
+        "emoji": "ð±",
         "venta": 1,
         "activo": true
       },
@@ -3113,7 +3113,7 @@
         "art": "4084",
         "unit": 49,
         "caja": 441,
-        "emoji": "💪",
+        "emoji": "ðª",
         "venta": 1,
         "activo": true
       }
@@ -3121,13 +3121,13 @@
     "lorenz": [
       {
         "id": "lz1",
-        "name": "Papas Naturals Clásicas 120g",
+        "name": "Papas Naturals ClÃ¡sicas 120g",
         "cat": "papas",
         "present": "Caja x 12u",
         "art": "5617",
         "unit": 105,
         "caja": 1260,
-        "emoji": "🥔",
+        "emoji": "ð¥",
         "venta": 2,
         "activo": true
       },
@@ -3139,7 +3139,7 @@
         "art": "5618",
         "unit": 105,
         "caja": 1260,
-        "emoji": "🌿",
+        "emoji": "ð¿",
         "venta": 2,
         "activo": true
       },
@@ -3151,19 +3151,19 @@
         "art": "5600",
         "unit": 105,
         "caja": 1260,
-        "emoji": "🌶️",
+        "emoji": "ð¶ï¸",
         "venta": 2,
         "activo": true
       },
       {
         "id": "lz4",
-        "name": "Papas Naturals Balsámico 120g",
+        "name": "Papas Naturals BalsÃ¡mico 120g",
         "cat": "papas",
         "present": "Caja x 12u",
         "art": "5624",
         "unit": 105,
         "caja": 1260,
-        "emoji": "🍇",
+        "emoji": "ð",
         "venta": 2,
         "activo": true
       },
@@ -3175,7 +3175,7 @@
         "art": "5616",
         "unit": 105,
         "caja": 1260,
-        "emoji": "🧂",
+        "emoji": "ð§",
         "venta": 2,
         "activo": true
       },
@@ -3187,7 +3187,7 @@
         "art": "5693",
         "unit": 105,
         "caja": 1260,
-        "emoji": "🫒",
+        "emoji": "ð«",
         "venta": 2,
         "activo": true
       },
@@ -3199,7 +3199,7 @@
         "art": "5925",
         "unit": 105,
         "caja": 1260,
-        "emoji": "🧀",
+        "emoji": "ð§",
         "venta": 2,
         "activo": true
       }
@@ -3207,49 +3207,49 @@
     "suavipan": [
       {
         "id": "sv1",
-        "name": "Budín Marmolado Zero Azúcar 250g",
+        "name": "BudÃ­n Marmolado Zero AzÃºcar 250g",
         "cat": "budines",
         "present": "Caja x 10",
         "art": "3838",
         "unit": 159,
         "caja": 1590,
-        "emoji": "🍰",
+        "emoji": "ð°",
         "venta": 2,
         "activo": true
       },
       {
         "id": "sv2",
-        "name": "Budín Coco Zero Azúcar 250g",
+        "name": "BudÃ­n Coco Zero AzÃºcar 250g",
         "cat": "budines",
         "present": "Caja x 10",
         "art": "4037",
         "unit": 159,
         "caja": 1590,
-        "emoji": "🥥",
+        "emoji": "ð¥¥",
         "venta": 2,
         "activo": true
       },
       {
         "id": "sv3",
-        "name": "Budín Chocolate Zero Azúcar 250g",
+        "name": "BudÃ­n Chocolate Zero AzÃºcar 250g",
         "cat": "budines",
         "present": "Caja x 10",
         "art": "3837",
         "unit": 159,
         "caja": 1590,
-        "emoji": "🍫",
+        "emoji": "ð«",
         "venta": 2,
         "activo": true
       },
       {
         "id": "sv4",
-        "name": "Budín Naranja Zero Azúcar 250g",
+        "name": "BudÃ­n Naranja Zero AzÃºcar 250g",
         "cat": "budines",
         "present": "Caja x 10",
         "art": "3839",
         "unit": 159,
         "caja": 1590,
-        "emoji": "🍊",
+        "emoji": "ð",
         "venta": 2,
         "activo": true
       }
@@ -3263,7 +3263,7 @@
         "art": "800",
         "unit": 88,
         "caja": 1232,
-        "emoji": "🍕",
+        "emoji": "ð",
         "venta": 2,
         "activo": true
       },
@@ -3275,7 +3275,7 @@
         "art": "801",
         "unit": 88,
         "caja": 1232,
-        "emoji": "🧀",
+        "emoji": "ð§",
         "venta": 2,
         "activo": true
       },
@@ -3287,7 +3287,7 @@
         "art": "802",
         "unit": 88,
         "caja": 1232,
-        "emoji": "🍖",
+        "emoji": "ð",
         "venta": 2,
         "activo": true
       },
@@ -3299,7 +3299,7 @@
         "art": "803",
         "unit": 88,
         "caja": 1232,
-        "emoji": "🥔",
+        "emoji": "ð¥",
         "venta": 2,
         "activo": true
       },
@@ -3311,7 +3311,7 @@
         "art": "804",
         "unit": 88,
         "caja": 1232,
-        "emoji": "🧅",
+        "emoji": "ð§",
         "venta": 2,
         "activo": true
       }
@@ -3325,7 +3325,7 @@
         "cat": "Caramelos",
         "art": "700",
         "present": "Caja x 50 unidades",
-        "emoji": "📦",
+        "emoji": "ð¦",
         "venta": 1,
         "activo": true
       }
