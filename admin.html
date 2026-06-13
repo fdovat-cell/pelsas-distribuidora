@@ -670,62 +670,38 @@ function renderToolFichas() {
 async function generateFicha() {
   const sel = [...document.getElementById('fg-brand').selectedOptions].map(o=>o.value);
   if (!sel.length) { alert('Seleccioná al menos una marca'); return; }
-
   const filename = (document.getElementById('fg-filename').value.trim() || sel[0]) + '.jpg';
 
-  // Collect products from selected brands
   let allProds = [];
   sel.forEach(bid => {
     const b = data.brands.find(x=>x.id===bid);
     const ps = (data.products[bid]||[]).filter(p=>p.activo!==false);
     ps.forEach(p => allProds.push({...p, _brand: b}));
   });
-
   if (!allProds.length) { alert('Las marcas seleccionadas no tienen productos activos'); return; }
 
   const preview = document.getElementById('fg-preview');
-  preview.innerHTML = '<div style="color:var(--mid);font-size:13px">Generando ficha…</div>';
+  preview.innerHTML = '<div style="color:var(--mid);font-size:13px;padding:1rem 0">⏳ Generando ficha…</div>';
 
-  // Canvas dimensions — A4 landscape proportions at 96dpi
-  const COLS = 3;
-  const PW = 1400; // canvas width
-  const HEADER_H = 120;
-  const CELL_W = Math.floor(PW / COLS);
-  const CELL_H = 340;
-  const rows = Math.ceil(allProds.length / COLS);
-  const PH = HEADER_H + rows * CELL_H + 40;
+  // ── Dimensiones ──────────────────────────────────────────────────────────
+  const COLS      = 3;
+  const PW        = 1500;
+  const PAD       = 28;          // padding exterior e interior
+  const HEADER_H  = 160;
+  const FOOTER_H  = 44;
+  const CELL_W    = Math.floor((PW - PAD * 2 - (COLS - 1) * PAD) / COLS);
+  const IMG_AREA  = 220;
+  const PRICE_H   = 80;
+  const INFO_H    = 90;
+  const CELL_H    = IMG_AREA + PRICE_H + INFO_H + PAD * 2;
+  const ROWS      = Math.ceil(allProds.length / COLS);
+  const PH        = HEADER_H + PAD + ROWS * (CELL_H + PAD) + FOOTER_H + PAD;
 
   const canvas = document.createElement('canvas');
   canvas.width = PW; canvas.height = PH;
   const ctx = canvas.getContext('2d');
 
-  // Background
-  ctx.fillStyle = '#F5F0E8';
-  ctx.fillRect(0, 0, PW, PH);
-
-  // Header bar
-  ctx.fillStyle = '#1A1A18';
-  ctx.fillRect(0, 0, PW, HEADER_H);
-
-  // Header text — brand names
-  const headerText = sel.map(bid => data.brands.find(b=>b.id===bid)?.name || bid).join(' · ');
-  ctx.fillStyle = '#FFFFFF';
-  ctx.font = 'bold 42px sans-serif';
-  ctx.textAlign = 'left';
-  ctx.textBaseline = 'middle';
-  ctx.fillText(headerText, 36, HEADER_H / 2);
-
-  // PelSAS tag top right
-  ctx.fillStyle = '#B02020';
-  ctx.fillRect(PW - 260, 20, 240, 80);
-  ctx.fillStyle = '#FFFFFF';
-  ctx.font = 'bold 28px sans-serif';
-  ctx.textAlign = 'center';
-  ctx.fillText('PEL SAS', PW - 140, 50);
-  ctx.font = '20px sans-serif';
-  ctx.fillText('096 190002', PW - 140, 82);
-
-  // Products grid
+  // ── Helpers ───────────────────────────────────────────────────────────────
   const loadImg = src => new Promise(res => {
     const i = new Image();
     i.crossOrigin = 'anonymous';
@@ -734,104 +710,214 @@ async function generateFicha() {
     i.src = src;
   });
 
+  function roundRect(x, y, w, h, r) {
+    ctx.beginPath();
+    ctx.moveTo(x+r, y);
+    ctx.lineTo(x+w-r, y); ctx.quadraticCurveTo(x+w, y, x+w, y+r);
+    ctx.lineTo(x+w, y+h-r); ctx.quadraticCurveTo(x+w, y+h, x+w-r, y+h);
+    ctx.lineTo(x+r, y+h); ctx.quadraticCurveTo(x, y+h, x, y+h-r);
+    ctx.lineTo(x, y+r); ctx.quadraticCurveTo(x, y, x+r, y);
+    ctx.closePath();
+  }
+
+  function wrapText(text, x, y, maxW, lineH, maxLines) {
+    const words = text.split(' ');
+    let line = '', drawn = 0;
+    for (const w of words) {
+      const test = line + (line?' ':'') + w;
+      if (ctx.measureText(test).width > maxW && line) {
+        if (drawn < maxLines) { ctx.fillText(line, x, y + drawn * lineH); drawn++; }
+        line = w;
+      } else line = test;
+    }
+    if (drawn < maxLines && line) ctx.fillText(line, x, y + drawn * lineH);
+  }
+
+  function fmtPrice(n) {
+    return '$' + Number(n).toLocaleString('es-UY', {minimumFractionDigits:0, maximumFractionDigits:2});
+  }
+
+  // ── Fondo general ─────────────────────────────────────────────────────────
+  ctx.fillStyle = '#EDEAE3';
+  ctx.fillRect(0, 0, PW, PH);
+
+  // ── HEADER ────────────────────────────────────────────────────────────────
+  // Gradiente negro → gris oscuro
+  const grad = ctx.createLinearGradient(0, 0, PW, HEADER_H);
+  grad.addColorStop(0, '#1A1A18');
+  grad.addColorStop(1, '#2E2C28');
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, PW, HEADER_H);
+
+  // Línea roja decorativa izquierda
+  ctx.fillStyle = '#B02020';
+  ctx.fillRect(0, 0, 8, HEADER_H);
+
+  // Logo de marca (si tiene una sola marca)
+  let headerLogoDrawn = false;
+  if (sel.length === 1) {
+    const b = data.brands.find(x => x.id === sel[0]);
+    if (b && b.logo) {
+      const logoImg = await loadImg(b.logo);
+      if (logoImg) {
+        const lh = 90, lw = lh * (logoImg.width / logoImg.height);
+        ctx.drawImage(logoImg, 28, (HEADER_H - lh) / 2, Math.min(lw, 200), lh);
+        headerLogoDrawn = true;
+      }
+    }
+  }
+
+  // Nombre de marcas en el header
+  const headerNames = sel.map(bid => data.brands.find(b=>b.id===bid)?.name || bid).join('  ·  ');
+  const headerX = headerLogoDrawn ? 250 : 30;
+  ctx.fillStyle = '#FFFFFF';
+  ctx.font = `bold 54px 'Arial Black', sans-serif`;
+  ctx.textAlign = 'left';
+  ctx.textBaseline = 'middle';
+  ctx.fillText(headerNames.toUpperCase(), headerX, HEADER_H / 2 - 8);
+  ctx.font = `300 22px Arial, sans-serif`;
+  ctx.fillStyle = '#AAA49C';
+  ctx.fillText('CATÁLOGO DE PRODUCTOS', headerX, HEADER_H / 2 + 30);
+
+  // Badge PelSAS
+  const badgeW = 210, badgeH = 90;
+  const badgeX = PW - badgeW - 28, badgeY = (HEADER_H - badgeH) / 2;
+  ctx.fillStyle = '#B02020';
+  roundRect(badgeX, badgeY, badgeW, badgeH, 8);
+  ctx.fill();
+  ctx.fillStyle = '#FFFFFF';
+  ctx.font = `bold 30px 'Arial Black', sans-serif`;
+  ctx.textAlign = 'center';
+  ctx.fillText('PEL SAS', badgeX + badgeW/2, badgeY + 34);
+  ctx.font = `500 19px Arial, sans-serif`;
+  ctx.fillStyle = '#FFCCCC';
+  ctx.fillText('096 190002', badgeX + badgeW/2, badgeY + 62);
+
+  // ── GRID DE PRODUCTOS ─────────────────────────────────────────────────────
   for (let i = 0; i < allProds.length; i++) {
     const p = allProds[i];
     const col = i % COLS;
     const row = Math.floor(i / COLS);
-    const x = col * CELL_W;
-    const y = HEADER_H + row * CELL_H;
+    const cx = PAD + col * (CELL_W + PAD);
+    const cy = HEADER_H + PAD + row * (CELL_H + PAD);
 
-    // Cell background alternating
-    ctx.fillStyle = col % 2 === 0 ? '#FFFFFF' : '#F5F0E8';
-    ctx.fillRect(x, y, CELL_W, CELL_H);
+    // Tarjeta blanca con sombra simulada
+    ctx.fillStyle = '#E0DDD6';
+    roundRect(cx+3, cy+4, CELL_W, CELL_H, 12);
+    ctx.fill();
+    ctx.fillStyle = '#FFFFFF';
+    roundRect(cx, cy, CELL_W, CELL_H, 12);
+    ctx.fill();
 
-    // Border
-    ctx.strokeStyle = '#D8D2C6';
-    ctx.lineWidth = 1;
-    ctx.strokeRect(x, y, CELL_W, CELL_H);
+    // ── Foto ──────────────────────────────────────────────────────────────
+    const imgY = cy + PAD;
+    const imgX = cx + (CELL_W - IMG_AREA) / 2;
 
-    // Product image
-    const img = await loadImg(`img/${p.art}.webp`);
-    const IMG_SIZE = 180;
-    const ix = x + (CELL_W - IMG_SIZE) / 2;
-    const iy = y + 16;
-    if (img) {
-      // fit image proportionally
-      const scale = Math.min(IMG_SIZE/img.width, IMG_SIZE/img.height);
-      const dw = img.width * scale, dh = img.height * scale;
-      ctx.drawImage(img, ix + (IMG_SIZE-dw)/2, iy + (IMG_SIZE-dh)/2, dw, dh);
+    // Fondo foto suave
+    ctx.fillStyle = '#F5F2EC';
+    roundRect(imgX, imgY, IMG_AREA, IMG_AREA, 8);
+    ctx.fill();
+
+    const prodImg = await loadImg(`img/${p.art}.webp`);
+    if (prodImg) {
+      const scale = Math.min((IMG_AREA - 16) / prodImg.width, (IMG_AREA - 16) / prodImg.height);
+      const dw = prodImg.width * scale, dh = prodImg.height * scale;
+      ctx.drawImage(prodImg, imgX + (IMG_AREA - dw)/2, imgY + (IMG_AREA - dh)/2, dw, dh);
     } else {
-      ctx.fillStyle = '#E0DAD0';
-      ctx.fillRect(ix, iy, IMG_SIZE, IMG_SIZE);
-      ctx.fillStyle = '#7A7468';
-      ctx.font = '14px sans-serif';
+      ctx.fillStyle = '#CCC7BF';
+      ctx.font = '14px Arial';
       ctx.textAlign = 'center';
-      ctx.fillText('sin foto', ix + IMG_SIZE/2, iy + IMG_SIZE/2);
+      ctx.textBaseline = 'middle';
+      ctx.fillText('sin foto', imgX + IMG_AREA/2, imgY + IMG_AREA/2);
     }
 
-    const tx = x + CELL_W / 2;
-    let ty = y + IMG_SIZE + 28;
-
-    // Prices box
+    // ── Bloque de precios ─────────────────────────────────────────────────
+    const priceBY = imgY + IMG_AREA + 14;
+    const priceBH = PRICE_H;
     ctx.fillStyle = '#1A1A18';
-    ctx.fillRect(x + 20, ty - 4, CELL_W - 40, 44);
-    ctx.fillStyle = '#FFFFFF';
-    ctx.font = 'bold 18px sans-serif';
-    ctx.textAlign = 'left';
-    ctx.fillText(`PRECIO UNIT.   PRECIO CAJA`, x + 28, ty + 5);
-    ctx.font = 'bold 22px sans-serif';
-    ctx.fillStyle = '#FFFFFF';
-    const unitStr = `$${Number(p.unit).toLocaleString('es-UY',{minimumFractionDigits:0,maximumFractionDigits:2})}`;
-    const cajaStr = `$${Number(p.caja).toLocaleString('es-UY',{minimumFractionDigits:0,maximumFractionDigits:2})}`;
-    ctx.fillText(`${unitStr}          ${cajaStr}`, x + 28, ty + 32);
-    ty += 58;
+    roundRect(cx + 12, priceBY, CELL_W - 24, priceBH, 8);
+    ctx.fill();
 
-    // Art code
+    // Labels
+    const halfW = (CELL_W - 24) / 2;
+    ctx.fillStyle = '#888480';
+    ctx.font = '500 13px Arial';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'top';
+    ctx.fillText('PRECIO UNIT.', cx + 12 + halfW/2, priceBY + 10);
+    ctx.fillText('PRECIO CAJA', cx + 12 + halfW + halfW/2, priceBY + 10);
+
+    // Divider vertical
+    ctx.strokeStyle = '#333230';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(cx + 12 + halfW, priceBY + 8);
+    ctx.lineTo(cx + 12 + halfW, priceBY + priceBH - 8);
+    ctx.stroke();
+
+    // Prices
+    ctx.fillStyle = '#FFFFFF';
+    ctx.font = `bold 28px 'Arial Black', sans-serif`;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(fmtPrice(p.unit), cx + 12 + halfW/2, priceBY + priceBH/2 + 8);
+    ctx.fillText(fmtPrice(p.caja), cx + 12 + halfW + halfW/2, priceBY + priceBH/2 + 8);
+
+    // ── Info producto ──────────────────────────────────────────────────────
+    let infoY = priceBY + priceBH + 14;
+
+    // Código artículo — badge rojo
+    const codeStr = p.art;
+    ctx.font = `bold 15px monospace`;
+    const codeW = ctx.measureText(codeStr).width + 20;
     ctx.fillStyle = '#B02020';
-    ctx.font = 'bold 28px sans-serif';
+    roundRect(cx + CELL_W/2 - codeW/2, infoY, codeW, 26, 5);
+    ctx.fill();
+    ctx.fillStyle = '#FFFFFF';
+    ctx.font = `bold 14px monospace`;
     ctx.textAlign = 'center';
-    ctx.fillText(p.art, tx, ty);
-    ty += 30;
+    ctx.textBaseline = 'middle';
+    ctx.fillText(codeStr, cx + CELL_W/2, infoY + 13);
+    infoY += 34;
 
-    // Product name
+    // Nombre del producto
     ctx.fillStyle = '#1A1A18';
-    ctx.font = 'bold 16px sans-serif';
+    ctx.font = `bold 16px Arial`;
     ctx.textAlign = 'center';
-    const words = p.name.split(' ');
-    let line = '', lines = [];
-    for (const w of words) {
-      const test = line + (line?' ':'') + w;
-      if (ctx.measureText(test).width > CELL_W - 30) { lines.push(line); line = w; }
-      else line = test;
-    }
-    if (line) lines.push(line);
-    lines.slice(0,2).forEach((l,li) => {
-      ctx.fillText(l, tx, ty + li * 20);
-    });
-    ty += lines.slice(0,2).length * 20 + 6;
+    ctx.textBaseline = 'top';
+    wrapText(p.name, cx + CELL_W/2, infoY, CELL_W - 30, 22, 2);
+    infoY += 48;
 
-    // Presentacion
+    // Presentación
     ctx.fillStyle = '#7A7468';
-    ctx.font = '14px sans-serif';
-    ctx.fillText(p.present, tx, ty);
+    ctx.font = `500 13px Arial`;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'top';
+    ctx.fillText(p.present, cx + CELL_W/2, infoY);
   }
 
-  // Watermark bottom
-  ctx.fillStyle = '#B0AA9E';
-  ctx.font = '13px sans-serif';
+  // ── FOOTER ────────────────────────────────────────────────────────────────
+  const footY = PH - FOOTER_H;
+  ctx.fillStyle = '#1A1A18';
+  ctx.fillRect(0, footY, PW, FOOTER_H);
+  ctx.fillStyle = '#B02020';
+  ctx.fillRect(0, footY, 8, FOOTER_H);
+  ctx.fillStyle = '#666260';
+  ctx.font = '13px Arial';
   ctx.textAlign = 'center';
-  ctx.fillText('PelSAS Distribuidora · pelsas-distribuidora.pages.dev', PW/2, PH - 14);
+  ctx.textBaseline = 'middle';
+  ctx.fillText('PelSAS Distribuidora  ·  Precios de lista en $UYU + IVA  ·  Sujeto a disponibilidad de stock', PW/2, footY + FOOTER_H/2);
 
-  // Show preview and download
+  // ── Download ──────────────────────────────────────────────────────────────
   canvas.toBlob(blob => {
     const url = URL.createObjectURL(blob);
     preview.innerHTML = `
-      <div style="margin-bottom:12px;display:flex;gap:10px;align-items:center">
-        <a href="${url}" download="${filename}" class="add-btn" style="background:var(--green);text-decoration:none;display:inline-block">⬇️ Descargar ${filename}</a>
-        <span style="font-size:12px;color:var(--mid)">Guardala en <code>img/fichas/</code> del repo</span>
+      <div style="margin-bottom:14px;display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+        <a href="${url}" download="${filename}" class="add-btn" style="background:var(--green);color:#fff;text-decoration:none;padding:10px 20px;border-radius:8px;font-weight:600;font-size:14px">⬇️ Descargar ${filename}</a>
+        <span style="font-size:12px;color:var(--mid)">Subila a <code>img/fichas/</code> en el repo</span>
       </div>
-      <img src="${url}" style="max-width:100%;border:1px solid var(--border);border-radius:10px">`;
-  }, 'image/jpeg', 0.92);
+      <img src="${url}" style="max-width:100%;border:1px solid var(--border);border-radius:12px;box-shadow:0 4px 16px rgba(0,0,0,.1)">`;
+  }, 'image/jpeg', 0.93);
 }
 
 // ── Acciones ─────────────────────────────────────────────────────────────────
