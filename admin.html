@@ -684,6 +684,247 @@ async function generateFicha() {
   preview.innerHTML = '<div style="color:var(--mid);font-size:13px;padding:1rem 0">⏳ Generando ficha…</div>';
 
   // ── Dimensiones ──────────────────────────────────────────────────────────
+  const COLS     = 3;
+  const PW       = 1500;
+  const GAP      = 20;
+  const MARGIN   = 28;
+  const HEADER_H = 130;
+  const FOOTER_H = 36;
+  const CELL_W   = Math.floor((PW - MARGIN*2 - GAP*(COLS-1)) / COLS);
+  const IMG_H    = Math.floor(CELL_W * 0.72);  // foto = 72% del ancho → grande
+  const INFO_H   = 148;
+  const CELL_H   = IMG_H + INFO_H;
+  const ROWS     = Math.ceil(allProds.length / COLS);
+  const PH       = HEADER_H + MARGIN + ROWS*(CELL_H+GAP) - GAP + MARGIN + FOOTER_H;
+
+  const canvas   = document.createElement('canvas');
+  canvas.width   = PW;
+  canvas.height  = PH;
+  const ctx      = canvas.getContext('2d');
+
+  // ── Helpers ───────────────────────────────────────────────────────────────
+  const loadImg = src => new Promise(res => {
+    const i = new Image(); i.crossOrigin='anonymous';
+    i.onload=()=>res(i); i.onerror=()=>res(null); i.src=src;
+  });
+
+  function rr(x,y,w,h,r){
+    ctx.beginPath();
+    ctx.moveTo(x+r,y);
+    ctx.lineTo(x+w-r,y); ctx.quadraticCurveTo(x+w,y,x+w,y+r);
+    ctx.lineTo(x+w,y+h-r); ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);
+    ctx.lineTo(x+r,y+h); ctx.quadraticCurveTo(x,y+h,x,y+h-r);
+    ctx.lineTo(x,y+r); ctx.quadraticCurveTo(x,y,x+r,y);
+    ctx.closePath();
+  }
+
+  function wrapText(text, x, y, maxW, lineH, maxLines){
+    const words=text.split(' '); let line='', n=0;
+    for(const w of words){
+      const t=line+(line?' ':'')+w;
+      if(ctx.measureText(t).width>maxW&&line){
+        if(n<maxLines){ctx.fillText(line,x,y+n*lineH);n++;} line=w;
+      } else line=t;
+    }
+    if(n<maxLines&&line) ctx.fillText(line,x,y+n*lineH);
+  }
+
+  function price(n){
+    return '$'+Number(n).toLocaleString('es-UY',{minimumFractionDigits:0,maximumFractionDigits:2});
+  }
+
+  // ── Fondo ─────────────────────────────────────────────────────────────────
+  ctx.fillStyle='#F0EDE6';
+  ctx.fillRect(0,0,PW,PH);
+
+  // ── HEADER ────────────────────────────────────────────────────────────────
+  // Fondo gris oscuro cálido (no negro puro)
+  ctx.fillStyle='#2B2926';
+  ctx.fillRect(0,0,PW,HEADER_H);
+
+  // Línea acento rojo fina arriba
+  ctx.fillStyle='#B02020';
+  ctx.fillRect(0,0,PW,5);
+
+  // Logo marca (una sola marca)
+  let logoEndX = MARGIN + 20;
+  if(sel.length===1){
+    const b=data.brands.find(x=>x.id===sel[0]);
+    if(b&&b.logo){
+      const li=await loadImg(b.logo);
+      if(li){
+        const lh=72, lw=Math.min(lh*(li.width/li.height),180);
+        ctx.drawImage(li, MARGIN+16, (HEADER_H-lh)/2+5, lw, lh);
+        logoEndX = MARGIN+16+lw+24;
+      }
+    }
+  }
+
+  // Nombre marcas
+  const brandLabel = sel.map(bid=>data.brands.find(b=>b.id===bid)?.name||bid).join('  ·  ').toUpperCase();
+  ctx.fillStyle='#FFFFFF';
+  ctx.font=`bold 46px Arial`;
+  ctx.textAlign='left';
+  ctx.textBaseline='middle';
+  ctx.fillText(brandLabel, logoEndX, HEADER_H/2 - 10);
+
+  // Subtítulo
+  ctx.fillStyle='#8A857E';
+  ctx.font=`400 17px Arial`;
+  ctx.fillText('Catálogo de productos · Precios en $UYU', logoEndX, HEADER_H/2 + 26);
+
+  // PelSAS pill derecha
+  const pw2=180, ph2=56, px2=PW-MARGIN-pw2, py2=(HEADER_H-ph2)/2;
+  ctx.fillStyle='#B02020';
+  rr(px2,py2,pw2,ph2,10); ctx.fill();
+  ctx.fillStyle='#FFFFFF';
+  ctx.font=`bold 22px Arial`;
+  ctx.textAlign='center';
+  ctx.textBaseline='middle';
+  ctx.fillText('PEL SAS', px2+pw2/2, py2+ph2/2-8);
+  ctx.fillStyle='#FFAAAA';
+  ctx.font=`400 15px Arial`;
+  ctx.fillText('096 190002', px2+pw2/2, py2+ph2/2+14);
+
+  // ── TARJETAS ──────────────────────────────────────────────────────────────
+  for(let i=0;i<allProds.length;i++){
+    const p=allProds[i];
+    const col=i%COLS, row=Math.floor(i/COLS);
+    const cx=MARGIN+col*(CELL_W+GAP);
+    const cy=HEADER_H+MARGIN+row*(CELL_H+GAP);
+
+    // Sombra sutil
+    ctx.fillStyle='rgba(0,0,0,0.07)';
+    rr(cx+2,cy+3,CELL_W,CELL_H,14); ctx.fill();
+
+    // Tarjeta blanca
+    ctx.fillStyle='#FFFFFF';
+    rr(cx,cy,CELL_W,CELL_H,14); ctx.fill();
+
+    // ── Foto ────────────────────────────────────────────────────────────
+    // Zona foto con clip redondeado arriba
+    ctx.save();
+    rr(cx,cy,CELL_W,IMG_H+14,14); ctx.clip();
+    ctx.fillStyle='#F5F2EC';
+    ctx.fillRect(cx,cy,CELL_W,IMG_H+14);
+
+    const pi=await loadImg(`img/${p.art}.webp`);
+    if(pi){
+      const pad=18;
+      const scale=Math.min((CELL_W-pad*2)/pi.width,(IMG_H-pad*2)/pi.height);
+      const dw=pi.width*scale, dh=pi.height*scale;
+      ctx.drawImage(pi, cx+(CELL_W-dw)/2, cy+(IMG_H-dh)/2, dw, dh);
+    } else {
+      ctx.fillStyle='#DDD9D2';
+      ctx.font='15px Arial'; ctx.textAlign='center'; ctx.textBaseline='middle';
+      ctx.fillText('sin foto', cx+CELL_W/2, cy+IMG_H/2);
+    }
+    ctx.restore();
+
+    // ── Info ─────────────────────────────────────────────────────────────
+    const infoTop = cy + IMG_H + 6;
+    const infoX   = cx + CELL_W/2;
+    let iy        = infoTop + 16;
+
+    // Nombre producto
+    ctx.fillStyle='#1A1A18';
+    ctx.font=`bold 17px Arial`;
+    ctx.textAlign='center';
+    ctx.textBaseline='top';
+    wrapText(p.name, infoX, iy, CELL_W-28, 22, 2);
+    iy += 48;
+
+    // Precios — en una línea, tipografía grande
+    const unitTxt = price(p.unit);
+    const cajaTxt = price(p.caja);
+
+    // Precio unitario destacado
+    ctx.font=`bold 26px Arial`;
+    ctx.fillStyle='#B02020';
+    ctx.textAlign='center';
+    ctx.textBaseline='top';
+
+    // Medir para centrar los dos precios juntos
+    const unitW = ctx.measureText(unitTxt).width;
+    ctx.font=`bold 20px Arial`;
+    const cajaW = ctx.measureText(cajaTxt).width;
+    const sepTxt=' · ';
+    ctx.font=`400 16px Arial`;
+    ctx.fillStyle='#AAA49C';
+    const sepW = ctx.measureText(sepTxt).width;
+
+    const totalW = unitW + sepW + cajaW + 40; // +40 for labels
+    let startX = infoX - totalW/2 + 4;
+
+    // unit price
+    ctx.font=`bold 26px Arial`;
+    ctx.fillStyle='#B02020';
+    ctx.textAlign='left';
+    ctx.fillText(unitTxt, startX, iy);
+
+    // label unit
+    ctx.font=`400 11px Arial`;
+    ctx.fillStyle='#AAA49C';
+    ctx.fillText('unit', startX, iy+30);
+
+    // separator
+    ctx.font=`300 20px Arial`;
+    ctx.fillStyle='#D0CBC4';
+    ctx.fillText('/', startX+unitW+8, iy+4);
+
+    // caja price
+    ctx.font=`bold 20px Arial`;
+    ctx.fillStyle='#1A1A18';
+    ctx.fillText(cajaTxt, startX+unitW+20, iy+4);
+
+    // label caja
+    ctx.font=`400 11px Arial`;
+    ctx.fillStyle='#AAA49C';
+    ctx.fillText('caja', startX+unitW+20, iy+30);
+
+    iy += 46;
+
+    // Línea divisora suave
+    ctx.strokeStyle='#EDEAE3';
+    ctx.lineWidth=1;
+    ctx.beginPath();
+    ctx.moveTo(cx+20, iy); ctx.lineTo(cx+CELL_W-20, iy);
+    ctx.stroke();
+    iy += 10;
+
+    // Presentación + art — misma línea, discreta
+    ctx.font=`400 12px Arial`;
+    ctx.fillStyle='#AAA49C';
+    ctx.textAlign='center';
+    ctx.textBaseline='top';
+    ctx.fillText(`${p.present}  ·  art. ${p.art}`, infoX, iy);
+  }
+
+  // ── FOOTER ────────────────────────────────────────────────────────────────
+  const fy=PH-FOOTER_H;
+  ctx.fillStyle='#2B2926';
+  ctx.fillRect(0,fy,PW,FOOTER_H);
+  ctx.fillStyle='#B02020';
+  ctx.fillRect(0,fy,PW,3);
+  ctx.fillStyle='#66625E';
+  ctx.font='12px Arial';
+  ctx.textAlign='center';
+  ctx.textBaseline='middle';
+  ctx.fillText('PelSAS Distribuidora  ·  Precios de lista en $UYU · Sujeto a disponibilidad de stock', PW/2, fy+FOOTER_H/2);
+
+  // ── Render ────────────────────────────────────────────────────────────────
+  canvas.toBlob(blob=>{
+    const url=URL.createObjectURL(blob);
+    preview.innerHTML=`
+      <div style="margin-bottom:14px;display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+        <a href="${url}" download="${filename}" class="add-btn" style="background:var(--green);color:#fff;text-decoration:none;padding:10px 20px;border-radius:8px;font-weight:600;font-size:14px">⬇️ Descargar ${filename}</a>
+        <span style="font-size:12px;color:var(--mid)">Subila a <code>img/fichas/</code> en el repo</span>
+      </div>
+      <img src="${url}" style="max-width:100%;border:1px solid var(--border);border-radius:12px;box-shadow:0 4px 16px rgba(0,0,0,.1)">`;
+  },'image/jpeg',0.93);
+}
+
+  // ── Dimensiones ──────────────────────────────────────────────────────────
   const COLS      = 3;
   const PW        = 1500;
   const PAD       = 28;          // padding exterior e interior
