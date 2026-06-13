@@ -29,7 +29,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 /* LAYOUT */
 #app{display:none}
 .topbar{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:0 2rem;height:60px;background:var(--white);border-bottom:1px solid var(--border)}
-.topbar-logo{font-family:'Playfair Display',serif;font-size:20px;font-weight:900}<br>
+.topbar-logo{font-family:'Playfair Display',serif;font-size:20px;font-weight:900}
 .topbar-logo span{color:var(--red)}
 .topbar-badge{font-size:11px;background:var(--red);color:#fff;border-radius:6px;padding:2px 8px;margin-left:8px;letter-spacing:.04em}
 .topbar-right{display:flex;align-items:center;gap:12px}
@@ -235,6 +235,48 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <!-- STATUS BAR -->
 <div class="status-bar" id="status-bar"></div>
 
+<!-- MODAL crear/editar marca -->
+<div class="modal-bg" id="brand-modal-bg">
+  <div class="modal">
+    <div class="modal-title" id="brand-modal-title">Marca</div>
+    <div class="form-row">
+      <label>Nombre de la marca</label>
+      <input type="text" id="fb-name" placeholder="Ej: Dori">
+    </div>
+    <div class="form-grid">
+      <div class="form-row">
+        <label>ID interno (sin espacios)</label>
+        <input type="text" id="fb-id" placeholder="Ej: dori">
+      </div>
+      <div class="form-row">
+        <label>Sección</label>
+        <select id="fb-sid">
+          <option value="alimentos">Alimentos &amp; Snacks</option>
+          <option value="fumadores">Fumadores</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-row">
+      <label>Descripción corta</label>
+      <input type="text" id="fb-desc" placeholder="Ej: Golosinas y maní">
+    </div>
+    <div class="form-grid">
+      <div class="form-row">
+        <label>Emoji</label>
+        <input type="text" id="fb-emoji" placeholder="🍬">
+      </div>
+      <div class="form-row">
+        <label>Logo (ruta)</label>
+        <input type="text" id="fb-logo" placeholder="img/logo-dori.webp">
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button class="modal-cancel" onclick="closeBrandModal()">Cancelar</button>
+      <button class="modal-save" onclick="saveBrand()">Guardar marca</button>
+    </div>
+  </div>
+</div>
+
 <script>
 // ── Config ───────────────────────────────────────────────────────────────────
 let GH_OWNER = '', GH_REPO = '', GH_TOKEN = '', GH_SHA = '';
@@ -337,11 +379,11 @@ function renderSidebar() {
   const alBrands = data.brands.filter(b => b.sid === 'alimentos');
   const fumBrands = data.brands.filter(b => b.sid === 'fumadores');
   let html = '';
-  html += renderBrandGroup('&#127851; Alimentos', alBrands);
-html += renderBrandGroup('&#128680; Fumadores', fumBrands);
+  html += renderBrandGroup('&#127851; Alimentos', alBrands, 'alimentos');
+  html += renderBrandGroup('&#128680; Fumadores', fumBrands, 'fumadores');
   document.getElementById('sidebar').innerHTML = html;
 }
-function renderBrandGroup(label, brands) {
+function renderBrandGroup(label, brands, sid) {
   return `<div class="sidebar-section">
     <span class="sidebar-label">${label}</span>
     ${brands.map(b => {
@@ -355,6 +397,7 @@ function renderBrandGroup(label, brands) {
         <span class="b-count">${count}/${total}</span>
       </button>`;
     }).join('')}
+    <button class="brand-btn" style="color:var(--mid);font-style:italic" onclick="openBrandModal(null,'${sid}')">+ Nueva marca</button>
   </div>`;
 }
 
@@ -398,6 +441,8 @@ function renderContent() {
         <div class="toggle-track${brand.activo!==false?' on':''}" onclick="toggleBrand('${brand.id}')">
           <div class="toggle-thumb"></div>
         </div>
+        <button class="edit-btn" onclick="openBrandModal('${brand.id}')">Editar marca</button>
+        <button class="del-btn" onclick="deleteBrand('${brand.id}')">Borrar marca</button>
       </div>
     </div>
 
@@ -552,6 +597,94 @@ function saveProduct() {
   renderSidebar();
 }
 
+// ── Modal de marca ───────────────────────────────────────────────────────────
+let editingBrandId = null;
+let newBrandSid = 'alimentos';
+
+function openBrandModal(bid, sid) {
+  editingBrandId = bid;
+  if (bid) {
+    const b = data.brands.find(x => x.id === bid);
+    if (!b) return;
+    document.getElementById('brand-modal-title').textContent = 'Editar marca';
+    document.getElementById('fb-name').value = b.name;
+    document.getElementById('fb-id').value = b.id;
+    document.getElementById('fb-id').disabled = true;
+    document.getElementById('fb-sid').value = b.sid;
+    document.getElementById('fb-desc').value = b.desc || '';
+    document.getElementById('fb-emoji').value = b.emoji || '';
+    document.getElementById('fb-logo').value = b.logo || '';
+  } else {
+    newBrandSid = sid || 'alimentos';
+    document.getElementById('brand-modal-title').textContent = 'Nueva marca';
+    document.getElementById('fb-name').value = '';
+    document.getElementById('fb-id').value = '';
+    document.getElementById('fb-id').disabled = false;
+    document.getElementById('fb-sid').value = newBrandSid;
+    document.getElementById('fb-desc').value = '';
+    document.getElementById('fb-emoji').value = '📦';
+    document.getElementById('fb-logo').value = '';
+  }
+  document.getElementById('brand-modal-bg').classList.add('open');
+  document.getElementById('fb-name').focus();
+}
+
+function closeBrandModal() {
+  document.getElementById('brand-modal-bg').classList.remove('open');
+  editingBrandId = null;
+}
+
+function slugify(s) {
+  return s.toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9]+/g, '');
+}
+
+function saveBrand() {
+  const name = document.getElementById('fb-name').value.trim();
+  const sid  = document.getElementById('fb-sid').value;
+  const desc = document.getElementById('fb-desc').value.trim();
+  const emoji = document.getElementById('fb-emoji').value.trim() || '📦';
+  const logo = document.getElementById('fb-logo').value.trim() || 'img/placeholder.webp';
+
+  if (!name) { alert('Completá el nombre de la marca'); return; }
+
+  if (editingBrandId) {
+    const b = data.brands.find(x => x.id === editingBrandId);
+    Object.assign(b, { name, sid, desc, emoji, logo });
+  } else {
+    let id = document.getElementById('fb-id').value.trim();
+    id = id ? slugify(id) : slugify(name);
+    if (!id) { alert('Ingresá un ID válido para la marca'); return; }
+    if (data.brands.some(b => b.id === id)) { alert('Ya existe una marca con ese ID'); return; }
+    data.brands.push({ id, sid, name, emoji, desc, logo, activo: true });
+    if (!data.products[id]) data.products[id] = [];
+  }
+
+  markUnsaved();
+  closeBrandModal();
+  renderSidebar();
+}
+
+function deleteBrand(bid) {
+  const b = data.brands.find(x => x.id === bid);
+  if (!b) return;
+  const n = (data.products[bid]||[]).length;
+  if (!confirm(`¿Seguro que querés borrar la marca "${b.name}"${n?` y sus ${n} productos`:''}? Esta acción no se puede deshacer.`)) return;
+  data.brands = data.brands.filter(x => x.id !== bid);
+  delete data.products[bid];
+  if (currentBrand === bid) {
+    currentBrand = null;
+    document.getElementById('content').innerHTML = `
+      <div class="empty-state">
+        <span class="empty-icon">👈</span>
+        <div>Seleccioná una marca del menú</div>
+      </div>`;
+  }
+  markUnsaved();
+  renderSidebar();
+}
+
 // ── Status ────────────────────────────────────────────────────────────────────
 let statusTimer = null;
 function showStatus(msg, type='', duration=2500) {
@@ -565,6 +698,9 @@ function showStatus(msg, type='', duration=2500) {
 // ── Init ──────────────────────────────────────────────────────────────────────
 document.getElementById('modal-bg').addEventListener('click', e => {
   if (e.target === document.getElementById('modal-bg')) closeModal();
+});
+document.getElementById('brand-modal-bg').addEventListener('click', e => {
+  if (e.target === document.getElementById('brand-modal-bg')) closeBrandModal();
 });
 
 // Recuperar credenciales guardadas
