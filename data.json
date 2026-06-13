@@ -3339,6 +3339,19 @@
         "activo": true
       }
     ],
-    "pitstop": []
+    "pitstop": [
+      {
+        "id": "pitstop_1781362365134",
+        "name": "Galletas sabor jamón 22,8gr x 6u.",
+        "unit": 44.8,
+        "caja": 537.6,
+        "cat": "Galletas",
+        "art": "520",
+        "present": "pack x 6u.",
+        "emoji": "📦",
+        "venta": 2,
+        "activo": true
+      }
+    ]
   }
 }
