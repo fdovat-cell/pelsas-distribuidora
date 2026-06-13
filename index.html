@@ -457,6 +457,11 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 /* CATALOGO COMPLETO */
 .cat-wrap{max-width:1140px;margin:0 auto;padding:2rem 2.5rem}
 .cat-tabs{display:flex;gap:8px;margin-bottom:2rem;border-bottom:2px solid var(--border);padding-bottom:0}
+.fichas-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;margin-top:1rem}
+.fichas-card{display:flex;flex-direction:column;align-items:center;gap:8px;background:var(--white);border:1px solid var(--border);border-radius:14px;padding:18px 10px;cursor:pointer;transition:transform .15s,box-shadow .15s}
+.fichas-card:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(26,26,24,.08)}
+.fichas-logo{width:56px;height:56px;object-fit:contain}
+.fichas-name{font-size:13px;font-weight:600;text-align:center;color:var(--ink)}
 .cat-tab{padding:10px 20px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;border:none;background:none;cursor:pointer;color:var(--mid);border-bottom:3px solid transparent;margin-bottom:-2px;transition:color .15s,border-color .15s}
 .cat-tab.active{color:var(--ink);border-bottom-color:var(--red)}
 .cat-brand-block{margin-bottom:3rem}
@@ -703,6 +708,10 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
     <span class="bn-icon">📋</span>
     <span class="bn-label">Catálogo</span>
   </button>
+  <button class="bn-item" id="bn-fichas" onclick="goFichas()">
+    <span class="bn-icon">📸</span>
+    <span class="bn-label">Fichas</span>
+  </button>
   <button class="bn-item" id="bn-cart" onclick="toggleCart()">
     <span class="bn-icon">🛒</span>
     <span class="bn-label">Pedido</span>
@@ -779,12 +788,14 @@ function render(){
   else if(view==='fumadores')mv.innerHTML=renderFumadores();
   else if(view==='sintacc')mv.innerHTML=renderSintacc();
   else if(view==='catalogo')mv.innerHTML=renderCatalogo();
+  else if(view==='fichas')mv.innerHTML=renderFichas();
   const back=document.getElementById('back-btn');
   if(back)back.classList.toggle('visible',view!=='home');
   document.querySelectorAll('.bn-item').forEach(b=>b.classList.remove('active'));
   if(view==='home')document.getElementById('bn-home')?.classList.add('active');
   else if(view==='section'||view==='brand'||view==='fumadores'||view==='sintacc')document.getElementById('bn-marcas')?.classList.add('active');
   else if(view==='catalogo')document.getElementById('bn-catalogo')?.classList.add('active');
+  else if(view==='fichas')document.getElementById('bn-fichas')?.classList.add('active');
   window.scrollTo({top:0,behavior:'instant'});
 }
 function goBack(){
@@ -793,12 +804,13 @@ function goBack(){
     if(b&&b.sid==='fumadores')goFumadores();
     else if(curBrand&&['celisano','agridulce','smams','sanosinharina','suavipan','nutsbar','molinosala'].includes(curBrand)&&prevView==='sintacc')goSintacc();
     else goSection();
-  } else if(view==='section'||view==='fumadores'||view==='sintacc'||view==='catalogo')goHome();
+  } else if(view==='section'||view==='fumadores'||view==='sintacc'||view==='catalogo'||view==='fichas')goHome();
 }
 let prevView='home';
 let catTab='alimentos';
 function goSintacc(){prevView=view;view='sintacc';curBrand=null;activeFilter='todos';render()}
 function goCatalogo(tab){catTab=tab||'alimentos';view='catalogo';curBrand=null;render()}
+function goFichas(){view='fichas';curBrand=null;render()}
 function setCatTab(tab){catTab=tab;document.querySelectorAll('.cat-tab').forEach(t=>t.classList.remove('active'));document.getElementById('cattab-'+tab)?.classList.add('active');document.getElementById('cat-content').innerHTML=renderCatContent()}
 
 const freeIds=new Set(['celisano','agridulce','smams','sanosinharina','suavipan','nutsbar','molinosala']);
@@ -855,6 +867,27 @@ function renderCatalogo(){
     </div>
     <div id="cat-content">${renderCatContent()}</div>
   </div>`;
+}
+function renderFichas(){
+  const list=brands.filter(b=>b.activo!==false);
+  return`<div class="section-wrap">
+    <div class="breadcrumb" onclick="goHome()">← Inicio</div>
+    <div class="section-title">Fichas de marcas</div>
+    <div class="section-rule"></div>
+    <div class="section-meta">Tocá una marca para ver su ficha completa</div>
+    <div class="fichas-grid">${list.map(b=>`
+      <div class="fichas-card" onclick="openFicha('${b.id}')">
+        <img class="fichas-logo" src="${b.logo}" alt="${b.name}" onerror="this.outerHTML='<span style=\\'font-size:28px\\'>${b.emoji}</span>'">
+        <div class="fichas-name">${b.name}</div>
+      </div>`).join('')}
+    </div>
+  </div>`;
+}
+function openFicha(bid){
+  const img=new Image();
+  img.onload=()=>openLBraw('img/fichas/'+bid+'.jpg');
+  img.onerror=()=>alert('Todavía no hay ficha cargada para esta marca.');
+  img.src='img/fichas/'+bid+'.jpg';
 }
 function sintaccBrands(){
   const ids=['nutsbar','molinosala','celisano','agridulce','smams','sanosinharina','suavipan'];
@@ -1274,6 +1307,13 @@ function openLB(art){
   const lb=document.getElementById('lightbox');
   const im=document.getElementById('lb-img');
   im.src='img/'+art+'.webp';
+  lb.classList.add('open');lbReset();
+  document.body.style.overflow='hidden';
+}
+function openLBraw(src){
+  const lb=document.getElementById('lightbox');
+  const im=document.getElementById('lb-img');
+  im.src=src;
   lb.classList.add('open');lbReset();
   document.body.style.overflow='hidden';
 }
