@@ -2709,6 +2709,18 @@
         "emoji": "📦",
         "venta": 1,
         "activo": true
+      },
+      {
+        "id": "celisano_1781539831829",
+        "name": "Alfajor bañado c/chocolate s/gluten",
+        "unit": 66,
+        "caja": 396,
+        "cat": "alfajores",
+        "art": "2178",
+        "present": "CAJA X 6 U. 70GR",
+        "emoji": "📦",
+        "venta": 1,
+        "activo": true
       }
     ],
     "smams": [
