@@ -8,13 +8,13 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
---cream:#F5F0E8;--cream2:#EDE8DF;--ink:#1A1A18;--ink2:#3D3B36;
---mid:#7A7468;--light:#B0AA9E;--red:#B02020;--red-light:#F8EDED;
---border:#D8D2C6;--white:#FFFFFF;--green:#1E6B3C;--green-light:#EAF5EC;
+  --cream:#F5F0E8;--cream2:#EDE8DF;--ink:#1A1A18;--ink2:#3D3B36;
+  --mid:#7A7468;--light:#B0AA9E;--red:#B02020;--red-light:#F8EDED;
+  --border:#D8D2C6;--white:#FFFFFF;--green:#1E6B3C;--green-light:#EAF5EC;
 }
 body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);min-height:100vh}
+
 /* LOGIN */
-#login-screen{display:flex;align-items:center;justify-content:min-height:100vh;padding:2rem}
 #login-screen{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:2rem}
 .login-box{background:var(--white);border:1px solid var(--border);border-radius:20px;padding:3rem;max-width:420px;width:100%;text-align:center}
 .login-logo{font-family:'Playfair Display',serif;font-size:32px;font-weight:900;margin-bottom:.25rem}
@@ -25,6 +25,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 .login-btn{width:100%;background:var(--ink);color:#fff;border:none;border-radius:10px;padding:13px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;cursor:pointer;transition:background .15s}
 .login-btn:hover{background:var(--ink2)}
 .login-err{font-size:12px;color:var(--red);margin-top:8px;display:none}
+
 /* LAYOUT */
 #app{display:none}
 .topbar{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:0 2rem;height:60px;background:var(--white);border-bottom:1px solid var(--border)}
@@ -37,7 +38,9 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 .save-btn:disabled{background:var(--light);cursor:not-allowed}
 .logout-btn{background:none;border:1px solid var(--border);border-radius:8px;padding:8px 14px;font-family:'DM Sans',sans-serif;font-size:12px;color:var(--mid);cursor:pointer}
 .logout-btn:hover{border-color:var(--border);color:var(--ink)}
+
 .main{display:grid;grid-template-columns:240px 1fr;min-height:calc(100vh - 60px)}
+
 /* SIDEBAR */
 .sidebar{background:var(--white);border-right:1px solid var(--border);padding:1.5rem 0;overflow-y:auto;position:sticky;top:60px;height:calc(100vh - 60px)}
 .sidebar-section{padding:0 1rem;margin-bottom:1.5rem}
@@ -48,6 +51,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 .brand-btn.inactive{opacity:.45}
 .brand-btn .b-count{margin-left:auto;font-size:10px;color:var(--light);background:var(--cream2);border-radius:10px;padding:1px 7px}
 .brand-btn.active .b-count{background:var(--border)}
+
 /* CONTENT */
 .content{padding:2rem}
 .content-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;gap:1rem;flex-wrap:wrap}
@@ -59,6 +63,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 .add-btn:hover{background:var(--ink2)}
 .toggle-inactive-btn{background:var(--cream2);border:1px solid var(--border);border-radius:8px;padding:8px 14px;font-family:'DM Sans',sans-serif;font-size:12px;color:var(--mid);cursor:pointer}
 .toggle-inactive-btn.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+
 /* BRAND TOGGLE */
 .brand-meta{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:1.25rem 1.5rem;margin-bottom:1.25rem;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
 .brand-meta img{height:40px;max-width:120px;object-fit:contain}
@@ -71,6 +76,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 .toggle-track.on{background:var(--green)}
 .toggle-thumb{position:absolute;top:3px;left:3px;width:18px;height:18px;background:#fff;border-radius:50%;transition:transform .2s;box-shadow:0 1px 4px rgba(0,0,0,.2)}
 .toggle-track.on .toggle-thumb{transform:translateX(20px)}
+
 /* PRODUCTS TABLE */
 .prod-table{width:100%;border-collapse:collapse;background:var(--white);border:1px solid var(--border);border-radius:12px;overflow:hidden}
 .prod-table th{padding:10px 14px;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--light);font-weight:600;text-align:left;background:var(--cream);border-bottom:1px solid var(--border)}
@@ -90,6 +96,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 .del-btn{background:var(--red-light);border:1px solid #E8C4C4;border-radius:6px;padding:5px 10px;font-size:11px;font-weight:500;cursor:pointer;color:var(--red);font-family:'DM Sans',sans-serif}
 .del-btn:hover{background:#F0D0D0}
 .activo-toggle{cursor:pointer;font-size:18px}
+
 /* MODAL */
 .modal-bg{position:fixed;inset:0;background:rgba(26,26,24,.55);z-index:200;display:none;align-items:center;justify-content:center;padding:1rem}
 .modal-bg.open{display:flex}
@@ -105,22 +112,26 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 .modal-save:hover{background:var(--ink2)}
 .modal-cancel{background:none;border:1px solid var(--border);border-radius:9px;padding:12px 20px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--mid);cursor:pointer}
 .modal-cancel:hover{border-color:var(--border)}
+
 /* STATUS BAR */
 .status-bar{position:fixed;bottom:1.5rem;right:1.5rem;background:var(--ink);color:#fff;border-radius:10px;padding:12px 20px;font-size:13px;font-weight:500;z-index:300;display:none;gap:10px;align-items:center;max-width:340px;box-shadow:0 8px 28px rgba(26,26,24,.25)}
 .status-bar.show{display:flex}
 .status-bar.ok{background:var(--green)}
 .status-bar.err{background:var(--red)}
+
 /* EMPTY */
 .empty-state{text-align:center;padding:4rem 2rem;color:var(--light)}
 .empty-icon{font-size:48px;display:block;margin-bottom:12px}
+
 /* UNSAVED */
 .unsaved-dot{width:8px;height:8px;background:#F0A000;border-radius:50%;display:none}
 .unsaved-dot.show{display:block}
+
 @media(max-width:768px){
-.main{grid-template-columns:1fr}
-.sidebar{position:static;height:auto;border-right:none;border-bottom:1px solid var(--border)}
-.content{padding:1rem}
-.form-grid{grid-template-columns:1fr}
+  .main{grid-template-columns:1fr}
+  .sidebar{position:static;height:auto;border-right:none;border-bottom:1px solid var(--border)}
+  .content{padding:1rem}
+  .form-grid{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -224,10 +235,64 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <!-- STATUS BAR -->
 <div class="status-bar" id="status-bar"></div>
 
+<!-- MODAL elegir qué agregar -->
+<div class="modal-bg" id="choice-modal-bg">
+  <div class="modal" style="max-width:340px;text-align:center">
+    <div class="modal-title">¿Qué querés agregar?</div>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <button class="modal-save" onclick="closeChoiceModal();openModal(null)">+ Producto en esta marca</button>
+      <button class="modal-save" style="background:var(--cream2);color:var(--ink)" onclick="closeChoiceModal();openBrandModal(null, currentBrand ? (data.brands.find(b=>b.id===currentBrand)||{}).sid : 'alimentos')">+ Marca nueva</button>
+    </div>
+    <button class="modal-cancel" style="margin-top:10px;width:100%" onclick="closeChoiceModal()">Cancelar</button>
+  </div>
+</div>
+
+<!-- MODAL crear/editar marca -->
+<div class="modal-bg" id="brand-modal-bg">
+  <div class="modal">
+    <div class="modal-title" id="brand-modal-title">Marca</div>
+    <div class="form-row">
+      <label>Nombre de la marca</label>
+      <input type="text" id="fb-name" placeholder="Ej: Dori">
+    </div>
+    <div class="form-grid">
+      <div class="form-row">
+        <label>ID interno (sin espacios)</label>
+        <input type="text" id="fb-id" placeholder="Ej: dori">
+      </div>
+      <div class="form-row">
+        <label>Sección</label>
+        <select id="fb-sid">
+          <option value="alimentos">Alimentos &amp; Snacks</option>
+          <option value="fumadores">Fumadores</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-row">
+      <label>Descripción corta</label>
+      <input type="text" id="fb-desc" placeholder="Ej: Golosinas y maní">
+    </div>
+    <div class="form-grid">
+      <div class="form-row">
+        <label>Emoji</label>
+        <input type="text" id="fb-emoji" placeholder="🍬">
+      </div>
+      <div class="form-row">
+        <label>Logo (ruta)</label>
+        <input type="text" id="fb-logo" placeholder="img/logo-dori.webp">
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button class="modal-cancel" onclick="closeBrandModal()">Cancelar</button>
+      <button class="modal-save" onclick="saveBrand()">Guardar marca</button>
+    </div>
+  </div>
+</div>
+
 <script>
 // ── Config ───────────────────────────────────────────────────────────────────
 let GH_OWNER = '', GH_REPO = '', GH_TOKEN = '', GH_SHA = '';
-let data = null; // { brands, products }
+let data = null;       // { brands, products }
 let currentBrand = null;
 let editingId = null;
 let showInactive = false;
@@ -243,19 +308,14 @@ function doLogin() {
   GH_TOKEN = document.getElementById('gh-token').value.trim();
   if (!GH_OWNER || !GH_REPO || !GH_TOKEN) { showLoginErr('Completá todos los campos'); return; }
   localStorage.setItem('ps_owner', GH_OWNER);
-  localStorage.setItem('ps_repo',  GH_REPO);
+  localStorage.setItem('ps_repo', GH_REPO);
   localStorage.setItem('ps_token', GH_TOKEN);
   loadFromGitHub();
 }
-
 function doLogout() {
   localStorage.removeItem('ps_token');
-  // Al cerrar sesión también limpiamos la caché de datos para no dejar info sensible
-  localStorage.removeItem('ps_sha');
-  localStorage.removeItem('ps_data');
   location.reload();
 }
-
 function showLoginErr(msg) {
   const el = document.getElementById('login-err');
   el.textContent = msg; el.style.display = 'block';
@@ -276,63 +336,23 @@ async function ghFetch(path, opts={}) {
   return res.json();
 }
 
-// ── Caché local de data.json ─────────────────────────────────────────────────
-// Guarda el SHA y los datos en localStorage para evitar descargar
-// data.json completo en cada apertura. Solo se re-descarga si el SHA cambió.
-function saveLocalCache(sha, dataObj) {
-  try {
-    localStorage.setItem('ps_sha',  sha);
-    localStorage.setItem('ps_data', JSON.stringify(dataObj));
-  } catch(e) {
-    // localStorage lleno o bloqueado: no es crítico, simplemente no cacheamos
-    console.warn('No se pudo guardar caché local:', e.message);
-  }
-}
-
-function loadLocalCache() {
-  try {
-    const sha  = localStorage.getItem('ps_sha');
-    const raw  = localStorage.getItem('ps_data');
-    if (sha && raw) return { sha, data: JSON.parse(raw) };
-  } catch(e) { /* caché corrupta, la ignoramos */ }
-  return null;
-}
-
-// ── Carga inicial ────────────────────────────────────────────────────────────
 async function loadFromGitHub() {
-  showStatus('Verificando catálogo…');
+  showStatus('Cargando catálogo desde GitHub…');
   try {
-    // 1. Traemos solo los metadatos del archivo (incluye SHA y content).
-    //    Esta llamada es idéntica a la original — no agrega overhead.
     const file = await ghFetch(DATA_PATH);
-
-    const cache = loadLocalCache();
-
-    if (cache && cache.sha === file.sha) {
-      // ✅ El archivo en GitHub no cambió desde la última vez:
-      //    usamos los datos en memoria local → prácticamente instantáneo.
-      GH_SHA = file.sha;
-      data   = cache.data;
-      showStatus('Catálogo cargado desde caché ✓', 'ok');
-    } else {
-      // 🔄 Primera vez o el archivo cambió (otro dispositivo guardó):
-      //    decodificamos el contenido que ya vino en la misma respuesta.
-      GH_SHA = file.sha;
-      data   = JSON.parse(decodeURIComponent(escape(atob(file.content.replace(/\n/g,'')))));
-      saveLocalCache(GH_SHA, data);
-      showStatus('Catálogo cargado ✓', 'ok');
-    }
-
+    GH_SHA = file.sha;
+    const json = JSON.parse(decodeURIComponent(escape(atob(file.content.replace(/\n/g,'')))));
+    data = json;
     document.getElementById('login-screen').style.display = 'none';
     document.getElementById('app').style.display = 'block';
     renderSidebar();
+    showStatus('Catálogo cargado ✓', 'ok');
   } catch(e) {
     showLoginErr('Error: ' + e.message);
     showStatus('Error al cargar', 'err');
   }
 }
 
-// ── Guardar en GitHub ────────────────────────────────────────────────────────
 async function saveToGitHub() {
   if (!hasUnsaved) return;
   const btn = document.getElementById('save-btn');
@@ -340,7 +360,7 @@ async function saveToGitHub() {
   showStatus('Guardando en GitHub…');
   try {
     const content = btoa(unescape(encodeURIComponent(JSON.stringify(data, null, 2))));
-    const result  = await ghFetch(DATA_PATH, {
+    const result = await ghFetch(DATA_PATH, {
       method: 'PUT',
       body: JSON.stringify({
         message: `Admin: actualización catálogo ${new Date().toLocaleString('es-UY')}`,
@@ -348,12 +368,8 @@ async function saveToGitHub() {
         sha: GH_SHA
       })
     });
-    GH_SHA     = result.content.sha;
+    GH_SHA = result.content.sha;
     hasUnsaved = false;
-
-    // ✅ Actualizamos la caché local con el nuevo SHA y los datos guardados
-    saveLocalCache(GH_SHA, data);
-
     document.getElementById('unsaved-dot').classList.remove('show');
     btn.disabled = true;
     showStatus('¡Guardado! Los cambios ya están en el sitio 🎉', 'ok', 4000);
@@ -372,22 +388,21 @@ function markUnsaved() {
 
 // ── Sidebar ──────────────────────────────────────────────────────────────────
 function renderSidebar() {
-  const alBrands  = data.brands.filter(b => b.sid === 'alimentos');
+  const alBrands = data.brands.filter(b => b.sid === 'alimentos');
   const fumBrands = data.brands.filter(b => b.sid === 'fumadores');
   let html = '';
-  html += renderBrandGroup('&#127851; Alimentos', alBrands);
-  html += renderBrandGroup('&#128680; Fumadores', fumBrands);
+  html += renderBrandGroup('&#127851; Alimentos', alBrands, 'alimentos');
+  html += renderBrandGroup('&#128680; Fumadores', fumBrands, 'fumadores');
   document.getElementById('sidebar').innerHTML = html;
 }
-
-function renderBrandGroup(label, brands) {
+function renderBrandGroup(label, brands, sid) {
   return `<div class="sidebar-section">
     <span class="sidebar-label">${label}</span>
     ${brands.map(b => {
-      const count  = (data.products[b.id]||[]).filter(p=>p.activo!==false).length;
-      const total  = (data.products[b.id]||[]).length;
-      const active   = currentBrand === b.id ? ' active' : '';
-      const inactive = b.activo === false   ? ' inactive' : '';
+      const count = (data.products[b.id]||[]).filter(p=>p.activo!==false).length;
+      const total = (data.products[b.id]||[]).length;
+      const active = currentBrand === b.id ? ' active' : '';
+      const inactive = b.activo === false ? ' inactive' : '';
       return `<button class="brand-btn${active}${inactive}" onclick="selectBrand('${b.id}')">
         <span>${b.emoji}</span>
         <span>${b.name}</span>
@@ -409,8 +424,7 @@ function renderContent() {
   if (!currentBrand) return;
   const brand = data.brands.find(b => b.id === currentBrand);
   if (!brand) return;
-
-  const prods    = data.products[currentBrand] || [];
+  const prods = data.products[currentBrand] || [];
   const filtered = prods
     .filter(p => showInactive || p.activo !== false)
     .filter(p => !searchQ || p.name.toLowerCase().includes(searchQ) || p.art.includes(searchQ) || p.cat.includes(searchQ));
@@ -423,9 +437,10 @@ function renderContent() {
         <button class="toggle-inactive-btn${showInactive?' on':''}" onclick="toggleInactive()">
           ${showInactive ? 'Ocultar inactivos' : 'Ver inactivos'}
         </button>
-        <button class="add-btn" onclick="openModal(null)">+ Agregar</button>
+        <button class="add-btn" onclick="openAddChoice()">+ Agregar</button>
       </div>
     </div>
+
     <div class="brand-meta">
       <img src="${brand.logo}" alt="${brand.name}" onerror="this.outerHTML='<span style=\\'font-size:28px\\'>${brand.emoji}</span>'">
       <div class="brand-meta-info">
@@ -437,14 +452,23 @@ function renderContent() {
         <div class="toggle-track${brand.activo!==false?' on':''}" onclick="toggleBrand('${brand.id}')">
           <div class="toggle-thumb"></div>
         </div>
+        <button class="edit-btn" onclick="openBrandModal('${brand.id}')">Editar marca</button>
+        <button class="del-btn" onclick="deleteBrand('${brand.id}')">Borrar marca</button>
       </div>
     </div>
+
     ${filtered.length === 0
       ? `<div class="empty-state"><span class="empty-icon">📦</span><div>No hay productos${searchQ?' para "'+searchQ+'"':''}</div></div>`
       : `<table class="prod-table">
           <thead><tr>
-            <th>Foto</th><th>Producto</th><th>Cat.</th><th>Art.</th>
-            <th>Precio unit.</th><th>Precio caja</th><th>Activo</th><th>Acciones</th>
+            <th>Foto</th>
+            <th>Producto</th>
+            <th>Cat.</th>
+            <th>Art.</th>
+            <th>Precio unit.</th>
+            <th>Precio caja</th>
+            <th>Activo</th>
+            <th>Acciones</th>
           </tr></thead>
           <tbody>${filtered.map(p => renderRow(p, currentBrand)).join('')}</tbody>
         </table>`
@@ -519,23 +543,23 @@ function openModal(pid) {
       if (p) break;
     }
     if (!p) return;
-    document.getElementById('f-name').value    = p.name;
-    document.getElementById('f-unit').value    = p.unit;
-    document.getElementById('f-caja').value    = p.caja;
-    document.getElementById('f-cat').value     = p.cat;
-    document.getElementById('f-art').value     = p.art;
+    document.getElementById('f-name').value = p.name;
+    document.getElementById('f-unit').value = p.unit;
+    document.getElementById('f-caja').value = p.caja;
+    document.getElementById('f-cat').value = p.cat;
+    document.getElementById('f-art').value = p.art;
     document.getElementById('f-present').value = p.present;
-    document.getElementById('f-emoji').value   = p.emoji;
-    document.getElementById('f-venta').value   = p.venta || 1;
+    document.getElementById('f-emoji').value = p.emoji;
+    document.getElementById('f-venta').value = p.venta || 1;
   } else {
-    document.getElementById('f-name').value    = '';
-    document.getElementById('f-unit').value    = '';
-    document.getElementById('f-caja').value    = '';
-    document.getElementById('f-cat').value     = '';
-    document.getElementById('f-art').value     = '';
+    document.getElementById('f-name').value = '';
+    document.getElementById('f-unit').value = '';
+    document.getElementById('f-caja').value = '';
+    document.getElementById('f-cat').value = '';
+    document.getElementById('f-art').value = '';
     document.getElementById('f-present').value = '';
-    document.getElementById('f-emoji').value   = '📦';
-    document.getElementById('f-venta').value   = 1;
+    document.getElementById('f-emoji').value = '📦';
+    document.getElementById('f-venta').value = 1;
   }
   document.getElementById('modal-bg').classList.add('open');
   document.getElementById('f-name').focus();
@@ -547,14 +571,14 @@ function closeModal() {
 }
 
 function saveProduct() {
-  const name    = document.getElementById('f-name').value.trim();
-  const unit    = parseFloat(document.getElementById('f-unit').value);
-  const caja    = parseFloat(document.getElementById('f-caja').value);
-  const cat     = document.getElementById('f-cat').value.trim();
-  const art     = document.getElementById('f-art').value.trim();
+  const name = document.getElementById('f-name').value.trim();
+  const unit = parseFloat(document.getElementById('f-unit').value);
+  const caja = parseFloat(document.getElementById('f-caja').value);
+  const cat  = document.getElementById('f-cat').value.trim();
+  const art  = document.getElementById('f-art').value.trim();
   const present = document.getElementById('f-present').value.trim();
-  const emoji   = document.getElementById('f-emoji').value.trim() || '📦';
-  const venta   = parseInt(document.getElementById('f-venta').value);
+  const emoji = document.getElementById('f-emoji').value.trim() || '📦';
+  const venta = parseInt(document.getElementById('f-venta').value);
 
   if (!name || isNaN(unit) || isNaN(caja)) {
     alert('Completá al menos nombre, precio unitario y precio caja');
@@ -562,11 +586,16 @@ function saveProduct() {
   }
 
   if (editingId) {
+    // Editar existente
     for (const bid of Object.keys(data.products)) {
       const p = data.products[bid].find(x => x.id === editingId);
-      if (p) { Object.assign(p, { name, unit, caja, cat, art, present, emoji, venta }); break; }
+      if (p) {
+        Object.assign(p, { name, unit, caja, cat, art, present, emoji, venta });
+        break;
+      }
     }
   } else {
+    // Nuevo producto
     if (!currentBrand) { alert('Seleccioná una marca primero'); return; }
     if (!data.products[currentBrand]) data.products[currentBrand] = [];
     const newId = currentBrand + '_' + Date.now();
@@ -576,6 +605,103 @@ function saveProduct() {
   markUnsaved();
   closeModal();
   renderContent();
+  renderSidebar();
+}
+
+// ── Modal de elección ────────────────────────────────────────────────────────
+function openAddChoice() {
+  if (!currentBrand) { openModal(null); return; }
+  document.getElementById('choice-modal-bg').classList.add('open');
+}
+function closeChoiceModal() {
+  document.getElementById('choice-modal-bg').classList.remove('open');
+}
+
+// ── Modal de marca ───────────────────────────────────────────────────────────
+let editingBrandId = null;
+let newBrandSid = 'alimentos';
+
+function openBrandModal(bid, sid) {
+  editingBrandId = bid;
+  if (bid) {
+    const b = data.brands.find(x => x.id === bid);
+    if (!b) return;
+    document.getElementById('brand-modal-title').textContent = 'Editar marca';
+    document.getElementById('fb-name').value = b.name;
+    document.getElementById('fb-id').value = b.id;
+    document.getElementById('fb-id').disabled = true;
+    document.getElementById('fb-sid').value = b.sid;
+    document.getElementById('fb-desc').value = b.desc || '';
+    document.getElementById('fb-emoji').value = b.emoji || '';
+    document.getElementById('fb-logo').value = b.logo || '';
+  } else {
+    newBrandSid = sid || 'alimentos';
+    document.getElementById('brand-modal-title').textContent = 'Nueva marca';
+    document.getElementById('fb-name').value = '';
+    document.getElementById('fb-id').value = '';
+    document.getElementById('fb-id').disabled = false;
+    document.getElementById('fb-sid').value = newBrandSid;
+    document.getElementById('fb-desc').value = '';
+    document.getElementById('fb-emoji').value = '📦';
+    document.getElementById('fb-logo').value = '';
+  }
+  document.getElementById('brand-modal-bg').classList.add('open');
+  document.getElementById('fb-name').focus();
+}
+
+function closeBrandModal() {
+  document.getElementById('brand-modal-bg').classList.remove('open');
+  editingBrandId = null;
+}
+
+function slugify(s) {
+  return s.toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9]+/g, '');
+}
+
+function saveBrand() {
+  const name = document.getElementById('fb-name').value.trim();
+  const sid  = document.getElementById('fb-sid').value;
+  const desc = document.getElementById('fb-desc').value.trim();
+  const emoji = document.getElementById('fb-emoji').value.trim() || '📦';
+  const logo = document.getElementById('fb-logo').value.trim() || 'img/placeholder.webp';
+
+  if (!name) { alert('Completá el nombre de la marca'); return; }
+
+  if (editingBrandId) {
+    const b = data.brands.find(x => x.id === editingBrandId);
+    Object.assign(b, { name, sid, desc, emoji, logo });
+  } else {
+    let id = document.getElementById('fb-id').value.trim();
+    id = id ? slugify(id) : slugify(name);
+    if (!id) { alert('Ingresá un ID válido para la marca'); return; }
+    if (data.brands.some(b => b.id === id)) { alert('Ya existe una marca con ese ID'); return; }
+    data.brands.push({ id, sid, name, emoji, desc, logo, activo: true });
+    if (!data.products[id]) data.products[id] = [];
+  }
+
+  markUnsaved();
+  closeBrandModal();
+  renderSidebar();
+}
+
+function deleteBrand(bid) {
+  const b = data.brands.find(x => x.id === bid);
+  if (!b) return;
+  const n = (data.products[bid]||[]).length;
+  if (!confirm(`¿Seguro que querés borrar la marca "${b.name}"${n?` y sus ${n} productos`:''}? Esta acción no se puede deshacer.`)) return;
+  data.brands = data.brands.filter(x => x.id !== bid);
+  delete data.products[bid];
+  if (currentBrand === bid) {
+    currentBrand = null;
+    document.getElementById('content').innerHTML = `
+      <div class="empty-state">
+        <span class="empty-icon">👈</span>
+        <div>Seleccioná una marca del menú</div>
+      </div>`;
+  }
+  markUnsaved();
   renderSidebar();
 }
 
@@ -592,6 +718,12 @@ function showStatus(msg, type='', duration=2500) {
 // ── Init ──────────────────────────────────────────────────────────────────────
 document.getElementById('modal-bg').addEventListener('click', e => {
   if (e.target === document.getElementById('modal-bg')) closeModal();
+});
+document.getElementById('brand-modal-bg').addEventListener('click', e => {
+  if (e.target === document.getElementById('brand-modal-bg')) closeBrandModal();
+});
+document.getElementById('choice-modal-bg').addEventListener('click', e => {
+  if (e.target === document.getElementById('choice-modal-bg')) closeChoiceModal();
 });
 
 // Recuperar credenciales guardadas
