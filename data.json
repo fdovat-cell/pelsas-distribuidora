@@ -2733,6 +2733,30 @@
         "emoji": "📦",
         "venta": 1,
         "activo": true
+      },
+      {
+        "id": "celisano_1781540776014",
+        "name": "Alfajor bañado c/choc blanco s/gluten",
+        "unit": 66,
+        "caja": 396,
+        "cat": "alfajores",
+        "art": "2179",
+        "present": "CAJA X 6 U. 70GR",
+        "emoji": "📦",
+        "venta": 1,
+        "activo": true
+      },
+      {
+        "id": "celisano_1781540852660",
+        "name": "Alfajor membrillo s/lactosa y s/gluten",
+        "unit": 51,
+        "caja": 306,
+        "cat": "alfajores",
+        "art": "2181",
+        "present": "CAJA X 6 U. 70GR",
+        "emoji": "📦",
+        "venta": 1,
+        "activo": true
       }
     ],
     "smams": [
