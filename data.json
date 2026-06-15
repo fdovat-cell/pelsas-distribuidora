@@ -2656,8 +2656,8 @@
         "cat": "alfajores",
         "present": "Display x 12u 80g",
         "art": "2130",
-        "unit": 66,
-        "caja": 792,
+        "unit": 64,
+        "caja": 768,
         "emoji": "📦",
         "venta": 1,
         "activo": true
