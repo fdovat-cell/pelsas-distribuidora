@@ -2697,6 +2697,18 @@
         "emoji": "",
         "venta": 1,
         "activo": true
+      },
+      {
+        "id": "celisano_1781536582494",
+        "name": "Alfajor maizena s/glúten 70gr",
+        "unit": 59.5,
+        "caja": 357,
+        "cat": "Alfajores",
+        "art": "2180",
+        "present": "CAJA X 6 U. 70GR",
+        "emoji": "📦",
+        "venta": 2,
+        "activo": true
       }
     ],
     "smams": [
