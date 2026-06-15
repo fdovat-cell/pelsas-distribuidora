@@ -2672,7 +2672,7 @@
         "caja": 792,
         "emoji": "📦",
         "venta": 1,
-        "activo": true
+        "activo": false
       },
       {
         "id": "ce4",
@@ -2680,9 +2680,9 @@
         "cat": "alfajores",
         "present": "Display x 12u 70g",
         "art": "2134",
-        "unit": 46.5,
-        "caja": 558,
-        "emoji": "",
+        "unit": 48.6,
+        "caja": 583.2,
+        "emoji": "📦",
         "venta": 1,
         "activo": true
       },
@@ -2706,6 +2706,18 @@
         "cat": "Alfajores",
         "art": "2180",
         "present": "CAJA X 6 U. 70GR",
+        "emoji": "📦",
+        "venta": 1,
+        "activo": true
+      },
+      {
+        "id": "celisano_1781538589816",
+        "name": "Alfajor bañado c/choc blanco s/gluten",
+        "unit": 64,
+        "caja": 768,
+        "cat": "alfajores",
+        "art": "2128",
+        "present": "Caja x 12 u.",
         "emoji": "📦",
         "venta": 1,
         "activo": true
