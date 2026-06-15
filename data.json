@@ -2663,18 +2663,6 @@
         "activo": true
       },
       {
-        "id": "ce3",
-        "name": "Alfajor bañado c/choc blanco s/gluten",
-        "cat": "alfajores",
-        "present": "Display x 12u 80g",
-        "art": "2128",
-        "unit": 66,
-        "caja": 792,
-        "emoji": "📦",
-        "venta": 1,
-        "activo": false
-      },
-      {
         "id": "ce4",
         "name": "Alfajor membrillo s/lactosa y s/gluten",
         "cat": "alfajores",
