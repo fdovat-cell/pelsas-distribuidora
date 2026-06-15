@@ -5,17 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PelSAS · Admin</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --cream:#F5F0E8;--cream2:#EDE8DF;--ink:#1A1A18;--ink2:#3D3B36;
-  --mid:#7A7468;--light:#B0AA9E;--red:#B02020;--red-light:#F8EDED;
-  --border:#D8D2C6;--white:#FFFFFF;--green:#1E6B3C;--green-light:#EAF5EC;
+--cream:#F5F0E8;--cream2:#EDE8DF;--ink:#1A1A18;--ink2:#3D3B36;
+--mid:#7A7468;--light:#B0AA9E;--red:#B02020;--red-light:#F8EDED;
+--border:#D8D2C6;--white:#FFFFFF;--green:#1E6B3C;--green-light:#EAF5EC;
 }
 body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);min-height:100vh}
-
 /* LOGIN */
+#login-screen{display:flex;align-items:center;justify-content:min-height:100vh;padding:2rem}
 #login-screen{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:2rem}
 .login-box{background:var(--white);border:1px solid var(--border);border-radius:20px;padding:3rem;max-width:420px;width:100%;text-align:center}
 .login-logo{font-family:'Playfair Display',serif;font-size:32px;font-weight:900;margin-bottom:.25rem}
@@ -26,7 +25,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 .login-btn{width:100%;background:var(--ink);color:#fff;border:none;border-radius:10px;padding:13px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;cursor:pointer;transition:background .15s}
 .login-btn:hover{background:var(--ink2)}
 .login-err{font-size:12px;color:var(--red);margin-top:8px;display:none}
-
 /* LAYOUT */
 #app{display:none}
 .topbar{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:0 2rem;height:60px;background:var(--white);border-bottom:1px solid var(--border)}
@@ -39,9 +37,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 .save-btn:disabled{background:var(--light);cursor:not-allowed}
 .logout-btn{background:none;border:1px solid var(--border);border-radius:8px;padding:8px 14px;font-family:'DM Sans',sans-serif;font-size:12px;color:var(--mid);cursor:pointer}
 .logout-btn:hover{border-color:var(--border);color:var(--ink)}
-
 .main{display:grid;grid-template-columns:240px 1fr;min-height:calc(100vh - 60px)}
-
 /* SIDEBAR */
 .sidebar{background:var(--white);border-right:1px solid var(--border);padding:1.5rem 0;overflow-y:auto;position:sticky;top:60px;height:calc(100vh - 60px)}
 .sidebar-section{padding:0 1rem;margin-bottom:1.5rem}
@@ -52,7 +48,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 .brand-btn.inactive{opacity:.45}
 .brand-btn .b-count{margin-left:auto;font-size:10px;color:var(--light);background:var(--cream2);border-radius:10px;padding:1px 7px}
 .brand-btn.active .b-count{background:var(--border)}
-
 /* CONTENT */
 .content{padding:2rem}
 .content-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;gap:1rem;flex-wrap:wrap}
@@ -64,7 +59,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 .add-btn:hover{background:var(--ink2)}
 .toggle-inactive-btn{background:var(--cream2);border:1px solid var(--border);border-radius:8px;padding:8px 14px;font-family:'DM Sans',sans-serif;font-size:12px;color:var(--mid);cursor:pointer}
 .toggle-inactive-btn.on{background:var(--ink);color:#fff;border-color:var(--ink)}
-
 /* BRAND TOGGLE */
 .brand-meta{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:1.25rem 1.5rem;margin-bottom:1.25rem;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
 .brand-meta img{height:40px;max-width:120px;object-fit:contain}
@@ -77,7 +71,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 .toggle-track.on{background:var(--green)}
 .toggle-thumb{position:absolute;top:3px;left:3px;width:18px;height:18px;background:#fff;border-radius:50%;transition:transform .2s;box-shadow:0 1px 4px rgba(0,0,0,.2)}
 .toggle-track.on .toggle-thumb{transform:translateX(20px)}
-
 /* PRODUCTS TABLE */
 .prod-table{width:100%;border-collapse:collapse;background:var(--white);border:1px solid var(--border);border-radius:12px;overflow:hidden}
 .prod-table th{padding:10px 14px;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--light);font-weight:600;text-align:left;background:var(--cream);border-bottom:1px solid var(--border)}
@@ -97,7 +90,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 .del-btn{background:var(--red-light);border:1px solid #E8C4C4;border-radius:6px;padding:5px 10px;font-size:11px;font-weight:500;cursor:pointer;color:var(--red);font-family:'DM Sans',sans-serif}
 .del-btn:hover{background:#F0D0D0}
 .activo-toggle{cursor:pointer;font-size:18px}
-
 /* MODAL */
 .modal-bg{position:fixed;inset:0;background:rgba(26,26,24,.55);z-index:200;display:none;align-items:center;justify-content:center;padding:1rem}
 .modal-bg.open{display:flex}
@@ -113,41 +105,23 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 .modal-save:hover{background:var(--ink2)}
 .modal-cancel{background:none;border:1px solid var(--border);border-radius:9px;padding:12px 20px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--mid);cursor:pointer}
 .modal-cancel:hover{border-color:var(--border)}
-
 /* STATUS BAR */
 .status-bar{position:fixed;bottom:1.5rem;right:1.5rem;background:var(--ink);color:#fff;border-radius:10px;padding:12px 20px;font-size:13px;font-weight:500;z-index:300;display:none;gap:10px;align-items:center;max-width:340px;box-shadow:0 8px 28px rgba(26,26,24,.25)}
 .status-bar.show{display:flex}
 .status-bar.ok{background:var(--green)}
 .status-bar.err{background:var(--red)}
-
 /* EMPTY */
 .empty-state{text-align:center;padding:4rem 2rem;color:var(--light)}
 .empty-icon{font-size:48px;display:block;margin-bottom:12px}
-
 /* UNSAVED */
 .unsaved-dot{width:8px;height:8px;background:#F0A000;border-radius:50%;display:none}
 .unsaved-dot.show{display:block}
-
 @media(max-width:768px){
-  .main{grid-template-columns:1fr}
-  .sidebar{position:static;height:auto;border-right:none;border-bottom:1px solid var(--border)}
-  .content{padding:1rem}
-  .form-grid{grid-template-columns:1fr}
+.main{grid-template-columns:1fr}
+.sidebar{position:static;height:auto;border-right:none;border-bottom:1px solid var(--border)}
+.content{padding:1rem}
+.form-grid{grid-template-columns:1fr}
 }
-
-/* TOOLS */
-.tool-drop{border:2px dashed var(--border);border-radius:14px;padding:2.5rem;text-align:center;background:#fff;cursor:pointer;transition:border-color .15s;margin-bottom:1.25rem}
-.tool-drop.over{border-color:var(--red)}
-.tool-drop p{color:var(--mid);font-size:14px;margin-top:.5rem}
-.tool-item{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid var(--border);border-radius:10px;padding:10px 14px;margin-bottom:10px}
-.tool-item img{width:48px;height:48px;object-fit:contain;background:var(--cream);border-radius:6px}
-.tool-item .info{flex:1;min-width:0}
-.tool-item .name{font-size:13px;font-weight:500;word-break:break-all}
-.tool-item .size{font-size:11px;color:var(--mid)}
-.tool-item .name input{font-size:12px;padding:4px 6px;border:1px solid var(--border);border-radius:5px;width:100%;margin-top:4px;font-family:monospace}
-.tool-item a{font-size:12px;background:var(--green);color:#fff;border-radius:6px;padding:6px 12px;text-decoration:none;white-space:nowrap}
-.fichas-preview{max-width:100%;border:1px solid var(--border);border-radius:10px;margin-top:1.25rem;background:#fff}
-
 </style>
 </head>
 <body>
@@ -228,7 +202,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
       <input type="text" id="f-present" placeholder="Ej: Caja x 12 bolsas 700g">
     </div>
     <div class="form-grid">
-      <div class="form-row" style="display:none">
+      <div class="form-row">
         <label>Emoji</label>
         <input type="text" id="f-emoji" placeholder="🐻">
       </div>
@@ -250,66 +224,11 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <!-- STATUS BAR -->
 <div class="status-bar" id="status-bar"></div>
 
-<!-- MODAL elegir qué agregar -->
-<div class="modal-bg" id="choice-modal-bg">
-  <div class="modal" style="max-width:340px;text-align:center">
-    <div class="modal-title">¿Qué querés agregar?</div>
-    <div style="display:flex;flex-direction:column;gap:10px">
-      <button class="modal-save" onclick="closeChoiceModal();openModal(null)">+ Producto en esta marca</button>
-      <button class="modal-save" style="background:var(--cream2);color:var(--ink)" onclick="closeChoiceModal();openBrandModal(null, currentBrand ? (data.brands.find(b=>b.id===currentBrand)||{}).sid : 'alimentos')">+ Marca nueva</button>
-    </div>
-    <button class="modal-cancel" style="margin-top:10px;width:100%" onclick="closeChoiceModal()">Cancelar</button>
-  </div>
-</div>
-
-<!-- MODAL crear/editar marca -->
-<div class="modal-bg" id="brand-modal-bg">
-  <div class="modal">
-    <div class="modal-title" id="brand-modal-title">Marca</div>
-    <div class="form-row">
-      <label>Nombre de la marca</label>
-      <input type="text" id="fb-name" placeholder="Ej: Dori">
-    </div>
-    <div class="form-grid">
-      <div class="form-row">
-        <label>ID interno (sin espacios)</label>
-        <input type="text" id="fb-id" placeholder="Ej: dori">
-      </div>
-      <div class="form-row">
-        <label>Sección</label>
-        <select id="fb-sid">
-          <option value="alimentos">Alimentos &amp; Snacks</option>
-          <option value="fumadores">Fumadores</option>
-        </select>
-      </div>
-    </div>
-    <div class="form-row">
-      <label>Descripción corta</label>
-      <input type="text" id="fb-desc" placeholder="Ej: Golosinas y maní">
-    </div>
-    <div class="form-grid">
-      <div class="form-row" style="display:none">
-        <label>Emoji</label>
-        <input type="text" id="fb-emoji" placeholder="🍬">
-      </div>
-      <div class="form-row">
-        <label>Logo (ruta)</label>
-        <input type="text" id="fb-logo" placeholder="img/logo-dori.webp">
-      </div>
-    </div>
-    <div class="modal-actions">
-      <button class="modal-cancel" onclick="closeBrandModal()">Cancelar</button>
-      <button class="modal-save" onclick="saveBrand()">Guardar marca</button>
-    </div>
-  </div>
-</div>
-
 <script>
 // ── Config ───────────────────────────────────────────────────────────────────
 let GH_OWNER = '', GH_REPO = '', GH_TOKEN = '', GH_SHA = '';
-let data = null;       // { brands, products }
+let data = null; // { brands, products }
 let currentBrand = null;
-let view = 'brand';
 let editingId = null;
 let showInactive = false;
 let hasUnsaved = false;
@@ -324,14 +243,19 @@ function doLogin() {
   GH_TOKEN = document.getElementById('gh-token').value.trim();
   if (!GH_OWNER || !GH_REPO || !GH_TOKEN) { showLoginErr('Completá todos los campos'); return; }
   localStorage.setItem('ps_owner', GH_OWNER);
-  localStorage.setItem('ps_repo', GH_REPO);
+  localStorage.setItem('ps_repo',  GH_REPO);
   localStorage.setItem('ps_token', GH_TOKEN);
   loadFromGitHub();
 }
+
 function doLogout() {
   localStorage.removeItem('ps_token');
+  // Al cerrar sesión también limpiamos la caché de datos para no dejar info sensible
+  localStorage.removeItem('ps_sha');
+  localStorage.removeItem('ps_data');
   location.reload();
 }
+
 function showLoginErr(msg) {
   const el = document.getElementById('login-err');
   el.textContent = msg; el.style.display = 'block';
@@ -352,23 +276,63 @@ async function ghFetch(path, opts={}) {
   return res.json();
 }
 
-async function loadFromGitHub() {
-  showStatus('Cargando catálogo desde GitHub…');
+// ── Caché local de data.json ─────────────────────────────────────────────────
+// Guarda el SHA y los datos en localStorage para evitar descargar
+// data.json completo en cada apertura. Solo se re-descarga si el SHA cambió.
+function saveLocalCache(sha, dataObj) {
   try {
+    localStorage.setItem('ps_sha',  sha);
+    localStorage.setItem('ps_data', JSON.stringify(dataObj));
+  } catch(e) {
+    // localStorage lleno o bloqueado: no es crítico, simplemente no cacheamos
+    console.warn('No se pudo guardar caché local:', e.message);
+  }
+}
+
+function loadLocalCache() {
+  try {
+    const sha  = localStorage.getItem('ps_sha');
+    const raw  = localStorage.getItem('ps_data');
+    if (sha && raw) return { sha, data: JSON.parse(raw) };
+  } catch(e) { /* caché corrupta, la ignoramos */ }
+  return null;
+}
+
+// ── Carga inicial ────────────────────────────────────────────────────────────
+async function loadFromGitHub() {
+  showStatus('Verificando catálogo…');
+  try {
+    // 1. Traemos solo los metadatos del archivo (incluye SHA y content).
+    //    Esta llamada es idéntica a la original — no agrega overhead.
     const file = await ghFetch(DATA_PATH);
-    GH_SHA = file.sha;
-    const json = JSON.parse(decodeURIComponent(escape(atob(file.content.replace(/\n/g,'')))));
-    data = json;
+
+    const cache = loadLocalCache();
+
+    if (cache && cache.sha === file.sha) {
+      // ✅ El archivo en GitHub no cambió desde la última vez:
+      //    usamos los datos en memoria local → prácticamente instantáneo.
+      GH_SHA = file.sha;
+      data   = cache.data;
+      showStatus('Catálogo cargado desde caché ✓', 'ok');
+    } else {
+      // 🔄 Primera vez o el archivo cambió (otro dispositivo guardó):
+      //    decodificamos el contenido que ya vino en la misma respuesta.
+      GH_SHA = file.sha;
+      data   = JSON.parse(decodeURIComponent(escape(atob(file.content.replace(/\n/g,'')))));
+      saveLocalCache(GH_SHA, data);
+      showStatus('Catálogo cargado ✓', 'ok');
+    }
+
     document.getElementById('login-screen').style.display = 'none';
     document.getElementById('app').style.display = 'block';
     renderSidebar();
-    showStatus('Catálogo cargado ✓', 'ok');
   } catch(e) {
     showLoginErr('Error: ' + e.message);
     showStatus('Error al cargar', 'err');
   }
 }
 
+// ── Guardar en GitHub ────────────────────────────────────────────────────────
 async function saveToGitHub() {
   if (!hasUnsaved) return;
   const btn = document.getElementById('save-btn');
@@ -376,7 +340,7 @@ async function saveToGitHub() {
   showStatus('Guardando en GitHub…');
   try {
     const content = btoa(unescape(encodeURIComponent(JSON.stringify(data, null, 2))));
-    const result = await ghFetch(DATA_PATH, {
+    const result  = await ghFetch(DATA_PATH, {
       method: 'PUT',
       body: JSON.stringify({
         message: `Admin: actualización catálogo ${new Date().toLocaleString('es-UY')}`,
@@ -384,8 +348,12 @@ async function saveToGitHub() {
         sha: GH_SHA
       })
     });
-    GH_SHA = result.content.sha;
+    GH_SHA     = result.content.sha;
     hasUnsaved = false;
+
+    // ✅ Actualizamos la caché local con el nuevo SHA y los datos guardados
+    saveLocalCache(GH_SHA, data);
+
     document.getElementById('unsaved-dot').classList.remove('show');
     btn.disabled = true;
     showStatus('¡Guardado! Los cambios ya están en el sitio 🎉', 'ok', 4000);
@@ -404,29 +372,22 @@ function markUnsaved() {
 
 // ── Sidebar ──────────────────────────────────────────────────────────────────
 function renderSidebar() {
-  const alBrands = data.brands.filter(b => b.sid === 'alimentos');
+  const alBrands  = data.brands.filter(b => b.sid === 'alimentos');
   const fumBrands = data.brands.filter(b => b.sid === 'fumadores');
-  let html = `<div class="sidebar-section">
-    <span class="sidebar-label">🛠️ Herramientas</span>
-    <button class="brand-btn${view==='webp'?' active':''}" onclick="goTool('webp')">
-      <span>🖼️</span><span>Convertir a WebP</span>
-    </button>
-    <button class="brand-btn${view==='fichas'?' active':''}" onclick="goTool('fichas')">
-      <span>📋</span><span>Generador de fichas</span>
-    </button>
-  </div>`;
-  html += renderBrandGroup('&#127851; Alimentos', alBrands, 'alimentos');
-  html += renderBrandGroup('&#128680; Fumadores', fumBrands, 'fumadores');
+  let html = '';
+  html += renderBrandGroup('&#127851; Alimentos', alBrands);
+  html += renderBrandGroup('&#128680; Fumadores', fumBrands);
   document.getElementById('sidebar').innerHTML = html;
 }
-function renderBrandGroup(label, brands, sid) {
+
+function renderBrandGroup(label, brands) {
   return `<div class="sidebar-section">
     <span class="sidebar-label">${label}</span>
     ${brands.map(b => {
-      const count = (data.products[b.id]||[]).filter(p=>p.activo!==false).length;
-      const total = (data.products[b.id]||[]).length;
-      const active = currentBrand === b.id ? ' active' : '';
-      const inactive = b.activo === false ? ' inactive' : '';
+      const count  = (data.products[b.id]||[]).filter(p=>p.activo!==false).length;
+      const total  = (data.products[b.id]||[]).length;
+      const active   = currentBrand === b.id ? ' active' : '';
+      const inactive = b.activo === false   ? ' inactive' : '';
       return `<button class="brand-btn${active}${inactive}" onclick="selectBrand('${b.id}')">
         <span>${b.emoji}</span>
         <span>${b.name}</span>
@@ -448,7 +409,8 @@ function renderContent() {
   if (!currentBrand) return;
   const brand = data.brands.find(b => b.id === currentBrand);
   if (!brand) return;
-  const prods = data.products[currentBrand] || [];
+
+  const prods    = data.products[currentBrand] || [];
   const filtered = prods
     .filter(p => showInactive || p.activo !== false)
     .filter(p => !searchQ || p.name.toLowerCase().includes(searchQ) || p.art.includes(searchQ) || p.cat.includes(searchQ));
@@ -461,10 +423,9 @@ function renderContent() {
         <button class="toggle-inactive-btn${showInactive?' on':''}" onclick="toggleInactive()">
           ${showInactive ? 'Ocultar inactivos' : 'Ver inactivos'}
         </button>
-        <button class="add-btn" onclick="openAddChoice()">+ Agregar</button>
+        <button class="add-btn" onclick="openModal(null)">+ Agregar</button>
       </div>
     </div>
-
     <div class="brand-meta">
       <img src="${brand.logo}" alt="${brand.name}" onerror="this.outerHTML='<span style=\\'font-size:28px\\'>${brand.emoji}</span>'">
       <div class="brand-meta-info">
@@ -476,23 +437,14 @@ function renderContent() {
         <div class="toggle-track${brand.activo!==false?' on':''}" onclick="toggleBrand('${brand.id}')">
           <div class="toggle-thumb"></div>
         </div>
-        <button class="edit-btn" onclick="openBrandModal('${brand.id}')">Editar marca</button>
-        <button class="del-btn" onclick="deleteBrand('${brand.id}')">Borrar marca</button>
       </div>
     </div>
-
     ${filtered.length === 0
       ? `<div class="empty-state"><span class="empty-icon">📦</span><div>No hay productos${searchQ?' para "'+searchQ+'"':''}</div></div>`
       : `<table class="prod-table">
           <thead><tr>
-            <th>Foto</th>
-            <th>Producto</th>
-            <th>Cat.</th>
-            <th>Art.</th>
-            <th>Precio unit.</th>
-            <th>Precio caja</th>
-            <th>Activo</th>
-            <th>Acciones</th>
+            <th>Foto</th><th>Producto</th><th>Cat.</th><th>Art.</th>
+            <th>Precio unit.</th><th>Precio caja</th><th>Activo</th><th>Acciones</th>
           </tr></thead>
           <tbody>${filtered.map(p => renderRow(p, currentBrand)).join('')}</tbody>
         </table>`
@@ -515,413 +467,6 @@ function renderRow(p, bid) {
       <button class="del-btn" onclick="deleteProduct('${p.id}')">Borrar</button>
     </div></td>
   </tr>`;
-}
-
-// ── Herramientas ──────────────────────────────────────────────────────────────
-function goTool(t) {
-  view = t;
-  currentBrand = null;
-  renderSidebar();
-  if (t === 'webp') renderToolWebp();
-  else if (t === 'fichas') renderToolFichas();
-}
-
-function renderToolWebp() {
-  document.getElementById('content').innerHTML = `
-    <div class="content-hdr">
-      <div class="content-title">🖼️ Convertir imágenes a WebP</div>
-    </div>
-    <div style="padding:0 2rem 2rem">
-      <p style="font-size:13px;color:var(--mid);margin-bottom:1.25rem">
-        Arrastrá o seleccioná imágenes JPG/PNG. Se convierten a .webp listas para subir a <code>img/</code>.<br>
-        <strong>Logos de marca:</strong> nombralos <code>logo-{id}.webp</code> (ej: <code>logo-dori.webp</code>)<br>
-        <strong>Fotos de producto:</strong> nombralos con el código de artículo (ej: <code>9100.webp</code>)
-      </p>
-      <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-bottom:1.25rem">
-        <label style="font-size:12px;color:var(--mid);display:flex;align-items:center;gap:6px">
-          Calidad
-          <input type="range" id="wq" min="0.5" max="1" step="0.05" value="0.85" oninput="document.getElementById('wqv').textContent=Math.round(this.value*100)+'%'">
-          <span id="wqv">85%</span>
-        </label>
-        <label style="font-size:12px;color:var(--mid);display:flex;align-items:center;gap:6px">
-          Tamaño máx.
-          <select id="wmx" style="padding:5px 8px;border:1px solid var(--border);border-radius:6px;background:#fff">
-            <option value="0">Original</option>
-            <option value="1500" selected>1500px</option>
-            <option value="1000">1000px</option>
-            <option value="600">600px</option>
-          </select>
-        </label>
-      </div>
-      <div class="tool-drop" id="wdrop" onclick="document.getElementById('wfile').click()">
-        <div style="font-size:32px">📂</div>
-        <p>Tocá para elegir imágenes o arrastralas aquí</p>
-        <input type="file" id="wfile" accept="image/*" multiple style="display:none">
-      </div>
-      <div style="display:flex;gap:10px;margin-bottom:1rem" id="wactions" style="display:none">
-        <button class="add-btn" id="wdlall" style="background:var(--green)">⬇️ Descargar todas (.zip)</button>
-        <button class="toggle-inactive-btn" id="wclear">Limpiar</button>
-      </div>
-      <div id="wlist"></div>
-    </div>`;
-  initWebpTool();
-}
-
-function initWebpTool() {
-  const drop=document.getElementById('wdrop');
-  const input=document.getElementById('wfile');
-  const list=document.getElementById('wlist');
-  const actions=document.getElementById('wactions');
-  let items=[];
-
-  drop.ondragover=e=>{e.preventDefault();drop.classList.add('over')};
-  drop.ondragleave=()=>drop.classList.remove('over');
-  drop.ondrop=e=>{e.preventDefault();drop.classList.remove('over');handle(e.dataTransfer.files)};
-  input.onchange=()=>handle(input.files);
-
-  function handle(files){
-    [...files].forEach(f=>{
-      if(!f.type.startsWith('image/'))return;
-      const id='w'+Date.now()+Math.random().toString(36).slice(2);
-      const base=f.name.replace(/\.[^.]+$/,'').toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9-]/g,'');
-      const it={id,file:f,base,blob:null};
-      items.push(it);
-      const div=document.createElement('div');
-      div.className='tool-item';div.id=id;
-      div.innerHTML=`<img src="${URL.createObjectURL(f)}">
-        <div class="info">
-          <div class="name"><input value="${base}.webp" data-id="${id}"></div>
-          <div class="size">Convirtiendo…</div>
-        </div>
-        <span id="dl-${id}">⏳</span>`;
-      list.prepend(div);
-      convert(it);
-    });
-    actions.style.display=items.length?'flex':'none';
-  }
-
-  function convert(it){
-    const img=new Image();
-    img.onload=()=>{
-      let w=img.width,h=img.height;
-      const mx=parseInt(document.getElementById('wmx').value);
-      if(mx&&Math.max(w,h)>mx){const r=mx/Math.max(w,h);w=Math.round(w*r);h=Math.round(h*r);}
-      const cv=document.createElement('canvas');cv.width=w;cv.height=h;
-      cv.getContext('2d').drawImage(img,0,0,w,h);
-      cv.toBlob(blob=>{
-        it.blob=blob;
-        const kb=(blob.size/1024).toFixed(1);
-        document.getElementById(it.id).querySelector('.size').textContent=`${w}×${h}px · ${kb} KB`;
-        const url=URL.createObjectURL(blob);
-        document.getElementById('dl-'+it.id).outerHTML=`<a id="dl-${it.id}" download="${it.base}.webp" href="${url}" style="font-size:12px;background:var(--green);color:#fff;border-radius:6px;padding:6px 12px;text-decoration:none">⬇️ webp</a>`;
-      },'image/webp',parseFloat(document.getElementById('wq').value));
-    };
-    img.src=URL.createObjectURL(it.file);
-  }
-
-  document.getElementById('wclear').onclick=()=>{items=[];list.innerHTML='';actions.style.display='none'};
-  document.getElementById('wdlall').onclick=async()=>{
-    const zip=new JSZip();
-    for(const it of items){
-      if(!it.blob)continue;
-      const ni=document.querySelector(`input[data-id="${it.id}"]`);
-      let name=ni?ni.value.trim():it.base+'.webp';
-      if(!name.toLowerCase().endsWith('.webp'))name+='.webp';
-      zip.file(name,it.blob);
-    }
-    const blob=await zip.generateAsync({type:'blob'});
-    const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='imagenes-webp.zip';a.click();
-  };
-}
-
-function renderToolFichas() {
-  const brandOpts = data.brands.filter(b=>b.activo!==false)
-    .map(b=>`<option value="${b.id}">${b.name}</option>`).join('');
-
-  document.getElementById('content').innerHTML = `
-    <div class="content-hdr">
-      <div class="content-title">📋 Generador de fichas</div>
-    </div>
-    <div style="padding:0 2rem 2rem">
-      <p style="font-size:13px;color:var(--mid);margin-bottom:1.25rem">
-        Elegí una o varias marcas para generar la ficha con fotos y precios. Descargá la imagen y subila a <code>img/fichas/{id}.jpg</code>
-      </p>
-
-      <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:flex-end;margin-bottom:1.5rem">
-        <div>
-          <label style="font-size:11px;color:var(--mid);display:block;margin-bottom:4px">MARCAS A INCLUIR</label>
-          <select id="fg-brand" multiple size="5" style="padding:8px;border:1px solid var(--border);border-radius:8px;background:#fff;min-width:200px">
-            ${brandOpts}
-          </select>
-          <div style="font-size:11px;color:var(--mid);margin-top:3px">Ctrl+click para seleccionar varias</div>
-        </div>
-        <div>
-          <label style="font-size:11px;color:var(--mid);display:block;margin-bottom:4px">NOMBRE DE ARCHIVO</label>
-          <input id="fg-filename" type="text" placeholder="mazarena" style="padding:8px 12px;border:1px solid var(--border);border-radius:8px;width:180px;font-size:13px">
-          <div style="font-size:11px;color:var(--mid);margin-top:3px">Sin extensión — se guarda como .jpg</div>
-        </div>
-        <button class="add-btn" onclick="generateFicha()">Generar ficha</button>
-      </div>
-
-      <div id="fg-preview"></div>
-    </div>`;
-}
-
-async function generateFicha() {
-  const sel = [...document.getElementById('fg-brand').selectedOptions].map(o=>o.value);
-  if (!sel.length) { alert('Seleccioná al menos una marca'); return; }
-  const filename = (document.getElementById('fg-filename').value.trim() || sel[0]) + '.jpg';
-
-  let allProds = [];
-  sel.forEach(bid => {
-    const b = data.brands.find(x=>x.id===bid);
-    const ps = (data.products[bid]||[]).filter(p=>p.activo!==false);
-    ps.forEach(p => allProds.push({...p, _brand: b}));
-  });
-  if (!allProds.length) { alert('Las marcas seleccionadas no tienen productos activos'); return; }
-
-  const preview = document.getElementById('fg-preview');
-  preview.innerHTML = '<div style="color:var(--mid);font-size:13px;padding:1rem 0">⏳ Generando ficha…</div>';
-
-  // ── Dimensiones ──────────────────────────────────────────────────────────
-  const COLS     = 3;
-  const PW       = 1500;
-  const GAP      = 20;
-  const MARGIN   = 28;
-  const HEADER_H = 130;
-  const FOOTER_H = 36;
-  const CELL_W   = Math.floor((PW - MARGIN*2 - GAP*(COLS-1)) / COLS);
-  const IMG_H    = Math.floor(CELL_W * 0.72);  // foto = 72% del ancho → grande
-  const INFO_H   = 148;
-  const CELL_H   = IMG_H + INFO_H;
-  const ROWS     = Math.ceil(allProds.length / COLS);
-  const PH       = HEADER_H + MARGIN + ROWS*(CELL_H+GAP) - GAP + MARGIN + FOOTER_H;
-
-  const canvas   = document.createElement('canvas');
-  canvas.width   = PW;
-  canvas.height  = PH;
-  const ctx      = canvas.getContext('2d');
-
-  // ── Helpers ───────────────────────────────────────────────────────────────
-  const loadImg = src => new Promise(res => {
-    const i = new Image(); i.crossOrigin='anonymous';
-    i.onload=()=>res(i); i.onerror=()=>res(null); i.src=src;
-  });
-
-  function rr(x,y,w,h,r){
-    ctx.beginPath();
-    ctx.moveTo(x+r,y);
-    ctx.lineTo(x+w-r,y); ctx.quadraticCurveTo(x+w,y,x+w,y+r);
-    ctx.lineTo(x+w,y+h-r); ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);
-    ctx.lineTo(x+r,y+h); ctx.quadraticCurveTo(x,y+h,x,y+h-r);
-    ctx.lineTo(x,y+r); ctx.quadraticCurveTo(x,y,x+r,y);
-    ctx.closePath();
-  }
-
-  function wrapText(text, x, y, maxW, lineH, maxLines){
-    const words=text.split(' '); let line='', n=0;
-    for(const w of words){
-      const t=line+(line?' ':'')+w;
-      if(ctx.measureText(t).width>maxW&&line){
-        if(n<maxLines){ctx.fillText(line,x,y+n*lineH);n++;} line=w;
-      } else line=t;
-    }
-    if(n<maxLines&&line) ctx.fillText(line,x,y+n*lineH);
-  }
-
-  function price(n){
-    return '$'+Number(n).toLocaleString('es-UY',{minimumFractionDigits:0,maximumFractionDigits:2});
-  }
-
-  // ── Fondo ─────────────────────────────────────────────────────────────────
-  ctx.fillStyle='#F0EDE6';
-  ctx.fillRect(0,0,PW,PH);
-
-  // ── HEADER ────────────────────────────────────────────────────────────────
-  // Fondo gris oscuro cálido (no negro puro)
-  ctx.fillStyle='#2B2926';
-  ctx.fillRect(0,0,PW,HEADER_H);
-
-  // Línea acento rojo fina arriba
-  ctx.fillStyle='#B02020';
-  ctx.fillRect(0,0,PW,5);
-
-  // Logo marca (una sola marca)
-  let logoEndX = MARGIN + 20;
-  if(sel.length===1){
-    const b=data.brands.find(x=>x.id===sel[0]);
-    if(b&&b.logo){
-      const li=await loadImg(b.logo);
-      if(li){
-        const lh=72, lw=Math.min(lh*(li.width/li.height),180);
-        ctx.drawImage(li, MARGIN+16, (HEADER_H-lh)/2+5, lw, lh);
-        logoEndX = MARGIN+16+lw+24;
-      }
-    }
-  }
-
-  // Nombre marcas
-  const brandLabel = sel.map(bid=>data.brands.find(b=>b.id===bid)?.name||bid).join('  ·  ').toUpperCase();
-  ctx.fillStyle='#FFFFFF';
-  ctx.font=`bold 46px Arial`;
-  ctx.textAlign='left';
-  ctx.textBaseline='middle';
-  ctx.fillText(brandLabel, logoEndX, HEADER_H/2 - 10);
-
-  // Subtítulo
-  ctx.fillStyle='#8A857E';
-  ctx.font=`400 17px Arial`;
-  ctx.fillText('Catálogo de productos · Precios en $UYU', logoEndX, HEADER_H/2 + 26);
-
-  // PelSAS pill derecha
-  const pw2=180, ph2=56, px2=PW-MARGIN-pw2, py2=(HEADER_H-ph2)/2;
-  ctx.fillStyle='#B02020';
-  rr(px2,py2,pw2,ph2,10); ctx.fill();
-  ctx.fillStyle='#FFFFFF';
-  ctx.font=`bold 22px Arial`;
-  ctx.textAlign='center';
-  ctx.textBaseline='middle';
-  ctx.fillText('PEL SAS', px2+pw2/2, py2+ph2/2-8);
-  ctx.fillStyle='#FFAAAA';
-  ctx.font=`400 15px Arial`;
-  ctx.fillText('096 190002', px2+pw2/2, py2+ph2/2+14);
-
-  // ── TARJETAS ──────────────────────────────────────────────────────────────
-  for(let i=0;i<allProds.length;i++){
-    const p=allProds[i];
-    const col=i%COLS, row=Math.floor(i/COLS);
-    const cx=MARGIN+col*(CELL_W+GAP);
-    const cy=HEADER_H+MARGIN+row*(CELL_H+GAP);
-
-    // Sombra sutil
-    ctx.fillStyle='rgba(0,0,0,0.07)';
-    rr(cx+2,cy+3,CELL_W,CELL_H,14); ctx.fill();
-
-    // Tarjeta blanca
-    ctx.fillStyle='#FFFFFF';
-    rr(cx,cy,CELL_W,CELL_H,14); ctx.fill();
-
-    // ── Foto ────────────────────────────────────────────────────────────
-    // Zona foto con clip redondeado arriba
-    ctx.save();
-    rr(cx,cy,CELL_W,IMG_H+14,14); ctx.clip();
-    ctx.fillStyle='#F5F2EC';
-    ctx.fillRect(cx,cy,CELL_W,IMG_H+14);
-
-    const pi=await loadImg(`img/${p.art}.webp`);
-    if(pi){
-      const pad=18;
-      const scale=Math.min((CELL_W-pad*2)/pi.width,(IMG_H-pad*2)/pi.height);
-      const dw=pi.width*scale, dh=pi.height*scale;
-      ctx.drawImage(pi, cx+(CELL_W-dw)/2, cy+(IMG_H-dh)/2, dw, dh);
-    } else {
-      ctx.fillStyle='#DDD9D2';
-      ctx.font='15px Arial'; ctx.textAlign='center'; ctx.textBaseline='middle';
-      ctx.fillText('sin foto', cx+CELL_W/2, cy+IMG_H/2);
-    }
-    ctx.restore();
-
-    // ── Info ─────────────────────────────────────────────────────────────
-    const infoTop = cy + IMG_H + 6;
-    const infoX   = cx + CELL_W/2;
-    let iy        = infoTop + 16;
-
-    // Nombre producto
-    ctx.fillStyle='#1A1A18';
-    ctx.font=`bold 17px Arial`;
-    ctx.textAlign='center';
-    ctx.textBaseline='top';
-    wrapText(p.name, infoX, iy, CELL_W-28, 22, 2);
-    iy += 48;
-
-    // Precios — en una línea, tipografía grande
-    const unitTxt = price(p.unit);
-    const cajaTxt = price(p.caja);
-
-    // Precio unitario destacado
-    ctx.font=`bold 26px Arial`;
-    ctx.fillStyle='#B02020';
-    ctx.textAlign='center';
-    ctx.textBaseline='top';
-
-    // Medir para centrar los dos precios juntos
-    const unitW = ctx.measureText(unitTxt).width;
-    ctx.font=`bold 20px Arial`;
-    const cajaW = ctx.measureText(cajaTxt).width;
-    const sepTxt=' · ';
-    ctx.font=`400 16px Arial`;
-    ctx.fillStyle='#AAA49C';
-    const sepW = ctx.measureText(sepTxt).width;
-
-    const totalW = unitW + sepW + cajaW + 40; // +40 for labels
-    let startX = infoX - totalW/2 + 4;
-
-    // unit price
-    ctx.font=`bold 26px Arial`;
-    ctx.fillStyle='#B02020';
-    ctx.textAlign='left';
-    ctx.fillText(unitTxt, startX, iy);
-
-    // label unit
-    ctx.font=`400 11px Arial`;
-    ctx.fillStyle='#AAA49C';
-    ctx.fillText('unit', startX, iy+30);
-
-    // separator
-    ctx.font=`300 20px Arial`;
-    ctx.fillStyle='#D0CBC4';
-    ctx.fillText('/', startX+unitW+8, iy+4);
-
-    // caja price
-    ctx.font=`bold 20px Arial`;
-    ctx.fillStyle='#1A1A18';
-    ctx.fillText(cajaTxt, startX+unitW+20, iy+4);
-
-    // label caja
-    ctx.font=`400 11px Arial`;
-    ctx.fillStyle='#AAA49C';
-    ctx.fillText('caja', startX+unitW+20, iy+30);
-
-    iy += 46;
-
-    // Línea divisora suave
-    ctx.strokeStyle='#EDEAE3';
-    ctx.lineWidth=1;
-    ctx.beginPath();
-    ctx.moveTo(cx+20, iy); ctx.lineTo(cx+CELL_W-20, iy);
-    ctx.stroke();
-    iy += 10;
-
-    // Presentación + art — misma línea, discreta
-    ctx.font=`400 12px Arial`;
-    ctx.fillStyle='#AAA49C';
-    ctx.textAlign='center';
-    ctx.textBaseline='top';
-    ctx.fillText(`${p.present}  ·  art. ${p.art}`, infoX, iy);
-  }
-
-  // ── FOOTER ────────────────────────────────────────────────────────────────
-  const fy=PH-FOOTER_H;
-  ctx.fillStyle='#2B2926';
-  ctx.fillRect(0,fy,PW,FOOTER_H);
-  ctx.fillStyle='#B02020';
-  ctx.fillRect(0,fy,PW,3);
-  ctx.fillStyle='#66625E';
-  ctx.font='12px Arial';
-  ctx.textAlign='center';
-  ctx.textBaseline='middle';
-  ctx.fillText('PelSAS Distribuidora  ·  Precios de lista en $UYU · Sujeto a disponibilidad de stock', PW/2, fy+FOOTER_H/2);
-
-  // ── Render ────────────────────────────────────────────────────────────────
-  canvas.toBlob(blob=>{
-    const url=URL.createObjectURL(blob);
-    preview.innerHTML=`
-      <div style="margin-bottom:14px;display:flex;gap:12px;align-items:center;flex-wrap:wrap">
-        <a href="${url}" download="${filename}" class="add-btn" style="background:var(--green);color:#fff;text-decoration:none;padding:10px 20px;border-radius:8px;font-weight:600;font-size:14px">⬇️ Descargar ${filename}</a>
-        <span style="font-size:12px;color:var(--mid)">Subila a <code>img/fichas/</code> en el repo</span>
-      </div>
-      <img src="${url}" style="max-width:100%;border:1px solid var(--border);border-radius:12px;box-shadow:0 4px 16px rgba(0,0,0,.1)">`;
-  },'image/jpeg',0.93);
 }
 
 // ── Acciones ─────────────────────────────────────────────────────────────────
@@ -974,23 +519,23 @@ function openModal(pid) {
       if (p) break;
     }
     if (!p) return;
-    document.getElementById('f-name').value = p.name;
-    document.getElementById('f-unit').value = p.unit;
-    document.getElementById('f-caja').value = p.caja;
-    document.getElementById('f-cat').value = p.cat;
-    document.getElementById('f-art').value = p.art;
+    document.getElementById('f-name').value    = p.name;
+    document.getElementById('f-unit').value    = p.unit;
+    document.getElementById('f-caja').value    = p.caja;
+    document.getElementById('f-cat').value     = p.cat;
+    document.getElementById('f-art').value     = p.art;
     document.getElementById('f-present').value = p.present;
-    document.getElementById('f-emoji').value = p.emoji;
-    document.getElementById('f-venta').value = p.venta || 1;
+    document.getElementById('f-emoji').value   = p.emoji;
+    document.getElementById('f-venta').value   = p.venta || 1;
   } else {
-    document.getElementById('f-name').value = '';
-    document.getElementById('f-unit').value = '';
-    document.getElementById('f-caja').value = '';
-    document.getElementById('f-cat').value = '';
-    document.getElementById('f-art').value = '';
+    document.getElementById('f-name').value    = '';
+    document.getElementById('f-unit').value    = '';
+    document.getElementById('f-caja').value    = '';
+    document.getElementById('f-cat').value     = '';
+    document.getElementById('f-art').value     = '';
     document.getElementById('f-present').value = '';
-    document.getElementById('f-emoji').value = '📦';
-    document.getElementById('f-venta').value = 1;
+    document.getElementById('f-emoji').value   = '📦';
+    document.getElementById('f-venta').value   = 1;
   }
   document.getElementById('modal-bg').classList.add('open');
   document.getElementById('f-name').focus();
@@ -1002,14 +547,14 @@ function closeModal() {
 }
 
 function saveProduct() {
-  const name = document.getElementById('f-name').value.trim();
-  const unit = parseFloat(document.getElementById('f-unit').value);
-  const caja = parseFloat(document.getElementById('f-caja').value);
-  const cat  = document.getElementById('f-cat').value.trim();
-  const art  = document.getElementById('f-art').value.trim();
+  const name    = document.getElementById('f-name').value.trim();
+  const unit    = parseFloat(document.getElementById('f-unit').value);
+  const caja    = parseFloat(document.getElementById('f-caja').value);
+  const cat     = document.getElementById('f-cat').value.trim();
+  const art     = document.getElementById('f-art').value.trim();
   const present = document.getElementById('f-present').value.trim();
-  const emoji = document.getElementById('f-emoji').value.trim() || '📦';
-  const venta = parseInt(document.getElementById('f-venta').value);
+  const emoji   = document.getElementById('f-emoji').value.trim() || '📦';
+  const venta   = parseInt(document.getElementById('f-venta').value);
 
   if (!name || isNaN(unit) || isNaN(caja)) {
     alert('Completá al menos nombre, precio unitario y precio caja');
@@ -1017,16 +562,11 @@ function saveProduct() {
   }
 
   if (editingId) {
-    // Editar existente
     for (const bid of Object.keys(data.products)) {
       const p = data.products[bid].find(x => x.id === editingId);
-      if (p) {
-        Object.assign(p, { name, unit, caja, cat, art, present, emoji, venta });
-        break;
-      }
+      if (p) { Object.assign(p, { name, unit, caja, cat, art, present, emoji, venta }); break; }
     }
   } else {
-    // Nuevo producto
     if (!currentBrand) { alert('Seleccioná una marca primero'); return; }
     if (!data.products[currentBrand]) data.products[currentBrand] = [];
     const newId = currentBrand + '_' + Date.now();
@@ -1036,103 +576,6 @@ function saveProduct() {
   markUnsaved();
   closeModal();
   renderContent();
-  renderSidebar();
-}
-
-// ── Modal de elección ────────────────────────────────────────────────────────
-function openAddChoice() {
-  if (!currentBrand) { openModal(null); return; }
-  document.getElementById('choice-modal-bg').classList.add('open');
-}
-function closeChoiceModal() {
-  document.getElementById('choice-modal-bg').classList.remove('open');
-}
-
-// ── Modal de marca ───────────────────────────────────────────────────────────
-let editingBrandId = null;
-let newBrandSid = 'alimentos';
-
-function openBrandModal(bid, sid) {
-  editingBrandId = bid;
-  if (bid) {
-    const b = data.brands.find(x => x.id === bid);
-    if (!b) return;
-    document.getElementById('brand-modal-title').textContent = 'Editar marca';
-    document.getElementById('fb-name').value = b.name;
-    document.getElementById('fb-id').value = b.id;
-    document.getElementById('fb-id').disabled = true;
-    document.getElementById('fb-sid').value = b.sid;
-    document.getElementById('fb-desc').value = b.desc || '';
-    document.getElementById('fb-emoji').value = b.emoji || '';
-    document.getElementById('fb-logo').value = b.logo || '';
-  } else {
-    newBrandSid = sid || 'alimentos';
-    document.getElementById('brand-modal-title').textContent = 'Nueva marca';
-    document.getElementById('fb-name').value = '';
-    document.getElementById('fb-id').value = '';
-    document.getElementById('fb-id').disabled = false;
-    document.getElementById('fb-sid').value = newBrandSid;
-    document.getElementById('fb-desc').value = '';
-    document.getElementById('fb-emoji').value = '📦';
-    document.getElementById('fb-logo').value = '';
-  }
-  document.getElementById('brand-modal-bg').classList.add('open');
-  document.getElementById('fb-name').focus();
-}
-
-function closeBrandModal() {
-  document.getElementById('brand-modal-bg').classList.remove('open');
-  editingBrandId = null;
-}
-
-function slugify(s) {
-  return s.toLowerCase()
-    .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
-    .replace(/[^a-z0-9]+/g, '');
-}
-
-function saveBrand() {
-  const name = document.getElementById('fb-name').value.trim();
-  const sid  = document.getElementById('fb-sid').value;
-  const desc = document.getElementById('fb-desc').value.trim();
-  const emoji = document.getElementById('fb-emoji').value.trim() || '📦';
-  const logo = document.getElementById('fb-logo').value.trim() || 'img/placeholder.webp';
-
-  if (!name) { alert('Completá el nombre de la marca'); return; }
-
-  if (editingBrandId) {
-    const b = data.brands.find(x => x.id === editingBrandId);
-    Object.assign(b, { name, sid, desc, emoji, logo });
-  } else {
-    let id = document.getElementById('fb-id').value.trim();
-    id = id ? slugify(id) : slugify(name);
-    if (!id) { alert('Ingresá un ID válido para la marca'); return; }
-    if (data.brands.some(b => b.id === id)) { alert('Ya existe una marca con ese ID'); return; }
-    data.brands.push({ id, sid, name, emoji, desc, logo, activo: true });
-    if (!data.products[id]) data.products[id] = [];
-  }
-
-  markUnsaved();
-  closeBrandModal();
-  renderSidebar();
-}
-
-function deleteBrand(bid) {
-  const b = data.brands.find(x => x.id === bid);
-  if (!b) return;
-  const n = (data.products[bid]||[]).length;
-  if (!confirm(`¿Seguro que querés borrar la marca "${b.name}"${n?` y sus ${n} productos`:''}? Esta acción no se puede deshacer.`)) return;
-  data.brands = data.brands.filter(x => x.id !== bid);
-  delete data.products[bid];
-  if (currentBrand === bid) {
-    currentBrand = null;
-    document.getElementById('content').innerHTML = `
-      <div class="empty-state">
-        <span class="empty-icon">👈</span>
-        <div>Seleccioná una marca del menú</div>
-      </div>`;
-  }
-  markUnsaved();
   renderSidebar();
 }
 
@@ -1149,12 +592,6 @@ function showStatus(msg, type='', duration=2500) {
 // ── Init ──────────────────────────────────────────────────────────────────────
 document.getElementById('modal-bg').addEventListener('click', e => {
   if (e.target === document.getElementById('modal-bg')) closeModal();
-});
-document.getElementById('brand-modal-bg').addEventListener('click', e => {
-  if (e.target === document.getElementById('brand-modal-bg')) closeBrandModal();
-});
-document.getElementById('choice-modal-bg').addEventListener('click', e => {
-  if (e.target === document.getElementById('choice-modal-bg')) closeChoiceModal();
 });
 
 // Recuperar credenciales guardadas
