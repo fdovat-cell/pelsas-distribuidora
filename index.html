@@ -434,15 +434,90 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 /* mobile-only banners */
 .home-mobile-only{display:none}
 
-/* MOBILE */
-@media(max-width:720px){
-  .home-cats-grid{grid-template-columns:1fr}
+/* BOTTOM NAV — oculto por defecto, visible en tablet y mobile */
+.bottom-nav{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--white);border-top:1px solid var(--border);z-index:80;padding:6px 0 calc(6px + env(safe-area-inset-bottom));justify-content:space-around;box-shadow:0 -2px 12px rgba(26,26,24,.06)}
+.bn-item{background:none;border:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 14px;font-family:'DM Sans',sans-serif;color:var(--mid);position:relative;min-width:64px;transition:color .15s}
+.bn-item.active{color:var(--red)}
+.bn-icon{font-size:20px;line-height:1}
+.bn-label{font-size:10px;font-weight:500;letter-spacing:.04em;text-transform:uppercase}
+.bn-badge{position:absolute;top:0;right:6px;background:var(--red);color:#fff;border-radius:10px;min-width:16px;height:16px;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center;padding:0 4px}
+.bn-badge.zero{display:none}
+
+/* WHATSAPP FAB */
+.wa-fab{position:fixed;right:18px;bottom:calc(78px + env(safe-area-inset-bottom));width:54px;height:54px;border-radius:50%;background:#25D366;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 20px rgba(37,211,102,.45);z-index:75;transition:transform .15s,box-shadow .15s}
+.wa-fab:hover{transform:scale(1.06);box-shadow:0 8px 24px rgba(37,211,102,.55)}
+.wa-fab svg{width:28px;height:28px;fill:#fff}
+@media(min-width:1025px){.wa-fab{bottom:24px;right:24px;width:58px;height:58px}.wa-fab svg{width:30px;height:30px}}
+
+/* TABLET + MOBILE: mostrar bottom nav y ajustar body */
+@media(max-width:1024px){
+  body{padding-bottom:64px}
+  .bottom-nav{display:flex}
+  .home-mobile-only{display:flex !important}
   .home-banner.pago{display:none}
   .home-banner.fum{display:none}
-  .home-mobile-only{display:flex !important}
   .home-mobile-fum{min-height:130px}
   .home-mobile-pago{margin-top:0;cursor:default}
   .home-mobile-pago:hover{transform:none;box-shadow:none}
+}
+
+/* SOLO MOBILE: ajustes de layout más agresivos */
+@media(max-width:720px){
+  .collage-row,.fum-2col,.hero-row{grid-template-columns:1fr}
+  .topbar{padding-left:1rem;padding-right:1rem;height:56px}
+  .home-wrap{padding:1rem 1.25rem 2rem}
+  .section-wrap{padding-left:1.25rem;padding-right:1.25rem;padding-top:1.5rem}
+  .cart-panel{width:100%}
+  .promo-strip{flex-direction:column;text-align:center;padding:1.75rem 1.5rem;margin-bottom:3rem}
+  .logo-divider,.logo-city,.tel{display:none}
+  .logo-name{font-size:18px}
+  .cart-btn{padding:8px 13px;font-size:12px}
+  .cart-btn span:not(.badge){font-size:11px}
+  .gsearch{top:56px;padding:6px 1rem}
+  .gsearch-input{font-size:13px;padding:9px 32px 9px 34px}
+  .gsearch-icon{left:10px}
+  .gsr-img{width:38px;height:38px;font-size:20px}
+  .gsr-price{font-size:11px}
+  .hero-eyebrow{margin-bottom:.5rem;font-size:10px}
+  .hero-title{font-size:clamp(26px,7.5vw,38px);line-height:.98;margin-bottom:.75rem}
+  .hero-rule{margin-bottom:.5rem}
+  .hero-body{font-size:13px;line-height:1.5;margin-bottom:0;max-width:100%}
+  .hero-row{margin-bottom:.75rem}
+  .section-eyebrow{margin-bottom:.25rem}
+  .section-rule-line{margin-bottom:.75rem}
+  .collage-row{margin-bottom:2rem}
+  .col-visual{height:auto;min-height:180px}
+  .col-card.alimentos .col-visual{height:273px}
+  .col-card.fumadores .col-visual{height:273px}
+  .col-cta{
+    position:absolute;bottom:12px;left:50%;transform:translateX(-50%);
+    background:rgba(26,26,24,.72);color:#fff;
+    font-size:12px;font-weight:500;letter-spacing:.06em;
+    padding:6px 16px;border-radius:20px;
+    backdrop-filter:blur(4px);pointer-events:none;
+    white-space:nowrap;z-index:2;
+  }
+  .col-foot{padding:14px 16px}
+  .col-foot-name{font-size:15px}
+  .section-title{font-size:clamp(24px,6vw,32px)}
+  .section-meta{margin-bottom:1.25rem}
+  .toolbar{margin-bottom:1rem;gap:8px}
+  .prod-grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+  .prod-card{padding:.75rem;gap:7px;border-radius:11px}
+  .prod-icon{height:170px;font-size:42px;border-radius:8px}
+  .prod-art{font-size:9px}
+  .prod-name{font-size:12px;line-height:1.25}
+  .prod-present{font-size:10px}
+  .prices-row{gap:4px;margin:0}
+  .price-box{padding:5px 4px;border-radius:7px;border-width:1.5px;min-width:0}
+  .price-box-label{font-size:9px;letter-spacing:.04em}
+  .price-box-val{font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .prod-pu{font-size:17px}
+  .prod-pc{font-size:12px}
+  .qbtn{width:32px;height:32px;font-size:17px}
+  .qnum{font-size:13px;min-width:18px}
+  .abtn{padding:9px 6px;font-size:12px}
+  .qty-row{gap:5px}
 }
 
 /* CART PAGO SELECTOR */
@@ -577,82 +652,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 .back-btn{background:var(--cream);border:1px solid var(--border);border-radius:8px;width:34px;height:34px;display:none;align-items:center;justify-content:center;cursor:pointer;font-size:16px;color:var(--ink);transition:background .15s,border-color .15s;margin-right:10px;flex-shrink:0}
 .back-btn.visible{display:flex}
 .back-btn:hover{background:var(--cream2);border-color:var(--border2)}
-
-/* BOTTOM NAV */
-.bottom-nav{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--white);border-top:1px solid var(--border);z-index:80;padding:6px 0 calc(6px + env(safe-area-inset-bottom));justify-content:space-around;box-shadow:0 -2px 12px rgba(26,26,24,.06)}
-.bn-item{background:none;border:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 14px;font-family:'DM Sans',sans-serif;color:var(--mid);position:relative;min-width:64px;transition:color .15s}
-.bn-item.active{color:var(--red)}
-.bn-icon{font-size:20px;line-height:1}
-.bn-label{font-size:10px;font-weight:500;letter-spacing:.04em;text-transform:uppercase}
-.bn-badge{position:absolute;top:0;right:6px;background:var(--red);color:#fff;border-radius:10px;min-width:16px;height:16px;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center;padding:0 4px}
-.bn-badge.zero{display:none}
-
-/* WHATSAPP FAB */
-.wa-fab{position:fixed;right:18px;bottom:calc(78px + env(safe-area-inset-bottom));width:54px;height:54px;border-radius:50%;background:#25D366;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 20px rgba(37,211,102,.45);z-index:75;transition:transform .15s,box-shadow .15s}
-.wa-fab:hover{transform:scale(1.06);box-shadow:0 8px 24px rgba(37,211,102,.55)}
-.wa-fab svg{width:28px;height:28px;fill:#fff}
-@media(min-width:721px){.wa-fab{bottom:24px;right:24px;width:58px;height:58px}.wa-fab svg{width:30px;height:30px}}
-
-@media(max-width:720px){
-  .collage-row,.fum-2col,.hero-row{grid-template-columns:1fr}
-  .topbar{padding-left:1rem;padding-right:1rem;height:56px}
-  .home-wrap{padding:1rem 1.25rem 2rem}
-  .section-wrap{padding-left:1.25rem;padding-right:1.25rem;padding-top:1.5rem}
-  .cart-panel{width:100%}
-  .promo-strip{flex-direction:column;text-align:center;padding:1.75rem 1.5rem;margin-bottom:3rem}
-  .logo-divider,.logo-city,.tel{display:none}
-  .logo-name{font-size:18px}
-  .cart-btn{padding:8px 13px;font-size:12px}
-  .cart-btn span:not(.badge){font-size:11px}
-  body{padding-bottom:64px}
-  .bottom-nav{display:flex}
-  .gsearch{top:56px;padding:6px 1rem}
-  .gsearch-input{font-size:13px;padding:9px 32px 9px 34px}
-  .gsearch-icon{left:10px}
-  .gsr-img{width:38px;height:38px;font-size:20px}
-  .gsr-price{font-size:11px}
-  .hero-eyebrow{margin-bottom:.5rem;font-size:10px}
-  .hero-title{font-size:clamp(26px,7.5vw,38px);line-height:.98;margin-bottom:.75rem}
-  .hero-rule{margin-bottom:.5rem}
-  .hero-body{font-size:13px;line-height:1.5;margin-bottom:0;max-width:100%}
-  .hero-row{margin-bottom:.75rem}
-  .section-eyebrow{margin-bottom:.25rem}
-  .section-rule-line{margin-bottom:.75rem}
-  .collage-row{margin-bottom:2rem}
-  .col-visual{height:auto;min-height:180px}
-  .col-card.alimentos .col-visual{height:273px}
-  .col-card.fumadores .col-visual{height:273px}
-
-.col-cta{
-  position:absolute;bottom:12px;left:50%;transform:translateX(-50%);
-  background:rgba(26,26,24,.72);color:#fff;
-  font-size:12px;font-weight:500;letter-spacing:.06em;
-  padding:6px 16px;border-radius:20px;
-  backdrop-filter:blur(4px);pointer-events:none;
-  white-space:nowrap;z-index:2;
-}
-.col-foot{padding:14px 16px}
-  .col-foot-name{font-size:15px}
-  .section-title{font-size:clamp(24px,6vw,32px)}
-  .section-meta{margin-bottom:1.25rem}
-  .toolbar{margin-bottom:1rem;gap:8px}
-  .prod-grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
-  .prod-card{padding:.75rem;gap:7px;border-radius:11px}
-  .prod-icon{height:170px;font-size:42px;border-radius:8px}
-  .prod-art{font-size:9px}
-  .prod-name{font-size:12px;line-height:1.25}
-  .prod-present{font-size:10px}
-  .prices-row{gap:4px;margin:0}
-  .price-box{padding:5px 4px;border-radius:7px;border-width:1.5px;min-width:0}
-  .price-box-label{font-size:9px;letter-spacing:.04em}
-  .price-box-val{font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .prod-pu{font-size:17px}
-  .prod-pc{font-size:12px}
-  .qbtn{width:32px;height:32px;font-size:17px}
-  .qnum{font-size:13px;min-width:18px}
-  .abtn{padding:9px 6px;font-size:12px}
-  .qty-row{gap:5px}
-}
 </style>
 </head>
 <body>
@@ -736,16 +735,14 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <script>
 const WA='59896190002';
 // ── Configuración GitHub ─────────────────────────────────────────────────────
-const GH_OWNER = 'fdovat-cell';   // ← tu usuario de GitHub
-const GH_REPO  = 'pelsas-distribuidora';     // ← tu repositorio
-const GH_BRANCH = 'main';               // ← rama (main o master)
+const GH_OWNER = 'fdovat-cell';
+const GH_REPO  = 'pelsas-distribuidora';
+const GH_BRANCH = 'main';
 const DATA_URL = `https://raw.githubusercontent.com/${GH_OWNER}/${GH_REPO}/${GH_BRANCH}/data.json`;
 
-// Variables globales que se llenan desde la API
 let brands = [];
 let products = {};
 
-// Variables de la app
 let cart={},qtys={},modos={},view='home',curBrand=null,activeFilter='todos',checkout=false,done=false,pagoMethod='';
 const fmt=n=>'$'+n.toLocaleString('es-UY',{minimumFractionDigits:2,maximumFractionDigits:2});
 const allP=()=>Object.values(products).flat().filter(p=>p.activo!==false);
@@ -755,7 +752,6 @@ const fumBrands=()=>brands.filter(b=>b.sid==='fumadores'&&b.activo!==false);
 const alCount=()=>alBrands().reduce((a,b)=>(products[b.id]||[]).filter(p=>p.activo!==false).length+a,0);
 const fumCount=()=>fumBrands().reduce((a,b)=>(products[b.id]||[]).filter(p=>p.activo!==false).length+a,0);
 
-// Carga el catálogo desde GitHub y arranca la app
 async function initApp() {
   try {
     const res = await fetch(DATA_URL + '?t=' + Date.now());
@@ -763,7 +759,6 @@ async function initApp() {
     const data = await res.json();
     brands   = data.brands   || [];
     products = data.products || {};
-    // Inicializar qtys y modos para todos los productos
     Object.values(products).flat().forEach(p=>{qtys[p.id]=1;modos[p.id]='caja'});
     render();
   } catch(e) {
@@ -777,7 +772,6 @@ async function initApp() {
       '</div>';
   }
 }
-
 
 function render(){
   pushState(view,curBrand);
@@ -906,7 +900,6 @@ const brandGenImg={
   darkhorse:'img/gen-darkhorse.webp',
   elements:'img/gen-elements.webp',
 };
-// arts que tienen foto propia
 const hasOwnPhoto=new Set(['4000','4001','4002','4003','4004','4005','4006','4007','3000']);
 function getProdImg(bid,art){
   if(hasOwnPhoto.has(art))return`img/${art}.webp`;
@@ -968,7 +961,6 @@ function renderHome(){
         <div class="hero-title">La app de<br><em>lo que<br>se vende.</em></div>
         <div class="hero-rule"></div>
         <div class="hero-body">Elegí tu categoría, armá tu pedido y envialo por WhatsApp.</div>
-        <!-- PAGO: visible solo en PC dentro del hero-left -->
         <div class="home-banner pago">
           <div class="home-banner-icon">💳</div>
           <div class="home-banner-texts">
@@ -1012,10 +1004,16 @@ function renderHome(){
             </div>
           </div>
         </div>
-
-      </div><!-- /hero-cats -->
-    </div><!-- /hero-split -->
-
+        <div class="home-banner fum" onclick="goFumadores()" style="margin-top:16px">
+          <div class="home-banner-icon">🚬</div>
+          <div class="home-banner-texts">
+            <div class="home-banner-title">Artículos para fumadores</div>
+            <div class="home-banner-sub">${fumBrands().length} marcas · ${fumCount()} productos</div>
+          </div>
+          <div class="home-banner-arrow">→</div>
+        </div>
+      </div>
+    </div>
 
     <div class="home-mobile-only home-mobile-pago" style="background:var(--cream);border:1px solid var(--border);border-radius:14px;display:none;align-items:center;gap:14px;padding:14px 18px;margin-bottom:1.5rem;">
       <div class="home-banner-icon">💳</div>
@@ -1195,7 +1193,7 @@ function renderCart(){
   const keys=Object.keys(cart).filter(k=>cart[k]&&cart[k].qty>0);
   if(done){
     body.innerHTML=`<div class="confirm-box"><div class="confirm-icon">✅</div><div class="confirm-ttl">¡Pedido enviado!</div><div class="confirm-txt">Abrimos WhatsApp con el detalle.<br>Te contactamos a la brevedad.<br><br><span class="confirm-tel">PelSAS · 096 190 002</span></div><button class="new-btn" onclick="newOrder()">Nuevo pedido</button></div><div class="pwa-install-box" id="pwa-box"><div class="pwa-install-title">¿Querés tener PelSAS siempre a mano?</div><div class="pwa-install-sub">Instalá la app en tu celular y accedé directo, sin abrir el navegador.</div><button class="pwa-install-btn" onclick="installPWA()">Instalar PelSAS</button></div>`;
-  setTimeout(showInstallPrompt, 300);
+    setTimeout(showInstallPrompt, 300);
     foot.innerHTML='';return;
   }
   if(!keys.length){body.innerHTML=`<div class="empty-cart-box"><span class="empty-cart-icon">🛒</span>El pedido está vacío.</div>`;foot.innerHTML='';return}
@@ -1333,8 +1331,7 @@ function onLBWheel(e){e.preventDefault();const d=-e.deltaY*0.0025;lbScale=Math.m
 function onLBDbl(e){e.preventDefault();if(lbScale>1)lbReset();else{lbScale=2.5;_lbApply()}}
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&document.getElementById('lightbox').classList.contains('open'))closeLB()});
 
-
-/* HISTORY API - botón atrás Android */
+/* HISTORY API */
 function pushState(v,b){
   const state={view:v,brand:b};
   history.pushState(state,'','#'+v+(b?'-'+b:''));
@@ -1365,7 +1362,8 @@ function renderOnly(){
   else if(view==='catalogo')document.getElementById('bn-catalogo')?.classList.add('active');
   window.scrollTo({top:0,behavior:'instant'});
 }
-/* ── PWA ── */
+
+/* PWA */
 let _deferredPrompt=null;
 window.addEventListener('beforeinstallprompt',e=>{
   e.preventDefault();
