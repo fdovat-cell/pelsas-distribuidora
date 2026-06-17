@@ -692,7 +692,7 @@ async function generateFicha() {
   const FOOTER_H = 36;
   const CELL_W   = Math.floor((PW - MARGIN*2 - GAP*(COLS-1)) / COLS);
   const IMG_H    = Math.floor(CELL_W * 0.72);  // foto = 72% del ancho → grande
-  const INFO_H   = 160;
+  const INFO_H   = 195;
   const CELL_H   = IMG_H + INFO_H;
   const ROWS     = Math.ceil(allProds.length / COLS);
   const PH       = HEADER_H + MARGIN + ROWS*(CELL_H+GAP) - GAP + MARGIN + FOOTER_H;
@@ -821,6 +821,14 @@ async function generateFicha() {
     }
     ctx.restore();
 
+    // ── Info section background ───────────────────────────────────────────
+    ctx.fillStyle='#FDFCFA';
+    ctx.fillRect(cx+1, cy+IMG_H, CELL_W-2, INFO_H-1);
+
+    // Línea acento entre foto e info
+    ctx.fillStyle='#EAE6DE';
+    ctx.fillRect(cx+1, cy+IMG_H, CELL_W-2, 1);
+
     // ── Info ─────────────────────────────────────────────────────────────
     const infoTop = cy + IMG_H + 6;
     const infoX   = cx + CELL_W/2;
@@ -828,11 +836,11 @@ async function generateFicha() {
 
     // Nombre producto
     ctx.fillStyle='#1A1A18';
-    ctx.font=`bold 19px Arial`;
+    ctx.font=`bold 22px Arial`;
     ctx.textAlign='center';
     ctx.textBaseline='top';
-    wrapText(p.name, infoX, iy, CELL_W-28, 24, 2);
-    iy += 54;
+    wrapText(p.name, infoX, iy, CELL_W-28, 28, 2);
+    iy += 64;
 
     // Precios — en una línea, tipografía grande
     const unitTxt = price(p.unit);
@@ -863,9 +871,9 @@ async function generateFicha() {
     ctx.fillText(unitTxt, startX, iy);
 
     // label unit
-    ctx.font=`400 12px Arial`;
+    ctx.font=`500 15px Arial`;
     ctx.fillStyle='#AAA49C';
-    ctx.fillText('unit', startX, iy+33);
+    ctx.fillText('unit', startX, iy+35);
 
     // separator
     ctx.font=`300 22px Arial`;
@@ -878,26 +886,40 @@ async function generateFicha() {
     ctx.fillText(cajaTxt, startX+unitW+20, iy+4);
 
     // label caja
-    ctx.font=`400 12px Arial`;
+    ctx.font=`500 15px Arial`;
     ctx.fillStyle='#AAA49C';
-    ctx.fillText('caja', startX+unitW+20, iy+33);
+    ctx.fillText('caja', startX+unitW+20, iy+35);
 
-    iy += 52;
+    iy += 58;
 
     // Línea divisora suave
-    ctx.strokeStyle='#EDEAE3';
+    ctx.strokeStyle='#EAE6DE';
     ctx.lineWidth=1;
     ctx.beginPath();
-    ctx.moveTo(cx+20, iy); ctx.lineTo(cx+CELL_W-20, iy);
+    ctx.moveTo(cx+24, iy); ctx.lineTo(cx+CELL_W-24, iy);
     ctx.stroke();
-    iy += 10;
+    iy += 13;
 
-    // Presentación + art — misma línea, discreta
-    ctx.font=`400 12px Arial`;
-    ctx.fillStyle='#AAA49C';
+    // Presentación — línea propia, bien legible
+    ctx.font=`500 17px Arial`;
+    ctx.fillStyle='#4A4740';
     ctx.textAlign='center';
     ctx.textBaseline='top';
-    ctx.fillText(`${p.present}  ·  art. ${p.art}`, infoX, iy);
+    ctx.fillText(p.present, infoX, iy);
+    iy += 26;
+
+    // Nro de artículo — badge/pill
+    const artTxt = `art. ${p.art}`;
+    ctx.font=`600 15px Arial`;
+    const artW = ctx.measureText(artTxt).width;
+    const pillW = artW + 24, pillH = 24;
+    const pillX = infoX - pillW/2, pillY = iy;
+    ctx.fillStyle='#EDE8DF';
+    rr(pillX, pillY, pillW, pillH, 8); ctx.fill();
+    ctx.fillStyle='#7A7468';
+    ctx.textAlign='center';
+    ctx.textBaseline='middle';
+    ctx.fillText(artTxt, infoX, pillY + pillH/2);
   }
 
   // ── FOOTER ────────────────────────────────────────────────────────────────
@@ -907,10 +929,10 @@ async function generateFicha() {
   ctx.fillStyle='#B02020';
   ctx.fillRect(0,fy,PW,3);
   ctx.fillStyle='#66625E';
-  ctx.font='12px Arial';
+  ctx.font='500 14px Arial';
   ctx.textAlign='center';
   ctx.textBaseline='middle';
-  ctx.fillText('PelSAS Distribuidora  ·  Precios de lista en $UYU · Sujeto a disponibilidad de stock', PW/2, fy+FOOTER_H/2);
+  ctx.fillText('PelSAS Distribuidora  ·  Precios de lista en $UYU  ·  Sujeto a disponibilidad de stock', PW/2, fy+FOOTER_H/2);
 
   // ── Render ────────────────────────────────────────────────────────────────
   canvas.toBlob(blob=>{
