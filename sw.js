@@ -1,4 +1,4 @@
-const CACHE = 'pelsas-v1';
+const CACHE = 'pelsas-v2';
 const ASSETS = [
   '/',
   '/index.html',
@@ -6,7 +6,6 @@ const ASSETS = [
   '/icon-192.png',
   '/icon-512.png',
   '/img/collage-alimentos.webp',
-  '/img/collage-fumadores.webp',
 ];
 
 // Instalar y cachear assets principales
