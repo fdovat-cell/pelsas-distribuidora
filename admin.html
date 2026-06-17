@@ -692,7 +692,7 @@ async function generateFicha() {
   const FOOTER_H = 36;
   const CELL_W   = Math.floor((PW - MARGIN*2 - GAP*(COLS-1)) / COLS);
   const IMG_H    = Math.floor(CELL_W * 0.72);  // foto = 72% del ancho → grande
-  const INFO_H   = 148;
+  const INFO_H   = 160;
   const CELL_H   = IMG_H + INFO_H;
   const ROWS     = Math.ceil(allProds.length / COLS);
   const PH       = HEADER_H + MARGIN + ROWS*(CELL_H+GAP) - GAP + MARGIN + FOOTER_H;
@@ -828,25 +828,25 @@ async function generateFicha() {
 
     // Nombre producto
     ctx.fillStyle='#1A1A18';
-    ctx.font=`bold 17px Arial`;
+    ctx.font=`bold 19px Arial`;
     ctx.textAlign='center';
     ctx.textBaseline='top';
-    wrapText(p.name, infoX, iy, CELL_W-28, 22, 2);
-    iy += 48;
+    wrapText(p.name, infoX, iy, CELL_W-28, 24, 2);
+    iy += 54;
 
     // Precios — en una línea, tipografía grande
     const unitTxt = price(p.unit);
     const cajaTxt = price(p.caja);
 
     // Precio unitario destacado
-    ctx.font=`bold 26px Arial`;
+    ctx.font=`bold 29px Arial`;
     ctx.fillStyle='#B02020';
     ctx.textAlign='center';
     ctx.textBaseline='top';
 
     // Medir para centrar los dos precios juntos
     const unitW = ctx.measureText(unitTxt).width;
-    ctx.font=`bold 20px Arial`;
+    ctx.font=`bold 23px Arial`;
     const cajaW = ctx.measureText(cajaTxt).width;
     const sepTxt=' · ';
     ctx.font=`400 16px Arial`;
@@ -857,32 +857,32 @@ async function generateFicha() {
     let startX = infoX - totalW/2 + 4;
 
     // unit price
-    ctx.font=`bold 26px Arial`;
+    ctx.font=`bold 29px Arial`;
     ctx.fillStyle='#B02020';
     ctx.textAlign='left';
     ctx.fillText(unitTxt, startX, iy);
 
     // label unit
-    ctx.font=`400 11px Arial`;
+    ctx.font=`400 12px Arial`;
     ctx.fillStyle='#AAA49C';
-    ctx.fillText('unit', startX, iy+30);
+    ctx.fillText('unit', startX, iy+33);
 
     // separator
-    ctx.font=`300 20px Arial`;
+    ctx.font=`300 22px Arial`;
     ctx.fillStyle='#D0CBC4';
     ctx.fillText('/', startX+unitW+8, iy+4);
 
     // caja price
-    ctx.font=`bold 20px Arial`;
+    ctx.font=`bold 23px Arial`;
     ctx.fillStyle='#1A1A18';
     ctx.fillText(cajaTxt, startX+unitW+20, iy+4);
 
     // label caja
-    ctx.font=`400 11px Arial`;
+    ctx.font=`400 12px Arial`;
     ctx.fillStyle='#AAA49C';
-    ctx.fillText('caja', startX+unitW+20, iy+30);
+    ctx.fillText('caja', startX+unitW+20, iy+33);
 
-    iy += 46;
+    iy += 52;
 
     // Línea divisora suave
     ctx.strokeStyle='#EDEAE3';
