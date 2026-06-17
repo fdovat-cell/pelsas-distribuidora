@@ -600,6 +600,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
   .topbar,.gsearch,#main-view,.bottom-nav{margin-right:340px}
   .overlay{display:none!important}
   .cart-toggle-desktop{display:none}
+  .close-btn{display:none!important}
 }
 .cart-hdr{display:flex;justify-content:space-between;align-items:center;padding:1.25rem 1.5rem;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--white);z-index:1}
 .cart-ttl{font-family:'Playfair Display',serif;font-size:20px;font-weight:900;color:var(--ink)}
@@ -1011,14 +1012,7 @@ function renderHome(){
             </div>
           </div>
         </div>
-        <div class="home-banner fum" onclick="goFumadores()" style="margin-top:16px">
-          <div class="home-banner-icon">🚬</div>
-          <div class="home-banner-texts">
-            <div class="home-banner-title">Artículos para fumadores</div>
-            <div class="home-banner-sub">${fumBrands().length} marcas · ${fumCount()} productos</div>
-          </div>
-          <div class="home-banner-arrow">→</div>
-        </div>
+
       </div>
     </div>
 
