@@ -1401,10 +1401,6 @@ if('serviceWorker' in navigator){
 
 initApp();
 // Panel siempre visible en desktop
-if(window.matchMedia('(min-width:1100px) and (orientation:landscape)').matches){
-  document.getElementById('cart-panel').classList.add('open');
-  renderCart();
-}
 window.addEventListener('resize',()=>{
   const panel=document.getElementById('cart-panel');
   const ov=document.getElementById('overlay');
