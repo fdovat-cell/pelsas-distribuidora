@@ -595,13 +595,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 .cart-panel{position:fixed;top:0;right:0;width:340px;height:100%;background:var(--white);border-left:1px solid var(--border);overflow-y:auto;z-index:100;transform:translateX(100%);transition:transform .25s ease;display:flex;flex-direction:column}
 .cart-panel.open{transform:translateX(0)}
 /* Panel siempre visible en desktop */
-@media(min-width:1100px) and (orientation:landscape){
-  .cart-panel{transform:none;box-shadow:-4px 0 24px rgba(26,26,24,.07)}
-  .topbar,.gsearch,#main-view,.bottom-nav{margin-right:340px}
-  .overlay{display:none!important}
-  .cart-toggle-desktop{display:none}
-  .close-btn{display:none!important}
-}
+
 .cart-hdr{display:flex;justify-content:space-between;align-items:center;padding:1.25rem 1.5rem;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--white);z-index:1}
 .cart-ttl{font-family:'Playfair Display',serif;font-size:20px;font-weight:900;color:var(--ink)}
 .close-btn{background:none;border:none;font-size:20px;cursor:pointer;color:var(--light);line-height:1}
@@ -1187,15 +1181,9 @@ function updateBadge(){
   const bn=document.getElementById('bn-badge');
   if(bn){bn.textContent=n;bn.classList.toggle('zero',n===0)}
 }
-function isDesktop(){return window.matchMedia('(min-width:1100px) and (orientation:landscape)').matches}
 function toggleCart(){
-  if(isDesktop()){
-    document.getElementById('cart-panel').classList.add('open');
-    document.getElementById('overlay').classList.remove('open');
-  } else {
-    document.getElementById('cart-panel').classList.toggle('open');
-    document.getElementById('overlay').classList.toggle('open');
-  }
+  document.getElementById('cart-panel').classList.toggle('open');
+  document.getElementById('overlay').classList.toggle('open');
   checkout=false;done=false;renderCart()
 }
 function renderCart(){
@@ -1227,7 +1215,7 @@ function renderCart(){
     </div>
     <div class="cart-foot"><div class="total-row"><span class="total-lbl">Total estimado</span><span class="total-val">${fmt(total)}</span></div><div class="checkout-form"><label>Nombre o negocio</label><input type="text" id="cfn" placeholder="Tu nombre o razón social"><label>WhatsApp</label><input type="text" id="cft" placeholder="09x xxx xxx"><label>Dirección</label><input type="text" id="cfd" placeholder="Calle, número, ciudad"><label>Notas</label><textarea id="cfno" rows="2" placeholder="Horario, indicaciones..."></textarea></div><button class="wsp-btn" onclick="sendOrder()" style="margin-top:14px"><svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.528 5.855L.057 23.428a.75.75 0 00.916.916l5.573-1.471A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.885 0-3.651-.511-5.168-1.401l-.371-.219-3.849 1.016 1.016-3.849-.219-.371A9.953 9.953 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>Enviar por WhatsApp</button></div>`;
   } else {
-    foot.innerHTML=`<div class="cart-foot"><div class="total-row"><span class="total-lbl">Total estimado</span><span class="total-val">${fmt(total)}</span></div><button class="step-btn" onclick="showCheckout()">Confirmar y enviar por WhatsApp →</button><button class="new-btn" style="width:100%;margin-top:8px;text-align:center" onclick="if(!isDesktop())toggleCart()">← Seguir agregando</button></div>`;
+    foot.innerHTML=`<div class="cart-foot"><div class="total-row"><span class="total-lbl">Total estimado</span><span class="total-val">${fmt(total)}</span></div><button class="step-btn" onclick="showCheckout()">Confirmar y enviar por WhatsApp →</button><button class="new-btn" style="width:100%;margin-top:8px;text-align:center" onclick="toggleCart()">← Seguir agregando</button></div>`;
   }
 }
 function cQ(k,d){if(!cart[k])return;cart[k].qty=Math.max(1,cart[k].qty+d);updateBadge();renderCart()}
@@ -1401,17 +1389,7 @@ if('serviceWorker' in navigator){
 
 initApp();
 // Panel siempre visible en desktop
-window.addEventListener('resize',()=>{
-  const panel=document.getElementById('cart-panel');
-  const ov=document.getElementById('overlay');
-  if(window.matchMedia('(min-width:1100px) and (orientation:landscape)').matches){
-    panel.classList.add('open');
-    ov.classList.remove('open');
-  } else {
-    panel.classList.remove('open');
-    ov.classList.remove('open');
-  }
-});
+
 </script>
 </body>
 </html>
