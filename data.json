@@ -188,6 +188,15 @@
       "desc": "Galletas",
       "logo": "img/logo-pitstop.webp",
       "activo": true
+    },
+    {
+      "id": "ofertas",
+      "sid": "alimentos",
+      "name": "Varios OFERTA",
+      "emoji": "📦",
+      "desc": "Varios Ofertas",
+      "logo": "img/logo-variosoferta.webp",
+      "activo": true
     }
   ],
   "products": {
@@ -3400,6 +3409,7 @@
         "venta": 2,
         "activo": true
       }
-    ]
+    ],
+    "ofertas": []
   }
 }
