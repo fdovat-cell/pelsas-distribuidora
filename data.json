@@ -206,6 +206,15 @@
       "desc": "Edulcorantes/azucar",
       "logo": "img/logo-edulcorantes.webp",
       "activo": true
+    },
+    {
+      "id": "golosinas",
+      "sid": "alimentos",
+      "name": "Golosinas",
+      "emoji": "📦",
+      "desc": "Golosinas",
+      "logo": "img/logo-golosinas.webp",
+      "activo": true
     }
   ],
   "products": {
@@ -3574,6 +3583,56 @@
         "cat": "edulcorantes",
         "art": "31076",
         "present": "caja x 400 u.",
+        "emoji": "📦",
+        "venta": 1,
+        "activo": true
+      }
+    ],
+    "golosinas": [
+      {
+        "id": "golosinas_1782238420391",
+        "name": "MONEDAS DE CHOCOLATE  $5  50 unid. 250gr",
+        "unit": 199.4,
+        "caja": 199.4,
+        "cat": "chocolates",
+        "art": "30801",
+        "present": "bolsa x 50u.",
+        "emoji": "📦",
+        "venta": 1,
+        "activo": true
+      },
+      {
+        "id": "golosinas_1782238541440",
+        "name": "MONEDAS DE CHOCOLATE  $10  x 25u.",
+        "unit": 199.4,
+        "caja": 199.4,
+        "cat": "chocolates",
+        "art": "30802",
+        "present": "bolsa x 25u",
+        "emoji": "📦",
+        "venta": 1,
+        "activo": true
+      },
+      {
+        "id": "golosinas_1782238768847",
+        "name": "CHUPETIN Y PASTILLA BOTELLITA Display x30 Unidades",
+        "unit": 254,
+        "caja": 254,
+        "cat": "golosinas",
+        "art": "32769",
+        "present": "display x 30u",
+        "emoji": "📦",
+        "venta": 1,
+        "activo": true
+      },
+      {
+        "id": "golosinas_1782238960640",
+        "name": "Palitos de la Selva 133pcs 660grs",
+        "unit": 499,
+        "caja": 499,
+        "cat": "golosinas",
+        "art": "1288",
+        "present": "bolsa x 133u.",
         "emoji": "📦",
         "venta": 1,
         "activo": true
