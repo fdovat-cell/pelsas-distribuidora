@@ -3470,6 +3470,54 @@
         "emoji": "📦",
         "venta": 2,
         "activo": true
+      },
+      {
+        "id": "encendedores_1782233635311",
+        "name": "Encendedor RONSON transparente x25u",
+        "unit": 16,
+        "caja": 399.9,
+        "cat": "Encendedores",
+        "art": "16741",
+        "present": "pack x 25u",
+        "emoji": "📦",
+        "venta": 2,
+        "activo": true
+      },
+      {
+        "id": "encendedores_1782233775580",
+        "name": "Encendedor transparente BERLINA x50u",
+        "unit": 6.82,
+        "caja": 341.3,
+        "cat": "Encendedores",
+        "art": "19251",
+        "present": "Pack x 50u",
+        "emoji": "📦",
+        "venta": 2,
+        "activo": true
+      },
+      {
+        "id": "encendedores_1782233865919",
+        "name": "ENCENDEDOR ELECTRONICO MORLAN TRANSPARENTE X50 CON COD BARRAS",
+        "unit": 6.62,
+        "caja": 331.3,
+        "cat": "Encendedores",
+        "art": "30593",
+        "present": "Pack x 50u",
+        "emoji": "📦",
+        "venta": 2,
+        "activo": true
+      },
+      {
+        "id": "encendedores_1782233996408",
+        "name": "Encendedor Mini BIC Blíster 3 + 1",
+        "unit": 31.25,
+        "caja": 375,
+        "cat": "encendedores",
+        "art": "26395",
+        "present": "blister x 4 x 12",
+        "emoji": "📦",
+        "venta": 1,
+        "activo": true
       }
     ]
   }
