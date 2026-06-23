@@ -3417,7 +3417,7 @@
         "unit": 8.95,
         "caja": 223.8,
         "cat": "Encendedores",
-        "art": "",
+        "art": "31817",
         "present": "Pack x 25u.",
         "emoji": "📦",
         "venta": 2,
@@ -3433,6 +3433,42 @@
         "present": "unitario",
         "emoji": "📦",
         "venta": 1,
+        "activo": true
+      },
+      {
+        "id": "encendedores_1782233301358",
+        "name": "ENCENDEDOR DE COCINA MONSTER FLEXIBLE EN BLÍSTER",
+        "unit": 62.5,
+        "caja": 375,
+        "cat": "encendedores",
+        "art": "31820",
+        "present": "caja x 6",
+        "emoji": "📦",
+        "venta": 1,
+        "activo": true
+      },
+      {
+        "id": "encendedores_1782233440743",
+        "name": "Encendedor MINI BIC 12 Unidades",
+        "unit": 33.3,
+        "caja": 399.8,
+        "cat": "encendedores",
+        "art": "8498",
+        "present": "blister x 12",
+        "emoji": "📦",
+        "venta": 2,
+        "activo": true
+      },
+      {
+        "id": "encendedores_1782233543364",
+        "name": "Encendedor MAXI BIC 12 Unidades",
+        "unit": 47.9,
+        "caja": 575.6,
+        "cat": "encendedores",
+        "art": "7200",
+        "present": "blister x 12u",
+        "emoji": "📦",
+        "venta": 2,
         "activo": true
       }
     ]
