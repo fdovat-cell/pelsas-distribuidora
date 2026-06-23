@@ -3422,6 +3422,18 @@
         "emoji": "📦",
         "venta": 2,
         "activo": true
+      },
+      {
+        "id": "encendedores_1782233203447",
+        "name": "ENCENDEDOR DE COCINA MONSTER CLÁSICO EN BLÍSTER",
+        "unit": 50,
+        "caja": 600,
+        "cat": "encendedores",
+        "art": "31821",
+        "present": "unitario",
+        "emoji": "📦",
+        "venta": 1,
+        "activo": true
       }
     ]
   }
