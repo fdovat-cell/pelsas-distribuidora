@@ -3636,6 +3636,42 @@
         "emoji": "📦",
         "venta": 1,
         "activo": true
+      },
+      {
+        "id": "golosinas_1782239213488",
+        "name": "Galletita OKEBON Molino Natural Tubo 240 Grs -",
+        "unit": 85,
+        "caja": 85,
+        "cat": "galletitas",
+        "art": "270751",
+        "present": "galletitas",
+        "emoji": "📦",
+        "venta": 1,
+        "activo": true
+      },
+      {
+        "id": "golosinas_1782239333760",
+        "name": "Pastillas FREEGELLS x12 Unidades",
+        "unit": 77,
+        "caja": 77,
+        "cat": "",
+        "art": "54101",
+        "present": "caja x 12u.",
+        "emoji": "📦",
+        "venta": 1,
+        "activo": true
+      },
+      {
+        "id": "golosinas_1782239568192",
+        "name": "Galleta Waffle HIPOPO 84grs",
+        "unit": 14.9,
+        "caja": 14.9,
+        "cat": "galletas",
+        "art": "11300011301",
+        "present": "84gr",
+        "emoji": "📦",
+        "venta": 1,
+        "activo": true
       }
     ]
   }
