@@ -197,6 +197,15 @@
       "desc": "Encendedores",
       "logo": "img:logo/encendedores.webp",
       "activo": true
+    },
+    {
+      "id": "edulcorantes",
+      "sid": "alimentos",
+      "name": "Edulcorantes-Azucar",
+      "emoji": "📦",
+      "desc": "Edulcorantes/azucar",
+      "logo": "img/logo-edulcorantes.webp",
+      "activo": true
     }
   ],
   "products": {
@@ -3515,6 +3524,56 @@
         "cat": "encendedores",
         "art": "26395",
         "present": "blister x 4 x 12",
+        "emoji": "📦",
+        "venta": 1,
+        "activo": true
+      }
+    ],
+    "edulcorantes": [
+      {
+        "id": "edulcorantes_1782235440575",
+        "name": "Azucar x 180 sobres Azucarlito",
+        "unit": 292.1,
+        "caja": 292.1,
+        "cat": "edulcorantes",
+        "art": "20369",
+        "present": "caja x 180 sobres",
+        "emoji": "📦",
+        "venta": 1,
+        "activo": true
+      },
+      {
+        "id": "edulcorantes_1782235518852",
+        "name": "EDULCORANTE SUCARYL (CAJON 400UNI)",
+        "unit": 582,
+        "caja": 582,
+        "cat": "edulcorantes",
+        "art": "30333",
+        "present": "caja x 400 sobres",
+        "emoji": "📦",
+        "venta": 1,
+        "activo": true
+      },
+      {
+        "id": "edulcorantes_1782235592856",
+        "name": "Edulcorante SPLENDA Pack 700 sobres",
+        "unit": 1268.8,
+        "caja": 1268.8,
+        "cat": "edulcorantes",
+        "art": "7094",
+        "present": "caja x 700 sobres",
+        "emoji": "📦",
+        "venta": 1,
+        "activo": true
+      },
+      {
+        "id": "edulcorantes_1782235722169",
+        "name": "EDULCORANTE TEVIAS 400UNI",
+        "unit": 741.6,
+        "caja": 741.6,
+        "cat": "edulcorantes",
+        "art": "31076",
+        "present": "caja x 400 u.",
         "emoji": "📦",
         "venta": 1,
         "activo": true
