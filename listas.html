@@ -230,7 +230,7 @@ function loadExcel(input) {
   const reader = new FileReader();
   reader.onload = function(e) {
     try {
-      const wb = XLSX.read(e.target.result, { type: 'array' });
+      const wb = XLSX.read(e.target.result, { type: 'array', cellFormula: false, cellNF: false });
       const ws = wb.Sheets['Lista de Costos'];
       if (!ws) throw new Error('No encontré la hoja "Lista de Costos"');
 
@@ -249,7 +249,11 @@ function loadExcel(input) {
         const addr = col + row;
         const cell = ws[addr];
         if (!cell) return null;
-        return cell.v !== undefined ? cell.v : null;
+        const v = cell.v;
+        if (v === undefined || v === null || v === '') return null;
+        if (typeof v === 'number') return v;
+        const n = parseFloat(String(v).replace(',','.'));
+        return isNaN(n) ? null : n;
       }
 
       const catMap = {
