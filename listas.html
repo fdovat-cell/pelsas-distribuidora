@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PelSAS · Listas de Precios</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --cream:#F5F0E8;--cream2:#EDE8DF;--ink:#1A1A18;--ink2:#3D3B36;
+  --mid:#7A7468;--light:#B0AA9E;--red:#B02020;--red-light:#F8EDED;
+  --border:#D8D2C6;--white:#FFFFFF;--green:#1E6B3C;--green-light:#EAF5EC;
+  --blue:#1565C0;--blue-light:#DDEEFF;
+  --purple:#6A1B9A;--purple-light:#F0E6FF;
+  --orange:#E65100;--orange-light:#FFF0E0;
+}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);min-height:100vh}
+
+/* TOPBAR */
+.topbar{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:0 2rem;height:60px;background:var(--white);border-bottom:1px solid var(--border)}
+.topbar-logo{font-family:'Playfair Display',serif;font-size:20px;font-weight:900}
+.topbar-logo span{color:var(--red)}
+.topbar-badge{font-size:11px;background:var(--red);color:#fff;border-radius:6px;padding:2px 8px;margin-left:8px}
+.back-btn{background:none;border:1px solid var(--border);border-radius:8px;padding:7px 14px;font-family:'DM Sans',sans-serif;font-size:12px;color:var(--mid);cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+.back-btn:hover{color:var(--ink);border-color:var(--ink)}
+
+/* LAYOUT */
+.main{display:grid;grid-template-columns:300px 1fr;min-height:calc(100vh - 60px)}
+
+/* PANEL IZQUIERDO */
+.panel-left{background:var(--white);border-right:1px solid var(--border);padding:0;overflow-y:auto;position:sticky;top:60px;height:calc(100vh - 60px);display:flex;flex-direction:column}
+
+.panel-section{padding:1.25rem 1.5rem;border-bottom:1px solid var(--border)}
+.panel-section:last-child{border-bottom:none}
+.panel-label{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--light);font-weight:600;margin-bottom:.75rem;display:block}
+
+/* Upload */
+.upload-area{border:2px dashed var(--border);border-radius:10px;padding:1.5rem;text-align:center;cursor:pointer;transition:border-color .15s,background .15s;position:relative}
+.upload-area:hover,.upload-area.drag{border-color:var(--red);background:var(--red-light)}
+.upload-area input{position:absolute;inset:0;opacity:0;cursor:pointer}
+.upload-icon{font-size:28px;display:block;margin-bottom:.5rem}
+.upload-text{font-size:13px;color:var(--mid)}
+.upload-text strong{color:var(--ink)}
+.upload-loaded{font-size:12px;color:var(--green);margin-top:.5rem;font-weight:500}
+
+/* Canales */
+.canal-grid{display:flex;flex-direction:column;gap:6px}
+.canal-item{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:8px;border:1.5px solid var(--border);cursor:pointer;transition:border-color .15s,background .15s;user-select:none}
+.canal-item:hover{border-color:var(--ink2)}
+.canal-item.active-blue{border-color:var(--blue);background:var(--blue-light)}
+.canal-item.active-purple{border-color:var(--purple);background:var(--purple-light)}
+.canal-item.active-orange{border-color:var(--orange);background:var(--orange-light)}
+.canal-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.dot-blue{background:var(--blue)}
+.dot-purple{background:var(--purple)}
+.dot-orange{background:var(--orange)}
+.canal-name{font-size:13px;font-weight:500;flex:1}
+.canal-check{font-size:14px;opacity:0}
+.canal-item.active-blue .canal-check,
+.canal-item.active-purple .canal-check,
+.canal-item.active-orange .canal-check{opacity:1}
+
+/* Categorías */
+.cat-list{display:flex;flex-direction:column;gap:4px;flex:1;overflow-y:auto}
+.cat-item{display:flex;align-items:center;gap:8px;padding:7px 10px;border-radius:7px;cursor:pointer;transition:background .1s;user-select:none}
+.cat-item:hover{background:var(--cream)}
+.cat-item.selected{background:var(--green-light)}
+.cat-check{width:16px;height:16px;border-radius:4px;border:1.5px solid var(--border);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:10px;transition:border-color .15s,background .15s}
+.cat-item.selected .cat-check{background:var(--green);border-color:var(--green);color:#fff}
+.cat-name{font-size:13px;flex:1}
+.cat-count{font-size:10px;color:var(--light);background:var(--cream2);border-radius:10px;padding:1px 6px}
+
+.select-all-btn{font-size:11px;color:var(--mid);background:none;border:none;cursor:pointer;padding:4px 10px;border-radius:6px;font-family:'DM Sans',sans-serif}
+.select-all-btn:hover{background:var(--cream2);color:var(--ink)}
+
+/* PANEL DERECHO */
+.panel-right{padding:2rem;overflow-y:auto}
+
+.right-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;flex-wrap:wrap;gap:1rem}
+.right-title{font-family:'Playfair Display',serif;font-size:26px;font-weight:900}
+
+.gen-btn{background:var(--ink);color:#fff;border:none;border-radius:9px;padding:11px 24px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:8px;transition:background .15s}
+.gen-btn:hover{background:var(--ink2)}
+.gen-btn:disabled{background:var(--light);cursor:not-allowed}
+
+/* Preview table */
+.preview-wrap{background:var(--white);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.preview-toolbar{display:flex;align-items:center;justify-content:space-between;padding:.75rem 1.25rem;border-bottom:1px solid var(--border);background:var(--cream)}
+.preview-info{font-size:12px;color:var(--mid)}
+.preview-info strong{color:var(--ink)}
+
+.search-box{padding:7px 12px;border:1.5px solid var(--border);border-radius:7px;font-family:'DM Sans',sans-serif;font-size:13px;background:var(--white);color:var(--ink);outline:none;width:200px}
+.search-box:focus{border-color:var(--red)}
+
+.preview-table-wrap{overflow-x:auto;max-height:calc(100vh - 260px)}
+table.preview{width:100%;border-collapse:collapse}
+table.preview th{position:sticky;top:0;padding:9px 14px;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--light);font-weight:600;text-align:left;background:var(--cream);border-bottom:1px solid var(--border);white-space:nowrap}
+table.preview td{padding:8px 14px;font-size:13px;border-bottom:1px solid var(--border);vertical-align:middle}
+table.preview tr:last-child td{border-bottom:none}
+table.preview tr:hover td{background:var(--cream)}
+table.preview td.cat-cell{font-size:11px;color:var(--mid)}
+table.preview td.price-cell{font-weight:600;white-space:nowrap}
+table.preview td.price-blue{color:var(--blue)}
+table.preview td.price-purple{color:var(--purple)}
+table.preview td.price-orange{color:var(--orange)}
+.row-sel{width:16px;height:16px;accent-color:var(--green);cursor:pointer}
+
+/* Cat separator row */
+table.preview tr.cat-sep td{background:var(--green-light);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--green);font-weight:700;padding:5px 14px;border-bottom:1px solid #C8E6C9}
+
+/* Empty / loading states */
+.empty-state{text-align:center;padding:4rem 2rem;color:var(--light)}
+.empty-icon{font-size:48px;display:block;margin-bottom:12px}
+
+/* Status */
+.status-bar{position:fixed;bottom:1.5rem;right:1.5rem;background:var(--ink);color:#fff;border-radius:10px;padding:12px 20px;font-size:13px;font-weight:500;z-index:300;display:none;gap:10px;align-items:center;max-width:340px;box-shadow:0 8px 28px rgba(26,26,24,.25)}
+.status-bar.show{display:flex}
+.status-bar.ok{background:var(--green)}
+.status-bar.err{background:var(--red)}
+
+/* Sel count badge */
+.sel-badge{font-size:11px;background:var(--green);color:#fff;border-radius:10px;padding:2px 8px;margin-left:6px}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div style="display:flex;align-items:center;gap:10px">
+    <div class="topbar-logo"><span>Pel</span>SAS</div>
+    <span class="topbar-badge">LISTAS DE PRECIOS</span>
+  </div>
+  <a href="admin.html" class="back-btn">← Volver al admin</a>
+</div>
+
+<div class="main">
+
+  <!-- PANEL IZQUIERDO -->
+  <div class="panel-left">
+
+    <!-- 1. Cargar Excel -->
+    <div class="panel-section">
+      <span class="panel-label">1 · Archivo de precios</span>
+      <div class="upload-area" id="upload-area">
+        <input type="file" accept=".xlsx,.xls" onchange="loadExcel(this)">
+        <span class="upload-icon">📊</span>
+        <div class="upload-text"><strong>Subí el Excel</strong><br>de precios y escalas</div>
+        <div class="upload-loaded" id="upload-status" style="display:none"></div>
+      </div>
+    </div>
+
+    <!-- 2. Canales -->
+    <div class="panel-section">
+      <span class="panel-label">2 · Columnas de precio</span>
+      <div class="canal-grid">
+        <div class="canal-item" id="canal-minunit" onclick="toggleCanal('minunit')">
+          <div class="canal-dot dot-blue"></div>
+          <span class="canal-name">Minorista unitario</span>
+          <span class="canal-check">✓</span>
+        </div>
+        <div class="canal-item" id="canal-mincaja" onclick="toggleCanal('mincaja')">
+          <div class="canal-dot dot-purple"></div>
+          <span class="canal-name">Minorista caja</span>
+          <span class="canal-check">✓</span>
+        </div>
+        <div class="canal-item" id="canal-consfin" onclick="toggleCanal('consfin')">
+          <div class="canal-dot dot-orange"></div>
+          <span class="canal-name">Consumidor final</span>
+          <span class="canal-check">✓</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. Categorías -->
+    <div class="panel-section" style="flex:1;overflow:hidden;display:flex;flex-direction:column;min-height:0">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem">
+        <span class="panel-label" style="margin-bottom:0">3 · Categorías</span>
+        <button class="select-all-btn" onclick="toggleAllCats()">todas / ninguna</button>
+      </div>
+      <div class="cat-list" id="cat-list">
+        <div class="empty-state" style="padding:1.5rem">
+          <div style="font-size:13px;color:var(--light)">Cargá el Excel primero</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- PANEL DERECHO -->
+  <div class="panel-right">
+    <div class="right-hdr">
+      <div>
+        <div class="right-title">Vista previa</div>
+        <div id="preview-summary" style="font-size:13px;color:var(--mid);margin-top:3px">Cargá el Excel y elegí las opciones para generar la lista</div>
+      </div>
+      <button class="gen-btn" id="gen-btn" onclick="generatePDF()" disabled>
+        📄 Generar PDF
+      </button>
+    </div>
+
+    <div id="preview-container">
+      <div class="empty-state">
+        <span class="empty-icon">📋</span>
+        <div>La lista aparece acá</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="status-bar" id="status-bar"></div>
+
+<script>
+// ── Estado ────────────────────────────────────────────────────────────────────
+let allProducts = [];     // [{producto, categoria, codigo, costoUnit, costoCaja, precioMinUnit, precioMinCaja, precioConsFin}]
+let categories = [];      // string[]
+let selectedCats = new Set();
+let selectedProducts = new Set(); // producto ids seleccionados individualmente
+let canales = { minunit: true, mincaja: false, consfin: false };
+let searchQ = '';
+
+// ── Cargar Excel ──────────────────────────────────────────────────────────────
+function loadExcel(input) {
+  const file = input.files[0];
+  if (!file) return;
+  showStatus('Leyendo Excel…');
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      const wb = XLSX.read(e.target.result, { type: 'array' });
+      const ws = wb.Sheets['Lista de Costos'];
+      if (!ws) throw new Error('No encontré la hoja "Lista de Costos"');
+
+      // Read raw data starting row 5 (index 4) — headers in row 3-4
+      // Columns: A=Producto+Código, B=CostoUnit, C=CostoCaja,
+      //          D=EscalaMinUnit, E=%MinUnit, F=$MinUnit,
+      //          G=EscalaMinCaja, H=%MinCaja, I=$MinCaja,
+      //          J=EscalaConsFin, K=%ConsFin, L=$ConsFin
+      const rows = XLSX.utils.sheet_to_json(ws, { header: 1, defval: null });
+
+      allProducts = [];
+      categories = [];
+      const catSet = new Set();
+
+      for (let i = 4; i < rows.length; i++) {
+        const row = rows[i];
+        const cellA = row[0];
+        if (!cellA || typeof cellA !== 'string' || cellA.trim() === '') continue;
+
+        // Skip category separator rows (they start with ▸)
+        if (cellA.trim().startsWith('▸')) continue;
+
+        // Parse product + code from cell A (two lines separated by \n)
+        const parts = cellA.split('\n');
+        const producto = (parts[0] || '').trim();
+        const codigo = (parts[1] || '').trim();
+        if (!producto) continue;
+
+        const categoria = typeof row[1] === 'string' ? row[1].trim() : '';
+        const costoUnit = parseFloat(row[1]) || null; // actually B col index 1
+        const costoCaja = parseFloat(row[2]) || null; // C col index 2
+
+        // Wait — sheet_to_json maps: index 0=A, 1=B, 2=C, 3=D... etc
+        // A=prod+cod, B=costoUnit(idx1), C=costoCaja(idx2)
+        // But category is NOT in this sheet layout — it was merged into category separator rows
+        // We need to track current category from separator rows
+        const costoU = typeof row[1] === 'number' ? row[1] : null;
+        const costoC = typeof row[2] === 'number' ? row[2] : null;
+        const precioMinUnit = typeof row[5] === 'number' ? row[5] : null;  // F
+        const precioMinCaja = typeof row[8] === 'number' ? row[8] : null;  // I
+        const precioConsFin  = typeof row[11] === 'number' ? row[11] : null; // L
+
+        // We'll get category by tracking separator rows
+        allProducts.push({
+          id: i,
+          producto,
+          codigo,
+          categoria: '__pending__',
+          costoUnit: costoU,
+          costoCaja: costoC,
+          precioMinUnit,
+          precioMinCaja,
+          precioConsFin
+        });
+      }
+
+      // Second pass: assign categories from separator rows
+      let currentCat = '';
+      let prodIdx = 0;
+      for (let i = 4; i < rows.length; i++) {
+        const row = rows[i];
+        const cellA = row[0];
+        if (!cellA || typeof cellA !== 'string') continue;
+        if (cellA.trim().startsWith('▸')) {
+          // Category separator
+          currentCat = cellA.replace('▸','').trim();
+          // Proper case
+          currentCat = currentCat.charAt(0).toUpperCase() + currentCat.slice(1).toLowerCase();
+          // Fix known categories
+          const catMap = {
+            'ALIMENTOS': 'Alimentos', 'BEBIDAS': 'Bebidas',
+            'CUIDADO PERSONAL': 'Cuidado Personal', 'GOLOSINAS': 'Golosinas',
+            'HOGAR Y TIEMPO LIBRE': 'Hogar y Tiempo Libre',
+            'LIMPIEZA Y HOGAR': 'Limpieza y Hogar', 'MASCOTAS': 'Mascotas',
+            'PAPELERÍA': 'Papelería', 'QUIOSCO': 'Quiosco'
+          };
+          const key = cellA.replace('▸','').trim().toUpperCase();
+          currentCat = catMap[key] || currentCat;
+          if (!catSet.has(currentCat)) { catSet.add(currentCat); categories.push(currentCat); }
+        } else {
+          // Product row — find the product in allProducts with this row index
+          const p = allProducts.find(x => x.id === i);
+          if (p) p.categoria = currentCat;
+        }
+      }
+
+      // Filter out products with no costs (empty rows)
+      allProducts = allProducts.filter(p => p.costoUnit !== null || p.costoCaja !== null);
+      allProducts = allProducts.filter(p => p.categoria !== '__pending__');
+
+      // Select all cats by default
+      selectedCats = new Set(categories);
+      // Select all products by default
+      selectedProducts = new Set(allProducts.map(p => p.id));
+
+      document.getElementById('upload-status').textContent = `✓ ${allProducts.length} productos · ${categories.length} categorías`;
+      document.getElementById('upload-status').style.display = 'block';
+
+      renderCatList();
+      renderPreview();
+      showStatus(`Excel cargado: ${allProducts.length} productos`, 'ok');
+    } catch(err) {
+      showStatus('Error al leer el Excel: ' + err.message, 'err', 5000);
+      console.error(err);
+    }
+  };
+  reader.readAsArrayBuffer(file);
+}
+
+// ── Canales ───────────────────────────────────────────────────────────────────
+function toggleCanal(id) {
+  canales[id] = !canales[id];
+  const el = document.getElementById('canal-' + id);
+  const colorMap = { minunit: 'active-blue', mincaja: 'active-purple', consfin: 'active-orange' };
+  el.classList.toggle(colorMap[id], canales[id]);
+  renderPreview();
+}
+
+// Init canal states
+document.getElementById('canal-minunit').classList.add('active-blue');
+
+// ── Categorías ────────────────────────────────────────────────────────────────
+function renderCatList() {
+  const el = document.getElementById('cat-list');
+  if (!categories.length) {
+    el.innerHTML = '<div style="font-size:13px;color:var(--light);padding:1rem">Cargá el Excel primero</div>';
+    return;
+  }
+  el.innerHTML = categories.map(cat => {
+    const count = allProducts.filter(p => p.categoria === cat).length;
+    const sel = selectedCats.has(cat);
+    return `<div class="cat-item${sel ? ' selected' : ''}" onclick="toggleCat('${cat}')">
+      <div class="cat-check">${sel ? '✓' : ''}</div>
+      <span class="cat-name">${cat}</span>
+      <span class="cat-count">${count}</span>
+    </div>`;
+  }).join('');
+}
+
+function toggleCat(cat) {
+  if (selectedCats.has(cat)) {
+    selectedCats.delete(cat);
+    // Also deselect all products of this category
+    allProducts.filter(p => p.categoria === cat).forEach(p => selectedProducts.delete(p.id));
+  } else {
+    selectedCats.add(cat);
+    // Select all products of this category
+    allProducts.filter(p => p.categoria === cat).forEach(p => selectedProducts.add(p.id));
+  }
+  renderCatList();
+  renderPreview();
+}
+
+function toggleAllCats() {
+  if (selectedCats.size === categories.length) {
+    selectedCats.clear();
+    selectedProducts.clear();
+  } else {
+    categories.forEach(c => selectedCats.add(c));
+    allProducts.forEach(p => selectedProducts.add(p.id));
+  }
+  renderCatList();
+  renderPreview();
+}
+
+// ── Preview ───────────────────────────────────────────────────────────────────
+function getVisibleProducts() {
+  return allProducts.filter(p =>
+    selectedCats.has(p.categoria) &&
+    selectedProducts.has(p.id) &&
+    (!searchQ || p.producto.toLowerCase().includes(searchQ) || p.codigo.includes(searchQ))
+  );
+}
+
+function renderPreview() {
+  const prods = getVisibleProducts();
+  const anyCanal = canales.minunit || canales.mincaja || canales.consfin;
+  const genBtn = document.getElementById('gen-btn');
+
+  document.getElementById('preview-summary').textContent =
+    prods.length
+      ? `${prods.length} productos · ${selectedCats.size} categorías`
+      : 'Ningún producto seleccionado';
+
+  genBtn.disabled = !prods.length || !anyCanal;
+
+  if (!allProducts.length) {
+    document.getElementById('preview-container').innerHTML = `
+      <div class="empty-state"><span class="empty-icon">📊</span><div>Cargá el Excel primero</div></div>`;
+    return;
+  }
+
+  if (!prods.length) {
+    document.getElementById('preview-container').innerHTML = `
+      <div class="empty-state"><span class="empty-icon">🔍</span><div>Ningún producto coincide</div></div>`;
+    return;
+  }
+
+  // Build columns
+  const cols = [];
+  if (canales.minunit)  cols.push({ key: 'precioMinUnit',  label: 'Min. Unit.', cls: 'price-blue' });
+  if (canales.mincaja)  cols.push({ key: 'precioMinCaja',  label: 'Min. Caja',  cls: 'price-purple' });
+  if (canales.consfin)  cols.push({ key: 'precioConsFin',  label: 'Cons. Final', cls: 'price-orange' });
+
+  // Group by category
+  const byCat = {};
+  prods.forEach(p => {
+    if (!byCat[p.categoria]) byCat[p.categoria] = [];
+    byCat[p.categoria].push(p);
+  });
+
+  let rows = '';
+  Object.entries(byCat).forEach(([cat, catProds]) => {
+    const colspan = 3 + cols.length;
+    rows += `<tr class="cat-sep"><td colspan="${colspan}">${cat}</td></tr>`;
+    catProds.forEach(p => {
+      const pricesCells = cols.map(c => {
+        const v = p[c.key];
+        return `<td class="price-cell ${c.cls}">${v != null ? '$ ' + v.toFixed(2) : '—'}</td>`;
+      }).join('');
+      rows += `<tr>
+        <td><input type="checkbox" class="row-sel" ${selectedProducts.has(p.id) ? 'checked' : ''}
+          onchange="toggleProduct(${p.id}, this.checked)"></td>
+        <td>${p.producto}${p.codigo ? `<br><span style="font-size:10px;color:var(--light)">${p.codigo}</span>` : ''}</td>
+        <td class="cat-cell">${p.categoria}</td>
+        ${pricesCells}
+      </tr>`;
+    });
+  });
+
+  document.getElementById('preview-container').innerHTML = `
+    <div class="preview-wrap">
+      <div class="preview-toolbar">
+        <div class="preview-info"><strong>${prods.length}</strong> productos</div>
+        <input type="text" class="search-box" placeholder="Buscar producto…"
+          value="${searchQ}" oninput="onSearch(this.value)">
+      </div>
+      <div class="preview-table-wrap">
+        <table class="preview">
+          <thead><tr>
+            <th style="width:32px"></th>
+            <th>Producto</th>
+            <th>Categoría</th>
+            ${cols.map(c => `<th>${c.label}</th>`).join('')}
+          </tr></thead>
+          <tbody>${rows}</tbody>
+        </table>
+      </div>
+    </div>`;
+}
+
+function toggleProduct(id, checked) {
+  if (checked) selectedProducts.add(id);
+  else selectedProducts.delete(id);
+  // Don't re-render full table to avoid losing focus
+  // Just update category selection state
+  const catProds = allProducts.filter(p => p.categoria === allProducts.find(x=>x.id===id)?.categoria);
+  const allSel = catProds.every(p => selectedProducts.has(p.id));
+  if (allSel) {
+    selectedCats.add(allProducts.find(x=>x.id===id)?.categoria);
+  } else {
+    selectedCats.delete(allProducts.find(x=>x.id===id)?.categoria);
+  }
+  renderCatList();
+  document.getElementById('preview-summary').textContent =
+    `${getVisibleProducts().length} productos · ${selectedCats.size} categorías`;
+}
+
+function onSearch(q) {
+  searchQ = q.toLowerCase().trim();
+  renderPreview();
+}
+
+// ── Generar PDF ───────────────────────────────────────────────────────────────
+function generatePDF() {
+  const prods = getVisibleProducts();
+  if (!prods.length) return;
+
+  showStatus('Generando PDF…');
+
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
+
+  // Header
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(20);
+  doc.setTextColor(26, 26, 24);
+  doc.text('PELSAS DISTRIBUIDORA', 14, 18);
+
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(9);
+  doc.setTextColor(122, 116, 104);
+  const fecha = new Date().toLocaleDateString('es-UY', { day:'2-digit', month:'long', year:'numeric' });
+  doc.text(`Lista de precios · ${fecha}`, 14, 25);
+
+  // Canal labels
+  const canalLabels = [];
+  if (canales.minunit)  canalLabels.push('Minorista unitario');
+  if (canales.mincaja)  canalLabels.push('Minorista caja');
+  if (canales.consfin)  canalLabels.push('Consumidor final');
+  doc.text(canalLabels.join('  ·  '), 14, 31);
+
+  // Line separator
+  doc.setDrawColor(216, 210, 198);
+  doc.setLineWidth(0.4);
+  doc.line(14, 34, 196, 34);
+
+  // Build table columns
+  const head = [['Producto', 'Categoría']];
+  if (canales.minunit)  head[0].push('Min. Unit.');
+  if (canales.mincaja)  head[0].push('Min. Caja');
+  if (canales.consfin)  head[0].push('Cons. Final');
+
+  // Group by category
+  const byCat = {};
+  prods.forEach(p => {
+    if (!byCat[p.categoria]) byCat[p.categoria] = [];
+    byCat[p.categoria].push(p);
+  });
+
+  const body = [];
+  Object.entries(byCat).forEach(([cat, catProds]) => {
+    // Category row
+    body.push([{ content: cat, colSpan: head[0].length, styles: {
+      fontStyle: 'bold', fontSize: 8, fillColor: [234, 245, 236],
+      textColor: [30, 107, 60], cellPadding: {top:3,bottom:3,left:4,right:4}
+    }}]);
+    catProds.forEach(p => {
+      const row = [
+        { content: p.producto + (p.codigo ? `\n${p.codigo}` : ''), styles: { fontSize: 9, cellWidth: 'auto' } },
+        { content: p.categoria, styles: { fontSize: 8, textColor: [122,116,104] } }
+      ];
+      if (canales.minunit)  row.push({ content: p.precioMinUnit  != null ? `$ ${p.precioMinUnit.toFixed(2)}`  : '—', styles: { fontStyle:'bold', textColor:[21,101,192], halign:'right' }});
+      if (canales.mincaja)  row.push({ content: p.precioMinCaja  != null ? `$ ${p.precioMinCaja.toFixed(2)}`  : '—', styles: { fontStyle:'bold', textColor:[106,27,154], halign:'right' }});
+      if (canales.consfin)  row.push({ content: p.precioConsFin  != null ? `$ ${p.precioConsFin.toFixed(2)}`  : '—', styles: { fontStyle:'bold', textColor:[230,81,0], halign:'right' }});
+      body.push(row);
+    });
+  });
+
+  // Column widths
+  const pageW = 182;
+  const nPriceCols = (canales.minunit?1:0) + (canales.mincaja?1:0) + (canales.consfin?1:0);
+  const priceColW = 28;
+  const catColW = 32;
+  const prodColW = pageW - catColW - (nPriceCols * priceColW);
+
+  const colStyles = {
+    0: { cellWidth: prodColW },
+    1: { cellWidth: catColW },
+  };
+  let ci = 2;
+  if (canales.minunit)  { colStyles[ci] = { cellWidth: priceColW }; ci++; }
+  if (canales.mincaja)  { colStyles[ci] = { cellWidth: priceColW }; ci++; }
+  if (canales.consfin)  { colStyles[ci] = { cellWidth: priceColW }; ci++; }
+
+  doc.autoTable({
+    head,
+    body,
+    startY: 37,
+    margin: { left: 14, right: 14 },
+    styles: { font: 'helvetica', fontSize: 9, cellPadding: {top:3,bottom:3,left:4,right:4}, overflow: 'linebreak' },
+    headStyles: { fillColor: [26,26,24], textColor: 255, fontStyle: 'bold', fontSize: 9 },
+    alternateRowStyles: { fillColor: [245,240,232] },
+    columnStyles: colStyles,
+    didDrawPage: function(data) {
+      // Footer on each page
+      const pageCount = doc.internal.getNumberOfPages();
+      doc.setFont('helvetica','normal');
+      doc.setFontSize(8);
+      doc.setTextColor(176,170,158);
+      doc.text(`Pág. ${data.pageNumber}`, 196, 290, { align: 'right' });
+      doc.text('PelSAS Distribuidora · Lista interna de precios', 14, 290);
+    }
+  });
+
+  // Save
+  const catNames = Array.from(selectedCats).join('-').replace(/\s+/g,'').slice(0,40);
+  doc.save(`PelSAS_Lista_${catNames}_${fecha.replace(/\s/g,'')}.pdf`);
+  showStatus('PDF generado ✓', 'ok');
+}
+
+// ── Helpers ───────────────────────────────────────────────────────────────────
+let statusTimer = null;
+function showStatus(msg, type='', duration=2500) {
+  const el = document.getElementById('status-bar');
+  el.textContent = msg;
+  el.className = 'status-bar show' + (type ? ' '+type : '');
+  clearTimeout(statusTimer);
+  statusTimer = setTimeout(() => el.classList.remove('show'), duration);
+}
+
+// Drag & drop on upload area
+const ua = document.getElementById('upload-area');
+ua.addEventListener('dragover', e => { e.preventDefault(); ua.classList.add('drag'); });
+ua.addEventListener('dragleave', () => ua.classList.remove('drag'));
+ua.addEventListener('drop', e => {
+  e.preventDefault();
+  ua.classList.remove('drag');
+  const file = e.dataTransfer.files[0];
+  if (file) {
+    const input = ua.querySelector('input');
+    const dt = new DataTransfer();
+    dt.items.add(file);
+    input.files = dt.files;
+    loadExcel(input);
+  }
+});
+</script>
+</body>
+</html>
