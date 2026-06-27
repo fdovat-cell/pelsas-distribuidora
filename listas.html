@@ -230,7 +230,7 @@ function loadExcel(input) {
   const reader = new FileReader();
   reader.onload = function(e) {
     try {
-      const wb = XLSX.read(e.target.result, { type: 'array', cellFormula: false, cellNF: false });
+      const wb = XLSX.read(e.target.result, { type: 'array' });
       const ws = wb.Sheets['Lista de Costos'];
       if (!ws) throw new Error('No encontré la hoja "Lista de Costos"');
 
@@ -249,9 +249,15 @@ function loadExcel(input) {
         const addr = col + row;
         const cell = ws[addr];
         if (!cell) return null;
-        const v = cell.v;
-        if (v === undefined || v === null || v === '') return null;
+        // Use cached formula value (.v) — if empty string, try formatted value (.w)
+        let v = cell.v;
+        if (v === undefined || v === null || v === '') {
+          // Try formatted value as fallback
+          const w = cell.w ? String(cell.w).replace(/[$\s]/g,'').replace(',','.') : '';
+          v = w ? parseFloat(w) : null;
+        }
         if (typeof v === 'number') return v;
+        if (v === null || v === undefined || v === '') return null;
         const n = parseFloat(String(v).replace(',','.'));
         return isNaN(n) ? null : n;
       }
