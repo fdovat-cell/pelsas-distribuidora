@@ -29,7 +29,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 .back-btn:hover{color:var(--ink);border-color:var(--ink)}
 
 /* LAYOUT */
-.main{display:grid;grid-template-columns:340px 1fr;min-height:calc(100vh - 60px)}
+.main{display:grid;grid-template-columns:380px 1fr;min-height:calc(100vh - 60px)}
 
 /* PANEL IZQUIERDO */
 .panel-left{background:var(--white);border-right:1px solid var(--border);padding:0;overflow-y:auto;position:sticky;top:60px;height:calc(100vh - 60px);display:flex;flex-direction:column}
@@ -585,15 +585,13 @@ function generatePDF() {
   // Links en el encabezado — derecha
   const appUrl   = 'pelsas-distribuidora.pages.dev';
   const waUrl    = 'wa.me/59899886225';
-  const appLabel = '🌐 ' + appUrl;
-  const waLabel  = '💬 WhatsApp';
 
   doc.setFontSize(8);
   doc.setTextColor(21, 101, 192);
-  doc.textWithLink(appLabel, 196, 18, { url: 'https://' + appUrl, align: 'right' });
+  doc.textWithLink(appUrl, 196, 18, { url: 'https://' + appUrl, align: 'right' });
 
   doc.setTextColor(30, 107, 60);
-  doc.textWithLink(waLabel, 196, 25, { url: 'https://' + waUrl, align: 'right' });
+  doc.textWithLink('WhatsApp +598 9988 6225', 196, 25, { url: 'https://' + waUrl, align: 'right' });
 
   // Line separator
   doc.setDrawColor(216, 210, 198);
@@ -654,6 +652,11 @@ function generatePDF() {
   if (canales.mincaja)  { colStyles[ci] = { cellWidth: priceColW }; ci++; }
   if (canales.consfin)  { colStyles[ci] = { cellWidth: priceColW }; ci++; }
 
+  // Dibujar fondo en la primera página ANTES de autoTable
+  if (fondoBase64) {
+    doc.addImage(fondoBase64, fondoType, 0, 0, 210, 297, '', 'NONE');
+  }
+
   doc.autoTable({
     head,
     body,
@@ -663,16 +666,18 @@ function generatePDF() {
     headStyles: { fillColor: [26,26,24], textColor: 255, fontStyle: 'bold', fontSize: 6 },
     alternateRowStyles: { fillColor: [245,240,232] },
     columnStyles: colStyles,
-    didDrawPage: function(data) {
-      // Imagen de fondo — se dibuja primero, debajo de todo
-      if (fondoBase64) {
+    willDrawPage: function(data) {
+      // Fondo en cada página nueva (la primera ya está dibujada arriba)
+      if (fondoBase64 && data.pageNumber > 1) {
         doc.addImage(fondoBase64, fondoType, 0, 0, 210, 297, '', 'NONE');
       }
+    },
+    didDrawPage: function(data) {
       // Footer on each page
       doc.setFont('helvetica','normal');
       doc.setFontSize(8);
       doc.setTextColor(176,170,158);
-      doc.text(`Pág. ${data.pageNumber}`, 196, 290, { align: 'right' });
+      doc.text(`Pag. ${data.pageNumber}`, 196, 290, { align: 'right' });
       doc.text('PelSAS Distribuidora · Lista interna de precios', 14, 290);
     }
   });
