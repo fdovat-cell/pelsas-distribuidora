@@ -29,23 +29,23 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 .back-btn:hover{color:var(--ink);border-color:var(--ink)}
 
 /* LAYOUT */
-.main{display:grid;grid-template-columns:300px 1fr;min-height:calc(100vh - 60px)}
+.main{display:grid;grid-template-columns:340px 1fr;min-height:calc(100vh - 60px)}
 
 /* PANEL IZQUIERDO */
 .panel-left{background:var(--white);border-right:1px solid var(--border);padding:0;overflow-y:auto;position:sticky;top:60px;height:calc(100vh - 60px);display:flex;flex-direction:column}
 
-.panel-section{padding:1.25rem 1.5rem;border-bottom:1px solid var(--border)}
+.panel-section{padding:1rem 1.25rem;border-bottom:1px solid var(--border)}
 .panel-section:last-child{border-bottom:none}
 .panel-label{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--light);font-weight:600;margin-bottom:.75rem;display:block}
 
 /* Upload */
-.upload-area{border:2px dashed var(--border);border-radius:10px;padding:1.5rem;text-align:center;cursor:pointer;transition:border-color .15s,background .15s;position:relative}
+.upload-area{border:2px dashed var(--border);border-radius:10px;padding:.9rem 1rem;text-align:center;cursor:pointer;transition:border-color .15s,background .15s;position:relative}
 .upload-area:hover,.upload-area.drag{border-color:var(--red);background:var(--red-light)}
 .upload-area input{position:absolute;inset:0;opacity:0;cursor:pointer}
-.upload-icon{font-size:28px;display:block;margin-bottom:.5rem}
-.upload-text{font-size:13px;color:var(--mid)}
+.upload-icon{font-size:20px;display:block;margin-bottom:.3rem}
+.upload-text{font-size:12px;color:var(--mid)}
 .upload-text strong{color:var(--ink)}
-.upload-loaded{font-size:12px;color:var(--green);margin-top:.5rem;font-weight:500}
+.upload-loaded{font-size:12px;color:var(--green);margin-top:.4rem;font-weight:500}
 
 /* Canales */
 .canal-grid{display:flex;flex-direction:column;gap:6px}
@@ -66,13 +66,13 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 
 /* Categorías */
 .cat-list{display:flex;flex-direction:column;gap:4px;flex:1;overflow-y:auto}
-.cat-item{display:flex;align-items:center;gap:8px;padding:7px 10px;border-radius:7px;cursor:pointer;transition:background .1s;user-select:none}
+.cat-item{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:7px;cursor:pointer;transition:background .1s;user-select:none}
 .cat-item:hover{background:var(--cream)}
 .cat-item.selected{background:var(--green-light)}
-.cat-check{width:16px;height:16px;border-radius:4px;border:1.5px solid var(--border);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:10px;transition:border-color .15s,background .15s}
+.cat-check{width:18px;height:18px;border-radius:5px;border:1.5px solid var(--border);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:11px;transition:border-color .15s,background .15s}
 .cat-item.selected .cat-check{background:var(--green);border-color:var(--green);color:#fff}
-.cat-name{font-size:13px;flex:1}
-.cat-count{font-size:10px;color:var(--light);background:var(--cream2);border-radius:10px;padding:1px 6px}
+.cat-name{font-size:14px;flex:1}
+.cat-count{font-size:11px;color:var(--light);background:var(--cream2);border-radius:10px;padding:2px 8px}
 
 .select-all-btn{font-size:11px;color:var(--mid);background:none;border:none;cursor:pointer;padding:4px 10px;border-radius:6px;font-family:'DM Sans',sans-serif}
 .select-all-btn:hover{background:var(--cream2);color:var(--ink)}
@@ -152,6 +152,17 @@ table.preview tr.cat-sep td{background:var(--green-light);font-size:10px;letter-
       </div>
     </div>
 
+    <!-- 1b. Imagen de fondo -->
+    <div class="panel-section">
+      <span class="panel-label">1b · Fondo del PDF</span>
+      <div class="upload-area" id="upload-area-img">
+        <input type="file" accept="image/*" onchange="loadFondo(this)">
+        <span class="upload-icon">🖼️</span>
+        <div class="upload-text"><strong>Subí la imagen de fondo</strong><br>PNG o JPG · A4 vertical</div>
+        <div class="upload-loaded" id="fondo-status" style="display:none"></div>
+      </div>
+    </div>
+
     <!-- 2. Canales -->
     <div class="panel-section">
       <span class="panel-label">2 · Columnas de precio</span>
@@ -221,6 +232,24 @@ let selectedCats = new Set();
 let selectedProducts = new Set(); // producto ids seleccionados individualmente
 let canales = { minunit: true, mincaja: false, consfin: false };
 let searchQ = '';
+let fondoBase64 = null;   // imagen de fondo del PDF en base64
+let fondoType = 'PNG';    // tipo MIME para jsPDF
+
+// ── Cargar imagen de fondo ────────────────────────────────────────────────────
+function loadFondo(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    fondoBase64 = e.target.result.split(',')[1]; // solo el base64, sin el header
+    fondoType = file.type === 'image/jpeg' ? 'JPEG' : 'PNG';
+    const el = document.getElementById('fondo-status');
+    el.textContent = '✓ ' + file.name;
+    el.style.display = 'block';
+    showStatus('Imagen de fondo cargada ✓', 'ok');
+  };
+  reader.readAsDataURL(file);
+}
 
 // ── Cargar Excel ──────────────────────────────────────────────────────────────
 function loadExcel(input) {
@@ -553,7 +582,18 @@ function generatePDF() {
   const fecha = new Date().toLocaleDateString('es-UY', { day:'2-digit', month:'long', year:'numeric' });
   doc.text(`Lista de precios · ${fecha}`, 14, 25);
 
-  // No canal labels in PDF header
+  // Links en el encabezado — derecha
+  const appUrl   = 'pelsas-distribuidora.pages.dev';
+  const waUrl    = 'wa.me/59899886225';
+  const appLabel = '🌐 ' + appUrl;
+  const waLabel  = '💬 WhatsApp';
+
+  doc.setFontSize(8);
+  doc.setTextColor(21, 101, 192);
+  doc.textWithLink(appLabel, 196, 18, { url: 'https://' + appUrl, align: 'right' });
+
+  doc.setTextColor(30, 107, 60);
+  doc.textWithLink(waLabel, 196, 25, { url: 'https://' + waUrl, align: 'right' });
 
   // Line separator
   doc.setDrawColor(216, 210, 198);
@@ -624,8 +664,11 @@ function generatePDF() {
     alternateRowStyles: { fillColor: [245,240,232] },
     columnStyles: colStyles,
     didDrawPage: function(data) {
+      // Imagen de fondo — se dibuja primero, debajo de todo
+      if (fondoBase64) {
+        doc.addImage(fondoBase64, fondoType, 0, 0, 210, 297, '', 'NONE');
+      }
       // Footer on each page
-      const pageCount = doc.internal.getNumberOfPages();
       doc.setFont('helvetica','normal');
       doc.setFontSize(8);
       doc.setTextColor(176,170,158);
@@ -650,7 +693,22 @@ function showStatus(msg, type='', duration=2500) {
   statusTimer = setTimeout(() => el.classList.remove('show'), duration);
 }
 
-// Drag & drop on upload area
+// Drag & drop on image upload area
+const uaImg = document.getElementById('upload-area-img');
+uaImg.addEventListener('dragover', e => { e.preventDefault(); uaImg.classList.add('drag'); });
+uaImg.addEventListener('dragleave', () => uaImg.classList.remove('drag'));
+uaImg.addEventListener('drop', e => {
+  e.preventDefault();
+  uaImg.classList.remove('drag');
+  const file = e.dataTransfer.files[0];
+  if (file) {
+    const input = uaImg.querySelector('input');
+    const dt = new DataTransfer();
+    dt.items.add(file);
+    input.files = dt.files;
+    loadFondo(input);
+  }
+});
 const ua = document.getElementById('upload-area');
 ua.addEventListener('dragover', e => { e.preventDefault(); ua.classList.add('drag'); });
 ua.addEventListener('dragleave', () => ua.classList.remove('drag'));
