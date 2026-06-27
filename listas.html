@@ -234,96 +234,80 @@ function loadExcel(input) {
       const ws = wb.Sheets['Lista de Costos'];
       if (!ws) throw new Error('No encontré la hoja "Lista de Costos"');
 
-      // Read raw data starting row 5 (index 4) — headers in row 3-4
+      // Read cell by cell using direct address — avoids merge/index issues
       // Columns: A=Producto+Código, B=CostoUnit, C=CostoCaja,
       //          D=EscalaMinUnit, E=%MinUnit, F=$MinUnit,
       //          G=EscalaMinCaja, H=%MinCaja, I=$MinCaja,
       //          J=EscalaConsFin, K=%ConsFin, L=$ConsFin
-      const rows = XLSX.utils.sheet_to_json(ws, { header: 1, defval: null });
+      // Data starts at row 5
+
+      const range = XLSX.utils.decode_range(ws['!ref']);
+      const maxRow = range.e.r + 1; // 1-based
+
+      function cellVal(col, row) {
+        // col = 'A','B'... row = 1-based
+        const addr = col + row;
+        const cell = ws[addr];
+        if (!cell) return null;
+        return cell.v !== undefined ? cell.v : null;
+      }
+
+      const catMap = {
+        'ALIMENTOS': 'Alimentos', 'BEBIDAS': 'Bebidas',
+        'CUIDADO PERSONAL': 'Cuidado Personal', 'GOLOSINAS': 'Golosinas',
+        'HOGAR Y TIEMPO LIBRE': 'Hogar y Tiempo Libre',
+        'LIMPIEZA Y HOGAR': 'Limpieza y Hogar', 'MASCOTAS': 'Mascotas',
+        'PAPELERÍA': 'Papelería', 'QUIOSCO': 'Quiosco'
+      };
 
       allProducts = [];
       categories = [];
       const catSet = new Set();
+      let currentCat = '';
 
-      for (let i = 4; i < rows.length; i++) {
-        const row = rows[i];
-        const cellA = row[0];
+      for (let r = 5; r <= maxRow; r++) {
+        const cellA = cellVal('A', r);
         if (!cellA || typeof cellA !== 'string' || cellA.trim() === '') continue;
 
-        // Skip category separator rows (they start with ▸)
-        if (cellA.trim().startsWith('▸')) continue;
+        // Category separator row
+        if (cellA.trim().startsWith('▸')) {
+          const key = cellA.replace('▸','').trim().toUpperCase();
+          currentCat = catMap[key] || cellA.replace('▸','').trim();
+          if (!catSet.has(currentCat)) { catSet.add(currentCat); categories.push(currentCat); }
+          continue;
+        }
 
-        // Parse product + code from cell A (two lines separated by \n)
+        // Product row — parse name + code from cell A (two lines \n)
         const parts = cellA.split('\n');
         const producto = (parts[0] || '').trim();
-        const codigo = (parts[1] || '').trim();
+        const codigo   = (parts[1] || '').trim();
         if (!producto) continue;
 
-        const categoria = typeof row[1] === 'string' ? row[1].trim() : '';
-        const costoUnit = parseFloat(row[1]) || null; // actually B col index 1
-        const costoCaja = parseFloat(row[2]) || null; // C col index 2
+        // Read prices directly by column address
+        const costoUnit    = typeof cellVal('B',r) === 'number' ? cellVal('B',r) : null;
+        const costoCaja    = typeof cellVal('C',r) === 'number' ? cellVal('C',r) : null;
+        const precioMinUnit = typeof cellVal('F',r) === 'number' ? cellVal('F',r) : null;
+        const precioMinCaja = typeof cellVal('I',r) === 'number' ? cellVal('I',r) : null;
+        const precioConsFin = typeof cellVal('L',r) === 'number' ? cellVal('L',r) : null;
 
-        // Wait — sheet_to_json maps: index 0=A, 1=B, 2=C, 3=D... etc
-        // A=prod+cod, B=costoUnit(idx1), C=costoCaja(idx2)
-        // But category is NOT in this sheet layout — it was merged into category separator rows
-        // We need to track current category from separator rows
-        const costoU = typeof row[1] === 'number' ? row[1] : null;
-        const costoC = typeof row[2] === 'number' ? row[2] : null;
-        const precioMinUnit = typeof row[5] === 'number' ? row[5] : null;  // F
-        const precioMinCaja = typeof row[8] === 'number' ? row[8] : null;  // I
-        const precioConsFin  = typeof row[11] === 'number' ? row[11] : null; // L
+        // Skip rows with no cost at all (truly empty rows)
+        if (costoUnit === null && costoCaja === null) continue;
 
-        // We'll get category by tracking separator rows
         allProducts.push({
-          id: i,
+          id: r,
           producto,
           codigo,
-          categoria: '__pending__',
-          costoUnit: costoU,
-          costoCaja: costoC,
+          categoria: currentCat,
+          costoUnit,
+          costoCaja,
           precioMinUnit,
           precioMinCaja,
           precioConsFin
         });
       }
 
-      // Second pass: assign categories from separator rows
-      let currentCat = '';
-      let prodIdx = 0;
-      for (let i = 4; i < rows.length; i++) {
-        const row = rows[i];
-        const cellA = row[0];
-        if (!cellA || typeof cellA !== 'string') continue;
-        if (cellA.trim().startsWith('▸')) {
-          // Category separator
-          currentCat = cellA.replace('▸','').trim();
-          // Proper case
-          currentCat = currentCat.charAt(0).toUpperCase() + currentCat.slice(1).toLowerCase();
-          // Fix known categories
-          const catMap = {
-            'ALIMENTOS': 'Alimentos', 'BEBIDAS': 'Bebidas',
-            'CUIDADO PERSONAL': 'Cuidado Personal', 'GOLOSINAS': 'Golosinas',
-            'HOGAR Y TIEMPO LIBRE': 'Hogar y Tiempo Libre',
-            'LIMPIEZA Y HOGAR': 'Limpieza y Hogar', 'MASCOTAS': 'Mascotas',
-            'PAPELERÍA': 'Papelería', 'QUIOSCO': 'Quiosco'
-          };
-          const key = cellA.replace('▸','').trim().toUpperCase();
-          currentCat = catMap[key] || currentCat;
-          if (!catSet.has(currentCat)) { catSet.add(currentCat); categories.push(currentCat); }
-        } else {
-          // Product row — find the product in allProducts with this row index
-          const p = allProducts.find(x => x.id === i);
-          if (p) p.categoria = currentCat;
-        }
-      }
-
-      // Filter out products with no costs (empty rows)
-      allProducts = allProducts.filter(p => p.costoUnit !== null || p.costoCaja !== null);
-      allProducts = allProducts.filter(p => p.categoria !== '__pending__');
-
-      // Select all cats by default
+      // Select all by default
       selectedCats = new Set(categories);
-      // Select all products by default
       selectedProducts = new Set(allProducts.map(p => p.id));
 
       document.getElementById('upload-status').textContent = `✓ ${allProducts.length} productos · ${categories.length} categorías`;
