@@ -561,17 +561,23 @@ function generatePDF() {
   Object.entries(byCat).forEach(([cat, catProds]) => {
     // Category row
     body.push([{ content: cat, colSpan: head[0].length, styles: {
-      fontStyle: 'bold', fontSize: 8, fillColor: [234, 245, 236],
+      fontStyle: 'bold', fontSize: 7, fillColor: [234, 245, 236],
       textColor: [30, 107, 60], cellPadding: {top:3,bottom:3,left:4,right:4}
     }}]);
     catProds.forEach(p => {
+      // Fix 1: skip products with no price in any selected canal
+      const hasPrice = (canales.minunit && p.precioMinUnit != null) ||
+                       (canales.mincaja && p.precioMinCaja != null) ||
+                       (canales.consfin && p.precioConsFin != null);
+      if (!hasPrice) return;
+
       const row = [
-        { content: p.producto + (p.codigo ? `\n${p.codigo}` : ''), styles: { fontSize: 9, cellWidth: 'auto' } },
-        { content: p.categoria, styles: { fontSize: 8, textColor: [122,116,104] } }
+        { content: p.producto + (p.codigo ? `\n${p.codigo}` : ''), styles: { fontSize: 7, cellWidth: 'auto' } },
+        { content: p.categoria, styles: { fontSize: 7, textColor: [122,116,104] } }
       ];
-      if (canales.minunit)  row.push({ content: p.precioMinUnit  != null ? `$ ${p.precioMinUnit.toFixed(2)}`  : '—', styles: { fontStyle:'bold', textColor:[21,101,192], halign:'right' }});
-      if (canales.mincaja)  row.push({ content: p.precioMinCaja  != null ? `$ ${p.precioMinCaja.toFixed(2)}`  : '—', styles: { fontStyle:'bold', textColor:[106,27,154], halign:'right' }});
-      if (canales.consfin)  row.push({ content: p.precioConsFin  != null ? `$ ${p.precioConsFin.toFixed(2)}`  : '—', styles: { fontStyle:'bold', textColor:[230,81,0], halign:'right' }});
+      if (canales.minunit)  row.push({ content: p.precioMinUnit  != null ? `$ ${p.precioMinUnit.toFixed(2)}`  : '—', styles: { fontStyle:'bold', fontSize: 7, textColor:[21,101,192], halign:'right' }});
+      if (canales.mincaja)  row.push({ content: p.precioMinCaja  != null ? `$ ${p.precioMinCaja.toFixed(2)}`  : '—', styles: { fontStyle:'bold', fontSize: 7, textColor:[106,27,154], halign:'right' }});
+      if (canales.consfin)  row.push({ content: p.precioConsFin  != null ? `$ ${p.precioConsFin.toFixed(2)}`  : '—', styles: { fontStyle:'bold', fontSize: 7, textColor:[230,81,0], halign:'right' }});
       body.push(row);
     });
   });
@@ -597,8 +603,8 @@ function generatePDF() {
     body,
     startY: 37,
     margin: { left: 14, right: 14 },
-    styles: { font: 'helvetica', fontSize: 9, cellPadding: {top:3,bottom:3,left:4,right:4}, overflow: 'linebreak' },
-    headStyles: { fillColor: [26,26,24], textColor: 255, fontStyle: 'bold', fontSize: 9 },
+    styles: { font: 'helvetica', fontSize: 7, cellPadding: {top:2,bottom:2,left:3,right:3}, overflow: 'linebreak' },
+    headStyles: { fillColor: [26,26,24], textColor: 255, fontStyle: 'bold', fontSize: 7 },
     alternateRowStyles: { fillColor: [245,240,232] },
     columnStyles: colStyles,
     didDrawPage: function(data) {
