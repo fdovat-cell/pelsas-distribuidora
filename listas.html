@@ -231,6 +231,8 @@ function loadExcel(input) {
   reader.onload = function(e) {
     try {
       const wb = XLSX.read(e.target.result, { type: 'array' });
+      window._lastWB = wb;
+      console.log('Hojas encontradas:', wb.SheetNames);
       const ws = wb.Sheets['Lista de Costos'];
       if (!ws) throw new Error('No encontré la hoja "Lista de Costos"');
 
@@ -244,22 +246,32 @@ function loadExcel(input) {
       const range = XLSX.utils.decode_range(ws['!ref']);
       const maxRow = range.e.r + 1; // 1-based
 
-      function cellVal(col, row) {
-        // col = 'A','B'... row = 1-based
-        const addr = col + row;
-        const cell = ws[addr];
+      // Get raw value from cell (returns whatever Excel stored)
+      function cellRaw(col, row) {
+        const cell = ws[col + row];
+        return cell ? cell.v : null;
+      }
+      // Get numeric value — returns null if not a number or empty
+      function cellNum(col, row) {
+        const cell = ws[col + row];
         if (!cell) return null;
-        // Use cached formula value (.v) — if empty string, try formatted value (.w)
-        let v = cell.v;
-        if (v === undefined || v === null || v === '') {
-          // Try formatted value as fallback
-          const w = cell.w ? String(cell.w).replace(/[$\s]/g,'').replace(',','.') : '';
-          v = w ? parseFloat(w) : null;
-        }
+        const v = cell.v;
         if (typeof v === 'number') return v;
-        if (v === null || v === undefined || v === '') return null;
-        const n = parseFloat(String(v).replace(',','.'));
-        return isNaN(n) ? null : n;
+        // Try formatted value (.w) for formula results stored as strings
+        if (cell.w) {
+          const w = String(cell.w).replace(/[$\s%]/g,'').replace(',','.');
+          const n = parseFloat(w);
+          if (!isNaN(n)) return n;
+        }
+        return null;
+      }
+      // Get string value from cell
+      function cellStr(col, row) {
+        const cell = ws[col + row];
+        if (!cell) return null;
+        const v = cell.v;
+        if (typeof v === 'string') return v;
+        return null;
       }
 
       const catMap = {
@@ -276,8 +288,8 @@ function loadExcel(input) {
       let currentCat = '';
 
       for (let r = 5; r <= maxRow; r++) {
-        const cellA = cellVal('A', r);
-        if (!cellA || typeof cellA !== 'string' || cellA.trim() === '') continue;
+        const cellA = cellStr('A', r);
+        if (!cellA || cellA.trim() === '') continue;
 
         // Category separator row
         if (cellA.trim().startsWith('▸')) {
@@ -294,11 +306,11 @@ function loadExcel(input) {
         if (!producto) continue;
 
         // Read prices directly by column address
-        const costoUnit    = typeof cellVal('B',r) === 'number' ? cellVal('B',r) : null;
-        const costoCaja    = typeof cellVal('C',r) === 'number' ? cellVal('C',r) : null;
-        const precioMinUnit = typeof cellVal('F',r) === 'number' ? cellVal('F',r) : null;
-        const precioMinCaja = typeof cellVal('I',r) === 'number' ? cellVal('I',r) : null;
-        const precioConsFin = typeof cellVal('L',r) === 'number' ? cellVal('L',r) : null;
+        const costoUnit    = cellNum('B',r);
+        const costoCaja    = cellNum('C',r);
+        const precioMinUnit = cellNum('F',r);
+        const precioMinCaja = cellNum('I',r);
+        const precioConsFin = cellNum('L',r);
 
         // Skip rows with no cost at all (truly empty rows)
         if (costoUnit === null && costoCaja === null) continue;
