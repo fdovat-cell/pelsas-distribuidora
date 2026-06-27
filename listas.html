@@ -451,13 +451,14 @@ function renderPreview() {
   let rows = '';
   Object.entries(byCat).forEach(([cat, catProds]) => {
     const colspan = 3 + cols.length;
-    rows += `<tr class="cat-sep"><td colspan="${colspan}">${cat}</td></tr>`;
+    rows += `<tr class="cat-sep cat-sep-row"><td colspan="${colspan}">${cat}</td></tr>`;
     catProds.forEach(p => {
       const pricesCells = cols.map(c => {
         const v = p[c.key];
         return `<td class="price-cell ${c.cls}">${v != null ? '$ ' + v.toFixed(2) : '—'}</td>`;
       }).join('');
-      rows += `<tr>
+      const searchData = (p.producto + ' ' + p.codigo).toLowerCase();
+      rows += `<tr class="prod-row" data-search="${searchData}">
         <td><input type="checkbox" class="row-sel" ${selectedProducts.has(p.id) ? 'checked' : ''}
           onchange="toggleProduct(${p.id}, this.checked)"></td>
         <td>${p.producto}${p.codigo ? `<br><span style="font-size:10px;color:var(--light)">${p.codigo}</span>` : ''}</td>
@@ -472,7 +473,7 @@ function renderPreview() {
       <div class="preview-toolbar">
         <div class="preview-info"><strong>${prods.length}</strong> productos</div>
         <input type="text" class="search-box" placeholder="Buscar producto…"
-          value="${searchQ}" oninput="onSearch(this.value)">
+          value="${searchQ}" id="search-input" oninput="onSearch(this.value)">
       </div>
       <div class="preview-table-wrap">
         <table class="preview">
@@ -507,7 +508,27 @@ function toggleProduct(id, checked) {
 
 function onSearch(q) {
   searchQ = q.toLowerCase().trim();
-  renderPreview();
+  // Filter rows in-place without re-rendering (preserves input focus)
+  const rows = document.querySelectorAll('tr.prod-row');
+  if (!rows.length) return;
+  rows.forEach(row => {
+    const text = (row.dataset.search || '').toLowerCase();
+    row.style.display = (!searchQ || text.includes(searchQ)) ? '' : 'none';
+  });
+  // Hide cat separators if all their products are hidden
+  document.querySelectorAll('tr.cat-sep-row').forEach(sep => {
+    let next = sep.nextElementSibling;
+    let hasVisible = false;
+    while (next && next.classList.contains('prod-row')) {
+      if (next.style.display !== 'none') hasVisible = true;
+      next = next.nextElementSibling;
+    }
+    sep.style.display = hasVisible ? '' : 'none';
+  });
+  // Update count
+  const visible = document.querySelectorAll('tr.prod-row:not([style*="none"])').length;
+  const info = document.querySelector('.preview-info');
+  if (info) info.innerHTML = '<strong>' + visible + '</strong> productos';
 }
 
 // ── Generar PDF ───────────────────────────────────────────────────────────────
