@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PelSAS · Admin</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -49,9 +48,11 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 .brand-btn{display:flex;align-items:center;gap:10px;width:100%;padding:9px 12px;border:none;background:none;border-radius:9px;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--ink2);transition:background .12s;text-align:left}
 .brand-btn:hover{background:var(--cream)}
 .brand-btn.active{background:var(--cream2);color:var(--ink);font-weight:500}
-.brand-btn.inactive{opacity:.45}
-.brand-btn .b-count{margin-left:auto;font-size:10px;color:var(--light);background:var(--cream2);border-radius:10px;padding:1px 7px}
+.brand-btn.inactive-brand{opacity:.45}
+.brand-btn .b-count{margin-left:auto;font-size:10px;color:var(--light);background:var(--cream2);border-radius:10px;padding:1px 7px;flex-shrink:0}
 .brand-btn.active .b-count{background:var(--border)}
+.sidebar-add-brand{display:flex;align-items:center;gap:8px;width:100%;padding:8px 12px;border:1px dashed var(--border);background:none;border-radius:9px;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:12px;color:var(--mid);transition:all .12s;text-align:left;margin-top:6px}
+.sidebar-add-brand:hover{border-color:var(--ink);color:var(--ink);background:var(--cream)}
 
 /* CONTENT */
 .content{padding:2rem}
@@ -65,18 +66,21 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 .toggle-inactive-btn{background:var(--cream2);border:1px solid var(--border);border-radius:8px;padding:8px 14px;font-family:'DM Sans',sans-serif;font-size:12px;color:var(--mid);cursor:pointer}
 .toggle-inactive-btn.on{background:var(--ink);color:#fff;border-color:var(--ink)}
 
-/* BRAND TOGGLE */
+/* BRAND HEADER */
 .brand-meta{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:1.25rem 1.5rem;margin-bottom:1.25rem;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
 .brand-meta img{height:40px;max-width:120px;object-fit:contain}
 .brand-meta-info{flex:1}
 .brand-meta-name{font-family:'Playfair Display',serif;font-size:18px;font-weight:900}
 .brand-meta-desc{font-size:12px;color:var(--mid);margin-top:2px}
-.brand-toggle{display:flex;align-items:center;gap:10px;margin-left:auto}
+.brand-meta-actions{display:flex;align-items:center;gap:10px;margin-left:auto}
+.brand-toggle{display:flex;align-items:center;gap:10px}
 .toggle-label{font-size:12px;color:var(--mid)}
 .toggle-track{position:relative;width:44px;height:24px;background:var(--border);border-radius:12px;cursor:pointer;transition:background .2s;flex-shrink:0}
 .toggle-track.on{background:var(--green)}
 .toggle-thumb{position:absolute;top:3px;left:3px;width:18px;height:18px;background:#fff;border-radius:50%;transition:transform .2s;box-shadow:0 1px 4px rgba(0,0,0,.2)}
 .toggle-track.on .toggle-thumb{transform:translateX(20px)}
+.edit-brand-btn{background:var(--cream2);border:1px solid var(--border);border-radius:6px;padding:6px 12px;font-size:11px;font-weight:500;cursor:pointer;color:var(--ink);font-family:'DM Sans',sans-serif}
+.edit-brand-btn:hover{border-color:var(--ink);background:var(--cream)}
 
 /* PRODUCTS TABLE */
 .prod-table{width:100%;border-collapse:collapse;background:var(--white);border:1px solid var(--border);border-radius:12px;overflow:hidden}
@@ -107,12 +111,15 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 .form-row label{display:block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--light);margin-bottom:5px;font-weight:600}
 .form-row input,.form-row select,.form-row textarea{width:100%;padding:10px 12px;border:1.5px solid var(--border);border-radius:8px;font-family:'DM Sans',sans-serif;font-size:14px;background:var(--cream);color:var(--ink);outline:none;transition:border-color .15s}
 .form-row input:focus,.form-row select:focus,.form-row textarea:focus{border-color:var(--red)}
+.form-row input[readonly]{background:var(--cream2);color:var(--mid);cursor:not-allowed}
 .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .modal-actions{display:flex;gap:10px;margin-top:1.5rem}
 .modal-save{flex:1;background:var(--ink);color:#fff;border:none;border-radius:9px;padding:12px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;cursor:pointer}
 .modal-save:hover{background:var(--ink2)}
 .modal-cancel{background:none;border:1px solid var(--border);border-radius:9px;padding:12px 20px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--mid);cursor:pointer}
 .modal-cancel:hover{border-color:var(--border)}
+.form-hint{font-size:11px;color:var(--light);margin-top:4px;line-height:1.5}
+.form-hint strong{color:var(--mid)}
 
 /* STATUS BAR */
 .status-bar{position:fixed;bottom:1.5rem;right:1.5rem;background:var(--ink);color:#fff;border-radius:10px;padding:12px 20px;font-size:13px;font-weight:500;z-index:300;display:none;gap:10px;align-items:center;max-width:340px;box-shadow:0 8px 28px rgba(26,26,24,.25)}
@@ -128,18 +135,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 .unsaved-dot{width:8px;height:8px;background:#F0A000;border-radius:50%;display:none}
 .unsaved-dot.show{display:block}
 
-/* TOOLS */
-.tool-drop{border:2px dashed var(--border);border-radius:14px;padding:2.5rem;text-align:center;background:#fff;cursor:pointer;transition:border-color .15s;margin-bottom:1.25rem}
-.tool-drop.over{border-color:var(--red)}
-.tool-drop p{color:var(--mid);font-size:14px;margin-top:.5rem}
-.tool-item{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid var(--border);border-radius:10px;padding:10px 14px;margin-bottom:10px}
-.tool-item img{width:48px;height:48px;object-fit:contain;background:var(--cream);border-radius:6px}
-.tool-item .info{flex:1;min-width:0}
-.tool-item .name{font-size:13px;font-weight:500;word-break:break-all}
-.tool-item .size{font-size:11px;color:var(--mid)}
-.tool-item .name input{font-size:12px;padding:4px 6px;border:1px solid var(--border);border-radius:5px;width:100%;margin-top:4px;font-family:monospace}
-.tool-item a{font-size:12px;background:var(--green);color:#fff;border-radius:6px;padding:6px 12px;text-decoration:none;white-space:nowrap}
-.fichas-preview{max-width:100%;border:1px solid var(--border);border-radius:10px;margin-top:1.25rem;background:#fff}
+/* TABLE WRAPPER para updates sin perder el header */
+#table-area{margin-top:0}
 
 @media(max-width:768px){
   .main{grid-template-columns:1fr}
@@ -194,10 +191,10 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
   </div>
 </div>
 
-<!-- MODAL editar/crear producto -->
-<div class="modal-bg" id="modal-bg">
+<!-- MODAL: editar/crear producto -->
+<div class="modal-bg" id="modal-prod-bg">
   <div class="modal">
-    <div class="modal-title" id="modal-title">Producto</div>
+    <div class="modal-title" id="modal-prod-title">Producto</div>
     <div class="form-row">
       <label>Nombre del producto</label>
       <input type="text" id="f-name" placeholder="Ej: Gomitas Deliket surtidas 700g">
@@ -220,6 +217,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
       <div class="form-row">
         <label>Artículo (código)</label>
         <input type="text" id="f-art" placeholder="Ej: 5732">
+        <div class="form-hint">La foto del producto debe subirse a GitHub como <strong>img/{artículo}.webp</strong></div>
       </div>
     </div>
     <div class="form-row">
@@ -240,60 +238,52 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
       </div>
     </div>
     <div class="modal-actions">
-      <button class="modal-cancel" onclick="closeModal()">Cancelar</button>
+      <button class="modal-cancel" onclick="closeProdModal()">Cancelar</button>
       <button class="modal-save" onclick="saveProduct()">Guardar producto</button>
     </div>
   </div>
 </div>
 
-<!-- STATUS BAR -->
-<div class="status-bar" id="status-bar"></div>
-
-<!-- MODAL elegir qué agregar -->
-<div class="modal-bg" id="choice-modal-bg">
-  <div class="modal" style="max-width:340px;text-align:center">
-    <div class="modal-title">¿Qué querés agregar?</div>
-    <div style="display:flex;flex-direction:column;gap:10px">
-      <button class="modal-save" onclick="closeChoiceModal();openModal(null)">+ Producto en esta marca</button>
-      <button class="modal-save" style="background:var(--cream2);color:var(--ink)" onclick="closeChoiceModal();openBrandModal(null, currentBrand ? (data.brands.find(b=>b.id===currentBrand)||{}).sid : 'alimentos')">+ Marca nueva</button>
-    </div>
-    <button class="modal-cancel" style="margin-top:10px;width:100%" onclick="closeChoiceModal()">Cancelar</button>
-  </div>
-</div>
-
-<!-- MODAL crear/editar marca -->
-<div class="modal-bg" id="brand-modal-bg">
+<!-- MODAL: crear/editar marca -->
+<div class="modal-bg" id="modal-brand-bg">
   <div class="modal">
-    <div class="modal-title" id="brand-modal-title">Marca</div>
-    <div class="form-row">
-      <label>Nombre de la marca</label>
-      <input type="text" id="fb-name" placeholder="Ej: Dori">
-    </div>
+    <div class="modal-title" id="modal-brand-title">Nueva marca</div>
     <div class="form-grid">
       <div class="form-row">
-        <label>ID interno (sin espacios)</label>
-        <input type="text" id="fb-id" placeholder="Ej: dori">
+        <label>Nombre de la marca</label>
+        <input type="text" id="fb-name" placeholder="Ej: Deliket" oninput="autoFillBrandId()">
       </div>
       <div class="form-row">
-        <label>Sección</label>
-        <select id="fb-sid">
-          <option value="alimentos">Alimentos &amp; Snacks</option>
-          <option value="fumadores">Fumadores</option>
-        </select>
+        <label>Emoji</label>
+        <input type="text" id="fb-emoji" placeholder="🍬">
       </div>
+    </div>
+    <div class="form-row">
+      <label>ID interno</label>
+      <input type="text" id="fb-id" placeholder="ej: deliket">
+      <div class="form-hint">Minúsculas, sin espacios ni tildes. Se usa internamente y no cambia.</div>
     </div>
     <div class="form-row">
       <label>Descripción corta</label>
       <input type="text" id="fb-desc" placeholder="Ej: Golosinas y maní">
     </div>
-    <div class="form-grid">
-      <div class="form-row">
-        <label>Emoji</label>
-        <input type="text" id="fb-emoji" placeholder="🍬">
-      </div>
-      <div class="form-row">
-        <label>Logo (ruta)</label>
-        <input type="text" id="fb-logo" placeholder="img/logo-dori.webp">
+    <div class="form-row">
+      <label>Categoría</label>
+      <select id="fb-sid">
+        <option value="alimentos">🍬 Alimentos y Snacks</option>
+        <option value="fumadores">🚬 Fumadores</option>
+      </select>
+    </div>
+    <div class="form-row">
+      <label>Logo (ruta en GitHub)</label>
+      <input type="text" id="fb-logo" placeholder="img/logo-deliket.webp">
+      <div class="form-hint">Subí el logo a GitHub en la carpeta <strong>img/</strong> con el nombre <strong>logo-{id}.webp</strong> y pegá la ruta acá.</div>
+    </div>
+    <div class="form-row" style="display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--cream);border-radius:8px;border:1.5px solid var(--border)">
+      <input type="checkbox" id="fb-libre" style="width:18px;height:18px;accent-color:var(--green);cursor:pointer;flex-shrink:0">
+      <div>
+        <label for="fb-libre" style="font-size:13px;color:var(--ink);font-weight:500;cursor:pointer;letter-spacing:0;text-transform:none">🌿 Aparece en sección Libres (sin TACC / sin azúcar)</label>
+        <div class="form-hint" style="margin-top:2px">Marcá si la marca tiene productos sin gluten, sin lactosa o sin azúcar</div>
       </div>
     </div>
     <div class="modal-actions">
@@ -303,48 +293,54 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
   </div>
 </div>
 
+<!-- STATUS BAR -->
+<div class="status-bar" id="status-bar"></div>
+
 <script>
-// ── Config ───────────────────────────────────────────────────────────────────
+// ── Config ────────────────────────────────────────────────────────────────────
 let GH_OWNER = '', GH_REPO = '', GH_TOKEN = '', GH_SHA = '';
-let data = null;       // { brands, products }
+let data = null;
 let currentBrand = null;
-let view = 'brand';
-let editingId = null;
+let editingProdId = null;
+let editingBrandId = null;
 let showInactive = false;
 let hasUnsaved = false;
 let searchQ = '';
 
 const DATA_PATH = 'data.json';
 
-// ── Login ────────────────────────────────────────────────────────────────────
+// ── Login ─────────────────────────────────────────────────────────────────────
 function doLogin() {
   GH_OWNER = document.getElementById('gh-owner').value.trim();
   GH_REPO  = document.getElementById('gh-repo').value.trim();
   GH_TOKEN = document.getElementById('gh-token').value.trim();
   if (!GH_OWNER || !GH_REPO || !GH_TOKEN) { showLoginErr('Completá todos los campos'); return; }
   localStorage.setItem('ps_owner', GH_OWNER);
-  localStorage.setItem('ps_repo', GH_REPO);
+  localStorage.setItem('ps_repo',  GH_REPO);
   localStorage.setItem('ps_token', GH_TOKEN);
   loadFromGitHub();
 }
+
 function doLogout() {
   localStorage.removeItem('ps_token');
   location.reload();
 }
+
 function showLoginErr(msg) {
   const el = document.getElementById('login-err');
-  el.textContent = msg; el.style.display = 'block';
+  el.textContent = msg;
+  el.style.display = 'block';
 }
 
-// ── GitHub API ───────────────────────────────────────────────────────────────
-async function ghFetch(path, opts={}) {
+// ── GitHub API ────────────────────────────────────────────────────────────────
+async function ghFetch(path, opts = {}) {
   const url = `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${path}`;
   const res = await fetch(url, {
     ...opts,
     headers: {
       'Authorization': `token ${GH_TOKEN}`,
       'Content-Type': 'application/json',
-      ...(opts.headers||{})
+      ...(opts.headers || {})
     }
   });
   if (!res.ok) throw new Error(`GitHub ${res.status}: ${await res.text()}`);
@@ -356,14 +352,16 @@ async function loadFromGitHub() {
   try {
     const file = await ghFetch(DATA_PATH);
     GH_SHA = file.sha;
-    const json = JSON.parse(decodeURIComponent(escape(atob(file.content.replace(/\n/g,'')))));
+    const raw = atob(file.content.replace(/\n/g, ''));
+    const bytes = Uint8Array.from(raw, c => c.charCodeAt(0));
+    const json = JSON.parse(new TextDecoder('utf-8').decode(bytes));
     data = json;
     document.getElementById('login-screen').style.display = 'none';
     document.getElementById('app').style.display = 'block';
     renderSidebar();
     showStatus('Catálogo cargado ✓', 'ok');
-  } catch(e) {
-    showLoginErr('Error: ' + e.message);
+  } catch (e) {
+    showLoginErr('Error al conectar: ' + e.message);
     showStatus('Error al cargar', 'err');
   }
 }
@@ -372,9 +370,24 @@ async function saveToGitHub() {
   if (!hasUnsaved) return;
   const btn = document.getElementById('save-btn');
   btn.disabled = true;
+
+  // Validar JSON antes de guardar
+  let jsonStr;
+  try {
+    jsonStr = JSON.stringify(data, null, 2);
+    JSON.parse(jsonStr); // verificar que sea válido
+  } catch (e) {
+    showStatus('Error: el JSON no es válido — no se guardó', 'err', 5000);
+    btn.disabled = false;
+    return;
+  }
+
   showStatus('Guardando en GitHub…');
   try {
-    const content = btoa(unescape(encodeURIComponent(JSON.stringify(data, null, 2))));
+    const encBytes = new TextEncoder().encode(jsonStr);
+    let bin = '';
+    encBytes.forEach(b => bin += String.fromCharCode(b));
+    const content = btoa(bin);
     const result = await ghFetch(DATA_PATH, {
       method: 'PUT',
       body: JSON.stringify({
@@ -384,61 +397,70 @@ async function saveToGitHub() {
       })
     });
     GH_SHA = result.content.sha;
+
+    // Verificar que lo guardado sea válido leyendo de vuelta
+    try {
+      const verify = await ghFetch(DATA_PATH);
+      const vRaw = atob(verify.content.replace(/\n/g, ''));
+      const vBytes = Uint8Array.from(vRaw, c => c.charCodeAt(0));
+      JSON.parse(new TextDecoder('utf-8').decode(vBytes));
+    } catch (ve) {
+      showStatus('⚠️ Guardado pero no se pudo verificar — revisá el sitio', 'err', 6000);
+      btn.disabled = false;
+      return;
+    }
+
     hasUnsaved = false;
     document.getElementById('unsaved-dot').classList.remove('show');
     btn.disabled = true;
+    // Purgar caché de jsDelivr para que el sitio vea los cambios al instante
+    fetch(`https://purge.jsdelivr.net/gh/${GH_OWNER}/${GH_REPO}@${GH_BRANCH}/data.json`).catch(()=>{});
     showStatus('¡Guardado! Los cambios ya están en el sitio 🎉', 'ok', 4000);
-  } catch(e) {
-    showStatus('Error al guardar: ' + e.message, 'err', 5000);
+  } catch (e) {
+    showStatus('Error al guardar: ' + e.message, 'err', 6000);
     btn.disabled = false;
   }
 }
 
-// ── Marca cambio como pendiente ──────────────────────────────────────────────
 function markUnsaved() {
   hasUnsaved = true;
   document.getElementById('unsaved-dot').classList.add('show');
   document.getElementById('save-btn').disabled = false;
 }
 
-// ── Sidebar ──────────────────────────────────────────────────────────────────
+// ── Sidebar ───────────────────────────────────────────────────────────────────
 function renderSidebar() {
-  const alBrands = data.brands.filter(b => b.sid === 'alimentos');
+  const alBrands  = data.brands.filter(b => b.sid === 'alimentos');
   const fumBrands = data.brands.filter(b => b.sid === 'fumadores');
-  let html = `<div class="sidebar-section">
-    <span class="sidebar-label">🛠️ Herramientas</span>
-    <button class="brand-btn${view==='webp'?' active':''}" onclick="goTool('webp')">
-      <span>🖼️</span><span>Convertir a WebP</span>
-    </button>
-    <button class="brand-btn${view==='fichas'?' active':''}" onclick="goTool('fichas')">
-      <span>📋</span><span>Generador de fichas</span>
-    </button>
-  </div>`;
-  html += renderBrandGroup('&#127851; Alimentos', alBrands, 'alimentos');
-  html += renderBrandGroup('&#128680; Fumadores', fumBrands, 'fumadores');
+  let html = '';
+  html += renderBrandGroup('Alimentos', alBrands, 'alimentos');
+  html += renderBrandGroup('Fumadores', fumBrands, 'fumadores');
   document.getElementById('sidebar').innerHTML = html;
 }
+
 function renderBrandGroup(label, brands, sid) {
   return `<div class="sidebar-section">
     <span class="sidebar-label">${label}</span>
     ${brands.map(b => {
-      const count = (data.products[b.id]||[]).filter(p=>p.activo!==false).length;
-      const total = (data.products[b.id]||[]).length;
-      const active = currentBrand === b.id ? ' active' : '';
-      const inactive = b.activo === false ? ' inactive' : '';
+      const count = (data.products[b.id] || []).filter(p => p.activo !== false).length;
+      const total = (data.products[b.id] || []).length;
+      const active   = currentBrand === b.id ? ' active' : '';
+      const inactive = b.activo === false ? ' inactive-brand' : '';
       return `<button class="brand-btn${active}${inactive}" onclick="selectBrand('${b.id}')">
         <span>${b.emoji}</span>
-        <span>${b.name}</span>
+        <span style="flex:1;text-align:left">${b.name}</span>
         <span class="b-count">${count}/${total}</span>
       </button>`;
     }).join('')}
+    <button class="sidebar-add-brand" onclick="openBrandModal(null,'${sid}')">
+      + Nueva marca
+    </button>
   </div>`;
 }
 
 // ── Contenido de marca ────────────────────────────────────────────────────────
 function selectBrand(bid) {
   currentBrand = bid;
-  view = 'brand';
   searchQ = '';
   renderSidebar();
   renderContent();
@@ -448,540 +470,106 @@ function renderContent() {
   if (!currentBrand) return;
   const brand = data.brands.find(b => b.id === currentBrand);
   if (!brand) return;
-  const prods = data.products[currentBrand] || [];
-  const filtered = prods
-    .filter(p => showInactive || p.activo !== false)
-    .filter(p => !searchQ || p.name.toLowerCase().includes(searchQ) || p.art.includes(searchQ) || p.cat.includes(searchQ));
 
   document.getElementById('content').innerHTML = `
     <div class="content-hdr">
       <div class="content-title">${brand.emoji} ${brand.name}</div>
       <div class="hdr-actions">
-        <input type="text" class="search-box" placeholder="Buscar producto…" value="${searchQ}" oninput="onSearch(this.value)">
-        <button class="toggle-inactive-btn${showInactive?' on':''}" onclick="toggleInactive()">
+        <input type="text" class="search-box" id="search-input"
+          placeholder="Buscar producto…"
+          value="${escHtml(searchQ)}"
+          oninput="onSearch(this.value)"
+          autocomplete="off">
+        <button class="toggle-inactive-btn${showInactive ? ' on' : ''}" onclick="toggleInactive()">
           ${showInactive ? 'Ocultar inactivos' : 'Ver inactivos'}
         </button>
-        <button class="add-btn" onclick="openAddChoice()">+ Agregar</button>
+        <button class="add-btn" onclick="openProdModal(null)">+ Agregar</button>
       </div>
     </div>
 
     <div class="brand-meta">
-      <img src="${brand.logo}" alt="${brand.name}" onerror="this.outerHTML='<span style=\\'font-size:28px\\'>${brand.emoji}</span>'">
+      <img src="${brand.logo}" alt="${brand.name}"
+        onerror="this.outerHTML='<span style=\\'font-size:28px\\'>${brand.emoji}</span>'">
       <div class="brand-meta-info">
         <div class="brand-meta-name">${brand.name}</div>
         <div class="brand-meta-desc">${brand.desc}</div>
       </div>
-      <div class="brand-toggle">
-        <span class="toggle-label">${brand.activo!==false?'Activa':'Inactiva'}</span>
-        <div class="toggle-track${brand.activo!==false?' on':''}" onclick="toggleBrand('${brand.id}')">
-          <div class="toggle-thumb"></div>
+      <div class="brand-meta-actions">
+        <button class="edit-brand-btn" onclick="openBrandModal('${brand.id}')">Editar marca</button>
+        <div class="brand-toggle">
+          <span class="toggle-label">${brand.activo !== false ? 'Activa' : 'Inactiva'}</span>
+          <div class="toggle-track${brand.activo !== false ? ' on' : ''}" onclick="toggleBrand('${brand.id}')">
+            <div class="toggle-thumb"></div>
+          </div>
         </div>
-        <button class="edit-btn" onclick="openBrandModal('${brand.id}')">Editar marca</button>
-        <button class="del-btn" onclick="deleteBrand('${brand.id}')">Borrar marca</button>
       </div>
     </div>
 
-    ${filtered.length === 0
-      ? `<div class="empty-state"><span class="empty-icon">📦</span><div>No hay productos${searchQ?' para "'+searchQ+'"':''}</div></div>`
-      : `<table class="prod-table">
-          <thead><tr>
-            <th>Foto</th>
-            <th>Producto</th>
-            <th>Cat.</th>
-            <th>Art.</th>
-            <th>Precio unit.</th>
-            <th>Precio caja</th>
-            <th>Activo</th>
-            <th>Acciones</th>
-          </tr></thead>
-          <tbody>${filtered.map(p => renderRow(p, currentBrand)).join('')}</tbody>
-        </table>`
-    }
+    <div id="table-area"></div>
   `;
+
+  renderTable();
 }
 
-function renderRow(p, bid) {
+function renderTable() {
+  const brand = data.brands.find(b => b.id === currentBrand);
+  if (!brand) return;
+  const prods = data.products[currentBrand] || [];
+  const q = searchQ.toLowerCase().trim();
+  const filtered = prods
+    .filter(p => showInactive || p.activo !== false)
+    .filter(p => !q || p.name.toLowerCase().includes(q) || String(p.art).includes(q) || p.cat.toLowerCase().includes(q));
+
+  const area = document.getElementById('table-area');
+  if (!area) return;
+
+  if (filtered.length === 0) {
+    area.innerHTML = `<div class="empty-state"><span class="empty-icon">📦</span><div>No hay productos${q ? ' para "' + escHtml(q) + '"' : ''}</div></div>`;
+    return;
+  }
+
+  area.innerHTML = `<table class="prod-table">
+    <thead><tr>
+      <th>Foto</th>
+      <th>Producto</th>
+      <th>Categoría</th>
+      <th>Art.</th>
+      <th>Precio unit.</th>
+      <th>Precio caja</th>
+      <th>Activo</th>
+      <th>Acciones</th>
+    </tr></thead>
+    <tbody>${filtered.map(p => renderRow(p)).join('')}</tbody>
+  </table>`;
+}
+
+function renderRow(p) {
   const inactive = p.activo === false ? ' inactive-row' : '';
   return `<tr class="${inactive}" id="row-${p.id}">
-    <td><img class="prod-img" src="img/${p.art}.webp" alt="" onerror="this.outerHTML='<span style=\\'font-size:24px\\'>${p.emoji}</span>'"></td>
-    <td><div class="prod-name-cell">${p.name}</div></td>
-    <td><span class="prod-cat">${p.cat}</span></td>
-    <td><span class="art-badge">${p.art}</span></td>
+    <td><img class="prod-img" src="img/${p.art}.webp" alt=""
+      onerror="this.outerHTML='<span style=\\'font-size:24px\\'>${p.emoji}</span>'"></td>
+    <td><div class="prod-name-cell">${escHtml(p.name)}</div></td>
+    <td><span class="prod-cat">${escHtml(p.cat)}</span></td>
+    <td><span class="art-badge">${escHtml(String(p.art))}</span></td>
     <td><div class="price-cell">$${p.unit.toFixed(2)}</div></td>
     <td><div class="price-cell">$${p.caja.toFixed(2)}<div class="price-unit">caja completa</div></div></td>
-    <td><span class="activo-toggle" onclick="toggleProduct('${p.id}')" title="Activar/desactivar">${p.activo!==false?'✅':'⬜'}</span></td>
+    <td><span class="activo-toggle" onclick="toggleProduct('${p.id}')" title="Activar/desactivar">${p.activo !== false ? '✅' : '⬜'}</span></td>
     <td><div class="action-btns">
-      <button class="edit-btn" onclick="openModal('${p.id}')">Editar</button>
+      <button class="edit-btn" onclick="openProdModal('${p.id}')">Editar</button>
       <button class="del-btn" onclick="deleteProduct('${p.id}')">Borrar</button>
     </div></td>
   </tr>`;
 }
 
-// ── Herramientas ──────────────────────────────────────────────────────────────
-function goTool(t) {
-  view = t;
-  currentBrand = null;
-  renderSidebar();
-  if (t === 'webp') renderToolWebp();
-  else if (t === 'fichas') renderToolFichas();
+function escHtml(str) {
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
 }
 
-function renderToolWebp() {
-  document.getElementById('content').innerHTML = `
-    <div class="content-hdr">
-      <div class="content-title">🖼️ Convertir imágenes a WebP</div>
-    </div>
-    <div style="padding:0 2rem 2rem">
-      <p style="font-size:13px;color:var(--mid);margin-bottom:1.25rem">
-        Arrastrá o seleccioná imágenes JPG/PNG. Se convierten a .webp listas para subir a <code>img/</code>.<br>
-        <strong>Logos de marca:</strong> nombralos <code>logo-{id}.webp</code> (ej: <code>logo-dori.webp</code>)<br>
-        <strong>Fotos de producto:</strong> nombralos con el código de artículo (ej: <code>9100.webp</code>)
-      </p>
-      <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-bottom:1.25rem">
-        <label style="font-size:12px;color:var(--mid);display:flex;align-items:center;gap:6px">
-          Calidad
-          <input type="range" id="wq" min="0.5" max="1" step="0.05" value="0.85" oninput="document.getElementById('wqv').textContent=Math.round(this.value*100)+'%'">
-          <span id="wqv">85%</span>
-        </label>
-        <label style="font-size:12px;color:var(--mid);display:flex;align-items:center;gap:6px">
-          Tamaño máx.
-          <select id="wmx" style="padding:5px 8px;border:1px solid var(--border);border-radius:6px;background:#fff">
-            <option value="0">Original</option>
-            <option value="1500" selected>1500px</option>
-            <option value="1000">1000px</option>
-            <option value="600">600px</option>
-          </select>
-        </label>
-      </div>
-      <div class="tool-drop" id="wdrop" onclick="document.getElementById('wfile').click()">
-        <div style="font-size:32px">📂</div>
-        <p>Tocá para elegir imágenes o arrastralas aquí</p>
-        <input type="file" id="wfile" accept="image/*" multiple style="display:none">
-      </div>
-      <div style="display:flex;gap:10px;margin-bottom:1rem" id="wactions" style="display:none">
-        <button class="add-btn" id="wdlall" style="background:var(--green)">⬇️ Descargar todas (.zip)</button>
-        <button class="toggle-inactive-btn" id="wclear">Limpiar</button>
-      </div>
-      <div id="wlist"></div>
-    </div>`;
-  initWebpTool();
-}
-
-function initWebpTool() {
-  const drop=document.getElementById('wdrop');
-  const input=document.getElementById('wfile');
-  const list=document.getElementById('wlist');
-  const actions=document.getElementById('wactions');
-  let items=[];
-
-  drop.ondragover=e=>{e.preventDefault();drop.classList.add('over')};
-  drop.ondragleave=()=>drop.classList.remove('over');
-  drop.ondrop=e=>{e.preventDefault();drop.classList.remove('over');handle(e.dataTransfer.files)};
-  input.onchange=()=>handle(input.files);
-
-  function handle(files){
-    [...files].forEach(f=>{
-      if(!f.type.startsWith('image/'))return;
-      const id='w'+Date.now()+Math.random().toString(36).slice(2);
-      const base=f.name.replace(/\.[^.]+$/,'').toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9-]/g,'');
-      const it={id,file:f,base,blob:null};
-      items.push(it);
-      const div=document.createElement('div');
-      div.className='tool-item';div.id=id;
-      div.innerHTML=`<img src="${URL.createObjectURL(f)}">
-        <div class="info">
-          <div class="name"><input value="${base}.webp" data-id="${id}"></div>
-          <div class="size">Convirtiendo…</div>
-        </div>
-        <span id="dl-${id}">⏳</span>`;
-      list.prepend(div);
-      convert(it);
-    });
-    actions.style.display=items.length?'flex':'none';
-  }
-
-  function convert(it){
-    const img=new Image();
-    img.onload=()=>{
-      let w=img.width,h=img.height;
-      const mx=parseInt(document.getElementById('wmx').value);
-      if(mx&&Math.max(w,h)>mx){const r=mx/Math.max(w,h);w=Math.round(w*r);h=Math.round(h*r);}
-      const cv=document.createElement('canvas');cv.width=w;cv.height=h;
-      cv.getContext('2d').drawImage(img,0,0,w,h);
-      cv.toBlob(blob=>{
-        it.blob=blob;
-        const kb=(blob.size/1024).toFixed(1);
-        document.getElementById(it.id).querySelector('.size').textContent=`${w}×${h}px · ${kb} KB`;
-        const url=URL.createObjectURL(blob);
-        document.getElementById('dl-'+it.id).outerHTML=`<a id="dl-${it.id}" download="${it.base}.webp" href="${url}" style="font-size:12px;background:var(--green);color:#fff;border-radius:6px;padding:6px 12px;text-decoration:none">⬇️ webp</a>`;
-      },'image/webp',parseFloat(document.getElementById('wq').value));
-    };
-    img.src=URL.createObjectURL(it.file);
-  }
-
-  document.getElementById('wclear').onclick=()=>{items=[];list.innerHTML='';actions.style.display='none'};
-  document.getElementById('wdlall').onclick=async()=>{
-    const zip=new JSZip();
-    for(const it of items){
-      if(!it.blob)continue;
-      const ni=document.querySelector(`input[data-id="${it.id}"]`);
-      let name=ni?ni.value.trim():it.base+'.webp';
-      if(!name.toLowerCase().endsWith('.webp'))name+='.webp';
-      zip.file(name,it.blob);
-    }
-    const blob=await zip.generateAsync({type:'blob'});
-    const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='imagenes-webp.zip';a.click();
-  };
-}
-
-function renderToolFichas() {
-  const brandOpts = data.brands.filter(b=>b.activo!==false)
-    .map(b=>`<option value="${b.id}">${b.name}</option>`).join('');
-
-  document.getElementById('content').innerHTML = `
-    <div class="content-hdr">
-      <div class="content-title">📋 Generador de fichas</div>
-    </div>
-    <div style="padding:0 2rem 2rem">
-      <p style="font-size:13px;color:var(--mid);margin-bottom:1.25rem">
-        Elegí una o varias marcas para generar la ficha con fotos y precios. Descargá la imagen y subila a <code>img/fichas/{id}.jpg</code>
-      </p>
-
-      <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:flex-end;margin-bottom:1.5rem">
-        <div>
-          <label style="font-size:11px;color:var(--mid);display:block;margin-bottom:4px">MARCAS A INCLUIR</label>
-          <select id="fg-brand" multiple size="5" style="padding:8px;border:1px solid var(--border);border-radius:8px;background:#fff;min-width:200px">
-            ${brandOpts}
-          </select>
-          <div style="font-size:11px;color:var(--mid);margin-top:3px">Ctrl+click para seleccionar varias</div>
-        </div>
-        <div>
-          <label style="font-size:11px;color:var(--mid);display:block;margin-bottom:4px">NOMBRE DE ARCHIVO</label>
-          <input id="fg-filename" type="text" placeholder="mazarena" style="padding:8px 12px;border:1px solid var(--border);border-radius:8px;width:180px;font-size:13px">
-          <div style="font-size:11px;color:var(--mid);margin-top:3px">Sin extensión — se guarda como .jpg</div>
-        </div>
-        <button class="add-btn" onclick="generateFicha()">Generar ficha</button>
-      </div>
-
-      <div id="fg-preview"></div>
-    </div>`;
-}
-
-async function generateFicha() {
-  const sel = [...document.getElementById('fg-brand').selectedOptions].map(o=>o.value);
-  if (!sel.length) { alert('Seleccioná al menos una marca'); return; }
-  const filename = (document.getElementById('fg-filename').value.trim() || sel[0]) + '.jpg';
-
-  let allProds = [];
-  sel.forEach(bid => {
-    const b = data.brands.find(x=>x.id===bid);
-    const ps = (data.products[bid]||[]).filter(p=>p.activo!==false);
-    ps.forEach(p => allProds.push({...p, _brand: b}));
-  });
-  if (!allProds.length) { alert('Las marcas seleccionadas no tienen productos activos'); return; }
-
-  const preview = document.getElementById('fg-preview');
-  preview.innerHTML = '<div style="color:var(--mid);font-size:13px;padding:1rem 0">⏳ Generando ficha…</div>';
-
-  // ── Dimensiones ──────────────────────────────────────────────────────────
-  const COLS     = 3;
-  const PW       = 1500;
-  const GAP      = 22;
-  const MARGIN   = 30;
-  const HEADER_H = 160;
-  const FOOTER_H = 52;
-  const CELL_W   = Math.floor((PW - MARGIN*2 - GAP*(COLS-1)) / COLS);
-  const IMG_H    = Math.floor(CELL_W * 0.82);  // foto = 82% del ancho — producto como protagonista
-  const INFO_H   = 230;
-  const CELL_H   = IMG_H + INFO_H;
-  const ROWS     = Math.ceil(allProds.length / COLS);
-  const PH       = HEADER_H + MARGIN + ROWS*(CELL_H+GAP) - GAP + MARGIN + FOOTER_H;
-
-  const canvas   = document.createElement('canvas');
-  canvas.width   = PW;
-  canvas.height  = PH;
-  const ctx      = canvas.getContext('2d');
-
-  // ── Helpers ───────────────────────────────────────────────────────────────
-  const loadImg = src => new Promise(res => {
-    const i = new Image(); i.crossOrigin='anonymous';
-    i.onload=()=>res(i); i.onerror=()=>res(null); i.src=src;
-  });
-
-  function rr(x,y,w,h,r){
-    ctx.beginPath();
-    ctx.moveTo(x+r,y);
-    ctx.lineTo(x+w-r,y); ctx.quadraticCurveTo(x+w,y,x+w,y+r);
-    ctx.lineTo(x+w,y+h-r); ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);
-    ctx.lineTo(x+r,y+h); ctx.quadraticCurveTo(x,y+h,x,y+h-r);
-    ctx.lineTo(x,y+r); ctx.quadraticCurveTo(x,y,x+r,y);
-    ctx.closePath();
-  }
-
-  function wrapText(text, x, y, maxW, lineH, maxLines){
-    const words=text.split(' '); let line='', n=0;
-    for(const w of words){
-      const t=line+(line?' ':'')+w;
-      if(ctx.measureText(t).width>maxW&&line){
-        if(n<maxLines){ctx.fillText(line,x,y+n*lineH);n++;} line=w;
-      } else line=t;
-    }
-    if(n<maxLines&&line) ctx.fillText(line,x,y+n*lineH);
-  }
-
-  function price(n){
-    return '$'+Number(n).toLocaleString('es-UY',{minimumFractionDigits:0,maximumFractionDigits:2});
-  }
-
-  // ── Fondo — papel levemente cálido ──────────────────────────────────────────
-  ctx.fillStyle='#EDE9E2';
-  ctx.fillRect(0,0,PW,PH);
-
-  // ── HEADER ────────────────────────────────────────────────────────────────
-  ctx.fillStyle='#1E1C1A';
-  ctx.fillRect(0,0,PW,HEADER_H);
-
-  // Barra acento rojo izquierda (vertical)
-  ctx.fillStyle='#B02020';
-  ctx.fillRect(0,0,8,HEADER_H);
-
-  // Degradé sutil derecha del header
-  const hGrad=ctx.createLinearGradient(PW*0.55,0,PW,0);
-  hGrad.addColorStop(0,'rgba(176,32,32,0)');
-  hGrad.addColorStop(1,'rgba(176,32,32,0.10)');
-  ctx.fillStyle=hGrad;
-  ctx.fillRect(0,0,PW,HEADER_H);
-
-  // Línea inferior del header
-  ctx.fillStyle='#B02020';
-  ctx.fillRect(0,HEADER_H-3,PW,3);
-
-  // Logo en caja blanca redondeada
-  let logoEndX = MARGIN + 24;
-  if(sel.length===1){
-    const b=data.brands.find(x=>x.id===sel[0]);
-    if(b&&b.logo){
-      const li=await loadImg(b.logo);
-      if(li){
-        const lh=90, lw=Math.min(lh*(li.width/li.height),210);
-        const lx=MARGIN+20, ly=(HEADER_H-lh)/2;
-        // Caja blanca con sombra
-        ctx.fillStyle='rgba(0,0,0,0.25)';
-        rr(lx+2,ly+3,lw+16,lh+16,10); ctx.fill();
-        ctx.fillStyle='rgba(255,255,255,0.12)';
-        rr(lx,ly,lw+16,lh+16,10); ctx.fill();
-        ctx.drawImage(li,lx+8,ly+8,lw,lh);
-        logoEndX = lx+lw+16+22;
-      }
-    }
-  }
-
-  // Nombre de marca(s) — grande y bold
-  const brandLabel = sel.map(bid=>data.brands.find(b=>b.id===bid)?.name||bid).join('  ·  ').toUpperCase();
-  ctx.fillStyle='#FFFFFF';
-  ctx.font=`bold 54px Arial`;
-  ctx.textAlign='left';
-  ctx.textBaseline='middle';
-  ctx.fillText(brandLabel, logoEndX, HEADER_H/2 - 14);
-
-  // Subtítulo editorial
-  ctx.fillStyle='rgba(255,255,255,0.42)';
-  ctx.font=`300 16px Arial`;
-  ctx.fillText('Catálogo de productos  ·  Precios en $UYU', logoEndX, HEADER_H/2 + 24);
-
-  // PelSAS pill derecha
-  const pw2=210, ph2=68, px2=PW-MARGIN-pw2, py2=(HEADER_H-ph2)/2;
-  // Sombra pill
-  ctx.fillStyle='rgba(0,0,0,0.3)';
-  rr(px2+2,py2+3,pw2,ph2,14); ctx.fill();
-  ctx.fillStyle='#B02020';
-  rr(px2,py2,pw2,ph2,14); ctx.fill();
-  // Línea fina arriba del pill (acento más claro)
-  ctx.fillStyle='rgba(255,255,255,0.15)';
-  rr(px2,py2,pw2,ph2/2,14); ctx.fill();
-  ctx.fillStyle='#FFFFFF';
-  ctx.font=`bold 24px Arial`;
-  ctx.textAlign='center';
-  ctx.textBaseline='middle';
-  ctx.fillText('PEL SAS', px2+pw2/2, py2+ph2/2-10);
-  ctx.fillStyle='rgba(255,200,200,0.9)';
-  ctx.font=`400 14px Arial`;
-  ctx.fillText('096 190 002', px2+pw2/2, py2+ph2/2+14);
-
-  // ── TARJETAS ──────────────────────────────────────────────────────────────
-  for(let i=0;i<allProds.length;i++){
-    const p=allProds[i];
-    const col=i%COLS, row=Math.floor(i/COLS);
-    const cx=MARGIN+col*(CELL_W+GAP);
-    const cy=HEADER_H+MARGIN+row*(CELL_H+GAP);
-
-    // Sombra 3 capas para profundidad
-    ctx.fillStyle='rgba(0,0,0,0.04)';
-    rr(cx+4,cy+7,CELL_W,CELL_H,16); ctx.fill();
-    ctx.fillStyle='rgba(0,0,0,0.055)';
-    rr(cx+2,cy+4,CELL_W,CELL_H,16); ctx.fill();
-    ctx.fillStyle='rgba(0,0,0,0.07)';
-    rr(cx+1,cy+2,CELL_W,CELL_H,16); ctx.fill();
-
-    // Tarjeta blanca
-    ctx.fillStyle='#FFFFFF';
-    rr(cx,cy,CELL_W,CELL_H,16); ctx.fill();
-
-    // ── Foto ────────────────────────────────────────────────────────────
-    // Zona foto con clip redondeado arriba
-    ctx.save();
-    rr(cx,cy,CELL_W,IMG_H+16,16); ctx.clip();
-    // Fondo degradé de la foto
-    const bgGrad=ctx.createLinearGradient(cx,cy,cx,cy+IMG_H);
-    bgGrad.addColorStop(0,'#F8F5F0');
-    bgGrad.addColorStop(1,'#EDE8DF');
-    ctx.fillStyle=bgGrad;
-    ctx.fillRect(cx,cy,CELL_W,IMG_H+16);
-
-    const pi=await loadImg(`img/${p.art}.webp`);
-    if(pi){
-      const pad=18;
-      const scale=Math.min((CELL_W-pad*2)/pi.width,(IMG_H-pad*2)/pi.height);
-      const dw=pi.width*scale, dh=pi.height*scale;
-      ctx.drawImage(pi, cx+(CELL_W-dw)/2, cy+(IMG_H-dh)/2, dw, dh);
-    } else {
-      ctx.fillStyle='#DDD9D2';
-      ctx.font='15px Arial'; ctx.textAlign='center'; ctx.textBaseline='middle';
-      ctx.fillText('sin foto', cx+CELL_W/2, cy+IMG_H/2);
-    }
-    ctx.restore();
-
-    // Borde sutil de la tarjeta
-    ctx.strokeStyle='#D8D2C6';
-    ctx.lineWidth=1;
-    rr(cx,cy,CELL_W,CELL_H,16); ctx.stroke();
-
-    // Stripe roja en top de cada tarjeta (clipeada a los bordes redondeados)
-    ctx.save();
-    rr(cx,cy,CELL_W,CELL_H,16); ctx.clip();
-    ctx.fillStyle='#B02020';
-    ctx.fillRect(cx,cy,CELL_W,5);
-    ctx.restore();
-
-    // ── Info section ─────────────────────────────────────────────────────
-    const infoTop = cy + IMG_H;
-    const infoX   = cx + CELL_W/2;
-    let iy        = infoTop + 20;
-
-    // Nombre producto — grande y limpio
-    ctx.fillStyle='#1A1A18';
-    ctx.font=`bold 24px Arial`;
-    ctx.textAlign='center';
-    ctx.textBaseline='top';
-    wrapText(p.name, infoX, iy, CELL_W-36, 30, 2);
-    iy += 68;
-
-    // ── Precios — dos columnas con caja visual ────────────────────────────
-    const cPad=22, cGap=12;
-    const colW2=(CELL_W-cPad*2-cGap)/2;
-    const colLx=cx+cPad, colRx=cx+cPad+colW2+cGap;
-    const boxH=64;
-
-    // Caja UNIDAD — fondo rojo muy suave
-    ctx.fillStyle='#FDF4F4';
-    rr(colLx,iy,colW2,boxH,10); ctx.fill();
-    ctx.strokeStyle='#F0D0D0';
-    ctx.lineWidth=1;
-    rr(colLx,iy,colW2,boxH,10); ctx.stroke();
-
-    ctx.font=`600 11px Arial`;
-    ctx.fillStyle='#C08080';
-    ctx.textAlign='center';
-    ctx.textBaseline='top';
-    ctx.fillText('UNIDAD', colLx+colW2/2, iy+9);
-
-    ctx.font=`bold 32px Arial`;
-    ctx.fillStyle='#B02020';
-    ctx.textBaseline='top';
-    ctx.fillText(price(p.unit), colLx+colW2/2, iy+26);
-
-    // Caja CAJA — fondo neutro
-    ctx.fillStyle='#F8F7F5';
-    rr(colRx,iy,colW2,boxH,10); ctx.fill();
-    ctx.strokeStyle='#E0DDD7';
-    ctx.lineWidth=1;
-    rr(colRx,iy,colW2,boxH,10); ctx.stroke();
-
-    ctx.font=`600 11px Arial`;
-    ctx.fillStyle='#8A857E';
-    ctx.textAlign='center';
-    ctx.textBaseline='top';
-    ctx.fillText('CAJA', colRx+colW2/2, iy+9);
-
-    ctx.font=`bold 26px Arial`;
-    ctx.fillStyle='#2B2926';
-    ctx.textBaseline='top';
-    ctx.fillText(price(p.caja), colRx+colW2/2, iy+26);
-
-    iy += boxH + 14;
-
-    // Línea divisora elegante
-    ctx.strokeStyle='#EAE6DF';
-    ctx.lineWidth=1;
-    ctx.beginPath();
-    ctx.moveTo(cx+32,iy); ctx.lineTo(cx+CELL_W-32,iy);
-    ctx.stroke();
-    iy += 12;
-
-    // Presentación — legible, peso medio
-    ctx.font=`500 16px Arial`;
-    ctx.fillStyle='#4A4740';
-    ctx.textAlign='center';
-    ctx.textBaseline='top';
-    ctx.fillText(p.present, infoX, iy);
-    iy += 24;
-
-    // Nro artículo — badge centrado
-    const artTxt=`art. ${p.art}`;
-    ctx.font=`600 14px Arial`;
-    const artMW=ctx.measureText(artTxt).width;
-    const apW=artMW+22, apH=22;
-    const apX=infoX-apW/2, apY=iy;
-    ctx.fillStyle='#EDE8DF';
-    rr(apX,apY,apW,apH,7); ctx.fill();
-    ctx.fillStyle='#7A7468';
-    ctx.textAlign='center';
-    ctx.textBaseline='middle';
-    ctx.fillText(artTxt,infoX,apY+apH/2);
-  }
-
-  // ── FOOTER ────────────────────────────────────────────────────────────────
-  const fy=PH-FOOTER_H;
-  ctx.fillStyle='#1E1C1A';
-  ctx.fillRect(0,fy,PW,FOOTER_H);
-  ctx.fillStyle='#B02020';
-  ctx.fillRect(0,fy,PW,3);
-  const hoy=new Date().toLocaleDateString('es-UY',{day:'2-digit',month:'long',year:'numeric'});
-  // Texto izquierda
-  ctx.fillStyle='rgba(255,255,255,0.55)';
-  ctx.font='500 14px Arial';
-  ctx.textAlign='left';
-  ctx.textBaseline='middle';
-  ctx.fillText('PelSAS Distribuidora  ·  Montevideo  ·  096 190 002', MARGIN+10, fy+FOOTER_H/2);
-  // Texto derecha — fecha
-  ctx.fillStyle='rgba(255,255,255,0.35)';
-  ctx.font='400 13px Arial';
-  ctx.textAlign='right';
-  ctx.fillText('Precios en $UYU · Válidos al '+hoy, PW-MARGIN-10, fy+FOOTER_H/2);
-
-  // ── Render ────────────────────────────────────────────────────────────────
-  canvas.toBlob(blob=>{
-    const url=URL.createObjectURL(blob);
-    preview.innerHTML=`
-      <div style="margin-bottom:14px;display:flex;gap:12px;align-items:center;flex-wrap:wrap">
-        <a href="${url}" download="${filename}" class="add-btn" style="background:var(--green);color:#fff;text-decoration:none;padding:10px 20px;border-radius:8px;font-weight:600;font-size:14px">⬇️ Descargar ${filename}</a>
-        <span style="font-size:12px;color:var(--mid)">Subila a <code>img/fichas/</code> en el repo</span>
-      </div>
-      <img src="${url}" style="max-width:100%;border:1px solid var(--border);border-radius:12px;box-shadow:0 4px 16px rgba(0,0,0,.1)">`;
-  },'image/jpeg',0.93);
-}
-
-// ── Acciones ─────────────────────────────────────────────────────────────────
+// ── Acciones sobre marcas ─────────────────────────────────────────────────────
 function toggleBrand(bid) {
   const b = data.brands.find(x => x.id === bid);
   b.activo = b.activo === false ? true : false;
@@ -990,13 +578,14 @@ function toggleBrand(bid) {
   renderContent();
 }
 
+// ── Acciones sobre productos ──────────────────────────────────────────────────
 function toggleProduct(pid) {
   for (const bid of Object.keys(data.products)) {
     const p = data.products[bid].find(x => x.id === pid);
     if (p) { p.activo = p.activo === false ? true : false; break; }
   }
   markUnsaved();
-  renderContent();
+  renderTable();
 }
 
 function deleteProduct(pid) {
@@ -1006,13 +595,14 @@ function deleteProduct(pid) {
     if (idx !== -1) { data.products[bid].splice(idx, 1); break; }
   }
   markUnsaved();
-  renderContent();
+  renderTable();
   renderSidebar();
 }
 
 function onSearch(q) {
-  searchQ = q.toLowerCase().trim();
-  renderContent();
+  searchQ = q;
+  // Solo actualiza la tabla, no re-renderiza el input (evita perder el foco)
+  renderTable();
 }
 
 function toggleInactive() {
@@ -1020,10 +610,11 @@ function toggleInactive() {
   renderContent();
 }
 
-// ── Modal ─────────────────────────────────────────────────────────────────────
-function openModal(pid) {
-  editingId = pid;
-  document.getElementById('modal-title').textContent = pid ? 'Editar producto' : 'Nuevo producto';
+// ── Modal: Producto ───────────────────────────────────────────────────────────
+function openProdModal(pid) {
+  editingProdId = pid;
+  document.getElementById('modal-prod-title').textContent = pid ? 'Editar producto' : 'Nuevo producto';
+
   if (pid) {
     let p = null;
     for (const bid of Object.keys(data.products)) {
@@ -1031,59 +622,58 @@ function openModal(pid) {
       if (p) break;
     }
     if (!p) return;
-    document.getElementById('f-name').value = p.name;
-    document.getElementById('f-unit').value = p.unit;
-    document.getElementById('f-caja').value = p.caja;
-    document.getElementById('f-cat').value = p.cat;
-    document.getElementById('f-art').value = p.art;
-    document.getElementById('f-present').value = p.present;
-    document.getElementById('f-emoji').value = p.emoji;
-    document.getElementById('f-venta').value = p.venta || 1;
+    document.getElementById('f-name').value    = p.name;
+    document.getElementById('f-unit').value    = p.unit;
+    document.getElementById('f-caja').value    = p.caja;
+    document.getElementById('f-cat').value     = p.cat;
+    document.getElementById('f-art').value     = p.art;
+    document.getElementById('f-present').value = p.present || '';
+    document.getElementById('f-emoji').value   = p.emoji || '📦';
+    document.getElementById('f-venta').value   = p.venta || 1;
   } else {
-    document.getElementById('f-name').value = '';
-    document.getElementById('f-unit').value = '';
-    document.getElementById('f-caja').value = '';
-    document.getElementById('f-cat').value = '';
-    document.getElementById('f-art').value = '';
+    document.getElementById('f-name').value    = '';
+    document.getElementById('f-unit').value    = '';
+    document.getElementById('f-caja').value    = '';
+    document.getElementById('f-cat').value     = '';
+    document.getElementById('f-art').value     = '';
     document.getElementById('f-present').value = '';
-    document.getElementById('f-emoji').value = '📦';
-    document.getElementById('f-venta').value = 1;
+    document.getElementById('f-emoji').value   = '📦';
+    document.getElementById('f-venta').value   = 1;
   }
-  document.getElementById('modal-bg').classList.add('open');
+
+  document.getElementById('modal-prod-bg').classList.add('open');
   document.getElementById('f-name').focus();
 }
 
-function closeModal() {
-  document.getElementById('modal-bg').classList.remove('open');
-  editingId = null;
+function closeProdModal() {
+  document.getElementById('modal-prod-bg').classList.remove('open');
+  editingProdId = null;
 }
 
 function saveProduct() {
-  const name = document.getElementById('f-name').value.trim();
-  const unit = parseFloat(document.getElementById('f-unit').value);
-  const caja = parseFloat(document.getElementById('f-caja').value);
-  const cat  = document.getElementById('f-cat').value.trim();
-  const art  = document.getElementById('f-art').value.trim();
+  const name    = document.getElementById('f-name').value.trim();
+  const unit    = parseFloat(document.getElementById('f-unit').value);
+  const caja    = parseFloat(document.getElementById('f-caja').value);
+  const cat     = document.getElementById('f-cat').value.trim();
+  const art     = document.getElementById('f-art').value.trim();
   const present = document.getElementById('f-present').value.trim();
-  const emoji = document.getElementById('f-emoji').value.trim() || '📦';
-  const venta = parseInt(document.getElementById('f-venta').value);
+  const emoji   = document.getElementById('f-emoji').value.trim() || '📦';
+  const venta   = parseInt(document.getElementById('f-venta').value);
 
   if (!name || isNaN(unit) || isNaN(caja)) {
     alert('Completá al menos nombre, precio unitario y precio caja');
     return;
   }
 
-  if (editingId) {
-    // Editar existente
+  if (editingProdId) {
     for (const bid of Object.keys(data.products)) {
-      const p = data.products[bid].find(x => x.id === editingId);
+      const p = data.products[bid].find(x => x.id === editingProdId);
       if (p) {
         Object.assign(p, { name, unit, caja, cat, art, present, emoji, venta });
         break;
       }
     }
   } else {
-    // Nuevo producto
     if (!currentBrand) { alert('Seleccioná una marca primero'); return; }
     if (!data.products[currentBrand]) data.products[currentBrand] = [];
     const newId = currentBrand + '_' + Date.now();
@@ -1091,127 +681,120 @@ function saveProduct() {
   }
 
   markUnsaved();
-  closeModal();
-  renderContent();
+  closeProdModal();
+  renderTable();
   renderSidebar();
 }
 
-// ── Modal de elección ────────────────────────────────────────────────────────
-function openAddChoice() {
-  if (!currentBrand) { openModal(null); return; }
-  document.getElementById('choice-modal-bg').classList.add('open');
-}
-function closeChoiceModal() {
-  document.getElementById('choice-modal-bg').classList.remove('open');
-}
-
-// ── Modal de marca ───────────────────────────────────────────────────────────
-let editingBrandId = null;
-let newBrandSid = 'alimentos';
-
-function openBrandModal(bid, sid) {
+// ── Modal: Marca ──────────────────────────────────────────────────────────────
+function openBrandModal(bid, defaultSid) {
   editingBrandId = bid;
+  document.getElementById('modal-brand-title').textContent = bid ? 'Editar marca' : 'Nueva marca';
+
   if (bid) {
     const b = data.brands.find(x => x.id === bid);
     if (!b) return;
-    document.getElementById('brand-modal-title').textContent = 'Editar marca';
-    document.getElementById('fb-name').value = b.name;
-    document.getElementById('fb-id').value = b.id;
-    document.getElementById('fb-id').disabled = true;
-    document.getElementById('fb-sid').value = b.sid;
-    document.getElementById('fb-desc').value = b.desc || '';
+    document.getElementById('fb-name').value  = b.name;
+    document.getElementById('fb-id').value    = b.id;
+    document.getElementById('fb-desc').value  = b.desc || '';
     document.getElementById('fb-emoji').value = b.emoji || '';
-    document.getElementById('fb-logo').value = b.logo || '';
+    document.getElementById('fb-sid').value     = b.sid || 'alimentos';
+    document.getElementById('fb-logo').value    = b.logo || '';
+    document.getElementById('fb-libre').checked = b.libre === true;
+    document.getElementById('fb-id').readOnly   = true;
   } else {
-    newBrandSid = sid || 'alimentos';
-    document.getElementById('brand-modal-title').textContent = 'Nueva marca';
-    document.getElementById('fb-name').value = '';
-    document.getElementById('fb-id').value = '';
-    document.getElementById('fb-id').disabled = false;
-    document.getElementById('fb-sid').value = newBrandSid;
-    document.getElementById('fb-desc').value = '';
-    document.getElementById('fb-emoji').value = '📦';
-    document.getElementById('fb-logo').value = '';
+    document.getElementById('fb-name').value    = '';
+    document.getElementById('fb-id').value      = '';
+    document.getElementById('fb-desc').value    = '';
+    document.getElementById('fb-emoji').value   = '';
+    document.getElementById('fb-sid').value     = defaultSid || 'alimentos';
+    document.getElementById('fb-logo').value    = '';
+    document.getElementById('fb-libre').checked = false;
+    document.getElementById('fb-id').readOnly   = false;
   }
-  document.getElementById('brand-modal-bg').classList.add('open');
+
+  document.getElementById('modal-brand-bg').classList.add('open');
   document.getElementById('fb-name').focus();
 }
 
 function closeBrandModal() {
-  document.getElementById('brand-modal-bg').classList.remove('open');
+  document.getElementById('modal-brand-bg').classList.remove('open');
   editingBrandId = null;
 }
 
-function slugify(s) {
-  return s.toLowerCase()
+function autoFillBrandId() {
+  if (editingBrandId) return; // no tocar el ID si estamos editando
+  const idField = document.getElementById('fb-id');
+  if (idField.readOnly) return;
+  const name = document.getElementById('fb-name').value;
+  idField.value = name
+    .toLowerCase()
     .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
-    .replace(/[^a-z0-9]+/g, '');
+    .replace(/[^a-z0-9]/g, '')
+    .substring(0, 20);
 }
 
 function saveBrand() {
-  const name = document.getElementById('fb-name').value.trim();
-  const sid  = document.getElementById('fb-sid').value;
-  const desc = document.getElementById('fb-desc').value.trim();
-  const emoji = document.getElementById('fb-emoji').value.trim() || '📦';
-  const logo = document.getElementById('fb-logo').value.trim() || 'img/placeholder.webp';
+  const name  = document.getElementById('fb-name').value.trim();
+  const id    = document.getElementById('fb-id').value.trim();
+  const desc  = document.getElementById('fb-desc').value.trim();
+  const emoji = document.getElementById('fb-emoji').value.trim();
+  const sid   = document.getElementById('fb-sid').value;
+  const logo  = document.getElementById('fb-logo').value.trim() || `img/logo-${id}.webp`;
+  const libre = document.getElementById('fb-libre').checked;
 
-  if (!name) { alert('Completá el nombre de la marca'); return; }
+  if (!name || !id) {
+    alert('Completá al menos el nombre y el ID de la marca');
+    return;
+  }
 
   if (editingBrandId) {
     const b = data.brands.find(x => x.id === editingBrandId);
-    Object.assign(b, { name, sid, desc, emoji, logo });
+    if (b) Object.assign(b, { name, desc, emoji, sid, logo, libre });
   } else {
-    let id = document.getElementById('fb-id').value.trim();
-    id = id ? slugify(id) : slugify(name);
-    if (!id) { alert('Ingresá un ID válido para la marca'); return; }
-    if (data.brands.some(b => b.id === id)) { alert('Ya existe una marca con ese ID'); return; }
-    data.brands.push({ id, sid, name, emoji, desc, logo, activo: true });
+    // Verificar que el ID no exista
+    if (data.brands.find(x => x.id === id)) {
+      alert(`Ya existe una marca con el ID "${id}". Usá un ID diferente.`);
+      return;
+    }
+    data.brands.push({ id, sid, name, emoji, desc, logo, libre, activo: true });
     if (!data.products[id]) data.products[id] = [];
   }
 
   markUnsaved();
   closeBrandModal();
   renderSidebar();
-}
 
-function deleteBrand(bid) {
-  const b = data.brands.find(x => x.id === bid);
-  if (!b) return;
-  const n = (data.products[bid]||[]).length;
-  if (!confirm(`¿Seguro que querés borrar la marca "${b.name}"${n?` y sus ${n} productos`:''}? Esta acción no se puede deshacer.`)) return;
-  data.brands = data.brands.filter(x => x.id !== bid);
-  delete data.products[bid];
-  if (currentBrand === bid) {
-    currentBrand = null;
-    document.getElementById('content').innerHTML = `
-      <div class="empty-state">
-        <span class="empty-icon">👈</span>
-        <div>Seleccioná una marca del menú</div>
-      </div>`;
+  // Si editamos la marca actual, re-render del contenido para actualizar el header
+  if (editingBrandId && editingBrandId === currentBrand) {
+    renderContent();
   }
-  markUnsaved();
-  renderSidebar();
 }
 
-// ── Status ────────────────────────────────────────────────────────────────────
+// ── Status bar ────────────────────────────────────────────────────────────────
 let statusTimer = null;
-function showStatus(msg, type='', duration=2500) {
+function showStatus(msg, type = '', duration = 2500) {
   const el = document.getElementById('status-bar');
   el.textContent = msg;
-  el.className = 'status-bar show' + (type ? ' '+type : '');
+  el.className = 'status-bar show' + (type ? ' ' + type : '');
   clearTimeout(statusTimer);
   statusTimer = setTimeout(() => el.classList.remove('show'), duration);
 }
 
 // ── Init ──────────────────────────────────────────────────────────────────────
-document.getElementById('modal-bg').addEventListener('click', e => {
-  if (e.target === document.getElementById('modal-bg')) closeModal();
+document.getElementById('modal-prod-bg').addEventListener('click', e => {
+  if (e.target === document.getElementById('modal-prod-bg')) closeProdModal();
 });
-document.getElementById('brand-modal-bg').addEventListener('click', e => {
-  if (e.target === document.getElementById('brand-modal-bg')) closeBrandModal();
+document.getElementById('modal-brand-bg').addEventListener('click', e => {
+  if (e.target === document.getElementById('modal-brand-bg')) closeBrandModal();
 });
-document.getElementById('choice-modal-bg').addEventListener('click', e => {
-  if (e.target === document.getElementById('choice-modal-bg')) closeChoiceModal();
+
+// Tecla Escape cierra el modal abierto
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    closeProdModal();
+    closeBrandModal();
+  }
 });
 
 // Recuperar credenciales guardadas
@@ -1222,7 +805,9 @@ if (saved_owner) document.getElementById('gh-owner').value = saved_owner;
 if (saved_repo)  document.getElementById('gh-repo').value  = saved_repo;
 if (saved_token) {
   document.getElementById('gh-token').value = saved_token;
-  GH_OWNER = saved_owner; GH_REPO = saved_repo; GH_TOKEN = saved_token;
+  GH_OWNER = saved_owner;
+  GH_REPO  = saved_repo;
+  GH_TOKEN = saved_token;
   loadFromGitHub();
 }
 </script>
