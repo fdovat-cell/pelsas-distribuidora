@@ -3683,6 +3683,19 @@
         "activo": true
       }
     ],
-    "bombonesdelicorewedervobro": []
+    "bombonesdelicorewedervobro": [
+      {
+        "id": "bombonesdelicorewedervobro_1782838028839",
+        "name": "Bombones de licor con cerezas x 98u",
+        "unit": 1323,
+        "caja": 13223,
+        "cat": "Bombones",
+        "art": "969",
+        "present": "Caja x 98u",
+        "emoji": "📦",
+        "venta": 2,
+        "activo": true
+      }
+    ]
   }
 }
