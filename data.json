@@ -3695,6 +3695,42 @@
         "emoji": "📦",
         "venta": 2,
         "activo": true
+      },
+      {
+        "id": "bombonesdelicorewedervobro_1782838106453",
+        "name": "Bombones con licor de cerezas x 71u",
+        "unit": 799,
+        "caja": 799,
+        "cat": "Bombones",
+        "art": "970",
+        "present": "caja x 71u",
+        "emoji": "📦",
+        "venta": 2,
+        "activo": true
+      },
+      {
+        "id": "bombonesdelicorewedervobro_1782838219907",
+        "name": "Bombones con lícor de cerezas x 40",
+        "unit": 499,
+        "caja": 499,
+        "cat": "",
+        "art": "971",
+        "present": "Caja x 40u.",
+        "emoji": "📦",
+        "venta": 2,
+        "activo": true
+      },
+      {
+        "id": "bombonesdelicorewedervobro_1782838318625",
+        "name": "Barriles chocolate rellenos c/whisky-licor-cocktail x 18u",
+        "unit": 536,
+        "caja": 536,
+        "cat": "Bombones",
+        "art": "972",
+        "present": "Caja x 18u",
+        "emoji": "📦",
+        "venta": 2,
+        "activo": true
       }
     ]
   }
