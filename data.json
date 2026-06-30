@@ -215,15 +215,6 @@
       "desc": "Golosinas",
       "logo": "img/logo-golosinas.webp",
       "activo": true
-    },
-    {
-      "id": "bombones",
-      "sid": "alimentos",
-      "name": "Bombones",
-      "emoji": "📦",
-      "desc": "Bombones",
-      "logo": "img:logo-bombones.webp",
-      "activo": true
     }
   ],
   "products": {
@@ -3680,20 +3671,6 @@
         "present": "84gr",
         "emoji": "📦",
         "venta": 1,
-        "activo": true
-      }
-    ],
-    "bombones": [
-      {
-        "id": "bombones_1782846418082",
-        "name": "Bombones con licor de cereza x 98 u.",
-        "unit": 13.5,
-        "caja": 1323,
-        "cat": "bombones",
-        "art": "969",
-        "present": "CAja x 98 u.",
-        "emoji": "📦",
-        "venta": 2,
         "activo": true
       }
     ]

@@ -434,15 +434,90 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 /* mobile-only banners */
 .home-mobile-only{display:none}
 
-/* MOBILE */
-@media(max-width:720px){
-  .home-cats-grid{grid-template-columns:1fr}
+/* BOTTOM NAV — oculto por defecto, visible en tablet y mobile */
+.bottom-nav{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--white);border-top:1px solid var(--border);z-index:80;padding:6px 0 calc(6px + env(safe-area-inset-bottom));justify-content:space-around;box-shadow:0 -2px 12px rgba(26,26,24,.06)}
+.bn-item{background:none;border:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 14px;font-family:'DM Sans',sans-serif;color:var(--mid);position:relative;min-width:64px;transition:color .15s}
+.bn-item.active{color:var(--red)}
+.bn-icon{font-size:20px;line-height:1}
+.bn-label{font-size:10px;font-weight:500;letter-spacing:.04em;text-transform:uppercase}
+.bn-badge{position:absolute;top:0;right:6px;background:var(--red);color:#fff;border-radius:10px;min-width:16px;height:16px;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center;padding:0 4px}
+.bn-badge.zero{display:none}
+
+/* WHATSAPP FAB */
+.wa-fab{position:fixed;right:18px;bottom:calc(78px + env(safe-area-inset-bottom));width:54px;height:54px;border-radius:50%;background:#25D366;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 20px rgba(37,211,102,.45);z-index:75;transition:transform .15s,box-shadow .15s}
+.wa-fab:hover{transform:scale(1.06);box-shadow:0 8px 24px rgba(37,211,102,.55)}
+.wa-fab svg{width:28px;height:28px;fill:#fff}
+@media(min-width:1025px){.wa-fab{bottom:24px;right:24px;width:58px;height:58px}.wa-fab svg{width:30px;height:30px}}
+
+/* TABLET + MOBILE: mostrar bottom nav y ajustar body */
+@media(max-width:1024px){
+  body{padding-bottom:64px}
+  .bottom-nav{display:flex}
+  .home-mobile-only{display:flex !important}
   .home-banner.pago{display:none}
   .home-banner.fum{display:none}
-  .home-mobile-only{display:flex !important}
   .home-mobile-fum{min-height:130px}
   .home-mobile-pago{margin-top:0;cursor:default}
   .home-mobile-pago:hover{transform:none;box-shadow:none}
+}
+
+/* SOLO MOBILE: ajustes de layout más agresivos */
+@media(max-width:720px){
+  .collage-row,.fum-2col,.hero-row{grid-template-columns:1fr}
+  .topbar{padding-left:1rem;padding-right:1rem;height:56px}
+  .home-wrap{padding:1rem 1.25rem 2rem}
+  .section-wrap{padding-left:1.25rem;padding-right:1.25rem;padding-top:1.5rem}
+  .cart-panel{width:100%}
+  .promo-strip{flex-direction:column;text-align:center;padding:1.75rem 1.5rem;margin-bottom:3rem}
+  .logo-divider,.logo-city,.tel{display:none}
+  .logo-name{font-size:18px}
+  .cart-btn{padding:8px 13px;font-size:12px}
+  .cart-btn span:not(.badge){font-size:11px}
+  .gsearch{top:56px;padding:6px 1rem}
+  .gsearch-input{font-size:13px;padding:9px 32px 9px 34px}
+  .gsearch-icon{left:10px}
+  .gsr-img{width:38px;height:38px;font-size:20px}
+  .gsr-price{font-size:11px}
+  .hero-eyebrow{margin-bottom:.5rem;font-size:10px}
+  .hero-title{font-size:clamp(26px,7.5vw,38px);line-height:.98;margin-bottom:.75rem}
+  .hero-rule{margin-bottom:.5rem}
+  .hero-body{font-size:13px;line-height:1.5;margin-bottom:0;max-width:100%}
+  .hero-row{margin-bottom:.75rem}
+  .section-eyebrow{margin-bottom:.25rem}
+  .section-rule-line{margin-bottom:.75rem}
+  .collage-row{margin-bottom:2rem}
+  .col-visual{height:auto;min-height:180px}
+  .col-card.alimentos .col-visual{height:273px}
+  .col-card.fumadores .col-visual{height:273px}
+  .col-cta{
+    position:absolute;bottom:12px;left:50%;transform:translateX(-50%);
+    background:rgba(26,26,24,.72);color:#fff;
+    font-size:12px;font-weight:500;letter-spacing:.06em;
+    padding:6px 16px;border-radius:20px;
+    backdrop-filter:blur(4px);pointer-events:none;
+    white-space:nowrap;z-index:2;
+  }
+  .col-foot{padding:14px 16px}
+  .col-foot-name{font-size:15px}
+  .section-title{font-size:clamp(24px,6vw,32px)}
+  .section-meta{margin-bottom:1.25rem}
+  .toolbar{margin-bottom:1rem;gap:8px}
+  .prod-grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+  .prod-card{padding:.75rem;gap:7px;border-radius:11px}
+  .prod-icon{height:170px;font-size:42px;border-radius:8px}
+  .prod-art{font-size:9px}
+  .prod-name{font-size:12px;line-height:1.25}
+  .prod-present{font-size:10px}
+  .prices-row{gap:4px;margin:0}
+  .price-box{padding:5px 4px;border-radius:7px;border-width:1.5px;min-width:0}
+  .price-box-label{font-size:9px;letter-spacing:.04em}
+  .price-box-val{font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .prod-pu{font-size:17px}
+  .prod-pc{font-size:12px}
+  .qbtn{width:32px;height:32px;font-size:17px}
+  .qnum{font-size:13px;min-width:18px}
+  .abtn{padding:9px 6px;font-size:12px}
+  .qty-row{gap:5px}
 }
 
 /* CART PAGO SELECTOR */
@@ -457,6 +532,11 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 /* CATALOGO COMPLETO */
 .cat-wrap{max-width:1140px;margin:0 auto;padding:2rem 2.5rem}
 .cat-tabs{display:flex;gap:8px;margin-bottom:2rem;border-bottom:2px solid var(--border);padding-bottom:0}
+.fichas-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;margin-top:1rem}
+.fichas-card{display:flex;flex-direction:column;align-items:center;gap:8px;background:var(--white);border:1px solid var(--border);border-radius:14px;padding:18px 10px;cursor:pointer;transition:transform .15s,box-shadow .15s}
+.fichas-card:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(26,26,24,.08)}
+.fichas-logo{width:56px;height:56px;object-fit:contain}
+.fichas-name{font-size:13px;font-weight:600;text-align:center;color:var(--ink)}
 .cat-tab{padding:10px 20px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;border:none;background:none;cursor:pointer;color:var(--mid);border-bottom:3px solid transparent;margin-bottom:-2px;transition:color .15s,border-color .15s}
 .cat-tab.active{color:var(--ink);border-bottom-color:var(--red)}
 .cat-brand-block{margin-bottom:3rem}
@@ -514,6 +594,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 .overlay.open{display:block}
 .cart-panel{position:fixed;top:0;right:0;width:340px;height:100%;background:var(--white);border-left:1px solid var(--border);overflow-y:auto;z-index:100;transform:translateX(100%);transition:transform .25s ease;display:flex;flex-direction:column}
 .cart-panel.open{transform:translateX(0)}
+/* Panel siempre visible en desktop */
+
 .cart-hdr{display:flex;justify-content:space-between;align-items:center;padding:1.25rem 1.5rem;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--white);z-index:1}
 .cart-ttl{font-family:'Playfair Display',serif;font-size:20px;font-weight:900;color:var(--ink)}
 .close-btn{background:none;border:none;font-size:20px;cursor:pointer;color:var(--light);line-height:1}
@@ -572,87 +654,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 .back-btn{background:var(--cream);border:1px solid var(--border);border-radius:8px;width:34px;height:34px;display:none;align-items:center;justify-content:center;cursor:pointer;font-size:16px;color:var(--ink);transition:background .15s,border-color .15s;margin-right:10px;flex-shrink:0}
 .back-btn.visible{display:flex}
 .back-btn:hover{background:var(--cream2);border-color:var(--border2)}
-
-/* BOTTOM NAV */
-.bottom-nav{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--white);border-top:1px solid var(--border);z-index:80;padding:6px 0 calc(6px + env(safe-area-inset-bottom));justify-content:space-around;box-shadow:0 -2px 12px rgba(26,26,24,.06)}
-.bn-item{background:none;border:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 14px;font-family:'DM Sans',sans-serif;color:var(--mid);position:relative;min-width:64px;transition:color .15s}
-.bn-item.active{color:var(--red)}
-.fichas-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;margin-top:1rem}
-.fichas-card{display:flex;flex-direction:column;align-items:center;gap:8px;background:var(--white);border:1px solid var(--border);border-radius:14px;padding:18px 10px;cursor:pointer;transition:transform .15s,box-shadow .15s}
-.fichas-card:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(26,26,24,.08)}
-.fichas-logo{width:56px;height:56px;object-fit:contain}
-.fichas-name{font-size:13px;font-weight:600;text-align:center;color:var(--ink)}
-.bn-icon{font-size:20px;line-height:1}
-.bn-label{font-size:10px;font-weight:500;letter-spacing:.04em;text-transform:uppercase}
-.bn-badge{position:absolute;top:0;right:6px;background:var(--red);color:#fff;border-radius:10px;min-width:16px;height:16px;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center;padding:0 4px}
-.bn-badge.zero{display:none}
-
-/* WHATSAPP FAB */
-.wa-fab{position:fixed;right:18px;bottom:calc(78px + env(safe-area-inset-bottom));width:54px;height:54px;border-radius:50%;background:#25D366;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 20px rgba(37,211,102,.45);z-index:75;transition:transform .15s,box-shadow .15s}
-.wa-fab:hover{transform:scale(1.06);box-shadow:0 8px 24px rgba(37,211,102,.55)}
-.wa-fab svg{width:28px;height:28px;fill:#fff}
-@media(min-width:721px){.wa-fab{bottom:24px;right:24px;width:58px;height:58px}.wa-fab svg{width:30px;height:30px}}
-
-@media(max-width:720px){
-  .collage-row,.fum-2col,.hero-row{grid-template-columns:1fr}
-  .topbar{padding-left:1rem;padding-right:1rem;height:56px}
-  .home-wrap{padding:1rem 1.25rem 2rem}
-  .section-wrap{padding-left:1.25rem;padding-right:1.25rem;padding-top:1.5rem}
-  .cart-panel{width:100%}
-  .promo-strip{flex-direction:column;text-align:center;padding:1.75rem 1.5rem;margin-bottom:3rem}
-  .logo-divider,.logo-city,.tel{display:none}
-  .logo-name{font-size:18px}
-  .cart-btn{padding:8px 13px;font-size:12px}
-  .cart-btn span:not(.badge){font-size:11px}
-  body{padding-bottom:64px}
-  .bottom-nav{display:flex}
-  .gsearch{top:56px;padding:6px 1rem}
-  .gsearch-input{font-size:13px;padding:9px 32px 9px 34px}
-  .gsearch-icon{left:10px}
-  .gsr-img{width:38px;height:38px;font-size:20px}
-  .gsr-price{font-size:11px}
-  .hero-eyebrow{margin-bottom:.5rem;font-size:10px}
-  .hero-title{font-size:clamp(26px,7.5vw,38px);line-height:.98;margin-bottom:.75rem}
-  .hero-rule{margin-bottom:.5rem}
-  .hero-body{font-size:13px;line-height:1.5;margin-bottom:0;max-width:100%}
-  .hero-row{margin-bottom:.75rem}
-  .section-eyebrow{margin-bottom:.25rem}
-  .section-rule-line{margin-bottom:.75rem}
-  .collage-row{margin-bottom:2rem}
-  .col-visual{height:auto;min-height:180px}
-  .col-card.alimentos .col-visual{height:273px}
-  .col-card.fumadores .col-visual{height:273px}
-
-.col-cta{
-  position:absolute;bottom:12px;left:50%;transform:translateX(-50%);
-  background:rgba(26,26,24,.72);color:#fff;
-  font-size:12px;font-weight:500;letter-spacing:.06em;
-  padding:6px 16px;border-radius:20px;
-  backdrop-filter:blur(4px);pointer-events:none;
-  white-space:nowrap;z-index:2;
-}
-.col-foot{padding:14px 16px}
-  .col-foot-name{font-size:15px}
-  .section-title{font-size:clamp(24px,6vw,32px)}
-  .section-meta{margin-bottom:1.25rem}
-  .toolbar{margin-bottom:1rem;gap:8px}
-  .prod-grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
-  .prod-card{padding:.75rem;gap:7px;border-radius:11px}
-  .prod-icon{height:170px;font-size:42px;border-radius:8px}
-  .prod-art{font-size:9px}
-  .prod-name{font-size:12px;line-height:1.25}
-  .prod-present{font-size:10px}
-  .prices-row{gap:4px;margin:0}
-  .price-box{padding:5px 4px;border-radius:7px;border-width:1.5px;min-width:0}
-  .price-box-label{font-size:9px;letter-spacing:.04em}
-  .price-box-val{font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .prod-pu{font-size:17px}
-  .prod-pc{font-size:12px}
-  .qbtn{width:32px;height:32px;font-size:17px}
-  .qnum{font-size:13px;min-width:18px}
-  .abtn{padding:9px 6px;font-size:12px}
-  .qty-row{gap:5px}
-}
 </style>
 </head>
 <body>
@@ -709,7 +710,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
     <span class="bn-label">Catálogo</span>
   </button>
   <button class="bn-item" id="bn-fichas" onclick="goFichas()">
-    <span class="bn-icon">🗂️</span>
+    <span class="bn-icon">📸</span>
     <span class="bn-label">Fichas</span>
   </button>
   <button class="bn-item" id="bn-cart" onclick="toggleCart()">
@@ -726,7 +727,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <div class="overlay" id="overlay" onclick="toggleCart()"></div>
 <div class="cart-panel" id="cart-panel">
   <div class="cart-hdr">
-    <span class="cart-ttl">Tu pedido</span>
+    <span class="cart-ttl">Pedido en curso</span>
     <button class="close-btn" onclick="toggleCart()">✕</button>
   </div>
   <div class="cart-body" id="cart-body"></div>
@@ -736,16 +737,14 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <script>
 const WA='59896190002';
 // ── Configuración GitHub ─────────────────────────────────────────────────────
-const GH_OWNER = 'fdovat-cell';   // ← tu usuario de GitHub
-const GH_REPO  = 'pelsas-catalogo';     // ← tu repositorio
-const GH_BRANCH = 'main';               // ← rama (main o master)
-const DATA_URL = './data.json';
+const GH_OWNER = 'fdovat-cell';
+const GH_REPO  = 'pelsas-distribuidora';
+const GH_BRANCH = 'main';
+const DATA_URL = `https://raw.githubusercontent.com/${GH_OWNER}/${GH_REPO}/${GH_BRANCH}/data.json`;
 
-// Variables globales que se llenan desde la API
 let brands = [];
 let products = {};
 
-// Variables de la app
 let cart={},qtys={},modos={},view='home',curBrand=null,activeFilter='todos',checkout=false,done=false,pagoMethod='';
 const fmt=n=>'$'+n.toLocaleString('es-UY',{minimumFractionDigits:2,maximumFractionDigits:2});
 const allP=()=>Object.values(products).flat().filter(p=>p.activo!==false);
@@ -755,7 +754,6 @@ const fumBrands=()=>brands.filter(b=>b.sid==='fumadores'&&b.activo!==false);
 const alCount=()=>alBrands().reduce((a,b)=>(products[b.id]||[]).filter(p=>p.activo!==false).length+a,0);
 const fumCount=()=>fumBrands().reduce((a,b)=>(products[b.id]||[]).filter(p=>p.activo!==false).length+a,0);
 
-// Carga el catálogo desde GitHub y arranca la app
 async function initApp() {
   try {
     const res = await fetch(DATA_URL + '?t=' + Date.now());
@@ -763,7 +761,6 @@ async function initApp() {
     const data = await res.json();
     brands   = data.brands   || [];
     products = data.products || {};
-    // Inicializar qtys y modos para todos los productos
     Object.values(products).flat().forEach(p=>{qtys[p.id]=1;modos[p.id]='caja'});
     render();
   } catch(e) {
@@ -777,7 +774,6 @@ async function initApp() {
       '</div>';
   }
 }
-
 
 function render(){
   pushState(view,curBrand);
@@ -811,34 +807,12 @@ let catTab='alimentos';
 function goSintacc(){prevView=view;view='sintacc';curBrand=null;activeFilter='todos';render()}
 function goCatalogo(tab){catTab=tab||'alimentos';view='catalogo';curBrand=null;render()}
 function goFichas(){view='fichas';curBrand=null;render()}
-function renderFichas(){
-  const list=brands.filter(b=>b.activo!==false);
-  return`<div class="section-wrap">
-    <div class="breadcrumb" onclick="goHome()">← Inicio</div>
-    <div class="section-title">Fichas de marcas</div>
-    <div class="section-rule"></div>
-    <div class="section-meta">Tocá una marca para ver su ficha completa</div>
-    <div class="fichas-grid">${list.map(b=>`
-      <div class="fichas-card" onclick="openFicha('${b.id}')">
-        <img class="fichas-logo" src="${b.logo}" alt="${b.name}" onerror="this.outerHTML='<span style=\\'font-size:28px\\'>${b.emoji}</span>'">
-        <div class="fichas-name">${b.name}</div>
-      </div>`).join('')}
-    </div>
-  </div>`;
-}
-function openFicha(bid){
-  const img=new Image();
-  img.onload=()=>openLBraw('img/fichas/'+bid+'.jpg');
-  img.onerror=()=>alert('Todavía no hay ficha cargada para esta marca.');
-  img.src='img/fichas/'+bid+'.jpg';
-}
 function setCatTab(tab){catTab=tab;document.querySelectorAll('.cat-tab').forEach(t=>t.classList.remove('active'));document.getElementById('cattab-'+tab)?.classList.add('active');document.getElementById('cat-content').innerHTML=renderCatContent()}
 
 const freeIds=new Set(['celisano','agridulce','smams','sanosinharina','suavipan','nutsbar','molinosala']);
 const freeProdCats=new Set(['sin gluten','sin azucar','sin lactosa','budines','proteina','bombones']);
-function isLibreBrand(bid){const b=getBrand(bid);return b&&(b.libre===true||freeIds.has(bid));}
 function isFree(bid,p){
-  if(isLibreBrand(bid))return true;
+  if(freeIds.has(bid))return true;
   if(bid==='agridulce'&&p.cat==='sin azucar')return true;
   if(bid==='smams'&&(p.cat==='sin gluten'||p.cat==='sin azucar'))return true;
   return false;
@@ -846,13 +820,11 @@ function isFree(bid,p){
 
 function renderCatContent(){
   const sid=catTab;
-  const blist=sid==='libre'
-    ? brands.filter(b=>b.activo!==false&&isLibreBrand(b.id))
-    : brands.filter(b=>b.sid===sid);
+  const blist=brands.filter(b=>b.sid===sid);
   return blist.map(b=>{
     const ps=products[b.id]||[];
     if(!ps.length)return'';
-    const hasFree=isLibreBrand(b.id);
+    const hasFree=freeIds.has(b.id)||(b.id==='agridulce'&&ps.some(p=>p.cat==='sin azucar'))||(b.id==='smams'&&ps.some(p=>p.cat==='sin gluten'||p.cat==='sin azucar'));
     return`<div class="cat-brand-block">
       <div class="cat-brand-hdr">
         <img class="cat-brand-logo" src="${b.logo}" alt="${b.name}" onerror="this.outerHTML='<span style=\\'font-size:22px\\'>${b.emoji}</span>'">
@@ -865,7 +837,7 @@ function renderCatContent(){
         const k=p.id+'_'+(modos[p.id]||'caja');
         const inCart=cart[k]&&cart[k].qty>0;
         return`<div class="cat-prod-card${free?' free-highlight':''}">
-          <img class="cat-prod-img" src="${getProdImg(b.id,p.art)}" alt="${p.name}" onerror="this.onerror=null;this.outerHTML='<div class=\\'cat-prod-img\\'style=\\'display:flex;align-items:center;justify-content:center;font-size:36px;background:var(--cream);aspect-ratio:1\\'>${p.emoji}</div>'" onclick="openLB('img/${p.art}.webp')">
+          <img class="cat-prod-img" src="${getProdImg(b.id,p.art)}" alt="${p.name}" onerror="this.onerror=null;this.src='img/placeholder.webp'" onclick="openLB('img/${p.art}.webp')">
           <div class="cat-prod-body">
             <div class="cat-prod-name">${p.name}</div>
             <div class="cat-prod-prices">
@@ -887,18 +859,41 @@ function renderCatalogo(){
     <div class="section-rule"></div>
     <div class="cat-tabs">
       <button class="cat-tab${catTab==='alimentos'?' active':''}" id="cattab-alimentos" onclick="setCatTab('alimentos')">🍬 Alimentos &amp; Snacks</button>
-      <button class="cat-tab${catTab==='libre'?' active':''}" id="cattab-libre" onclick="setCatTab('libre')">🌿 Sin Gluten / Libres</button>
       <button class="cat-tab${catTab==='fumadores'?' active':''}" id="cattab-fumadores" onclick="setCatTab('fumadores')">🚬 Fumadores</button>
     </div>
     <div id="cat-content">${renderCatContent()}</div>
   </div>`;
 }
+function renderFichas(){
+  const list=brands.filter(b=>b.activo!==false);
+  return`<div class="section-wrap">
+    <div class="breadcrumb" onclick="goHome()">← Inicio</div>
+    <div class="section-title">Fichas de marcas</div>
+    <div class="section-rule"></div>
+    <div class="section-meta">Tocá una marca para ver su ficha completa</div>
+    <div class="fichas-grid">${list.map(b=>`
+      <div class="fichas-card" onclick="openFicha('${b.id}')">
+        <img class="fichas-logo" src="${b.logo}" alt="${b.name}" onerror="this.outerHTML='<span style=\\'font-size:28px\\'>${b.emoji}</span>'">
+        <div class="fichas-name">${b.name}</div>
+      </div>`).join('')}
+    </div>
+  </div>`;
+}
+function openFicha(bid){
+  const img=new Image();
+  img.onload=()=>openLBraw('img/fichas/'+bid+'.jpg');
+  img.onerror=()=>alert('Todavía no hay ficha cargada para esta marca.');
+  img.src='img/fichas/'+bid+'.jpg';
+}
 function sintaccBrands(){
-  return brands.filter(b=>b.activo!==false&&isLibreBrand(b.id));
+  const ids=['nutsbar','molinosala','celisano','agridulce','smams','sanosinharina','suavipan'];
+  return ids.map(id=>getBrand(id)).filter(Boolean);
 }
 function sintaccProducts(bid){
   const all=products[bid]||[];
-  if(isLibreBrand(bid))return all;
+  if(bid==='celisano'||bid==='sanosinharina'||bid==='suavipan'||bid==='nutsbar'||bid==='molinosala')return all;
+  if(bid==='agridulce')return all.filter(p=>p.cat==='sin azucar');
+  if(bid==='smams')return all.filter(p=>p.cat==='sin gluten'||p.cat==='sin azucar');
   return all;
 }
 const brandGenImg={
@@ -907,7 +902,6 @@ const brandGenImg={
   darkhorse:'img/gen-darkhorse.webp',
   elements:'img/gen-elements.webp',
 };
-// arts que tienen foto propia
 const hasOwnPhoto=new Set(['4000','4001','4002','4003','4004','4005','4006','4007','3000']);
 function getProdImg(bid,art){
   if(hasOwnPhoto.has(art))return`img/${art}.webp`;
@@ -969,7 +963,6 @@ function renderHome(){
         <div class="hero-title">La app de<br><em>lo que<br>se vende.</em></div>
         <div class="hero-rule"></div>
         <div class="hero-body">Elegí tu categoría, armá tu pedido y envialo por WhatsApp.</div>
-        <!-- PAGO: visible solo en PC dentro del hero-left -->
         <div class="home-banner pago">
           <div class="home-banner-icon">💳</div>
           <div class="home-banner-texts">
@@ -1013,33 +1006,10 @@ function renderHome(){
             </div>
           </div>
         </div>
-        <!-- FUMADORES: visible solo en PC dentro del hero-cats -->
-        <div class="home-banner fum" onclick="goFumadores()" style="margin-top:12px;background-image:url('img/banner-fumadores.webp');background-size:cover;background-position:center;position:relative;">
-          <div style="position:absolute;inset:0;background:rgba(26,26,24,.15);border-radius:14px"></div>
-          <div style="position:relative;z-index:1;display:contents">
-            <div class="home-banner-icon">🚬</div>
-            <div class="home-banner-texts">
-              <div class="home-banner-title">Artículos para fumadores</div>
-              <div class="home-banner-sub">${fumBrands().length} marcas · ${fumCount()} productos</div>
-            </div>
-            <div class="home-banner-arrow">→</div>
-          </div>
-        </div>
-      </div><!-- /hero-cats -->
-    </div><!-- /hero-split -->
 
-    <!-- MOBILE ONLY: fumadores y pago apilados -->
-    <div class="home-mobile-only home-mobile-fum" onclick="goFumadores()" style="background-image:url('img/banner-fumadores.webp');background-size:cover;background-position:center;position:relative;margin-bottom:10px;border:1px solid var(--ink);border-radius:14px;display:none;align-items:center;gap:14px;padding:14px 18px;cursor:pointer;">
-      <div style="position:absolute;inset:0;background:rgba(26,26,24,.15);border-radius:14px"></div>
-      <div style="position:relative;z-index:1;display:contents">
-        <div class="home-banner-icon">🚬</div>
-        <div class="home-banner-texts">
-          <div class="home-banner-title" style="color:#fff">Artículos para fumadores</div>
-          <div class="home-banner-sub" style="color:rgba(255,255,255,.5)">${fumBrands().length} marcas · ${fumCount()} productos</div>
-        </div>
-        <div class="home-banner-arrow" style="background:rgba(255,255,255,.15);color:#fff">→</div>
       </div>
     </div>
+
     <div class="home-mobile-only home-mobile-pago" style="background:var(--cream);border:1px solid var(--border);border-radius:14px;display:none;align-items:center;gap:14px;padding:14px 18px;margin-bottom:1.5rem;">
       <div class="home-banner-icon">💳</div>
       <div class="home-banner-texts">
@@ -1115,12 +1085,38 @@ function getFiltered(ps){
 function renderCards(filtered,bid){
   if(!filtered.length)return'<div class="empty-g">Sin resultados</div>';
   return filtered.map(p=>{
-    const inCart=!!(cart[p.id+'_caja']&&cart[p.id+'_caja'].qty>0);
+    const inCart=cart[p.id+'_caja']>0||cart[p.id+'_unit']>0;
+    const modo=modos[p.id]||'caja';
     const isBaja=p.cat==='baja rotacion';
     const imgSrc=bid?getProdImg(bid,p.art):`img/${p.art}.webp`;
     const genImg=bid&&brandGenImg[bid]?brandGenImg[bid]:'';
     const onerrorFallback=genImg?`this.onerror=null;this.src='${genImg}'`:`this.onerror=null`;
-    {
+    if(p.venta===2){
+      return`<div class="prod-card${isBaja?' baja-rot':''}" data-pid="${p.id}">
+        ${isBaja?'<span class="baja-rot-tag">Consultar disponibilidad</span>':''}
+        <div class="prod-icon"><img src="${imgSrc}" alt="${p.name}" loading="lazy" onclick="openLB('${p.art}')" onerror="${onerrorFallback}"></div>
+        <div class="prod-art">Art. ${p.art}</div>
+        <div class="prod-name">${p.name}</div>
+        <div class="prod-present">${p.present}</div>
+        <div class="prices-row">
+          <div class="price-box${modo==='caja'?' selected':''}" onclick="setModo('${p.id}','caja')">
+            <div class="price-box-label">Pack</div>
+            <div class="price-box-val">${fmt(p.caja)}</div>
+          </div>
+          <div class="price-box${modo==='unit'?' selected':''}" onclick="setModo('${p.id}','unit')">
+            <div class="price-box-label">½ Caja</div>
+            <div class="price-box-val">${fmt(p.caja/2)}</div>
+          </div>
+        </div>
+        <div class="prod-unit-ref">Unidad: ${fmt(p.unit)}</div>
+        <div class="qty-row">
+          <button class="qbtn" onclick="chQ('${p.id}',-1)">−</button>
+          <span class="qnum" id="q${p.id}">${qtys[p.id]}</span>
+          <button class="qbtn" onclick="chQ('${p.id}',1)">+</button>
+          <button class="abtn${inCart?' added':''}" onclick="addC('${p.id}')">${inCart?'En pedido':'Agregar'}</button>
+        </div>
+      </div>`;
+    } else {
       return`<div class="prod-card${isBaja?' baja-rot':''}" data-pid="${p.id}">
         ${isBaja?'<span class="baja-rot-tag">Consultar disponibilidad</span>':''}
         <div class="prod-icon"><img src="${imgSrc}" alt="${p.name}" loading="lazy" onclick="openLB('${p.art}')" onerror="${onerrorFallback}"></div>
@@ -1171,8 +1167,11 @@ function setModo(id,modo){modos[id]=modo;reGrid()}
 function chQ(id,d){qtys[id]=Math.max(1,(qtys[id]||1)+d);const el=document.getElementById('q'+id);if(el)el.textContent=qtys[id]}
 function addC(id){
   const p=allP().find(x=>x.id===id);if(!p)return;
-  const cartKey=id+'_caja';
-  if(!cart[cartKey])cart[cartKey]={qty:0,precio:p.caja,label:'pack',pid:id};
+  const modo=modos[id]||'caja';
+  const precio=modo==='unit'?p.caja/2:p.caja;
+  const label=modo==='unit'?'½ caja':'pack';
+  const cartKey=id+'_'+modo;
+  if(!cart[cartKey])cart[cartKey]={qty:0,precio,label,pid:id};
   cart[cartKey].qty+=(qtys[id]||1);
   updateBadge();reGrid();
 }
@@ -1182,14 +1181,18 @@ function updateBadge(){
   const bn=document.getElementById('bn-badge');
   if(bn){bn.textContent=n;bn.classList.toggle('zero',n===0)}
 }
-function toggleCart(){document.getElementById('cart-panel').classList.toggle('open');document.getElementById('overlay').classList.toggle('open');checkout=false;done=false;renderCart()}
+function toggleCart(){
+  document.getElementById('cart-panel').classList.toggle('open');
+  document.getElementById('overlay').classList.toggle('open');
+  checkout=false;done=false;renderCart()
+}
 function renderCart(){
   const body=document.getElementById('cart-body');
   const foot=document.getElementById('cart-foot-area');
   const keys=Object.keys(cart).filter(k=>cart[k]&&cart[k].qty>0);
   if(done){
     body.innerHTML=`<div class="confirm-box"><div class="confirm-icon">✅</div><div class="confirm-ttl">¡Pedido enviado!</div><div class="confirm-txt">Abrimos WhatsApp con el detalle.<br>Te contactamos a la brevedad.<br><br><span class="confirm-tel">PelSAS · 096 190 002</span></div><button class="new-btn" onclick="newOrder()">Nuevo pedido</button></div><div class="pwa-install-box" id="pwa-box"><div class="pwa-install-title">¿Querés tener PelSAS siempre a mano?</div><div class="pwa-install-sub">Instalá la app en tu celular y accedé directo, sin abrir el navegador.</div><button class="pwa-install-btn" onclick="installPWA()">Instalar PelSAS</button></div>`;
-  setTimeout(showInstallPrompt, 300);
+    setTimeout(showInstallPrompt, 300);
     foot.innerHTML='';return;
   }
   if(!keys.length){body.innerHTML=`<div class="empty-cart-box"><span class="empty-cart-icon">🛒</span>El pedido está vacío.</div>`;foot.innerHTML='';return}
@@ -1212,7 +1215,7 @@ function renderCart(){
     </div>
     <div class="cart-foot"><div class="total-row"><span class="total-lbl">Total estimado</span><span class="total-val">${fmt(total)}</span></div><div class="checkout-form"><label>Nombre o negocio</label><input type="text" id="cfn" placeholder="Tu nombre o razón social"><label>WhatsApp</label><input type="text" id="cft" placeholder="09x xxx xxx"><label>Dirección</label><input type="text" id="cfd" placeholder="Calle, número, ciudad"><label>Notas</label><textarea id="cfno" rows="2" placeholder="Horario, indicaciones..."></textarea></div><button class="wsp-btn" onclick="sendOrder()" style="margin-top:14px"><svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.528 5.855L.057 23.428a.75.75 0 00.916.916l5.573-1.471A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.885 0-3.651-.511-5.168-1.401l-.371-.219-3.849 1.016 1.016-3.849-.219-.371A9.953 9.953 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>Enviar por WhatsApp</button></div>`;
   } else {
-    foot.innerHTML=`<div class="cart-foot"><div class="total-row"><span class="total-lbl">Total estimado</span><span class="total-val">${fmt(total)}</span></div><button class="step-btn" onclick="showCheckout()">Confirmar y enviar por WhatsApp →</button><button class="new-btn" style="width:100%;margin-top:8px;text-align:center" onclick="toggleCart()">← Seguir agregando productos</button></div>`;
+    foot.innerHTML=`<div class="cart-foot"><div class="total-row"><span class="total-lbl">Total estimado</span><span class="total-val">${fmt(total)}</span></div><button class="step-btn" onclick="showCheckout()">Confirmar y enviar por WhatsApp →</button><button class="new-btn" style="width:100%;margin-top:8px;text-align:center" onclick="toggleCart()">← Seguir agregando</button></div>`;
   }
 }
 function cQ(k,d){if(!cart[k])return;cart[k].qty=Math.max(1,cart[k].qty+d);updateBadge();renderCart()}
@@ -1304,6 +1307,13 @@ function openLB(art){
   lb.classList.add('open');lbReset();
   document.body.style.overflow='hidden';
 }
+function openLBraw(src){
+  const lb=document.getElementById('lightbox');
+  const im=document.getElementById('lb-img');
+  im.src=src;
+  lb.classList.add('open');lbReset();
+  document.body.style.overflow='hidden';
+}
 function closeLB(){document.getElementById('lightbox').classList.remove('open');document.body.style.overflow=''}
 function lbBgClose(e){if(e.target.id==='lightbox')closeLB()}
 function lbZoom(d){lbScale=Math.max(1,Math.min(6,lbScale*(d>0?1.3:1/1.3)));if(lbScale===1){lbTx=0;lbTy=0}_lbApply()}
@@ -1320,8 +1330,7 @@ function onLBWheel(e){e.preventDefault();const d=-e.deltaY*0.0025;lbScale=Math.m
 function onLBDbl(e){e.preventDefault();if(lbScale>1)lbReset();else{lbScale=2.5;_lbApply()}}
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&document.getElementById('lightbox').classList.contains('open'))closeLB()});
 
-
-/* HISTORY API - botón atrás Android */
+/* HISTORY API */
 function pushState(v,b){
   const state={view:v,brand:b};
   history.pushState(state,'','#'+v+(b?'-'+b:''));
@@ -1352,7 +1361,8 @@ function renderOnly(){
   else if(view==='catalogo')document.getElementById('bn-catalogo')?.classList.add('active');
   window.scrollTo({top:0,behavior:'instant'});
 }
-/* ── PWA ── */
+
+/* PWA */
 let _deferredPrompt=null;
 window.addEventListener('beforeinstallprompt',e=>{
   e.preventDefault();
@@ -1378,6 +1388,8 @@ if('serviceWorker' in navigator){
 }
 
 initApp();
+// Panel siempre visible en desktop
+
 </script>
 </body>
 </html>

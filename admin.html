@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PelSAS · Admin</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -48,11 +49,9 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 .brand-btn{display:flex;align-items:center;gap:10px;width:100%;padding:9px 12px;border:none;background:none;border-radius:9px;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--ink2);transition:background .12s;text-align:left}
 .brand-btn:hover{background:var(--cream)}
 .brand-btn.active{background:var(--cream2);color:var(--ink);font-weight:500}
-.brand-btn.inactive-brand{opacity:.45}
-.brand-btn .b-count{margin-left:auto;font-size:10px;color:var(--light);background:var(--cream2);border-radius:10px;padding:1px 7px;flex-shrink:0}
+.brand-btn.inactive{opacity:.45}
+.brand-btn .b-count{margin-left:auto;font-size:10px;color:var(--light);background:var(--cream2);border-radius:10px;padding:1px 7px}
 .brand-btn.active .b-count{background:var(--border)}
-.sidebar-add-brand{display:flex;align-items:center;gap:8px;width:100%;padding:8px 12px;border:1px dashed var(--border);background:none;border-radius:9px;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:12px;color:var(--mid);transition:all .12s;text-align:left;margin-top:6px}
-.sidebar-add-brand:hover{border-color:var(--ink);color:var(--ink);background:var(--cream)}
 
 /* CONTENT */
 .content{padding:2rem}
@@ -66,21 +65,18 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 .toggle-inactive-btn{background:var(--cream2);border:1px solid var(--border);border-radius:8px;padding:8px 14px;font-family:'DM Sans',sans-serif;font-size:12px;color:var(--mid);cursor:pointer}
 .toggle-inactive-btn.on{background:var(--ink);color:#fff;border-color:var(--ink)}
 
-/* BRAND HEADER */
+/* BRAND TOGGLE */
 .brand-meta{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:1.25rem 1.5rem;margin-bottom:1.25rem;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
 .brand-meta img{height:40px;max-width:120px;object-fit:contain}
 .brand-meta-info{flex:1}
 .brand-meta-name{font-family:'Playfair Display',serif;font-size:18px;font-weight:900}
 .brand-meta-desc{font-size:12px;color:var(--mid);margin-top:2px}
-.brand-meta-actions{display:flex;align-items:center;gap:10px;margin-left:auto}
-.brand-toggle{display:flex;align-items:center;gap:10px}
+.brand-toggle{display:flex;align-items:center;gap:10px;margin-left:auto}
 .toggle-label{font-size:12px;color:var(--mid)}
 .toggle-track{position:relative;width:44px;height:24px;background:var(--border);border-radius:12px;cursor:pointer;transition:background .2s;flex-shrink:0}
 .toggle-track.on{background:var(--green)}
 .toggle-thumb{position:absolute;top:3px;left:3px;width:18px;height:18px;background:#fff;border-radius:50%;transition:transform .2s;box-shadow:0 1px 4px rgba(0,0,0,.2)}
 .toggle-track.on .toggle-thumb{transform:translateX(20px)}
-.edit-brand-btn{background:var(--cream2);border:1px solid var(--border);border-radius:6px;padding:6px 12px;font-size:11px;font-weight:500;cursor:pointer;color:var(--ink);font-family:'DM Sans',sans-serif}
-.edit-brand-btn:hover{border-color:var(--ink);background:var(--cream)}
 
 /* PRODUCTS TABLE */
 .prod-table{width:100%;border-collapse:collapse;background:var(--white);border:1px solid var(--border);border-radius:12px;overflow:hidden}
@@ -111,15 +107,12 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 .form-row label{display:block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--light);margin-bottom:5px;font-weight:600}
 .form-row input,.form-row select,.form-row textarea{width:100%;padding:10px 12px;border:1.5px solid var(--border);border-radius:8px;font-family:'DM Sans',sans-serif;font-size:14px;background:var(--cream);color:var(--ink);outline:none;transition:border-color .15s}
 .form-row input:focus,.form-row select:focus,.form-row textarea:focus{border-color:var(--red)}
-.form-row input[readonly]{background:var(--cream2);color:var(--mid);cursor:not-allowed}
 .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .modal-actions{display:flex;gap:10px;margin-top:1.5rem}
 .modal-save{flex:1;background:var(--ink);color:#fff;border:none;border-radius:9px;padding:12px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;cursor:pointer}
 .modal-save:hover{background:var(--ink2)}
 .modal-cancel{background:none;border:1px solid var(--border);border-radius:9px;padding:12px 20px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--mid);cursor:pointer}
 .modal-cancel:hover{border-color:var(--border)}
-.form-hint{font-size:11px;color:var(--light);margin-top:4px;line-height:1.5}
-.form-hint strong{color:var(--mid)}
 
 /* STATUS BAR */
 .status-bar{position:fixed;bottom:1.5rem;right:1.5rem;background:var(--ink);color:#fff;border-radius:10px;padding:12px 20px;font-size:13px;font-weight:500;z-index:300;display:none;gap:10px;align-items:center;max-width:340px;box-shadow:0 8px 28px rgba(26,26,24,.25)}
@@ -135,10 +128,17 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 .unsaved-dot{width:8px;height:8px;background:#F0A000;border-radius:50%;display:none}
 .unsaved-dot.show{display:block}
 
-/* TABLE WRAPPER para updates sin perder el header */
-#table-area{margin-top:0}
-
-/* FICHAS */
+/* TOOLS */
+.tool-drop{border:2px dashed var(--border);border-radius:14px;padding:2.5rem;text-align:center;background:#fff;cursor:pointer;transition:border-color .15s;margin-bottom:1.25rem}
+.tool-drop.over{border-color:var(--red)}
+.tool-drop p{color:var(--mid);font-size:14px;margin-top:.5rem}
+.tool-item{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid var(--border);border-radius:10px;padding:10px 14px;margin-bottom:10px}
+.tool-item img{width:48px;height:48px;object-fit:contain;background:var(--cream);border-radius:6px}
+.tool-item .info{flex:1;min-width:0}
+.tool-item .name{font-size:13px;font-weight:500;word-break:break-all}
+.tool-item .size{font-size:11px;color:var(--mid)}
+.tool-item .name input{font-size:12px;padding:4px 6px;border:1px solid var(--border);border-radius:5px;width:100%;margin-top:4px;font-family:monospace}
+.tool-item a{font-size:12px;background:var(--green);color:#fff;border-radius:6px;padding:6px 12px;text-decoration:none;white-space:nowrap}
 .fichas-preview{max-width:100%;border:1px solid var(--border);border-radius:10px;margin-top:1.25rem;background:#fff}
 
 @media(max-width:768px){
@@ -194,10 +194,10 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
   </div>
 </div>
 
-<!-- MODAL: editar/crear producto -->
-<div class="modal-bg" id="modal-prod-bg">
+<!-- MODAL editar/crear producto -->
+<div class="modal-bg" id="modal-bg">
   <div class="modal">
-    <div class="modal-title" id="modal-prod-title">Producto</div>
+    <div class="modal-title" id="modal-title">Producto</div>
     <div class="form-row">
       <label>Nombre del producto</label>
       <input type="text" id="f-name" placeholder="Ej: Gomitas Deliket surtidas 700g">
@@ -220,7 +220,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
       <div class="form-row">
         <label>Artículo (código)</label>
         <input type="text" id="f-art" placeholder="Ej: 5732">
-        <div class="form-hint">La foto del producto debe subirse a GitHub como <strong>img/{artículo}.webp</strong></div>
       </div>
     </div>
     <div class="form-row">
@@ -241,52 +240,60 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
       </div>
     </div>
     <div class="modal-actions">
-      <button class="modal-cancel" onclick="closeProdModal()">Cancelar</button>
+      <button class="modal-cancel" onclick="closeModal()">Cancelar</button>
       <button class="modal-save" onclick="saveProduct()">Guardar producto</button>
     </div>
   </div>
 </div>
 
-<!-- MODAL: crear/editar marca -->
-<div class="modal-bg" id="modal-brand-bg">
+<!-- STATUS BAR -->
+<div class="status-bar" id="status-bar"></div>
+
+<!-- MODAL elegir qué agregar -->
+<div class="modal-bg" id="choice-modal-bg">
+  <div class="modal" style="max-width:340px;text-align:center">
+    <div class="modal-title">¿Qué querés agregar?</div>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <button class="modal-save" onclick="closeChoiceModal();openModal(null)">+ Producto en esta marca</button>
+      <button class="modal-save" style="background:var(--cream2);color:var(--ink)" onclick="closeChoiceModal();openBrandModal(null, currentBrand ? (data.brands.find(b=>b.id===currentBrand)||{}).sid : 'alimentos')">+ Marca nueva</button>
+    </div>
+    <button class="modal-cancel" style="margin-top:10px;width:100%" onclick="closeChoiceModal()">Cancelar</button>
+  </div>
+</div>
+
+<!-- MODAL crear/editar marca -->
+<div class="modal-bg" id="brand-modal-bg">
   <div class="modal">
-    <div class="modal-title" id="modal-brand-title">Nueva marca</div>
+    <div class="modal-title" id="brand-modal-title">Marca</div>
+    <div class="form-row">
+      <label>Nombre de la marca</label>
+      <input type="text" id="fb-name" placeholder="Ej: Dori">
+    </div>
     <div class="form-grid">
       <div class="form-row">
-        <label>Nombre de la marca</label>
-        <input type="text" id="fb-name" placeholder="Ej: Deliket" oninput="autoFillBrandId()">
+        <label>ID interno (sin espacios)</label>
+        <input type="text" id="fb-id" placeholder="Ej: dori">
       </div>
       <div class="form-row">
-        <label>Emoji</label>
-        <input type="text" id="fb-emoji" placeholder="🍬">
+        <label>Sección</label>
+        <select id="fb-sid">
+          <option value="alimentos">Alimentos &amp; Snacks</option>
+          <option value="fumadores">Fumadores</option>
+        </select>
       </div>
-    </div>
-    <div class="form-row">
-      <label>ID interno</label>
-      <input type="text" id="fb-id" placeholder="ej: deliket">
-      <div class="form-hint">Minúsculas, sin espacios ni tildes. Se usa internamente y no cambia.</div>
     </div>
     <div class="form-row">
       <label>Descripción corta</label>
       <input type="text" id="fb-desc" placeholder="Ej: Golosinas y maní">
     </div>
-    <div class="form-row">
-      <label>Categoría</label>
-      <select id="fb-sid">
-        <option value="alimentos">🍬 Alimentos y Snacks</option>
-        <option value="fumadores">🚬 Fumadores</option>
-      </select>
-    </div>
-    <div class="form-row">
-      <label>Logo (ruta en GitHub)</label>
-      <input type="text" id="fb-logo" placeholder="img/logo-deliket.webp">
-      <div class="form-hint">Subí el logo a GitHub en la carpeta <strong>img/</strong> con el nombre <strong>logo-{id}.webp</strong> y pegá la ruta acá.</div>
-    </div>
-    <div class="form-row" style="display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--cream);border-radius:8px;border:1.5px solid var(--border)">
-      <input type="checkbox" id="fb-libre" style="width:18px;height:18px;accent-color:var(--green);cursor:pointer;flex-shrink:0">
-      <div>
-        <label for="fb-libre" style="font-size:13px;color:var(--ink);font-weight:500;cursor:pointer;letter-spacing:0;text-transform:none">🌿 Aparece en sección Libres (sin TACC / sin azúcar)</label>
-        <div class="form-hint" style="margin-top:2px">Marcá si la marca tiene productos sin gluten, sin lactosa o sin azúcar</div>
+    <div class="form-grid">
+      <div class="form-row">
+        <label>Emoji</label>
+        <input type="text" id="fb-emoji" placeholder="🍬">
+      </div>
+      <div class="form-row">
+        <label>Logo (ruta)</label>
+        <input type="text" id="fb-logo" placeholder="img/logo-dori.webp">
       </div>
     </div>
     <div class="modal-actions">
@@ -296,55 +303,48 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
   </div>
 </div>
 
-<!-- STATUS BAR -->
-<div class="status-bar" id="status-bar"></div>
-
 <script>
-// ── Config ────────────────────────────────────────────────────────────────────
+// ── Config ───────────────────────────────────────────────────────────────────
 let GH_OWNER = '', GH_REPO = '', GH_TOKEN = '', GH_SHA = '';
-let data = null;
+let data = null;       // { brands, products }
 let currentBrand = null;
-let view = null;
-let editingProdId = null;
-let editingBrandId = null;
+let view = 'brand';
+let editingId = null;
 let showInactive = false;
 let hasUnsaved = false;
 let searchQ = '';
 
 const DATA_PATH = 'data.json';
 
-// ── Login ─────────────────────────────────────────────────────────────────────
+// ── Login ────────────────────────────────────────────────────────────────────
 function doLogin() {
   GH_OWNER = document.getElementById('gh-owner').value.trim();
   GH_REPO  = document.getElementById('gh-repo').value.trim();
   GH_TOKEN = document.getElementById('gh-token').value.trim();
   if (!GH_OWNER || !GH_REPO || !GH_TOKEN) { showLoginErr('Completá todos los campos'); return; }
   localStorage.setItem('ps_owner', GH_OWNER);
-  localStorage.setItem('ps_repo',  GH_REPO);
+  localStorage.setItem('ps_repo', GH_REPO);
   localStorage.setItem('ps_token', GH_TOKEN);
   loadFromGitHub();
 }
-
 function doLogout() {
   localStorage.removeItem('ps_token');
   location.reload();
 }
-
 function showLoginErr(msg) {
   const el = document.getElementById('login-err');
-  el.textContent = msg;
-  el.style.display = 'block';
+  el.textContent = msg; el.style.display = 'block';
 }
 
-// ── GitHub API ────────────────────────────────────────────────────────────────
-async function ghFetch(path, opts = {}) {
+// ── GitHub API ───────────────────────────────────────────────────────────────
+async function ghFetch(path, opts={}) {
   const url = `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${path}`;
   const res = await fetch(url, {
     ...opts,
     headers: {
       'Authorization': `token ${GH_TOKEN}`,
       'Content-Type': 'application/json',
-      ...(opts.headers || {})
+      ...(opts.headers||{})
     }
   });
   if (!res.ok) throw new Error(`GitHub ${res.status}: ${await res.text()}`);
@@ -356,16 +356,14 @@ async function loadFromGitHub() {
   try {
     const file = await ghFetch(DATA_PATH);
     GH_SHA = file.sha;
-    const raw = atob(file.content.replace(/\n/g, ''));
-    const bytes = Uint8Array.from(raw, c => c.charCodeAt(0));
-    const json = JSON.parse(new TextDecoder('utf-8').decode(bytes));
+    const json = JSON.parse(decodeURIComponent(escape(atob(file.content.replace(/\n/g,'')))));
     data = json;
     document.getElementById('login-screen').style.display = 'none';
     document.getElementById('app').style.display = 'block';
     renderSidebar();
     showStatus('Catálogo cargado ✓', 'ok');
-  } catch (e) {
-    showLoginErr('Error al conectar: ' + e.message);
+  } catch(e) {
+    showLoginErr('Error: ' + e.message);
     showStatus('Error al cargar', 'err');
   }
 }
@@ -374,24 +372,9 @@ async function saveToGitHub() {
   if (!hasUnsaved) return;
   const btn = document.getElementById('save-btn');
   btn.disabled = true;
-
-  // Validar JSON antes de guardar
-  let jsonStr;
-  try {
-    jsonStr = JSON.stringify(data, null, 2);
-    JSON.parse(jsonStr); // verificar que sea válido
-  } catch (e) {
-    showStatus('Error: el JSON no es válido — no se guardó', 'err', 5000);
-    btn.disabled = false;
-    return;
-  }
-
   showStatus('Guardando en GitHub…');
   try {
-    const encBytes = new TextEncoder().encode(jsonStr);
-    let bin = '';
-    encBytes.forEach(b => bin += String.fromCharCode(b));
-    const content = btoa(bin);
+    const content = btoa(unescape(encodeURIComponent(JSON.stringify(data, null, 2))));
     const result = await ghFetch(DATA_PATH, {
       method: 'PUT',
       body: JSON.stringify({
@@ -401,40 +384,26 @@ async function saveToGitHub() {
       })
     });
     GH_SHA = result.content.sha;
-
-    // Verificar que lo guardado sea válido leyendo de vuelta
-    try {
-      const verify = await ghFetch(DATA_PATH);
-      const vRaw = atob(verify.content.replace(/\n/g, ''));
-      const vBytes = Uint8Array.from(vRaw, c => c.charCodeAt(0));
-      JSON.parse(new TextDecoder('utf-8').decode(vBytes));
-    } catch (ve) {
-      showStatus('⚠️ Guardado pero no se pudo verificar — revisá el sitio', 'err', 6000);
-      btn.disabled = false;
-      return;
-    }
-
     hasUnsaved = false;
     document.getElementById('unsaved-dot').classList.remove('show');
     btn.disabled = true;
-    // Purgar caché de jsDelivr para que el sitio vea los cambios al instante
-    fetch(`https://purge.jsdelivr.net/gh/${GH_OWNER}/${GH_REPO}@${GH_BRANCH}/data.json`).catch(()=>{});
     showStatus('¡Guardado! Los cambios ya están en el sitio 🎉', 'ok', 4000);
-  } catch (e) {
-    showStatus('Error al guardar: ' + e.message, 'err', 6000);
+  } catch(e) {
+    showStatus('Error al guardar: ' + e.message, 'err', 5000);
     btn.disabled = false;
   }
 }
 
+// ── Marca cambio como pendiente ──────────────────────────────────────────────
 function markUnsaved() {
   hasUnsaved = true;
   document.getElementById('unsaved-dot').classList.add('show');
   document.getElementById('save-btn').disabled = false;
 }
 
-// ── Sidebar ───────────────────────────────────────────────────────────────────
+// ── Sidebar ──────────────────────────────────────────────────────────────────
 function renderSidebar() {
-  const alBrands  = data.brands.filter(b => b.sid === 'alimentos');
+  const alBrands = data.brands.filter(b => b.sid === 'alimentos');
   const fumBrands = data.brands.filter(b => b.sid === 'fumadores');
   let html = `<div class="sidebar-section">
     <span class="sidebar-label">🛠️ Herramientas</span>
@@ -445,34 +414,31 @@ function renderSidebar() {
       <span>📋</span><span>Generador de fichas</span>
     </button>
   </div>`;
-  html += renderBrandGroup('Alimentos', alBrands, 'alimentos');
-  html += renderBrandGroup('Fumadores', fumBrands, 'fumadores');
+  html += renderBrandGroup('&#127851; Alimentos', alBrands, 'alimentos');
+  html += renderBrandGroup('&#128680; Fumadores', fumBrands, 'fumadores');
   document.getElementById('sidebar').innerHTML = html;
 }
-
 function renderBrandGroup(label, brands, sid) {
   return `<div class="sidebar-section">
     <span class="sidebar-label">${label}</span>
     ${brands.map(b => {
-      const count = (data.products[b.id] || []).filter(p => p.activo !== false).length;
-      const total = (data.products[b.id] || []).length;
-      const active   = currentBrand === b.id ? ' active' : '';
-      const inactive = b.activo === false ? ' inactive-brand' : '';
+      const count = (data.products[b.id]||[]).filter(p=>p.activo!==false).length;
+      const total = (data.products[b.id]||[]).length;
+      const active = currentBrand === b.id ? ' active' : '';
+      const inactive = b.activo === false ? ' inactive' : '';
       return `<button class="brand-btn${active}${inactive}" onclick="selectBrand('${b.id}')">
         <span>${b.emoji}</span>
-        <span style="flex:1;text-align:left">${b.name}</span>
+        <span>${b.name}</span>
         <span class="b-count">${count}/${total}</span>
       </button>`;
     }).join('')}
-    <button class="sidebar-add-brand" onclick="openBrandModal(null,'${sid}')">
-      + Nueva marca
-    </button>
   </div>`;
 }
 
 // ── Contenido de marca ────────────────────────────────────────────────────────
 function selectBrand(bid) {
   currentBrand = bid;
+  view = 'brand';
   searchQ = '';
   renderSidebar();
   renderContent();
@@ -482,334 +448,76 @@ function renderContent() {
   if (!currentBrand) return;
   const brand = data.brands.find(b => b.id === currentBrand);
   if (!brand) return;
+  const prods = data.products[currentBrand] || [];
+  const filtered = prods
+    .filter(p => showInactive || p.activo !== false)
+    .filter(p => !searchQ || p.name.toLowerCase().includes(searchQ) || p.art.includes(searchQ) || p.cat.includes(searchQ));
 
   document.getElementById('content').innerHTML = `
     <div class="content-hdr">
       <div class="content-title">${brand.emoji} ${brand.name}</div>
       <div class="hdr-actions">
-        <input type="text" class="search-box" id="search-input"
-          placeholder="Buscar producto…"
-          value="${escHtml(searchQ)}"
-          oninput="onSearch(this.value)"
-          autocomplete="off">
-        <button class="toggle-inactive-btn${showInactive ? ' on' : ''}" onclick="toggleInactive()">
+        <input type="text" class="search-box" placeholder="Buscar producto…" value="${searchQ}" oninput="onSearch(this.value)">
+        <button class="toggle-inactive-btn${showInactive?' on':''}" onclick="toggleInactive()">
           ${showInactive ? 'Ocultar inactivos' : 'Ver inactivos'}
         </button>
-        <button class="add-btn" onclick="openProdModal(null)">+ Agregar</button>
+        <button class="add-btn" onclick="openAddChoice()">+ Agregar</button>
       </div>
     </div>
 
     <div class="brand-meta">
-      <img src="${brand.logo}" alt="${brand.name}"
-        onerror="this.outerHTML='<span style=\\'font-size:28px\\'>${brand.emoji}</span>'">
+      <img src="${brand.logo}" alt="${brand.name}" onerror="this.outerHTML='<span style=\\'font-size:28px\\'>${brand.emoji}</span>'">
       <div class="brand-meta-info">
         <div class="brand-meta-name">${brand.name}</div>
         <div class="brand-meta-desc">${brand.desc}</div>
       </div>
-      <div class="brand-meta-actions">
-        <button class="edit-brand-btn" onclick="openBrandModal('${brand.id}')">Editar marca</button>
-        <div class="brand-toggle">
-          <span class="toggle-label">${brand.activo !== false ? 'Activa' : 'Inactiva'}</span>
-          <div class="toggle-track${brand.activo !== false ? ' on' : ''}" onclick="toggleBrand('${brand.id}')">
-            <div class="toggle-thumb"></div>
-          </div>
+      <div class="brand-toggle">
+        <span class="toggle-label">${brand.activo!==false?'Activa':'Inactiva'}</span>
+        <div class="toggle-track${brand.activo!==false?' on':''}" onclick="toggleBrand('${brand.id}')">
+          <div class="toggle-thumb"></div>
         </div>
+        <button class="edit-btn" onclick="openBrandModal('${brand.id}')">Editar marca</button>
+        <button class="del-btn" onclick="deleteBrand('${brand.id}')">Borrar marca</button>
       </div>
     </div>
 
-    <div id="table-area"></div>
+    ${filtered.length === 0
+      ? `<div class="empty-state"><span class="empty-icon">📦</span><div>No hay productos${searchQ?' para "'+searchQ+'"':''}</div></div>`
+      : `<table class="prod-table">
+          <thead><tr>
+            <th>Foto</th>
+            <th>Producto</th>
+            <th>Cat.</th>
+            <th>Art.</th>
+            <th>Precio unit.</th>
+            <th>Precio caja</th>
+            <th>Activo</th>
+            <th>Acciones</th>
+          </tr></thead>
+          <tbody>${filtered.map(p => renderRow(p, currentBrand)).join('')}</tbody>
+        </table>`
+    }
   `;
-
-  renderTable();
 }
 
-function renderTable() {
-  const brand = data.brands.find(b => b.id === currentBrand);
-  if (!brand) return;
-  const prods = data.products[currentBrand] || [];
-  const q = searchQ.toLowerCase().trim();
-  const filtered = prods
-    .filter(p => showInactive || p.activo !== false)
-    .filter(p => !q || p.name.toLowerCase().includes(q) || String(p.art).includes(q) || p.cat.toLowerCase().includes(q));
-
-  const area = document.getElementById('table-area');
-  if (!area) return;
-
-  if (filtered.length === 0) {
-    area.innerHTML = `<div class="empty-state"><span class="empty-icon">📦</span><div>No hay productos${q ? ' para "' + escHtml(q) + '"' : ''}</div></div>`;
-    return;
-  }
-
-  area.innerHTML = `<table class="prod-table">
-    <thead><tr>
-      <th>Foto</th>
-      <th>Producto</th>
-      <th>Categoría</th>
-      <th>Art.</th>
-      <th>Precio unit.</th>
-      <th>Precio caja</th>
-      <th>Activo</th>
-      <th>Acciones</th>
-    </tr></thead>
-    <tbody>${filtered.map(p => renderRow(p)).join('')}</tbody>
-  </table>`;
-}
-
-function renderRow(p) {
+function renderRow(p, bid) {
   const inactive = p.activo === false ? ' inactive-row' : '';
   return `<tr class="${inactive}" id="row-${p.id}">
-    <td><img class="prod-img" src="img/${p.art}.webp" alt=""
-      onerror="this.outerHTML='<span style=\\'font-size:24px\\'>${p.emoji}</span>'"></td>
-    <td><div class="prod-name-cell">${escHtml(p.name)}</div></td>
-    <td><span class="prod-cat">${escHtml(p.cat)}</span></td>
-    <td><span class="art-badge">${escHtml(String(p.art))}</span></td>
+    <td><img class="prod-img" src="img/${p.art}.webp" alt="" onerror="this.outerHTML='<span style=\\'font-size:24px\\'>${p.emoji}</span>'"></td>
+    <td><div class="prod-name-cell">${p.name}</div></td>
+    <td><span class="prod-cat">${p.cat}</span></td>
+    <td><span class="art-badge">${p.art}</span></td>
     <td><div class="price-cell">$${p.unit.toFixed(2)}</div></td>
     <td><div class="price-cell">$${p.caja.toFixed(2)}<div class="price-unit">caja completa</div></div></td>
-    <td><span class="activo-toggle" onclick="toggleProduct('${p.id}')" title="Activar/desactivar">${p.activo !== false ? '✅' : '⬜'}</span></td>
+    <td><span class="activo-toggle" onclick="toggleProduct('${p.id}')" title="Activar/desactivar">${p.activo!==false?'✅':'⬜'}</span></td>
     <td><div class="action-btns">
-      <button class="edit-btn" onclick="openProdModal('${p.id}')">Editar</button>
+      <button class="edit-btn" onclick="openModal('${p.id}')">Editar</button>
       <button class="del-btn" onclick="deleteProduct('${p.id}')">Borrar</button>
     </div></td>
   </tr>`;
 }
 
-function escHtml(str) {
-  return String(str)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;');
-}
-
-// ── Acciones sobre marcas ─────────────────────────────────────────────────────
-function toggleBrand(bid) {
-  const b = data.brands.find(x => x.id === bid);
-  b.activo = b.activo === false ? true : false;
-  markUnsaved();
-  renderSidebar();
-  renderContent();
-}
-
-// ── Acciones sobre productos ──────────────────────────────────────────────────
-function toggleProduct(pid) {
-  for (const bid of Object.keys(data.products)) {
-    const p = data.products[bid].find(x => x.id === pid);
-    if (p) { p.activo = p.activo === false ? true : false; break; }
-  }
-  markUnsaved();
-  renderTable();
-}
-
-function deleteProduct(pid) {
-  if (!confirm('¿Seguro que querés borrar este producto? Esta acción no se puede deshacer.')) return;
-  for (const bid of Object.keys(data.products)) {
-    const idx = data.products[bid].findIndex(x => x.id === pid);
-    if (idx !== -1) { data.products[bid].splice(idx, 1); break; }
-  }
-  markUnsaved();
-  renderTable();
-  renderSidebar();
-}
-
-function onSearch(q) {
-  searchQ = q;
-  // Solo actualiza la tabla, no re-renderiza el input (evita perder el foco)
-  renderTable();
-}
-
-function toggleInactive() {
-  showInactive = !showInactive;
-  renderContent();
-}
-
-// ── Modal: Producto ───────────────────────────────────────────────────────────
-function openProdModal(pid) {
-  editingProdId = pid;
-  document.getElementById('modal-prod-title').textContent = pid ? 'Editar producto' : 'Nuevo producto';
-
-  if (pid) {
-    let p = null;
-    for (const bid of Object.keys(data.products)) {
-      p = data.products[bid].find(x => x.id === pid);
-      if (p) break;
-    }
-    if (!p) return;
-    document.getElementById('f-name').value    = p.name;
-    document.getElementById('f-unit').value    = p.unit;
-    document.getElementById('f-caja').value    = p.caja;
-    document.getElementById('f-cat').value     = p.cat;
-    document.getElementById('f-art').value     = p.art;
-    document.getElementById('f-present').value = p.present || '';
-    document.getElementById('f-emoji').value   = p.emoji || '📦';
-    document.getElementById('f-venta').value   = p.venta || 1;
-  } else {
-    document.getElementById('f-name').value    = '';
-    document.getElementById('f-unit').value    = '';
-    document.getElementById('f-caja').value    = '';
-    document.getElementById('f-cat').value     = '';
-    document.getElementById('f-art').value     = '';
-    document.getElementById('f-present').value = '';
-    document.getElementById('f-emoji').value   = '📦';
-    document.getElementById('f-venta').value   = 1;
-  }
-
-  document.getElementById('modal-prod-bg').classList.add('open');
-  document.getElementById('f-name').focus();
-}
-
-function closeProdModal() {
-  document.getElementById('modal-prod-bg').classList.remove('open');
-  editingProdId = null;
-}
-
-function saveProduct() {
-  const name    = document.getElementById('f-name').value.trim();
-  const unit    = parseFloat(document.getElementById('f-unit').value);
-  const caja    = parseFloat(document.getElementById('f-caja').value);
-  const cat     = document.getElementById('f-cat').value.trim();
-  const art     = document.getElementById('f-art').value.trim();
-  const present = document.getElementById('f-present').value.trim();
-  const emoji   = document.getElementById('f-emoji').value.trim() || '📦';
-  const venta   = parseInt(document.getElementById('f-venta').value);
-
-  if (!name || isNaN(unit) || isNaN(caja)) {
-    alert('Completá al menos nombre, precio unitario y precio caja');
-    return;
-  }
-
-  if (editingProdId) {
-    for (const bid of Object.keys(data.products)) {
-      const p = data.products[bid].find(x => x.id === editingProdId);
-      if (p) {
-        Object.assign(p, { name, unit, caja, cat, art, present, emoji, venta });
-        break;
-      }
-    }
-  } else {
-    if (!currentBrand) { alert('Seleccioná una marca primero'); return; }
-    if (!data.products[currentBrand]) data.products[currentBrand] = [];
-    const newId = currentBrand + '_' + Date.now();
-    data.products[currentBrand].push({ id: newId, name, unit, caja, cat, art, present, emoji, venta, activo: true });
-  }
-
-  markUnsaved();
-  closeProdModal();
-  renderTable();
-  renderSidebar();
-}
-
-// ── Modal: Marca ──────────────────────────────────────────────────────────────
-function openBrandModal(bid, defaultSid) {
-  editingBrandId = bid;
-  document.getElementById('modal-brand-title').textContent = bid ? 'Editar marca' : 'Nueva marca';
-
-  if (bid) {
-    const b = data.brands.find(x => x.id === bid);
-    if (!b) return;
-    document.getElementById('fb-name').value  = b.name;
-    document.getElementById('fb-id').value    = b.id;
-    document.getElementById('fb-desc').value  = b.desc || '';
-    document.getElementById('fb-emoji').value = b.emoji || '';
-    document.getElementById('fb-sid').value     = b.sid || 'alimentos';
-    document.getElementById('fb-logo').value    = b.logo || '';
-    document.getElementById('fb-libre').checked = b.libre === true;
-    document.getElementById('fb-id').readOnly   = true;
-  } else {
-    document.getElementById('fb-name').value    = '';
-    document.getElementById('fb-id').value      = '';
-    document.getElementById('fb-desc').value    = '';
-    document.getElementById('fb-emoji').value   = '';
-    document.getElementById('fb-sid').value     = defaultSid || 'alimentos';
-    document.getElementById('fb-logo').value    = '';
-    document.getElementById('fb-libre').checked = false;
-    document.getElementById('fb-id').readOnly   = false;
-  }
-
-  document.getElementById('modal-brand-bg').classList.add('open');
-  document.getElementById('fb-name').focus();
-}
-
-function closeBrandModal() {
-  document.getElementById('modal-brand-bg').classList.remove('open');
-  editingBrandId = null;
-}
-
-function autoFillBrandId() {
-  if (editingBrandId) return; // no tocar el ID si estamos editando
-  const idField = document.getElementById('fb-id');
-  if (idField.readOnly) return;
-  const name = document.getElementById('fb-name').value;
-  idField.value = name
-    .toLowerCase()
-    .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
-    .replace(/[^a-z0-9]/g, '')
-    .substring(0, 20);
-}
-
-function saveBrand() {
-  const name  = document.getElementById('fb-name').value.trim();
-  const id    = document.getElementById('fb-id').value.trim();
-  const desc  = document.getElementById('fb-desc').value.trim();
-  const emoji = document.getElementById('fb-emoji').value.trim();
-  const sid   = document.getElementById('fb-sid').value;
-  const logo  = document.getElementById('fb-logo').value.trim() || `img/logo-${id}.webp`;
-  const libre = document.getElementById('fb-libre').checked;
-
-  if (!name || !id) {
-    alert('Completá al menos el nombre y el ID de la marca');
-    return;
-  }
-
-  if (editingBrandId) {
-    const b = data.brands.find(x => x.id === editingBrandId);
-    if (b) Object.assign(b, { name, desc, emoji, sid, logo, libre });
-  } else {
-    // Verificar que el ID no exista
-    if (data.brands.find(x => x.id === id)) {
-      alert(`Ya existe una marca con el ID "${id}". Usá un ID diferente.`);
-      return;
-    }
-    data.brands.push({ id, sid, name, emoji, desc, logo, libre, activo: true });
-    if (!data.products[id]) data.products[id] = [];
-  }
-
-  markUnsaved();
-  closeBrandModal();
-  renderSidebar();
-
-  // Si editamos la marca actual, re-render del contenido para actualizar el header
-  if (editingBrandId && editingBrandId === currentBrand) {
-    renderContent();
-  }
-}
-
-// ── Status bar ────────────────────────────────────────────────────────────────
-let statusTimer = null;
-function showStatus(msg, type = '', duration = 2500) {
-  const el = document.getElementById('status-bar');
-  el.textContent = msg;
-  el.className = 'status-bar show' + (type ? ' ' + type : '');
-  clearTimeout(statusTimer);
-  statusTimer = setTimeout(() => el.classList.remove('show'), duration);
-}
-
-// ── Init ──────────────────────────────────────────────────────────────────────
-document.getElementById('modal-prod-bg').addEventListener('click', e => {
-  if (e.target === document.getElementById('modal-prod-bg')) closeProdModal();
-});
-document.getElementById('modal-brand-bg').addEventListener('click', e => {
-  if (e.target === document.getElementById('modal-brand-bg')) closeBrandModal();
-});
-
-// Tecla Escape cierra el modal abierto
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') {
-    closeProdModal();
-    closeBrandModal();
-  }
-});
-
-// ── Herramientas ─────────────────────────────────────────────────────────────
+// ── Herramientas ──────────────────────────────────────────────────────────────
 function goTool(t) {
   view = t;
   currentBrand = null;
@@ -1273,6 +981,239 @@ async function generateFicha() {
   },'image/jpeg',0.93);
 }
 
+// ── Acciones ─────────────────────────────────────────────────────────────────
+function toggleBrand(bid) {
+  const b = data.brands.find(x => x.id === bid);
+  b.activo = b.activo === false ? true : false;
+  markUnsaved();
+  renderSidebar();
+  renderContent();
+}
+
+function toggleProduct(pid) {
+  for (const bid of Object.keys(data.products)) {
+    const p = data.products[bid].find(x => x.id === pid);
+    if (p) { p.activo = p.activo === false ? true : false; break; }
+  }
+  markUnsaved();
+  renderContent();
+}
+
+function deleteProduct(pid) {
+  if (!confirm('¿Seguro que querés borrar este producto? Esta acción no se puede deshacer.')) return;
+  for (const bid of Object.keys(data.products)) {
+    const idx = data.products[bid].findIndex(x => x.id === pid);
+    if (idx !== -1) { data.products[bid].splice(idx, 1); break; }
+  }
+  markUnsaved();
+  renderContent();
+  renderSidebar();
+}
+
+function onSearch(q) {
+  searchQ = q.toLowerCase().trim();
+  renderContent();
+}
+
+function toggleInactive() {
+  showInactive = !showInactive;
+  renderContent();
+}
+
+// ── Modal ─────────────────────────────────────────────────────────────────────
+function openModal(pid) {
+  editingId = pid;
+  document.getElementById('modal-title').textContent = pid ? 'Editar producto' : 'Nuevo producto';
+  if (pid) {
+    let p = null;
+    for (const bid of Object.keys(data.products)) {
+      p = data.products[bid].find(x => x.id === pid);
+      if (p) break;
+    }
+    if (!p) return;
+    document.getElementById('f-name').value = p.name;
+    document.getElementById('f-unit').value = p.unit;
+    document.getElementById('f-caja').value = p.caja;
+    document.getElementById('f-cat').value = p.cat;
+    document.getElementById('f-art').value = p.art;
+    document.getElementById('f-present').value = p.present;
+    document.getElementById('f-emoji').value = p.emoji;
+    document.getElementById('f-venta').value = p.venta || 1;
+  } else {
+    document.getElementById('f-name').value = '';
+    document.getElementById('f-unit').value = '';
+    document.getElementById('f-caja').value = '';
+    document.getElementById('f-cat').value = '';
+    document.getElementById('f-art').value = '';
+    document.getElementById('f-present').value = '';
+    document.getElementById('f-emoji').value = '📦';
+    document.getElementById('f-venta').value = 1;
+  }
+  document.getElementById('modal-bg').classList.add('open');
+  document.getElementById('f-name').focus();
+}
+
+function closeModal() {
+  document.getElementById('modal-bg').classList.remove('open');
+  editingId = null;
+}
+
+function saveProduct() {
+  const name = document.getElementById('f-name').value.trim();
+  const unit = parseFloat(document.getElementById('f-unit').value);
+  const caja = parseFloat(document.getElementById('f-caja').value);
+  const cat  = document.getElementById('f-cat').value.trim();
+  const art  = document.getElementById('f-art').value.trim();
+  const present = document.getElementById('f-present').value.trim();
+  const emoji = document.getElementById('f-emoji').value.trim() || '📦';
+  const venta = parseInt(document.getElementById('f-venta').value);
+
+  if (!name || isNaN(unit) || isNaN(caja)) {
+    alert('Completá al menos nombre, precio unitario y precio caja');
+    return;
+  }
+
+  if (editingId) {
+    // Editar existente
+    for (const bid of Object.keys(data.products)) {
+      const p = data.products[bid].find(x => x.id === editingId);
+      if (p) {
+        Object.assign(p, { name, unit, caja, cat, art, present, emoji, venta });
+        break;
+      }
+    }
+  } else {
+    // Nuevo producto
+    if (!currentBrand) { alert('Seleccioná una marca primero'); return; }
+    if (!data.products[currentBrand]) data.products[currentBrand] = [];
+    const newId = currentBrand + '_' + Date.now();
+    data.products[currentBrand].push({ id: newId, name, unit, caja, cat, art, present, emoji, venta, activo: true });
+  }
+
+  markUnsaved();
+  closeModal();
+  renderContent();
+  renderSidebar();
+}
+
+// ── Modal de elección ────────────────────────────────────────────────────────
+function openAddChoice() {
+  if (!currentBrand) { openModal(null); return; }
+  document.getElementById('choice-modal-bg').classList.add('open');
+}
+function closeChoiceModal() {
+  document.getElementById('choice-modal-bg').classList.remove('open');
+}
+
+// ── Modal de marca ───────────────────────────────────────────────────────────
+let editingBrandId = null;
+let newBrandSid = 'alimentos';
+
+function openBrandModal(bid, sid) {
+  editingBrandId = bid;
+  if (bid) {
+    const b = data.brands.find(x => x.id === bid);
+    if (!b) return;
+    document.getElementById('brand-modal-title').textContent = 'Editar marca';
+    document.getElementById('fb-name').value = b.name;
+    document.getElementById('fb-id').value = b.id;
+    document.getElementById('fb-id').disabled = true;
+    document.getElementById('fb-sid').value = b.sid;
+    document.getElementById('fb-desc').value = b.desc || '';
+    document.getElementById('fb-emoji').value = b.emoji || '';
+    document.getElementById('fb-logo').value = b.logo || '';
+  } else {
+    newBrandSid = sid || 'alimentos';
+    document.getElementById('brand-modal-title').textContent = 'Nueva marca';
+    document.getElementById('fb-name').value = '';
+    document.getElementById('fb-id').value = '';
+    document.getElementById('fb-id').disabled = false;
+    document.getElementById('fb-sid').value = newBrandSid;
+    document.getElementById('fb-desc').value = '';
+    document.getElementById('fb-emoji').value = '📦';
+    document.getElementById('fb-logo').value = '';
+  }
+  document.getElementById('brand-modal-bg').classList.add('open');
+  document.getElementById('fb-name').focus();
+}
+
+function closeBrandModal() {
+  document.getElementById('brand-modal-bg').classList.remove('open');
+  editingBrandId = null;
+}
+
+function slugify(s) {
+  return s.toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9]+/g, '');
+}
+
+function saveBrand() {
+  const name = document.getElementById('fb-name').value.trim();
+  const sid  = document.getElementById('fb-sid').value;
+  const desc = document.getElementById('fb-desc').value.trim();
+  const emoji = document.getElementById('fb-emoji').value.trim() || '📦';
+  const logo = document.getElementById('fb-logo').value.trim() || 'img/placeholder.webp';
+
+  if (!name) { alert('Completá el nombre de la marca'); return; }
+
+  if (editingBrandId) {
+    const b = data.brands.find(x => x.id === editingBrandId);
+    Object.assign(b, { name, sid, desc, emoji, logo });
+  } else {
+    let id = document.getElementById('fb-id').value.trim();
+    id = id ? slugify(id) : slugify(name);
+    if (!id) { alert('Ingresá un ID válido para la marca'); return; }
+    if (data.brands.some(b => b.id === id)) { alert('Ya existe una marca con ese ID'); return; }
+    data.brands.push({ id, sid, name, emoji, desc, logo, activo: true });
+    if (!data.products[id]) data.products[id] = [];
+  }
+
+  markUnsaved();
+  closeBrandModal();
+  renderSidebar();
+}
+
+function deleteBrand(bid) {
+  const b = data.brands.find(x => x.id === bid);
+  if (!b) return;
+  const n = (data.products[bid]||[]).length;
+  if (!confirm(`¿Seguro que querés borrar la marca "${b.name}"${n?` y sus ${n} productos`:''}? Esta acción no se puede deshacer.`)) return;
+  data.brands = data.brands.filter(x => x.id !== bid);
+  delete data.products[bid];
+  if (currentBrand === bid) {
+    currentBrand = null;
+    document.getElementById('content').innerHTML = `
+      <div class="empty-state">
+        <span class="empty-icon">👈</span>
+        <div>Seleccioná una marca del menú</div>
+      </div>`;
+  }
+  markUnsaved();
+  renderSidebar();
+}
+
+// ── Status ────────────────────────────────────────────────────────────────────
+let statusTimer = null;
+function showStatus(msg, type='', duration=2500) {
+  const el = document.getElementById('status-bar');
+  el.textContent = msg;
+  el.className = 'status-bar show' + (type ? ' '+type : '');
+  clearTimeout(statusTimer);
+  statusTimer = setTimeout(() => el.classList.remove('show'), duration);
+}
+
+// ── Init ──────────────────────────────────────────────────────────────────────
+document.getElementById('modal-bg').addEventListener('click', e => {
+  if (e.target === document.getElementById('modal-bg')) closeModal();
+});
+document.getElementById('brand-modal-bg').addEventListener('click', e => {
+  if (e.target === document.getElementById('brand-modal-bg')) closeBrandModal();
+});
+document.getElementById('choice-modal-bg').addEventListener('click', e => {
+  if (e.target === document.getElementById('choice-modal-bg')) closeChoiceModal();
+});
+
 // Recuperar credenciales guardadas
 const saved_owner = localStorage.getItem('ps_owner');
 const saved_repo  = localStorage.getItem('ps_repo');
@@ -1281,9 +1222,7 @@ if (saved_owner) document.getElementById('gh-owner').value = saved_owner;
 if (saved_repo)  document.getElementById('gh-repo').value  = saved_repo;
 if (saved_token) {
   document.getElementById('gh-token').value = saved_token;
-  GH_OWNER = saved_owner;
-  GH_REPO  = saved_repo;
-  GH_TOKEN = saved_token;
+  GH_OWNER = saved_owner; GH_REPO = saved_repo; GH_TOKEN = saved_token;
   loadFromGitHub();
 }
 </script>
