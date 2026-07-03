@@ -762,12 +762,12 @@
         "id": "m3",
         "name": "Alfajor Maicena Bañada 75g",
         "cat": "alfajores",
-        "present": "Bandeja x 21",
+        "present": "Bandeja x 15 u",
         "art": "9103",
         "unit": 40,
-        "caja": 840,
-        "emoji": "",
-        "venta": 1,
+        "caja": 600,
+        "emoji": "📦",
+        "venta": 2,
         "activo": true
       },
       {
@@ -923,6 +923,42 @@
         "unit": 176,
         "caja": 2112,
         "emoji": "",
+        "venta": 2,
+        "activo": true
+      },
+      {
+        "id": "mazarena_1783089624134",
+        "name": "Alfajor relleno dulce de leche sabor limón",
+        "unit": 44.5,
+        "caja": 534,
+        "cat": "alfajores",
+        "art": "1015",
+        "present": "caja x 12 u.",
+        "emoji": "📦",
+        "venta": 2,
+        "activo": true
+      },
+      {
+        "id": "mazarena_1783089780227",
+        "name": "Alfajor Maicena x 15 u.",
+        "unit": 40,
+        "caja": 600,
+        "cat": "alfajores",
+        "art": "9101",
+        "present": "caja x 15 u",
+        "emoji": "📦",
+        "venta": 2,
+        "activo": true
+      },
+      {
+        "id": "mazarena_1783089967301",
+        "name": "Alfajor Maizena ch x 21 u",
+        "unit": 26,
+        "caja": 546,
+        "cat": "alfajores",
+        "art": "9104",
+        "present": "caja x 21 u",
+        "emoji": "📦",
         "venta": 2,
         "activo": true
       }
