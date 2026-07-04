@@ -313,6 +313,8 @@ let editingId = null;
 let showInactive = false;
 let hasUnsaved = false;
 let searchQ = '';
+let modSearchQ = '';
+let modFilter = 'todos';
 
 const DATA_PATH = 'data.json';
 
@@ -412,6 +414,9 @@ function renderSidebar() {
     </button>
     <button class="brand-btn${view==='fichas'?' active':''}" onclick="goTool('fichas')">
       <span>📋</span><span>Generador de fichas</span>
+    </button>
+    <button class="brand-btn${view==='modalidad'?' active':''}" onclick="goTool('modalidad')">
+      <span>🔀</span><span>Modalidad de venta</span>
     </button>
   </div>`;
   html += renderBrandGroup('&#127851; Alimentos', alBrands, 'alimentos');
@@ -524,6 +529,106 @@ function goTool(t) {
   renderSidebar();
   if (t === 'webp') renderToolWebp();
   else if (t === 'fichas') renderToolFichas();
+  else if (t === 'modalidad') renderToolModalidad();
+}
+
+// ── Modalidad de venta (revisión masiva) ────────────────────────────────────
+function allProductsForModalidad() {
+  let list = [];
+  data.brands.forEach(b => {
+    (data.products[b.id] || []).forEach(p => {
+      list.push({ p, bid: b.id, bname: b.name, bemoji: b.emoji });
+    });
+  });
+  return list;
+}
+
+function renderToolModalidad() {
+  const all = allProductsForModalidad();
+  const total = all.length;
+  const countUnidad = all.filter(x => (x.p.venta || 1) === 1).length;
+  const countCaja = all.filter(x => (x.p.venta || 1) === 2).length;
+
+  document.getElementById('content').innerHTML = `
+    <div class="content-hdr">
+      <div class="content-title">🔀 Modalidad de venta</div>
+      <div class="hdr-actions">
+        <input type="text" class="search-box" id="mod-search" placeholder="Buscar producto, marca o art…" value="${modSearchQ}" oninput="onModSearch(this.value)">
+      </div>
+    </div>
+    <div style="padding:0 2rem 1rem">
+      <p style="font-size:13px;color:var(--mid);margin-bottom:1rem">
+        Revisá cada producto y elegí si se vende <strong>por unidad</strong> o <strong>por caja</strong>. Los cambios quedan pendientes hasta que apretés <strong>Guardar</strong> arriba a la derecha.
+      </p>
+      <div style="display:flex;gap:8px;margin-bottom:1.25rem;flex-wrap:wrap">
+        <button class="toggle-inactive-btn${modFilter==='todos'?' on':''}" onclick="setModFilter('todos')">Todos (${total})</button>
+        <button class="toggle-inactive-btn${modFilter==='1'?' on':''}" onclick="setModFilter('1')">Por unidad (${countUnidad})</button>
+        <button class="toggle-inactive-btn${modFilter==='2'?' on':''}" onclick="setModFilter('2')">Por caja (${countCaja})</button>
+      </div>
+      <div id="mod-table-wrap">${renderModTable(all)}</div>
+    </div>`;
+}
+
+function renderModTable(all) {
+  const q = modSearchQ.trim().toLowerCase();
+  const filtered = all.filter(x => {
+    const mf = modFilter === 'todos' || String(x.p.venta || 1) === modFilter;
+    const mq = !q || x.p.name.toLowerCase().includes(q) || x.p.art.includes(q) || x.bname.toLowerCase().includes(q);
+    return mf && mq;
+  });
+  if (!filtered.length) {
+    return `<div class="empty-state"><span class="empty-icon">📦</span><div>No hay productos${q ? ' para "' + q + '"' : ''}</div></div>`;
+  }
+  return `<table class="prod-table">
+    <thead><tr>
+      <th>Foto</th>
+      <th>Marca</th>
+      <th>Producto</th>
+      <th>Art.</th>
+      <th>Precio unit.</th>
+      <th>Precio caja</th>
+      <th>Modalidad</th>
+    </tr></thead>
+    <tbody>${filtered.map(x => renderModRow(x)).join('')}</tbody>
+  </table>`;
+}
+
+function renderModRow(x) {
+  const p = x.p;
+  const venta = p.venta || 1;
+  return `<tr id="modrow-${p.id}">
+    <td><img class="prod-img" src="img/${p.art}.webp" alt="" onerror="this.outerHTML='<span style=\\'font-size:24px\\'>${p.emoji}</span>'"></td>
+    <td>${x.bemoji} ${x.bname}</td>
+    <td><div class="prod-name-cell">${p.name}</div></td>
+    <td><span class="art-badge">${p.art}</span></td>
+    <td><div class="price-cell">$${p.unit.toFixed(2)}</div></td>
+    <td><div class="price-cell">$${p.caja.toFixed(2)}</div></td>
+    <td>
+      <select onchange="setVenta('${x.bid}','${p.id}',this.value)" style="padding:7px 10px;border:1.5px solid var(--border);border-radius:8px;background:var(--cream);font-family:'DM Sans',sans-serif;font-size:13px">
+        <option value="1"${venta===1?' selected':''}>Por unidad</option>
+        <option value="2"${venta===2?' selected':''}>Por caja</option>
+      </select>
+    </td>
+  </tr>`;
+}
+
+function setVenta(bid, pid, val) {
+  const p = (data.products[bid] || []).find(x => x.id === pid);
+  if (!p) return;
+  p.venta = parseInt(val);
+  markUnsaved();
+  const row = document.getElementById('modrow-' + pid);
+  if (row) row.style.background = 'var(--green-light)';
+}
+
+function onModSearch(v) {
+  modSearchQ = v;
+  document.getElementById('mod-table-wrap').innerHTML = renderModTable(allProductsForModalidad());
+}
+
+function setModFilter(f) {
+  modFilter = f;
+  renderToolModalidad();
 }
 
 function renderToolWebp() {
