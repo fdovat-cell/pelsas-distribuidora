@@ -745,7 +745,7 @@ const DATA_URL = `https://raw.githubusercontent.com/${GH_OWNER}/${GH_REPO}/${GH_
 let brands = [];
 let products = {};
 
-let cart={},qtys={},modos={},view='home',curBrand=null,activeFilter='todos',checkout=false,done=false,pagoMethod='';
+let cart={},qtys={},view='home',curBrand=null,activeFilter='todos',checkout=false,done=false,pagoMethod='';
 const fmt=n=>'$'+n.toLocaleString('es-UY',{minimumFractionDigits:2,maximumFractionDigits:2});
 const allP=()=>Object.values(products).flat().filter(p=>p.activo!==false);
 const getBrand=id=>brands.find(b=>b.id===id);
@@ -761,7 +761,7 @@ async function initApp() {
     const data = await res.json();
     brands   = data.brands   || [];
     products = data.products || {};
-    Object.values(products).flat().forEach(p=>{qtys[p.id]=1;modos[p.id]='caja'});
+    Object.values(products).flat().forEach(p=>{qtys[p.id]=1});
     render();
   } catch(e) {
     console.error('Error cargando catálogo:', e);
@@ -834,7 +834,7 @@ function renderCatContent(){
       </div>
       <div class="cat-prod-grid">${ps.map(p=>{
         const free=isFree(b.id,p);
-        const k=p.id+'_'+(modos[p.id]||'caja');
+        const k=p.id+'_'+(p.venta===1?'unit':'caja');
         const inCart=cart[k]&&cart[k].qty>0;
         return`<div class="cat-prod-card${free?' free-highlight':''}">
           <img class="cat-prod-img" src="${getProdImg(b.id,p.art)}" alt="${p.name}" onerror="this.onerror=null;this.src='img/placeholder.webp'" onclick="openLB('img/${p.art}.webp')">
@@ -1085,56 +1085,31 @@ function getFiltered(ps){
 function renderCards(filtered,bid){
   if(!filtered.length)return'<div class="empty-g">Sin resultados</div>';
   return filtered.map(p=>{
-    const inCart=cart[p.id+'_caja']>0||cart[p.id+'_unit']>0;
-    const modo=modos[p.id]||'caja';
+    const modo=p.venta===1?'unit':'caja';
+    const cartKey=p.id+'_'+modo;
+    const inCart=cart[cartKey]>0;
     const isBaja=p.cat==='baja rotacion';
     const imgSrc=bid?getProdImg(bid,p.art):`img/${p.art}.webp`;
     const genImg=bid&&brandGenImg[bid]?brandGenImg[bid]:'';
     const onerrorFallback=genImg?`this.onerror=null;this.src='${genImg}'`:`this.onerror=null`;
-    if(p.venta===2){
-      return`<div class="prod-card${isBaja?' baja-rot':''}" data-pid="${p.id}">
-        ${isBaja?'<span class="baja-rot-tag">Consultar disponibilidad</span>':''}
-        <div class="prod-icon"><img src="${imgSrc}" alt="${p.name}" loading="lazy" onclick="openLB('${p.art}')" onerror="${onerrorFallback}"></div>
-        <div class="prod-art">Art. ${p.art}</div>
-        <div class="prod-name">${p.name}</div>
-        <div class="prod-present">${p.present}</div>
-        <div class="prices-row">
-          <div class="price-box${modo==='caja'?' selected':''}" onclick="setModo('${p.id}','caja')">
-            <div class="price-box-label">Pack</div>
-            <div class="price-box-val">${fmt(p.caja)}</div>
-          </div>
-          <div class="price-box${modo==='unit'?' selected':''}" onclick="setModo('${p.id}','unit')">
-            <div class="price-box-label">½ Caja</div>
-            <div class="price-box-val">${fmt(p.caja/2)}</div>
-          </div>
-        </div>
-        <div class="prod-unit-ref">Unidad: ${fmt(p.unit)}</div>
-        <div class="qty-row">
-          <button class="qbtn" onclick="chQ('${p.id}',-1)">−</button>
-          <span class="qnum" id="q${p.id}">${qtys[p.id]}</span>
-          <button class="qbtn" onclick="chQ('${p.id}',1)">+</button>
-          <button class="abtn${inCart?' added':''}" onclick="addC('${p.id}')">${inCart?'En pedido':'Agregar'}</button>
-        </div>
-      </div>`;
-    } else {
-      return`<div class="prod-card${isBaja?' baja-rot':''}" data-pid="${p.id}">
-        ${isBaja?'<span class="baja-rot-tag">Consultar disponibilidad</span>':''}
-        <div class="prod-icon"><img src="${imgSrc}" alt="${p.name}" loading="lazy" onclick="openLB('${p.art}')" onerror="${onerrorFallback}"></div>
-        <div class="prod-art">Art. ${p.art}</div>
-        <div class="prod-name">${p.name}</div>
-        <div class="prod-present">${p.present}</div>
-        <div>
-          <div class="prod-pu">${fmt(p.caja)}<em> / pack</em></div>
-          <div class="prod-pc">Unidad: ${fmt(p.unit)}</div>
-        </div>
-        <div class="qty-row">
-          <button class="qbtn" onclick="chQ('${p.id}',-1)">−</button>
-          <span class="qnum" id="q${p.id}">${qtys[p.id]}</span>
-          <button class="qbtn" onclick="chQ('${p.id}',1)">+</button>
-          <button class="abtn${inCart?' added':''}" onclick="addC('${p.id}')">${inCart?'En pedido':'Agregar'}</button>
-        </div>
-      </div>`;
-    }
+    const precioMostrado=modo==='unit'?p.unit:p.caja;
+    return`<div class="prod-card${isBaja?' baja-rot':''}" data-pid="${p.id}">
+      ${isBaja?'<span class="baja-rot-tag">Consultar disponibilidad</span>':''}
+      <div class="prod-icon"><img src="${imgSrc}" alt="${p.name}" loading="lazy" onclick="openLB('${p.art}')" onerror="${onerrorFallback}"></div>
+      <div class="prod-art">Art. ${p.art}</div>
+      <div class="prod-name">${p.name}</div>
+      <div class="prod-present">${p.present}</div>
+      <div>
+        <div class="prod-pu">${fmt(precioMostrado)}<em> / ${modo==='unit'?'unidad':'pack'}</em></div>
+        <div class="prod-pc">${modo==='unit'?`Pack: ${fmt(p.caja)}`:`Unidad: ${fmt(p.unit)}`}</div>
+      </div>
+      <div class="qty-row">
+        <button class="qbtn" onclick="chQ('${p.id}',-1)">−</button>
+        <span class="qnum" id="q${p.id}">${qtys[p.id]}</span>
+        <button class="qbtn" onclick="chQ('${p.id}',1)">+</button>
+        <button class="abtn${inCart?' added':''}" onclick="addC('${p.id}')">${inCart?'En pedido':'Agregar'}</button>
+      </div>
+    </div>`;
   }).join('');
 }
 
@@ -1163,13 +1138,12 @@ function goMarcas(){
   else goSection();
 }
 function setF(f,btn){activeFilter=f;document.querySelectorAll('.fbtn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');reGrid()}
-function setModo(id,modo){modos[id]=modo;reGrid()}
 function chQ(id,d){qtys[id]=Math.max(1,(qtys[id]||1)+d);const el=document.getElementById('q'+id);if(el)el.textContent=qtys[id]}
 function addC(id){
   const p=allP().find(x=>x.id===id);if(!p)return;
-  const modo=modos[id]||'caja';
-  const precio=modo==='unit'?p.caja/2:p.caja;
-  const label=modo==='unit'?'½ caja':'pack';
+  const modo=p.venta===1?'unit':'caja';
+  const precio=modo==='unit'?p.unit:p.caja;
+  const label=modo==='unit'?'unidad':'pack';
   const cartKey=id+'_'+modo;
   if(!cart[cartKey])cart[cartKey]={qty:0,precio,label,pid:id};
   cart[cartKey].qty+=(qtys[id]||1);
