@@ -236,9 +236,10 @@
         "art": "5820",
         "unit": 123.89,
         "caja": 2973.3,
-        "emoji": "",
+        "emoji": "📦",
         "venta": 1,
-        "activo": true
+        "activo": true,
+        "destacado": true
       },
       {
         "id": "d2",
