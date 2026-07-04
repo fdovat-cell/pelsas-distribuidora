@@ -172,15 +172,6 @@
       "activo": true
     },
     {
-      "id": "candelkush",
-      "sid": "alimentos",
-      "name": "Candel Kush",
-      "emoji": "",
-      "desc": "Caramelos con sabor a cáñamo",
-      "logo": "img/logo-candelkush.webp",
-      "activo": true
-    },
-    {
       "id": "pitstop",
       "sid": "alimentos",
       "name": "Galletas saladas",
@@ -3442,20 +3433,6 @@
         "caja": 1232,
         "emoji": "",
         "venta": 2,
-        "activo": true
-      }
-    ],
-    "candelkush": [
-      {
-        "id": "candelkush_1778780423399",
-        "name": "Candel Kush",
-        "unit": 55,
-        "caja": 2750,
-        "cat": "Caramelos",
-        "art": "700",
-        "present": "Caja x 50 unidades",
-        "emoji": "",
-        "venta": 1,
         "activo": true
       }
     ],
