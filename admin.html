@@ -239,6 +239,12 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
         </select>
       </div>
     </div>
+    <div class="form-row">
+      <label style="display:flex;align-items:center;gap:8px;cursor:pointer">
+        <input type="checkbox" id="f-destacado" style="width:auto">
+        Incluir en Modo Visita (selección para mostrarle a clientes nuevos)
+      </label>
+    </div>
     <div class="modal-actions">
       <button class="modal-cancel" onclick="closeModal()">Cancelar</button>
       <button class="modal-save" onclick="saveProduct()">Guardar producto</button>
@@ -509,7 +515,7 @@ function renderRow(p, bid) {
   const inactive = p.activo === false ? ' inactive-row' : '';
   return `<tr class="${inactive}" id="row-${p.id}">
     <td><img class="prod-img" src="img/${p.art}.webp" alt="" onerror="this.outerHTML='<span style=\\'font-size:24px\\'>${p.emoji}</span>'"></td>
-    <td><div class="prod-name-cell">${p.name}</div></td>
+    <td><div class="prod-name-cell">${p.destacado?'<span title="Incluido en Modo Visita">🤝 </span>':''}${p.name}</div></td>
     <td><span class="prod-cat">${p.cat}</span></td>
     <td><span class="art-badge">${p.art}</span></td>
     <td><div class="price-cell">$${p.unit.toFixed(2)}</div></td>
@@ -1144,6 +1150,7 @@ function openModal(pid) {
     document.getElementById('f-present').value = p.present;
     document.getElementById('f-emoji').value = p.emoji;
     document.getElementById('f-venta').value = p.venta || 1;
+    document.getElementById('f-destacado').checked = !!p.destacado;
   } else {
     document.getElementById('f-name').value = '';
     document.getElementById('f-unit').value = '';
@@ -1153,6 +1160,7 @@ function openModal(pid) {
     document.getElementById('f-present').value = '';
     document.getElementById('f-emoji').value = '📦';
     document.getElementById('f-venta').value = 1;
+    document.getElementById('f-destacado').checked = false;
   }
   document.getElementById('modal-bg').classList.add('open');
   document.getElementById('f-name').focus();
@@ -1172,6 +1180,7 @@ function saveProduct() {
   const present = document.getElementById('f-present').value.trim();
   const emoji = document.getElementById('f-emoji').value.trim() || '📦';
   const venta = parseInt(document.getElementById('f-venta').value);
+  const destacado = document.getElementById('f-destacado').checked;
 
   if (!name || isNaN(unit) || isNaN(caja)) {
     alert('Completá al menos nombre, precio unitario y precio caja');
@@ -1183,7 +1192,7 @@ function saveProduct() {
     for (const bid of Object.keys(data.products)) {
       const p = data.products[bid].find(x => x.id === editingId);
       if (p) {
-        Object.assign(p, { name, unit, caja, cat, art, present, emoji, venta });
+        Object.assign(p, { name, unit, caja, cat, art, present, emoji, venta, destacado });
         break;
       }
     }
@@ -1192,7 +1201,7 @@ function saveProduct() {
     if (!currentBrand) { alert('Seleccioná una marca primero'); return; }
     if (!data.products[currentBrand]) data.products[currentBrand] = [];
     const newId = currentBrand + '_' + Date.now();
-    data.products[currentBrand].push({ id: newId, name, unit, caja, cat, art, present, emoji, venta, activo: true });
+    data.products[currentBrand].push({ id: newId, name, unit, caja, cat, art, present, emoji, venta, destacado, activo: true });
   }
 
   markUnsaved();

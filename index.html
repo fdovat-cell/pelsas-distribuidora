@@ -435,8 +435,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 .home-mobile-only{display:none}
 
 /* BOTTOM NAV — oculto por defecto, visible en tablet y mobile */
-.bottom-nav{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--white);border-top:1px solid var(--border);z-index:80;padding:6px 0 calc(6px + env(safe-area-inset-bottom));justify-content:space-around;box-shadow:0 -2px 12px rgba(26,26,24,.06)}
-.bn-item{background:none;border:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 14px;font-family:'DM Sans',sans-serif;color:var(--mid);position:relative;min-width:64px;transition:color .15s}
+.bottom-nav{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--white);border-top:1px solid var(--border);z-index:80;padding:6px 0 calc(6px + env(safe-area-inset-bottom));justify-content:space-around;overflow-x:auto;box-shadow:0 -2px 12px rgba(26,26,24,.06)}
+.bn-item{background:none;border:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 10px;font-family:'DM Sans',sans-serif;color:var(--mid);position:relative;min-width:56px;flex:0 0 auto;transition:color .15s}
 .bn-item.active{color:var(--red)}
 .bn-icon{font-size:20px;line-height:1}
 .bn-label{font-size:10px;font-weight:500;letter-spacing:.04em;text-transform:uppercase}
@@ -569,6 +569,41 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 .cat-prod-add{width:100%;padding:4px 0;background:var(--ink);color:#fff;border:none;border-radius:0 0 6px 6px;font-size:9px;font-weight:600;cursor:pointer;margin-top:auto;font-family:'DM Sans',sans-serif}
 .cat-prod-add.in-cart{background:#3a7d44}
 .cat-prod-add:active{opacity:.8}
+
+/* MODO VISITA */
+.pres-search-wrap{position:relative;margin:1rem 0 2rem}
+.pres-search-input{width:100%;padding:13px 16px;border:1.5px solid var(--border);border-radius:10px;font-family:'DM Sans',sans-serif;font-size:14px;background:var(--white);color:var(--ink);outline:none}
+.pres-search-input:focus{border-color:var(--red)}
+.pres-search-results{display:none;position:absolute;top:calc(100% + 4px);left:0;right:0;background:var(--white);border:1px solid var(--border);border-radius:10px;box-shadow:0 8px 24px rgba(26,26,24,.12);z-index:20;max-height:260px;overflow-y:auto}
+.pres-search-results.show{display:block}
+.pres-search-item{padding:11px 16px;font-size:13px;cursor:pointer;border-bottom:1px solid var(--border)}
+.pres-search-item:last-child{border-bottom:none}
+.pres-search-item:hover{background:var(--cream)}
+.pres-search-item .pres-search-art{color:var(--light);font-size:11px;margin-left:6px}
+.pres-search-empty{padding:11px 16px;font-size:13px;color:var(--mid)}
+.pres-brand-block{margin-bottom:2.5rem}
+.pres-brand-hdr{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:2px solid var(--ink);margin-bottom:1rem}
+.pres-brand-logo{height:38px;max-width:110px;object-fit:contain}
+.pres-brand-name{font-family:'Playfair Display',serif;font-size:21px;font-weight:900;color:var(--ink)}
+.pres-brand-desc{font-size:12px;color:var(--mid);margin-top:2px;max-width:520px}
+.home-sel-wrap{margin:2.5rem 0}
+.home-sel-more{text-align:center;font-size:13px;font-weight:600;color:var(--red);cursor:pointer;padding:12px 0 4px;letter-spacing:.02em}
+.home-sel-more:hover{text-decoration:underline}
+.pres-prod-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px}
+.pres-card{background:var(--white);border:1px solid var(--border);border-radius:14px;overflow:hidden;position:relative;display:flex;flex-direction:column;box-shadow:0 2px 8px rgba(26,26,24,.04)}
+.pres-remove{position:absolute;top:6px;right:6px;width:24px;height:24px;border-radius:50%;border:none;background:rgba(26,26,24,.55);color:#fff;font-size:12px;cursor:pointer;z-index:2;display:flex;align-items:center;justify-content:center}
+.pres-img{width:100%;aspect-ratio:1;object-fit:cover;display:block;cursor:pointer;background:var(--cream)}
+.pres-name{font-size:13px;font-weight:600;color:var(--ink);padding:10px 10px 0;line-height:1.25}
+.pres-price{font-size:17px;font-weight:700;color:var(--ink);padding:4px 10px 0}
+.pres-price-unit{font-size:11px;font-weight:500;color:var(--mid)}
+.pres-add{width:calc(100% - 20px);margin:10px auto 12px;padding:9px 0;background:var(--ink);color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif}
+.pres-add.in-cart{background:#3a7d44}
+.pres-add:active{opacity:.85}
+@media(min-width:1025px){
+  .pres-prod-grid{grid-template-columns:repeat(auto-fill,minmax(180px,1fr))}
+  .pres-name{font-size:14px}
+  .pres-price{font-size:19px}
+}
 @media(min-width:721px){
   .cat-prod-grid{grid-template-columns:repeat(6,1fr);gap:8px}
   .cat-prod-name{font-size:10px}
@@ -713,6 +748,10 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
     <span class="bn-icon">📸</span>
     <span class="bn-label">Fichas</span>
   </button>
+  <button class="bn-item" id="bn-visita" onclick="goPresentacion()">
+    <span class="bn-icon">🤝</span>
+    <span class="bn-label">Visita</span>
+  </button>
   <button class="bn-item" id="bn-cart" onclick="toggleCart()">
     <span class="bn-icon">🛒</span>
     <span class="bn-label">Pedido</span>
@@ -746,6 +785,8 @@ let brands = [];
 let products = {};
 
 let cart={},qtys={},view='home',curBrand=null,activeFilter='todos',checkout=false,done=false,pagoMethod='';
+let presentExtra=[],presentHidden=new Set();
+let pidToBrand={};
 const fmt=n=>'$'+n.toLocaleString('es-UY',{minimumFractionDigits:2,maximumFractionDigits:2});
 const allP=()=>Object.values(products).flat().filter(p=>p.activo!==false);
 const getBrand=id=>brands.find(b=>b.id===id);
@@ -762,6 +803,8 @@ async function initApp() {
     brands   = data.brands   || [];
     products = data.products || {};
     Object.values(products).flat().forEach(p=>{qtys[p.id]=1});
+    pidToBrand={};
+    Object.keys(products).forEach(bid=>{(products[bid]||[]).forEach(p=>{pidToBrand[p.id]=bid})});
     render();
   } catch(e) {
     console.error('Error cargando catálogo:', e);
@@ -785,6 +828,7 @@ function render(){
   else if(view==='sintacc')mv.innerHTML=renderSintacc();
   else if(view==='catalogo')mv.innerHTML=renderCatalogo();
   else if(view==='fichas')mv.innerHTML=renderFichas();
+  else if(view==='presentacion')mv.innerHTML=renderPresentacion();
   const back=document.getElementById('back-btn');
   if(back)back.classList.toggle('visible',view!=='home');
   document.querySelectorAll('.bn-item').forEach(b=>b.classList.remove('active'));
@@ -792,6 +836,7 @@ function render(){
   else if(view==='section'||view==='brand'||view==='fumadores'||view==='sintacc')document.getElementById('bn-marcas')?.classList.add('active');
   else if(view==='catalogo')document.getElementById('bn-catalogo')?.classList.add('active');
   else if(view==='fichas')document.getElementById('bn-fichas')?.classList.add('active');
+  else if(view==='presentacion')document.getElementById('bn-visita')?.classList.add('active');
   window.scrollTo({top:0,behavior:'instant'});
 }
 function goBack(){
@@ -800,7 +845,7 @@ function goBack(){
     if(b&&b.sid==='fumadores')goFumadores();
     else if(curBrand&&['celisano','agridulce','smams','sanosinharina','suavipan','nutsbar','molinosala'].includes(curBrand)&&prevView==='sintacc')goSintacc();
     else goSection();
-  } else if(view==='section'||view==='fumadores'||view==='sintacc'||view==='catalogo'||view==='fichas')goHome();
+  } else if(view==='section'||view==='fumadores'||view==='sintacc'||view==='catalogo'||view==='fichas'||view==='presentacion')goHome();
 }
 let prevView='home';
 let catTab='alimentos';
@@ -884,6 +929,133 @@ function openFicha(bid){
   img.onload=()=>openLBraw('img/fichas/'+bid+'.jpg');
   img.onerror=()=>alert('Todavía no hay ficha cargada para esta marca.');
   img.src='img/fichas/'+bid+'.jpg';
+}
+function goPresentacion(){view='presentacion';curBrand=null;render()}
+function presentList(){
+  const curated=allP().filter(p=>p.destacado&&!presentHidden.has(p.id));
+  const ids=new Set(curated.map(p=>p.id));
+  const extra=presentExtra.map(id=>allP().find(p=>p.id===id)).filter(p=>p&&!ids.has(p.id));
+  return curated.concat(extra);
+}
+function presentGroups(){
+  const byBrand={};
+  presentList().forEach(p=>{
+    const bid=pidToBrand[p.id];
+    if(!bid)return;
+    if(!byBrand[bid])byBrand[bid]=[];
+    byBrand[bid].push(p);
+  });
+  return Object.keys(byBrand).map(bid=>({brand:getBrand(bid),products:byBrand[bid]})).filter(g=>g.brand);
+}
+function renderPresentacion(){
+  return`<div class="section-wrap">
+    <div class="breadcrumb" onclick="goHome()">← Inicio</div>
+    <div class="section-title">🤝 Modo visita</div>
+    <div class="section-rule"></div>
+    <div class="section-meta">Selección para mostrarle a un cliente nuevo. Sumá o sacá productos según cómo vaya la charla.</div>
+    <div class="pres-search-wrap">
+      <input type="text" id="pres-search" class="pres-search-input" placeholder="Buscar producto para sumar…" oninput="onPresSearch(this.value)">
+      <div id="pres-search-results" class="pres-search-results"></div>
+    </div>
+    <div id="pres-groups">${renderPresGroupsHtml()}</div>
+  </div>`;
+}
+function renderPresGroupsHtml(){
+  const groups=presentGroups();
+  if(!groups.length)return'<div class="empty-g">Todavía no marcaste productos para el Modo Visita. Marcalos desde el panel admin (tildá "Incluir en Modo Visita" al editar un producto) o sumalos acá arriba con el buscador.</div>';
+  return groups.map(renderPresBrandBlock).join('');
+}
+function renderPresBrandBlock(g){
+  const desc=getBrandDesc(g.brand.id);
+  return`<div class="pres-brand-block">
+    <div class="pres-brand-hdr" onclick="goBrand('${g.brand.id}')" style="cursor:pointer">
+      <img class="pres-brand-logo" src="${g.brand.logo}" alt="${g.brand.name}" onerror="this.outerHTML='<span style=\\'font-size:22px\\'>${g.brand.emoji}</span>'">
+      <div>
+        <div class="pres-brand-name">${g.brand.name}</div>
+        ${desc?`<div class="pres-brand-desc">${desc}</div>`:''}
+      </div>
+    </div>
+    <div class="pres-prod-grid">${g.products.map(p=>renderPresCard(p,g.brand.id)).join('')}</div>
+  </div>`;
+}
+function renderPresCard(p,bid){
+  const modo=p.venta===1?'unit':'caja';
+  const cartKey=p.id+'_'+modo;
+  const inCart=cart[cartKey]>0;
+  const precio=modo==='unit'?p.unit:p.caja;
+  const imgSrc=getProdImg(bid,p.art);
+  return`<div class="pres-card">
+    <button class="pres-remove" onclick="removeFromPresentacion('${p.id}')" title="Sacar de esta visita">✕</button>
+    <img class="pres-img" src="${imgSrc}" alt="${p.name}" loading="lazy" onclick="openLB('${p.art}')" onerror="this.onerror=null">
+    <div class="pres-name">${p.name}</div>
+    <div class="pres-price">${fmt(precio)}<span class="pres-price-unit"> / ${modo==='unit'?'unidad':'pack'}</span></div>
+    <button class="pres-add${inCart?' in-cart':''}" onclick="addC('${p.id}')">${inCart?'✓ En pedido':'+ Agregar'}</button>
+  </div>`;
+}
+function refreshPresGrid(){
+  const g=document.getElementById('pres-groups');
+  if(!g)return;
+  g.innerHTML=renderPresGroupsHtml();
+}
+function onPresSearch(v){
+  const box=document.getElementById('pres-search-results');
+  if(!v.trim()){box.innerHTML='';box.classList.remove('show');return}
+  const q=v.toLowerCase();
+  const matches=allP().filter(p=>p.name.toLowerCase().includes(q)||p.art.includes(q)).slice(0,8);
+  box.classList.add('show');
+  box.innerHTML=matches.length?matches.map(p=>`<div class="pres-search-item" onclick="addToPresentacion('${p.id}')">${p.name} <span class="pres-search-art">${p.art}</span></div>`).join(''):'<div class="pres-search-empty">Sin resultados</div>';
+}
+function addToPresentacion(id){
+  presentHidden.delete(id);
+  if(!presentExtra.includes(id))presentExtra.push(id);
+  const inp=document.getElementById('pres-search');if(inp)inp.value='';
+  const box=document.getElementById('pres-search-results');if(box){box.innerHTML='';box.classList.remove('show')}
+  refreshPresGrid();
+}
+function removeFromPresentacion(id){
+  presentHidden.add(id);
+  presentExtra=presentExtra.filter(x=>x!==id);
+  refreshPresGrid();
+}
+const HOME_SEL_LIMIT=6;
+function renderHomeSelHtml(){
+  const groups=presentGroups().slice(0,HOME_SEL_LIMIT);
+  if(!groups.length)return'';
+  return`<div class="section-eyebrow" style="margin-bottom:.5rem">Seleccionados</div>
+    <div class="section-rule-line" style="margin-bottom:1rem"></div>
+    ${groups.map(renderHomeSelBlock).join('')}
+    <div class="home-sel-more" onclick="goPresentacion()">Ver toda la selección →</div>`;
+}
+function renderHomeSelBlock(g){
+  const desc=getBrandDesc(g.brand.id);
+  return`<div class="pres-brand-block">
+    <div class="pres-brand-hdr" onclick="goBrand('${g.brand.id}')" style="cursor:pointer">
+      <img class="pres-brand-logo" src="${g.brand.logo}" alt="${g.brand.name}" onerror="this.outerHTML='<span style=\\'font-size:22px\\'>${g.brand.emoji}</span>'">
+      <div>
+        <div class="pres-brand-name">${g.brand.name}</div>
+        ${desc?`<div class="pres-brand-desc">${desc}</div>`:''}
+      </div>
+    </div>
+    <div class="pres-prod-grid">${g.products.map(p=>renderHomeSelCard(p,g.brand.id)).join('')}</div>
+  </div>`;
+}
+function renderHomeSelCard(p,bid){
+  const modo=p.venta===1?'unit':'caja';
+  const cartKey=p.id+'_'+modo;
+  const inCart=cart[cartKey]>0;
+  const precio=modo==='unit'?p.unit:p.caja;
+  const imgSrc=getProdImg(bid,p.art);
+  return`<div class="pres-card">
+    <img class="pres-img" src="${imgSrc}" alt="${p.name}" loading="lazy" onclick="openLB('${p.art}')" onerror="this.onerror=null">
+    <div class="pres-name">${p.name}</div>
+    <div class="pres-price">${fmt(precio)}<span class="pres-price-unit"> / ${modo==='unit'?'unidad':'pack'}</span></div>
+    <button class="pres-add${inCart?' in-cart':''}" onclick="addC('${p.id}')">${inCart?'✓ En pedido':'+ Agregar'}</button>
+  </div>`;
+}
+function refreshHomeSel(){
+  const w=document.getElementById('home-sel-wrap');
+  if(!w)return;
+  w.innerHTML=renderHomeSelHtml();
 }
 function sintaccBrands(){
   const ids=['nutsbar','molinosala','celisano','agridulce','smams','sanosinharina','suavipan'];
@@ -1009,6 +1181,8 @@ function renderHome(){
 
       </div>
     </div>
+
+    <div class="home-sel-wrap" id="home-sel-wrap">${renderHomeSelHtml()}</div>
 
     <div class="home-mobile-only home-mobile-pago" style="background:var(--cream);border:1px solid var(--border);border-radius:14px;display:none;align-items:center;gap:14px;padding:14px 18px;margin-bottom:1.5rem;">
       <div class="home-banner-icon">💳</div>
@@ -1148,6 +1322,8 @@ function addC(id){
   if(!cart[cartKey])cart[cartKey]={qty:0,precio,label,pid:id};
   cart[cartKey].qty+=(qtys[id]||1);
   updateBadge();reGrid();
+  if(view==='presentacion')refreshPresGrid();
+  if(view==='home')refreshHomeSel();
 }
 function updateBadge(){
   const n=Object.values(cart).reduce((a,b)=>a+(b.qty||0),0);
@@ -1327,12 +1503,16 @@ function renderOnly(){
   else if(view==='fumadores')mv.innerHTML=renderFumadores();
   else if(view==='sintacc')mv.innerHTML=renderSintacc();
   else if(view==='catalogo')mv.innerHTML=renderCatalogo();
+  else if(view==='fichas')mv.innerHTML=renderFichas();
+  else if(view==='presentacion')mv.innerHTML=renderPresentacion();
   const back=document.getElementById('back-btn');
   if(back)back.classList.toggle('visible',view!=='home');
   document.querySelectorAll('.bn-item').forEach(b=>b.classList.remove('active'));
   if(view==='home')document.getElementById('bn-home')?.classList.add('active');
   else if(view==='section'||view==='brand'||view==='fumadores'||view==='sintacc')document.getElementById('bn-marcas')?.classList.add('active');
   else if(view==='catalogo')document.getElementById('bn-catalogo')?.classList.add('active');
+  else if(view==='fichas')document.getElementById('bn-fichas')?.classList.add('active');
+  else if(view==='presentacion')document.getElementById('bn-visita')?.classList.add('active');
   window.scrollTo({top:0,behavior:'instant'});
 }
 
