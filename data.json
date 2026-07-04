@@ -215,6 +215,15 @@
       "desc": "Bombones",
       "logo": "img:logo/bombones.webp",
       "activo": true
+    },
+    {
+      "id": "caramelos",
+      "sid": "alimentos",
+      "name": "Caramelos y chupetines",
+      "emoji": "📦",
+      "desc": "Caramelos",
+      "logo": "img/logo-caramelos.webp",
+      "activo": true
     }
   ],
   "products": {
@@ -3745,6 +3754,7 @@
         "venta": 2,
         "activo": true
       }
-    ]
+    ],
+    "caramelos": []
   }
 }
