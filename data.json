@@ -239,7 +239,7 @@
         "emoji": "📦",
         "venta": 1,
         "activo": true,
-        "destacado": true
+        "destacado": false
       },
       {
         "id": "d2",
