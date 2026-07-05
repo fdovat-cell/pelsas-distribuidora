@@ -1186,9 +1186,10 @@
         "art": "5640",
         "unit": 14.5,
         "caja": 435,
-        "emoji": "",
+        "emoji": "📦",
         "venta": 2,
-        "activo": true
+        "activo": true,
+        "destacado": true
       },
       {
         "id": "se2",
@@ -1246,9 +1247,10 @@
         "art": "5645",
         "unit": 19.5,
         "caja": 585,
-        "emoji": "",
+        "emoji": "📦",
         "venta": 2,
-        "activo": true
+        "activo": true,
+        "destacado": true
       },
       {
         "id": "se7",
@@ -1426,9 +1428,10 @@
         "art": "5672",
         "unit": 14.5,
         "caja": 290,
-        "emoji": "",
+        "emoji": "📦",
         "venta": 2,
-        "activo": true
+        "activo": true,
+        "destacado": true
       },
       {
         "id": "se22",
