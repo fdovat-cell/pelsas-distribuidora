@@ -1,1689 +1,1549 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-  <meta http-equiv="Pragma" content="no-cache">
-  <meta http-equiv="Expires" content="0">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>mimundial · Mundial 2026</title>
-  <meta name="description" content="Fixture, tabla de posiciones y goleadores del Mundial 2026 en tiempo real.">
-  <meta name="theme-color" content="#070b12">
-  <link rel="manifest" href="manifest.json">
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="mimundial">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700;9..40,800&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg:#070b12; --bg-card:#0d1320; --bg-elev:#111827;
-      --border:rgba(255,255,255,.08); --border2:rgba(255,255,255,.13);
-      --text:#f0f4fb; --text-muted:#7a8ba0;
-      --green:#00e676; --green-dim:rgba(0,230,118,.12); --green-glow:rgba(0,230,118,.25);
-      --gold:#ffc107; --red:#ff4d4d;
-      --font-body:'DM Sans',system-ui,sans-serif;
-      --font-disp:'Plus Jakarta Sans',system-ui,sans-serif;
-      --nav-h:64px;
-    }
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    html,body{height:100%;background:var(--bg);color:var(--text);font-family:var(--font-body);-webkit-font-smoothing:antialiased;overscroll-behavior:none}
-    .screen{display:none;min-height:100dvh;padding-bottom:calc(var(--nav-h) + env(safe-area-inset-bottom,0px))}
-    .screen.active{display:block}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PelSAS · Distribuidora</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#1A1A18">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="PelSAS">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --cream:#F5F0E8;
+  --cream2:#EDE8DF;
+  --cream3:#E4DDD2;
+  --ink:#1A1A18;
+  --ink2:#3D3B36;
+  --mid:#7A7468;
+  --light:#B0AA9E;
+  --red:#B02020;
+  --red-dark:#8A1818;
+  --red-light:#F8EDED;
+  --border:#D8D2C6;
+  --border2:#C8C2B4;
+  --white:#FFFFFF;
+}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);min-height:100vh}
 
-    /* NAV */
-    .bottom-nav{position:fixed;bottom:0;left:0;right:0;height:calc(var(--nav-h) + env(safe-area-inset-bottom,0px));padding-bottom:env(safe-area-inset-bottom,0px);background:rgba(7,11,18,.92);backdrop-filter:blur(16px);border-top:1px solid var(--border);display:flex;align-items:stretch;z-index:100}
-    .nav-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;background:none;border:none;color:var(--text-muted);font-family:var(--font-body);font-size:.54rem;font-weight:700;letter-spacing:.02em;cursor:pointer;text-transform:uppercase;transition:color .15s;padding:8px 2px 4px}
-    .nav-item svg{width:20px;height:20px;stroke-width:1.8}
-    .nav-item.active{color:var(--green)}
-    .nav-item.active svg{stroke:var(--green)}
+/* TOPBAR */
+.topbar{
+  position:sticky;top:0;z-index:50;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 2.5rem;height:62px;
+  background:var(--white);
+  border-bottom:1px solid var(--border);
+}
+.logo{display:flex;align-items:baseline;gap:12px}
+.logo-name{
+  font-family:'Playfair Display',serif;
+  font-size:22px;font-weight:900;
+  color:var(--ink);letter-spacing:0.01em;
+}
+.logo-name span{color:var(--red)}
+.logo-divider{width:1px;height:14px;background:var(--border2)}
+.logo-city{font-size:11px;color:var(--light);letter-spacing:0.1em;text-transform:uppercase}
+.topbar-right{display:flex;align-items:center;gap:16px}
+.tel{font-size:12px;color:var(--mid);letter-spacing:0.04em}
+.cart-btn{
+  display:flex;align-items:center;gap:9px;
+  background:var(--ink);color:var(--white);
+  border:none;border-radius:8px;
+  padding:11px 20px;
+  font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;
+  cursor:pointer;transition:background .15s;
+  box-shadow:0 2px 8px rgba(26,26,24,.18);
+}
+.cart-btn:hover{background:var(--ink2)}
+.badge{
+  background:var(--red);color:#fff;
+  border-radius:50%;width:20px;height:20px;
+  font-size:11px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;
+}
 
-    /* HEADER */
-    .app-header{position:sticky;top:0;z-index:50;background:rgba(7,11,18,.88);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:.85rem 1.25rem;display:flex;align-items:center;justify-content:space-between}
-    .brand{display:flex;align-items:center;gap:8px}
-    .brand-icon{width:30px;height:30px;background:linear-gradient(135deg,#0d3d26,#0a2e1f);border-radius:8px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(0,230,118,.2)}
-    .brand-name{font-family:var(--font-disp);font-size:1rem;font-weight:800;letter-spacing:-.02em;color:#fff}
-    .brand-sub{font-size:.58rem;font-weight:600;color:var(--text-muted);letter-spacing:.01em;margin-top:1px}
-    .live-badge{background:rgba(255,77,77,.15);border:1px solid rgba(255,77,77,.3);color:var(--red);font-size:.65rem;font-weight:800;padding:3px 8px;border-radius:999px;letter-spacing:.05em;display:none;align-items:center;gap:5px}
-    .live-badge.visible{display:flex}
-    .live-dot{width:6px;height:6px;background:var(--red);border-radius:50%;animation:pulse 1.2s ease infinite}
-    @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
+/* HOME */
+.hero-split{
+  display:grid;
+  grid-template-columns:1fr 1.6fr;
+  gap:3rem;
+  align-items:start;
+  margin-bottom:3rem;
+}
+.hero-cats{display:flex;flex-direction:column}
+@media(max-width:720px){
+  .hero-split{grid-template-columns:1fr;gap:1.5rem}
+}
+.home-wrap{max-width:1140px;margin:0 auto;padding:2rem 2.5rem}
 
-    /* TABS */
-    .tabs-bar{display:flex;border-bottom:1px solid var(--border);overflow-x:auto;scrollbar-width:none;padding:0 1.25rem;background:var(--bg);position:sticky;top:57px;z-index:40}
-    .tabs-bar::-webkit-scrollbar{display:none}
-    .tab-btn{font-family:var(--font-body);font-size:.8rem;font-weight:700;color:var(--text-muted);padding:.7rem 0;margin-right:1.5rem;border:none;border-bottom:2px solid transparent;background:none;cursor:pointer;white-space:nowrap;transition:color .15s}
-    .tab-btn.active{color:var(--text);border-bottom-color:var(--green)}
+.hero-row{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;margin-bottom:1.5rem}
+.hero-left{}
+.hero-eyebrow{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--red);margin-bottom:1.25rem}
+.hero-title{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(38px,5vw,68px);
+  font-weight:900;line-height:1.0;
+  color:var(--ink);margin-bottom:1.5rem;
+}
+.hero-title em{font-style:italic;color:var(--red)}
+.hero-body{font-size:15px;color:var(--mid);line-height:1.7;max-width:380px;margin-bottom:2rem}
+.hero-rule{width:40px;height:2px;background:var(--red);margin-bottom:2rem}
+.hero-stats{display:flex;gap:2rem}
+.stat{border-left:2px solid var(--border2);padding-left:1rem}
+.stat-num{font-family:'Playfair Display',serif;font-size:28px;font-weight:900;color:var(--ink)}
+.stat-lbl{font-size:11px;color:var(--light);letter-spacing:.06em;text-transform:uppercase;margin-top:2px}
 
-    /* FIXTURE */
-    .section-hdr{font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--text-muted);padding:1rem 1.25rem .5rem}
-    .fixture-date-hdr{font-size:.72rem;font-weight:800;color:var(--text-muted);text-transform:uppercase;letter-spacing:.08em;padding:.75rem 1.25rem .3rem}
-    .sub-hdr{font-size:.7rem;font-weight:800;color:var(--text-muted);text-transform:uppercase;letter-spacing:.08em;padding:.6rem 1.25rem .25rem;display:flex;align-items:center;gap:5px}
-    .sub-hdr.live-sub{color:var(--red)}
+/* SECTION DIVIDER */
+.section-eyebrow{
+  font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--light);margin-bottom:.5rem;
+}
+.section-rule-line{
+  height:1px;background:var(--border);margin-bottom:1.25rem;
+}
 
-    /* MATCH CARD */
-    .match-card{margin:0 1rem .5rem;background:var(--bg-card);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:border-color .15s}
-    .match-card.live{border-color:rgba(255,77,77,.35);background:rgba(255,77,77,.04)}
-    .match-card.finished{border-color:var(--border)}
-    .match-meta{display:flex;align-items:center;justify-content:space-between;padding:.55rem .9rem .3rem;font-size:.65rem;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.05em;gap:8px}
-    .match-meta-group{color:var(--green);flex-shrink:0}
-    .match-venue{font-size:.62rem;font-weight:600;color:var(--text-muted);text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:55%;opacity:.8}
-    .match-body{display:flex;align-items:center;padding:.6rem .9rem .65rem;gap:8px}
-    .match-team{flex:1;display:flex;align-items:center;gap:8px}
-    .match-team.right{flex-direction:row-reverse;text-align:right}
-    .match-flag{font-size:1.35rem;line-height:1;flex-shrink:0}
-    .match-name{font-size:.82rem;font-weight:700;color:var(--text);line-height:1.2}
-    .match-center{display:flex;flex-direction:column;align-items:center;min-width:64px}
-    .match-score{font-family:var(--font-disp);font-size:1.35rem;font-weight:800;letter-spacing:.04em;color:var(--text);line-height:1}
-    .match-score.pending{color:var(--text-muted);font-size:1rem;letter-spacing:.1em}
-    .match-time{font-size:.65rem;font-weight:700;color:var(--text-muted);margin-top:3px}
-    .match-time.live{color:var(--red);display:flex;flex-direction:column;align-items:center;gap:1px}
-    .live-dot-small{width:5px;height:5px;background:var(--red);border-radius:50%;display:inline-block;margin-right:3px;animation:pulse 1.2s ease infinite;vertical-align:middle}
-    .match-clock{font-family:var(--font-disp);font-size:.72rem;font-weight:800;letter-spacing:.02em;color:var(--red);opacity:.85}
+/* COLLAGE CARDS */
+.collage-row{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:5rem}
+.col-card{
+  border-radius:16px;overflow:hidden;cursor:pointer;
+  border:1px solid var(--border);
+  background:var(--white);
+  transition:transform .2s,box-shadow .2s,border-color .2s;
+}
+.col-card:hover{transform:translateY(-4px);box-shadow:0 16px 48px rgba(26,26,24,.1);border-color:var(--border2)}
 
-    /* GOALS LIST */
-    .match-goals{border-top:1px solid var(--border);padding:.5rem .9rem .6rem;display:flex;flex-direction:column;gap:3px}
-    .match-goals-row{display:flex;align-items:center;gap:6px;font-size:.72rem;color:var(--text-muted)}
-    .goal-flag{font-size:.9rem;line-height:1;flex-shrink:0}
-    .goal-scorer{font-weight:700;color:var(--text)}
-    .goal-min{font-size:.65rem;color:var(--text-muted);margin-left:auto;flex-shrink:0}
-    .goal-type{font-size:.6rem;background:rgba(255,255,255,.07);border-radius:4px;padding:1px 5px;margin-left:3px;flex-shrink:0}
-    .goal-type.og{background:rgba(255,77,77,.12);color:var(--red)}
-    .goal-type.pen{background:rgba(255,193,7,.12);color:var(--gold)}
+.col-visual{height:auto;display:flex;align-items:center;justify-content:center;padding:0;position:relative;overflow:hidden}
+.col-card.alimentos .col-visual{
+  background:var(--cream);
+  padding:0;
+  height:300px;
+}
+.col-card.alimentos .col-visual img{
+  width:100%;height:100%;object-fit:cover;display:block;
+  transition:transform .3s ease;
+}
+.col-card.alimentos:hover .col-visual img{transform:scale(1.03)}
+.col-card.sintacc .col-visual{
+  background:#eaf5ec;
+  height:300px;
+  padding:0;
+  display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;
+}
+.col-card.sintacc .col-visual img{
+  width:100%;height:100%;object-fit:cover;display:block;
+  transition:transform .3s ease;
+}
+.col-card.sintacc:hover .col-visual img{transform:scale(1.03)}
+.col-card.fumadores .col-visual{
+  background:var(--ink);
+  height:300px;
+  padding:0;
+  display:block;
+}
 
-    /* STAGE BADGE */
-    .stage-hdr{font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--gold);padding:.9rem 1.25rem .4rem;display:flex;align-items:center;gap:6px}
-
-    /* TABLA */
-    .group-standing{margin:0 1rem .75rem;background:var(--bg-card);border:1px solid var(--border);border-radius:14px;overflow:hidden}
-    .group-standing-hdr{display:flex;align-items:center;justify-content:space-between;padding:.75rem 1rem .5rem;border-bottom:1px solid var(--border)}
-    .group-standing-title{font-family:var(--font-disp);font-size:.82rem;font-weight:800;color:var(--green)}
-    .group-standing-cols{display:flex;align-items:center;padding:.3rem 1rem;font-size:.6rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted)}
-    .standing-row{display:flex;align-items:center;padding:.6rem 1rem;border-top:1px solid var(--border)}
-    .standing-row:first-child{border-top:none}
-    .standing-pos{font-size:.72rem;font-weight:800;min-width:20px;color:var(--text-muted)}
-    .standing-pos.top2{color:var(--green)}
-    .standing-team{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;flex:1;min-width:0;gap:2px}
-    .standing-team-info{display:flex;align-items:center;gap:7px;min-width:0}
-    .standing-flag{font-size:1rem;flex-shrink:0}
-    .standing-name{font-size:.8rem;font-weight:700;color:var(--text);white-space:nowrap;letter-spacing:.02em}
-    .standing-stat{font-size:.78rem;font-weight:700;min-width:26px;text-align:center;color:var(--text-muted)}
-    .standing-stat.pts{font-family:var(--font-disp);font-size:.9rem;font-weight:800;color:var(--text);min-width:28px}
-    .standing-stat.gd{font-weight:800}
-    .standing-stat.gd.pos{color:var(--green)}
-    .standing-stat.gd.neg{color:var(--red)}
-
-    /* GOLEADORES */
-    .scorer-row{display:flex;align-items:center;gap:12px;padding:.7rem 1.25rem;border-bottom:1px solid var(--border)}
-    .scorer-row:last-child{border-bottom:none}
-    .scorer-rank{font-family:var(--font-disp);font-size:.85rem;font-weight:800;min-width:22px;color:var(--text-muted)}
-    .scorer-rank.gold{color:var(--gold)}
-    .scorer-rank.silver{color:#b0b8c8}
-    .scorer-rank.bronze{color:#cd7f32}
-    .scorer-info{flex:1}
-    .scorer-name{font-size:.88rem;font-weight:700;color:var(--text)}
-    .scorer-team{display:flex;align-items:center;gap:5px;margin-top:2px;font-size:.7rem;color:var(--text-muted)}
-    .scorer-goals{display:flex;align-items:center;gap:5px;background:var(--green-dim);border:1px solid var(--green-glow);border-radius:999px;padding:4px 10px}
-    .scorer-goals-num{font-family:var(--font-disp);font-size:1rem;font-weight:800;color:var(--green)}
-    .scorer-goals-lbl{font-size:.62rem;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:.04em}
-
-    /* ADMIN */
-    .admin-screen{max-width:600px;margin:0 auto;padding:1.5rem 1.25rem 3rem}
-    .admin-title{font-family:var(--font-disp);font-size:1.1rem;font-weight:800;margin-bottom:1rem}
-    .admin-btn{display:inline-flex;align-items:center;gap:8px;padding:.75rem 1.25rem;background:var(--green);color:#042812;border:none;border-radius:10px;font-family:var(--font-body);font-size:.88rem;font-weight:800;cursor:pointer;margin-bottom:.5rem;width:100%;justify-content:center;transition:opacity .15s}
-    .admin-btn:disabled{opacity:.5;cursor:not-allowed}
-    .admin-btn.ghost{background:rgba(255,255,255,.06);color:var(--text);border:1px solid var(--border2)}
-    .admin-input{width:100%;background:rgba(255,255,255,.05);border:1.5px solid var(--border2);border-radius:10px;padding:.75rem 1rem;color:var(--text);font-family:var(--font-body);font-size:.9rem;outline:none;margin-bottom:.75rem;transition:border-color .15s}
-    .admin-input:focus{border-color:var(--green)}
-    .admin-status{font-size:.78rem;color:var(--text-muted);margin-top:.5rem;min-height:1.2em}
-    .admin-status.ok{color:var(--green)}
-    .admin-status.err{color:var(--red)}
-    .admin-stat-box{background:var(--bg-card);border:1px solid var(--border);border-radius:10px;padding:1rem;margin-bottom:1rem;font-size:.82rem;color:var(--text-muted);line-height:2}
-
-    /* EMPTY / LOADING */
-    .empty-state{text-align:center;padding:3rem 1.5rem}
-    .empty-icon{font-size:2.5rem;margin-bottom:.75rem}
-    .empty-title{font-family:var(--font-disp);font-size:1rem;font-weight:800;margin-bottom:.4rem}
-    .empty-sub{font-size:.82rem;color:var(--text-muted);line-height:1.6}
-    .loading-wrap{display:flex;align-items:center;justify-content:center;padding:3rem;gap:12px;color:var(--text-muted);font-size:.85rem}
-    .spinner{width:20px;height:20px;border:2px solid var(--border2);border-top-color:var(--green);border-radius:50%;animation:spin .8s linear infinite;flex-shrink:0}
-    @keyframes spin{to{transform:rotate(360deg)}}
-
-    /* TOAST */
-    .toast{position:fixed;bottom:calc(var(--nav-h) + 12px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);background:#1a2235;border:1px solid var(--border2);border-radius:999px;padding:.55rem 1.25rem;font-size:.8rem;font-weight:700;color:var(--text);white-space:nowrap;pointer-events:none;opacity:0;transition:opacity .2s;z-index:200}
-    .toast.visible{opacity:1}
-
-    /* COUNTDOWN */
-    .hero-banner{position:relative;overflow:hidden;background:#070b12;padding:1.5rem 1.25rem 1.25rem}
-    .hero-banner::before{content:'';position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=900&q=70') center 35%/cover no-repeat;opacity:.18}
-    .hero-banner-content{position:relative;z-index:1}
-    .hero-label{font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.12em;color:var(--green);margin-bottom:.4rem}
-    .hero-title{font-family:var(--font-disp);font-size:1.6rem;font-weight:800;letter-spacing:-.03em;color:#fff;line-height:1.1;margin-bottom:.75rem}
-    .countdown-grid{display:flex;gap:10px;margin-bottom:.75rem}
-    .cd-unit{background:rgba(255,255,255,.07);border:1px solid var(--border2);border-radius:10px;padding:.55rem .65rem;text-align:center;min-width:54px}
-    .cd-num{font-family:var(--font-disp);font-size:1.4rem;font-weight:800;color:#fff;line-height:1}
-    .cd-lbl{font-size:.55rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);margin-top:3px}
-    .hero-date{font-size:.72rem;color:rgba(255,255,255,.45)}
-
-    @media(max-width:380px){.match-name{font-size:.75rem}.match-score{font-size:1.2rem}.standing-name{font-size:.72rem}}
-
-    /* LIVE NOW BAR */
-    #live-now-bar{background:rgba(255,77,77,.06);border-bottom:1px solid rgba(255,77,77,.18);padding-bottom:.25rem}
-    .live-now-label{display:flex;align-items:center;gap:7px;padding:.65rem 1.25rem .35rem;font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--red)}
-    .live-now-label .live-dot{width:7px;height:7px;background:var(--red);border-radius:50%;flex-shrink:0;animation:pulse 1.2s ease infinite}
-    #live-now-bar .match-card{margin:0 1rem .5rem;background:rgba(255,77,77,.08);border-color:rgba(255,77,77,.3)}
-
-    /* RONDA DE 32 — INFORMATIVO */
-    .info-banner{margin:1rem 1rem .5rem;background:rgba(255,193,7,.07);border:1px solid rgba(255,193,7,.22);border-radius:12px;padding:.7rem .9rem;font-size:.74rem;line-height:1.5;color:var(--text-muted)}
-    .info-banner strong{color:var(--gold)}
-    .r32-card{margin:0 1rem .5rem;background:var(--bg-card);border:1px dashed var(--border2);border-radius:14px;padding:.65rem .9rem;display:flex;align-items:center;gap:8px}
-    .r32-code{font-size:.62rem;font-weight:800;color:var(--text-muted);background:rgba(255,255,255,.06);border-radius:6px;padding:2px 6px;flex-shrink:0}
-    .r32-teams{flex:1;font-size:.78rem;font-weight:700;color:var(--text);line-height:1.35}
-    .r32-vs{color:var(--text-muted);font-weight:600;margin:0 4px}
-    .r32-date{font-size:.62rem;font-weight:700;color:var(--text-muted);flex-shrink:0;text-align:right}
-
-    /* PROYECCIÓN */
-    .proy-note{margin:-.25rem 1rem .85rem;font-size:.72rem;color:var(--text-muted);font-style:italic;padding:0 .1rem}
-    .proy-match{background:var(--bg-card);margin:0 1rem .6rem;border-radius:14px;border:1px solid var(--border);padding:.85rem 1rem}
-    .proy-match-header{font-size:.6rem;font-weight:800;color:var(--text-muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:.55rem}
-    .proy-match-teams{display:flex;align-items:center;gap:6px}
-    .proy-team{font-size:.88rem;font-weight:700;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-    .proy-placeholder{font-size:.72rem;color:var(--text-muted);font-style:italic;flex:1;line-height:1.3}
-    .proy-vs{font-size:.62rem;font-weight:800;color:var(--border2);flex-shrink:0;padding:0 2px}
-    .qualify-rank{color:var(--gold) !important}
-    .proy-out{color:var(--text-muted) !important;font-size:.7rem}
-
-    /* EQUIPO FAVORITO */
-    .match-card.fav{border-color:rgba(255,193,7,.45);background:rgba(255,193,7,.03)}
-    .fav-star{background:none;border:none;cursor:pointer;font-size:.85rem;line-height:1;padding:0 3px;opacity:.25;transition:opacity .2s,transform .15s;flex-shrink:0;color:var(--gold)}
-    .fav-star.active{opacity:1;transform:scale(1.15)}
-    .fav-star:active{transform:scale(.9)}
-
-    /* BADGE CLASIFICACIÓN EN GRUPOS */
-    .qualify-badge{font-size:.58rem;font-weight:800;border-radius:999px;padding:1px 6px;margin-left:5px;flex-shrink:0;letter-spacing:.02em}
-    .qualify-badge.ok{background:rgba(0,230,118,.13);color:var(--green);border:1px solid rgba(0,230,118,.3)}
-    .qualify-badge.out{background:rgba(255,77,77,.1);color:var(--red);border:1px solid rgba(255,77,77,.22)}
-
-    /* HISTORIAL DE GOLES EXPANDIBLE */
-    .goals-toggle-btn{background:none;border:none;cursor:pointer;width:100%;display:flex;align-items:center;justify-content:center;gap:5px;padding:.4rem .9rem .45rem;font-size:.7rem;font-weight:700;color:var(--text-muted);border-top:1px solid var(--border);transition:color .15s;letter-spacing:.02em}
-    .goals-toggle-btn:active{opacity:.65}
-    .goals-toggle-btn .tgl-count{background:rgba(255,255,255,.07);border-radius:999px;padding:1px 7px;font-size:.65rem}
-    .match-goals-body{overflow:hidden;transition:max-height .28s ease,opacity .2s ease}
-
-    /* TOAST DE GOL */
-    .goal-toast{position:fixed;bottom:calc(var(--nav-h) + 14px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%) scale(.88);background:linear-gradient(135deg,#0d3d26 0%,#0a2e1f 100%);border:1.5px solid rgba(0,230,118,.45);border-radius:999px;padding:.6rem 1.5rem;font-size:.85rem;font-weight:800;color:#fff;white-space:nowrap;pointer-events:none;opacity:0;transition:opacity .22s,transform .22s;z-index:202;max-width:92vw;overflow:hidden;text-overflow:ellipsis;text-align:center;box-shadow:0 4px 24px rgba(0,230,118,.15)}
-    .goal-toast.visible{opacity:1;transform:translateX(-50%) scale(1)}
+.fum-visual-inner{display:flex;gap:16px;align-items:center}
+.fum-vis-block{
+  background:rgba(255,255,255,.07);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:12px;padding:20px 18px;
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  min-width:110px;
+}
+.fum-vis-icon{font-size:32px}
+.fum-vis-name{font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:#fff}
+.fum-vis-tag{font-size:10px;color:rgba(255,255,255,.4)}
 
 
+.col-cta{
+  position:absolute;bottom:12px;left:50%;transform:translateX(-50%);
+  background:rgba(26,26,24,.72);color:#fff;
+  font-size:12px;font-weight:500;letter-spacing:.06em;
+  padding:6px 16px;border-radius:20px;
+  backdrop-filter:blur(4px);pointer-events:none;
+  white-space:nowrap;z-index:2;
+}
+.col-foot{
+  padding:18px 22px;
+  display:flex;align-items:center;justify-content:space-between;
+  border-top:1px solid var(--border);
+}
+.col-foot-name{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--ink)}
+.col-foot-sub{font-size:12px;color:var(--light);margin-top:3px}
+.col-arrow{
+  width:36px;height:36px;border-radius:50%;
+  background:var(--ink);color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  font-size:15px;font-weight:700;flex-shrink:0;
+  transition:background .15s;
+}
+.col-card:hover .col-arrow{background:var(--red)}
 
-    /* ESTADÍSTICAS */
-    .stat-card{background:var(--bg-card);border:1px solid var(--border);border-radius:14px;margin:0 1rem .6rem;overflow:hidden}
-    .stat-card-hdr{display:flex;align-items:center;gap:8px;padding:.7rem 1rem .5rem;border-bottom:1px solid var(--border);font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted)}
-    .stat-row{display:flex;align-items:center;padding:.55rem 1rem;border-top:1px solid var(--border);gap:10px}
-    .stat-row:first-child{border-top:none}
-    .stat-rank{font-family:var(--font-disp);font-size:.82rem;font-weight:800;min-width:22px;color:var(--text-muted)}
-    .stat-rank.gold{color:var(--gold)}
-    .stat-main{flex:1;font-size:.84rem;font-weight:700;color:var(--text)}
-    .stat-sub{font-size:.66rem;color:var(--text-muted);margin-top:1px}
-    .stat-val{font-family:var(--font-disp);font-size:1rem;font-weight:800;color:var(--green);min-width:28px;text-align:right}
-    .stat-val.red{color:var(--red)}
-    .stat-val.gold{color:var(--gold)}
-    .stat-kpi-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border)}
-    .stat-kpi{background:var(--bg-card);padding:.85rem 1rem;display:flex;flex-direction:column;gap:3px}
-    .stat-kpi-num{font-family:var(--font-disp);font-size:1.4rem;font-weight:800;color:var(--green);line-height:1}
-    .stat-kpi-lbl{font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--text-muted)}
-    .stat-kpi-sub{font-size:.7rem;color:var(--text-muted);margin-top:2px}
-    .stat-record-row{display:flex;align-items:flex-start;padding:.6rem 1rem;border-top:1px solid var(--border);gap:10px}
-    .stat-record-row:first-child{border-top:none}
-    .stat-record-ico{font-size:1.1rem;flex-shrink:0;line-height:1.4}
-    .stat-record-txt{flex:1}
-    .stat-record-title{font-size:.8rem;font-weight:700;color:var(--text);line-height:1.3}
-    .stat-record-desc{font-size:.68rem;color:var(--text-muted);margin-top:2px;line-height:1.4}
+/* PROMO STRIP */
+.promo-strip{
+  background:var(--ink);border-radius:16px;
+  padding:2.5rem 3rem;margin-bottom:5rem;
+  display:flex;align-items:center;justify-content:space-between;gap:2rem;
+}
+.promo-title{font-family:'Playfair Display',serif;font-size:24px;font-weight:900;color:#fff;margin-bottom:.5rem}
+.promo-body{font-size:14px;color:rgba(255,255,255,.5);max-width:420px;line-height:1.6}
+.promo-cta{
+  background:var(--red);color:#fff;border:none;
+  border-radius:8px;padding:12px 24px;
+  font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;
+  cursor:pointer;white-space:nowrap;transition:background .15s;flex-shrink:0;
+}
+.promo-cta:hover{background:var(--red-dark)}
 
-    /* R16 virtual bracket */
-    .r16-placeholder{color:var(--text-muted);font-style:italic;font-size:.82rem}
-    .r16-sub{font-size:.6rem;color:var(--text-muted);padding:.1rem 1rem .35rem;line-height:1.4}
-    .ko-bracket-lbl{font-size:.6rem;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--gold);padding:.3rem 1.25rem .1rem;opacity:.75}
-    .ko-venue{color:var(--text-muted);font-size:.62rem}
-    .ko-match-row{background:var(--bg-card);margin:0 1rem .5rem;border-radius:14px;border:1px solid var(--border);padding:.8rem 1rem}
-    .ko-score-line{font-size:.9rem;font-weight:700;line-height:1.5;margin-bottom:.35rem}
-    .ko-winner{color:var(--gold)}
-    .ko-meta{font-size:.65rem;color:var(--text-muted);display:flex;align-items:center;gap:6px;flex-wrap:wrap}
-    .ko-final-badge{color:var(--text-muted);font-weight:700}
-    .ko-live-badge{color:var(--red);font-weight:800;display:inline-flex;align-items:center;gap:4px}
-    .ko-time-badge{color:var(--text-muted);font-weight:700}
-    .final-tag{display:inline-block;font-size:.55rem;font-weight:800;padding:1px 5px;border-radius:6px;vertical-align:middle;margin-left:2px}
-    .final-tag.pen{background:rgba(255,204,0,.15);color:var(--gold);border:1px solid rgba(255,204,0,.35)}
-    .final-tag.et{background:rgba(100,180,255,.12);color:#64b4ff;border:1px solid rgba(100,180,255,.3)}
+/* SECTION WRAP */
+.section-wrap{max-width:1140px;margin:0 auto;padding:2.5rem 2.5rem 4rem}
+.breadcrumb{
+  display:flex;align-items:center;gap:8px;
+  font-size:13px;color:var(--light);
+  margin-bottom:2rem;cursor:pointer;
+}
+.breadcrumb:hover{color:var(--mid)}
+.breadcrumb .bc-active{color:var(--ink2);font-weight:500}
+.section-title{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(26px,3.5vw,42px);font-weight:900;
+  color:var(--ink);margin-bottom:.5rem;
+}
 
-    /* ── BRACKET TREE R16+ ── */
-    .btree-section{padding:0 .75rem .75rem}
-    .btree-half-lbl{font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--gold);padding:.5rem 0 .3rem;opacity:.9}
-    .bhalf{display:flex;align-items:stretch;gap:4px}
-    .bhalf-col{display:flex;flex-direction:column;flex:1;min-width:0}
-    .bhalf-col-lbl{font-size:.52rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--text-muted);text-align:center;padding:.15rem 0 .35rem;margin-bottom:.25rem;border-bottom:1px solid var(--border)}
-    .bhalf-pair{display:flex;flex-direction:column;flex:1;justify-content:center;gap:3px;margin:.1rem 0}
-    /* match card */
-    .bmcard{background:var(--bg-card);border:1px solid var(--border);border-radius:10px;overflow:hidden}
-    .bmcard .brow{display:flex;align-items:center;gap:5px;padding:.35rem .55rem;font-size:.75rem;font-weight:600;min-height:30px;border-bottom:1px solid var(--border)}
-    .bmcard .brow:last-of-type{border-bottom:none}
-    .bmcard .brow.won{color:var(--gold);background:rgba(255,193,7,.08)}
-    .bmcard .brow.lost{opacity:.33}
-    .bmcard .brow.cand{color:var(--text-muted);font-size:.67rem;gap:3px}
-    .bmcard .brow.tbd{color:var(--text-muted);justify-content:center;font-style:italic;font-size:.62rem;padding:.35rem .3rem}
-    .bmcard .brow .bflag{font-size:.95rem;line-height:1;flex-shrink:0}
-    .bmcard .brow .bname{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-    .bmcard .brow .bsc{font-weight:800;font-size:.75rem;color:var(--gold);margin-left:auto;flex-shrink:0;padding-left:4px}
-    .bmcard-meta{font-size:.5rem;color:var(--text-muted);text-align:center;padding:.2rem .4rem;border-top:1px solid var(--border);line-height:1.5}
-    /* final section */
-    .bfinal-wrap{margin:.5rem 0}
-    .bfinal-card{background:linear-gradient(135deg,rgba(255,193,7,.12) 0%,rgba(0,230,118,.08) 100%);border:2px solid rgba(255,193,7,.55);border-radius:14px;overflow:hidden}
-    .bfinal-hdr{font-size:.65rem;font-weight:800;text-transform:uppercase;color:var(--gold);letter-spacing:.09em;text-align:center;padding:.45rem .3rem .2rem}
-    .bfinal-date{font-size:.53rem;color:var(--text-muted);text-align:center;padding:.18rem .3rem .4rem;border-top:1px solid rgba(255,193,7,.2)}
-    .b3rd-card{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-top:.45rem}
-    .b3rd-hdr{font-size:.6rem;font-weight:800;text-transform:uppercase;color:var(--text-muted);letter-spacing:.07em;text-align:center;padding:.4rem .3rem .18rem}
-    .b3rd-date{font-size:.52rem;color:var(--text-muted);text-align:center;padding:.14rem .3rem .35rem;border-top:1px solid var(--border)}
-    /* info banner */
-    .info-banner{margin:.3rem 0 .5rem;background:rgba(0,230,118,.07);border:1px solid rgba(0,230,118,.18);border-radius:10px;padding:.5rem .8rem;font-size:.7rem;color:var(--text-muted);line-height:1.4}
-  </style>
-  <link rel="stylesheet" href="css/news.css">
+.brand-header-logo{margin-bottom:.25rem}
+.brand-header-logo img{height:52px;max-width:200px;object-fit:contain;display:block}
+@media(max-width:720px){.brand-header-logo img{height:44px;max-width:160px}}
+.section-rule{width:36px;height:2px;background:var(--red);margin:.4rem 0 .4rem}
+.section-meta{font-size:13px;color:var(--light);margin-bottom:1rem;letter-spacing:.02em}
+
+.brands-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:12px;margin-bottom:3rem}
+.brand-tile-lg{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:14px;overflow:hidden;
+  cursor:pointer;text-align:center;
+  transition:border-color .15s,transform .15s,box-shadow .15s;
+}
+.brand-tile-lg:hover{border-color:var(--red);transform:translateY(-3px);box-shadow:0 8px 24px rgba(26,26,24,.08)}
+.btl-logo{width:100%;height:100px;object-fit:contain;padding:12px;display:block;background:var(--white)}
+.btl-logo.logo-elements{padding:2px;height:130px;object-fit:contain}
+.btl-emoji{font-size:30px;margin:20px 0 8px;display:block}
+.btl-name{font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:var(--ink);padding:0 8px}
+.btl-count{font-size:11px;color:var(--light);margin:4px 0 14px;display:block}
+
+/* BRAND PAGE */
+.toolbar{display:flex;gap:10px;margin-bottom:1.5rem;flex-wrap:wrap;align-items:center}
+.search-wrap{flex:1;min-width:200px;position:relative}
+.search-wrap svg{position:absolute;left:12px;top:50%;transform:translateY(-50%)}
+.search-wrap input{
+  width:100%;padding:10px 14px 10px 38px;
+  border:1px solid var(--border);border-radius:8px;
+  font-family:'DM Sans',sans-serif;font-size:13px;
+  background:var(--white);color:var(--ink);outline:none;
+  transition:border-color .15s;
+}
+.search-wrap input:focus{border-color:var(--red)}
+.filters{display:flex;gap:6px;flex-wrap:wrap}
+.fbtn{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:20px;padding:6px 14px;
+  font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;
+  cursor:pointer;color:var(--mid);transition:all .15s;
+}
+.fbtn:hover{border-color:var(--red);color:var(--red)}
+.fbtn.active{background:var(--red);border-color:var(--red);color:#fff}
+
+.prod-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px}
+.prod-card{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:14px;padding:1.1rem;
+  display:flex;flex-direction:column;gap:9px;
+  transition:border-color .15s,transform .15s,box-shadow .15s;
+}
+.prod-card:hover{border-color:var(--border2);transform:translateY(-2px);box-shadow:0 6px 20px rgba(26,26,24,.07)}
+.prod-card.flash{border-color:var(--red);box-shadow:0 0 0 3px rgba(192,42,42,.18);animation:flashPulse 1.6s ease-out}
+@keyframes flashPulse{0%{box-shadow:0 0 0 0 rgba(192,42,42,.45)}70%{box-shadow:0 0 0 14px rgba(192,42,42,0)}100%{box-shadow:0 0 0 0 rgba(192,42,42,0)}}
+
+/* GLOBAL PREDICTIVE SEARCH */
+.gsearch{position:sticky;top:62px;z-index:55;background:var(--cream);border-bottom:1px solid var(--border);padding:8px 2.5rem}
+.gsearch-wrap{max-width:1200px;margin:0 auto;position:relative}
+.gsearch-input{width:100%;padding:10px 36px 10px 38px;border:1.5px solid var(--border);border-radius:10px;background:var(--white);font-family:'DM Sans',sans-serif;font-size:14px;color:var(--ink);outline:none;transition:border-color .15s,box-shadow .15s;box-sizing:border-box}
+.gsearch-input::placeholder{color:#B0AA9E}
+.gsearch-input:focus{border-color:var(--red);box-shadow:0 0 0 3px rgba(192,42,42,.08)}
+.gsearch-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);pointer-events:none;display:flex;align-items:center}
+.gsearch-clear{position:absolute;right:6px;top:50%;transform:translateY(-50%);background:transparent;border:0;font-size:20px;line-height:1;cursor:pointer;color:var(--mid);width:30px;height:30px;border-radius:50%;display:none;align-items:center;justify-content:center}
+.gsearch-clear.visible{display:flex}
+.gsearch-clear:hover{background:var(--cream)}
+.gsearch-results{position:absolute;top:calc(100% + 6px);left:0;right:0;background:var(--white);border:1.5px solid var(--border);border-radius:10px;box-shadow:0 10px 28px rgba(26,26,24,.14);max-height:64vh;overflow-y:auto;z-index:65;display:none}
+.gsearch-results.visible{display:block}
+.gsr-item{display:flex;gap:10px;align-items:center;padding:10px 12px;cursor:pointer;border-bottom:1px solid var(--border);transition:background .12s}
+.gsr-item:last-child{border-bottom:0}
+.gsr-item:hover,.gsr-item.kbsel{background:var(--cream)}
+.gsr-img{width:42px;height:42px;border-radius:7px;background:var(--cream);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;overflow:hidden}
+.gsr-img img{width:100%;height:100%;object-fit:contain;padding:2px;box-sizing:border-box;display:block}
+.gsr-text{flex:1;min-width:0}
+.gsr-name{font-size:13px;font-weight:600;color:var(--ink);line-height:1.3;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.gsr-meta{font-size:11px;color:var(--mid);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.gsr-price{font-size:12px;color:var(--red);font-weight:700;margin-left:8px;flex-shrink:0;white-space:nowrap}
+.gsr-empty{padding:18px;text-align:center;color:var(--mid);font-size:13px}
+
+.prod-icon{
+  height:210px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:54px;background:var(--cream);
+  overflow:hidden;
+}
+.prod-icon img{width:100%;height:100%;object-fit:contain;display:block;transform:scale(1.18);transform-origin:center;cursor:zoom-in}
+
+/* LIGHTBOX */
+.lightbox{position:fixed;inset:0;background:rgba(0,0,0,.94);z-index:200;display:none;align-items:center;justify-content:center;touch-action:none;overflow:hidden}
+.lightbox.open{display:flex}
+.lb-img{max-width:96vw;max-height:90vh;object-fit:contain;transform-origin:center;will-change:transform;user-select:none;-webkit-user-drag:none;pointer-events:auto}
+.lb-close{position:absolute;top:14px;right:14px;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.18);color:#fff;border:0;font-size:26px;line-height:1;cursor:pointer;z-index:2;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(6px)}
+.lb-close:hover{background:rgba(255,255,255,.3)}
+.lb-controls{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);display:flex;gap:10px;z-index:2}
+.lb-btn{width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.18);color:#fff;border:0;font-size:22px;cursor:pointer;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(6px)}
+.lb-btn:hover{background:rgba(255,255,255,.3)}
+.lb-hint{position:absolute;top:16px;left:50%;transform:translateX(-50%);color:#fff;font-size:11px;background:rgba(0,0,0,.5);padding:6px 14px;border-radius:20px;z-index:2;opacity:.85;letter-spacing:.05em;text-transform:uppercase;font-weight:500}
+
+.prod-art{font-size:10px;color:var(--light);letter-spacing:.06em;text-transform:uppercase}
+.prod-name{font-family:'Playfair Display',serif;font-size:13px;font-weight:700;line-height:1.3;color:var(--ink)}
+.prod-present{font-size:11px;color:var(--mid)}
+.prices-row{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:2px 0}
+.price-box{border:1.5px solid var(--border);border-radius:8px;padding:7px 8px;cursor:pointer;transition:all .15s;text-align:center}
+.price-box:hover{border-color:var(--border2)}
+.price-box.selected{border-color:var(--red);background:var(--red-light)}
+.price-box-label{font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:var(--light);margin-bottom:2px}
+.price-box-val{font-size:17px;font-weight:600;color:var(--ink)}
+.price-box.selected .price-box-label{color:var(--red)}
+.price-box.selected .price-box-val{color:var(--red)}
+.prod-pu{font-size:22px;font-weight:500;color:var(--ink)}
+.prod-pu em{font-size:11px;font-style:normal;color:var(--light)}
+.prod-pc{font-size:13px;color:var(--ink2);font-weight:500;margin-top:2px}
+.prod-unit-ref{font-size:13px;color:var(--ink2);font-weight:500;margin-top:3px}
+.qty-row{display:flex;align-items:center;gap:8px;margin-top:2px}
+.qbtn{
+  width:28px;height:28px;border:1px solid var(--border);
+  border-radius:6px;background:var(--cream);
+  cursor:pointer;font-size:16px;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--mid);transition:border-color .1s;
+}
+.qbtn:hover{border-color:var(--border2)}
+.qnum{font-size:14px;min-width:20px;text-align:center;font-weight:500;color:var(--ink)}
+.abtn{
+  flex:1;background:var(--ink);color:#fff;border:none;
+  border-radius:7px;padding:8px;font-size:12px;font-weight:500;
+  font-family:'DM Sans',sans-serif;cursor:pointer;transition:background .15s;
+}
+.abtn:hover{background:var(--ink2)}
+.abtn.added{background:#1E6B3C}
+.prod-card.baja-rot{border-style:dashed;opacity:.85}
+.baja-rot-tag{font-size:10px;color:var(--mid);background:var(--cream2);border-radius:4px;padding:2px 6px;display:inline-block;margin-bottom:2px}
+
+/* SIN TACC STRIP */
+.sintacc-strip{
+  background:var(--white);border:1px solid var(--border);border-radius:16px;
+  padding:1.5rem 2rem;margin-bottom:3rem;
+  display:flex;align-items:center;justify-content:space-between;gap:1.5rem;
+  cursor:pointer;transition:border-color .2s,box-shadow .2s,transform .2s;
+  position:relative;overflow:hidden;
+}
+.sintacc-strip::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:4px;
+  background:linear-gradient(180deg,#3a7d44,#5aab6a);border-radius:4px 0 0 4px;
+}
+.sintacc-strip:hover{border-color:var(--border2);transform:translateY(-2px);box-shadow:0 8px 28px rgba(26,26,24,.09)}
+.sintacc-left{display:flex;align-items:center;gap:1.25rem;flex:1;min-width:0}
+.sintacc-badge{
+  width:48px;height:48px;border-radius:12px;flex-shrink:0;
+  background:#eaf5ec;display:flex;align-items:center;justify-content:center;
+  font-size:24px;
+}
+.sintacc-texts{}
+.sintacc-label{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#3a7d44;font-weight:600;margin-bottom:3px}
+.sintacc-title{font-family:'Playfair Display',serif;font-size:18px;font-weight:900;color:var(--ink);line-height:1.1}
+.sintacc-sub{font-size:12px;color:var(--mid);margin-top:3px}
+.sintacc-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+.sintacc-tag{font-size:10px;background:#eaf5ec;color:#3a7d44;border-radius:20px;padding:3px 9px;font-weight:500;border:1px solid #c4e0c8}
+.sintacc-arrow{
+  width:40px;height:40px;border-radius:50%;background:var(--ink);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;flex-shrink:0;
+  transition:background .15s;
+}
+.sintacc-strip:hover .sintacc-arrow{background:#3a7d44}
+@media(max-width:720px){
+  .sintacc-strip{padding:1.25rem 1.25rem 1.25rem 1.5rem;gap:1rem}
+  .sintacc-title{font-size:16px}
+}
+
+/* SINTACC PAGE */
+.sintacc-brand-group{margin-bottom:2rem}
+.sintacc-brand-hdr{display:flex;align-items:center;gap:10px;margin-bottom:.75rem;padding-bottom:.5rem;border-bottom:1px solid var(--border)}
+.sintacc-brand-logo{height:32px;max-width:90px;object-fit:contain}
+.sintacc-brand-name{font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:var(--ink)}
+.sintacc-brand-count{font-size:11px;color:var(--light);margin-left:auto}
+
+.sintacc-brand-desc{font-size:12px;color:var(--mid);margin-bottom:.75rem;line-height:1.5;padding:8px 10px;background:#f0f7f1;border-radius:8px;border-left:3px solid #3a7d44}
+.brand-desc-strip{font-size:12px;color:var(--mid);line-height:1.5;padding:8px 12px;background:var(--cream);border-radius:8px;margin-bottom:1rem;border-left:3px solid var(--border2)}
+
+/* HOME REDESIGN */
+.home-cats-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:12px}
+
+/* Banner base */
+.home-banner{
+  border:1px solid var(--border);border-radius:14px;overflow:hidden;
+  cursor:pointer;transition:transform .18s,box-shadow .18s;
+  display:flex;align-items:center;gap:14px;padding:14px 18px;
+  background:var(--white);
+}
+.home-banner:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(26,26,24,.09)}
+.home-banner-icon{font-size:26px;flex-shrink:0}
+.home-banner-texts{flex:1;min-width:0}
+.home-banner-title{font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:var(--ink);line-height:1.2}
+.home-banner-sub{font-size:11px;color:var(--mid);margin-top:2px}
+.home-banner-arrow{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+
+/* Fumadores — PC: debajo de las 2 cards, ancho de hero-cats */
+.home-banner.fum{background:var(--ink);border-color:var(--ink);min-height:140px}
+.home-banner.fum .home-banner-title{color:#fff}
+.home-banner.fum .home-banner-sub{color:rgba(255,255,255,.5)}
+.home-banner.fum .home-banner-arrow{background:rgba(255,255,255,.15);color:#fff}
+
+/* Pago — PC: dentro de hero-left, debajo del texto */
+.home-banner.pago{background:var(--cream);border-color:var(--border);cursor:default;margin-top:1.5rem}
+.home-banner.pago:hover{transform:none;box-shadow:none}
+.home-banner.pago .home-banner-title{color:var(--ink2);font-size:10px;font-family:'DM Sans',sans-serif;font-weight:600;letter-spacing:.1em;text-transform:uppercase}
+.pago-methods{display:flex;flex-direction:column;gap:3px;margin-top:4px}
+.pago-method-item{font-size:11px;color:var(--ink2);display:flex;align-items:center;gap:5px}
+
+/* Sin TACC card */
+.col-card.sintacc{border-color:#c4e0c8}
+.col-card.sintacc .col-foot{background:#f0f7f1}
+.col-card.sintacc .col-foot-name{color:#2d6235}
+.col-card.sintacc .col-arrow{background:#3a7d44}
+.col-visual.sintacc-visual{background:#eaf5ec;height:300px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;flex-direction:column;gap:8px}
+.col-visual.sintacc-visual img{width:100%;height:100%;object-fit:cover;display:block}
+.sintacc-placeholder{display:flex;flex-direction:column;align-items:center;gap:8px;padding:20px}
+.sintacc-placeholder-icon{font-size:48px}
+.sintacc-placeholder-tags{display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
+.sintacc-placeholder-tag{font-size:10px;background:#fff;color:#3a7d44;border-radius:12px;padding:3px 9px;border:1px solid #c4e0c8;font-weight:500}
+
+/* mobile-only banners */
+.home-mobile-only{display:none}
+
+/* BOTTOM NAV — oculto por defecto, visible en tablet y mobile */
+.bottom-nav{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--white);border-top:1px solid var(--border);z-index:80;padding:6px 0 calc(6px + env(safe-area-inset-bottom));justify-content:space-around;overflow-x:auto;box-shadow:0 -2px 12px rgba(26,26,24,.06)}
+.bn-item{background:none;border:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 10px;font-family:'DM Sans',sans-serif;color:var(--mid);position:relative;min-width:56px;flex:0 0 auto;transition:color .15s}
+.bn-item.active{color:var(--red)}
+.bn-icon{font-size:20px;line-height:1}
+.bn-label{font-size:10px;font-weight:500;letter-spacing:.04em;text-transform:uppercase}
+.bn-badge{position:absolute;top:0;right:6px;background:var(--red);color:#fff;border-radius:10px;min-width:16px;height:16px;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center;padding:0 4px}
+.bn-badge.zero{display:none}
+
+/* WHATSAPP FAB */
+.wa-fab{position:fixed;right:18px;bottom:calc(78px + env(safe-area-inset-bottom));width:54px;height:54px;border-radius:50%;background:#25D366;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 20px rgba(37,211,102,.45);z-index:75;transition:transform .15s,box-shadow .15s}
+.wa-fab:hover{transform:scale(1.06);box-shadow:0 8px 24px rgba(37,211,102,.55)}
+.wa-fab svg{width:28px;height:28px;fill:#fff}
+@media(min-width:1025px){.wa-fab{bottom:24px;right:24px;width:58px;height:58px}.wa-fab svg{width:30px;height:30px}}
+
+/* TABLET + MOBILE: mostrar bottom nav y ajustar body */
+@media(max-width:1024px){
+  body{padding-bottom:64px}
+  .bottom-nav{display:flex}
+  .home-mobile-only{display:flex !important}
+  .home-banner.pago{display:none}
+  .home-banner.fum{display:none}
+  .home-mobile-fum{min-height:130px}
+  .home-mobile-pago{margin-top:0;cursor:default}
+  .home-mobile-pago:hover{transform:none;box-shadow:none}
+}
+
+/* SOLO MOBILE: ajustes de layout más agresivos */
+@media(max-width:720px){
+  .collage-row,.fum-2col,.hero-row{grid-template-columns:1fr}
+  .topbar{padding-left:1rem;padding-right:1rem;height:56px}
+  .home-wrap{padding:1rem 1.25rem 2rem}
+  .section-wrap{padding-left:1.25rem;padding-right:1.25rem;padding-top:1.5rem}
+  .cart-panel{width:100%}
+  .promo-strip{flex-direction:column;text-align:center;padding:1.75rem 1.5rem;margin-bottom:3rem}
+  .logo-divider,.logo-city,.tel{display:none}
+  .logo-name{font-size:18px}
+  .cart-btn{padding:8px 13px;font-size:12px}
+  .cart-btn span:not(.badge){font-size:11px}
+  .gsearch{top:56px;padding:6px 1rem}
+  .gsearch-input{font-size:13px;padding:9px 32px 9px 34px}
+  .gsearch-icon{left:10px}
+  .gsr-img{width:38px;height:38px;font-size:20px}
+  .gsr-price{font-size:11px}
+  .hero-eyebrow{margin-bottom:.5rem;font-size:10px}
+  .hero-title{font-size:clamp(26px,7.5vw,38px);line-height:.98;margin-bottom:.75rem}
+  .hero-rule{margin-bottom:.5rem}
+  .hero-body{font-size:13px;line-height:1.5;margin-bottom:0;max-width:100%}
+  .hero-row{margin-bottom:.75rem}
+  .section-eyebrow{margin-bottom:.25rem}
+  .section-rule-line{margin-bottom:.75rem}
+  .collage-row{margin-bottom:2rem}
+  .col-visual{height:auto;min-height:180px}
+  .col-card.alimentos .col-visual{height:273px}
+  .col-card.fumadores .col-visual{height:273px}
+  .col-cta{
+    position:absolute;bottom:12px;left:50%;transform:translateX(-50%);
+    background:rgba(26,26,24,.72);color:#fff;
+    font-size:12px;font-weight:500;letter-spacing:.06em;
+    padding:6px 16px;border-radius:20px;
+    backdrop-filter:blur(4px);pointer-events:none;
+    white-space:nowrap;z-index:2;
+  }
+  .col-foot{padding:14px 16px}
+  .col-foot-name{font-size:15px}
+  .section-title{font-size:clamp(24px,6vw,32px)}
+  .section-meta{margin-bottom:1.25rem}
+  .toolbar{margin-bottom:1rem;gap:8px}
+  .prod-grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+  .prod-card{padding:.75rem;gap:7px;border-radius:11px}
+  .prod-icon{height:170px;font-size:42px;border-radius:8px}
+  .prod-art{font-size:9px}
+  .prod-name{font-size:12px;line-height:1.25}
+  .prod-present{font-size:10px}
+  .prices-row{gap:4px;margin:0}
+  .price-box{padding:5px 4px;border-radius:7px;border-width:1.5px;min-width:0}
+  .price-box-label{font-size:9px;letter-spacing:.04em}
+  .price-box-val{font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .prod-pu{font-size:17px}
+  .prod-pc{font-size:12px}
+  .qbtn{width:32px;height:32px;font-size:17px}
+  .qnum{font-size:13px;min-width:18px}
+  .abtn{padding:9px 6px;font-size:12px}
+  .qty-row{gap:5px}
+}
+
+/* CART PAGO SELECTOR */
+.pago-selector{padding:1rem 1.5rem;border-top:1px solid var(--border)}
+.pago-sel-title{font-size:12px;font-weight:600;color:var(--ink);margin-bottom:.6rem}
+.pago-sel-opts{display:flex;flex-direction:column;gap:6px}
+.pago-sel-btn{display:flex;align-items:center;gap:10px;padding:10px 12px;border:1.5px solid var(--border);border-radius:10px;cursor:pointer;background:var(--white);transition:all .15s;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--ink);text-align:left}
+.pago-sel-btn:hover{border-color:var(--border2)}
+.pago-sel-btn.selected{border-color:var(--red);background:var(--red-light);color:var(--red)}
+.pago-sel-icon{font-size:18px;flex-shrink:0}
+
+/* CATALOGO COMPLETO */
+.cat-wrap{max-width:1140px;margin:0 auto;padding:2rem 2.5rem}
+.cat-tabs{display:flex;gap:8px;margin-bottom:2rem;border-bottom:2px solid var(--border);padding-bottom:0}
+.fichas-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;margin-top:1rem}
+.fichas-card{display:flex;flex-direction:column;align-items:center;gap:8px;background:var(--white);border:1px solid var(--border);border-radius:14px;padding:18px 10px;cursor:pointer;transition:transform .15s,box-shadow .15s}
+.fichas-card:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(26,26,24,.08)}
+.fichas-logo{width:56px;height:56px;object-fit:contain}
+.fichas-name{font-size:13px;font-weight:600;text-align:center;color:var(--ink)}
+.cat-tab{padding:10px 20px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;border:none;background:none;cursor:pointer;color:var(--mid);border-bottom:3px solid transparent;margin-bottom:-2px;transition:color .15s,border-color .15s}
+.cat-tab.active{color:var(--ink);border-bottom-color:var(--red)}
+.cat-brand-block{margin-bottom:3rem}
+.cat-brand-hdr{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:2px solid var(--ink);margin-bottom:1rem}
+.cat-brand-logo{height:36px;max-width:100px;object-fit:contain}
+.cat-brand-name{font-family:'Playfair Display',serif;font-size:20px;font-weight:900;color:var(--ink)}
+.cat-brand-count{font-size:11px;color:var(--light);margin-left:auto}
+.cat-brand-desc{font-size:12px;color:var(--mid);margin-bottom:1rem;line-height:1.5}
+.cat-free-badge{display:inline-flex;align-items:center;gap:4px;font-size:10px;background:#eaf5ec;color:#3a7d44;border:1px solid #c4e0c8;border-radius:10px;padding:2px 8px;font-weight:600;margin-left:8px}
+/* producto card dentro del catálogo — destacado free */
+.prod-card.free-highlight{border:2px solid #3a7d44;position:relative}
+.prod-card.free-highlight::before{content:'🌿 FREE';position:absolute;top:6px;left:6px;background:#3a7d44;color:#fff;font-size:9px;font-weight:700;padding:2px 6px;border-radius:6px;z-index:2;letter-spacing:.05em}
+@media(max-width:720px){
+  .cat-wrap{padding:1rem 1rem 5rem}
+  .cat-tabs{gap:4px}
+  .cat-tab{padding:8px 12px;font-size:12px}
+}
+
+/* CATALOGO COMPACT GRID */
+.cat-prod-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.cat-prod-card{background:var(--white);border:1px solid var(--border);border-radius:8px;overflow:hidden;display:flex;flex-direction:column;position:relative}
+.cat-prod-card.free-highlight{border-color:#3a7d44}
+.cat-prod-card.free-highlight::before{content:'🌿';position:absolute;top:3px;left:3px;background:#3a7d44;color:#fff;font-size:8px;padding:1px 4px;border-radius:4px;z-index:2}
+.cat-prod-img{width:100%;aspect-ratio:1;object-fit:cover;display:block;cursor:pointer}
+.cat-prod-body{padding:4px 5px 5px;display:flex;flex-direction:column;gap:2px;flex:1}
+.cat-prod-name{font-size:9px;color:var(--ink);line-height:1.2;font-weight:500;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.cat-prod-prices{display:flex;flex-direction:column;gap:1px;margin-top:2px}
+.cat-prod-price-pack{font-size:10px;font-weight:700;color:var(--ink)}
+.cat-prod-price-unit{font-size:9px;color:var(--mid)}
+.cat-prod-add{width:100%;padding:4px 0;background:var(--ink);color:#fff;border:none;border-radius:0 0 6px 6px;font-size:9px;font-weight:600;cursor:pointer;margin-top:auto;font-family:'DM Sans',sans-serif}
+.cat-prod-add.in-cart{background:#3a7d44}
+.cat-prod-add:active{opacity:.8}
+
+/* MODO VISITA */
+.pres-search-wrap{position:relative;margin:1rem 0 2rem}
+.pres-search-input{width:100%;padding:13px 16px;border:1.5px solid var(--border);border-radius:10px;font-family:'DM Sans',sans-serif;font-size:14px;background:var(--white);color:var(--ink);outline:none}
+.pres-search-input:focus{border-color:var(--red)}
+.pres-search-results{display:none;position:absolute;top:calc(100% + 4px);left:0;right:0;background:var(--white);border:1px solid var(--border);border-radius:10px;box-shadow:0 8px 24px rgba(26,26,24,.12);z-index:20;max-height:260px;overflow-y:auto}
+.pres-search-results.show{display:block}
+.pres-search-item{padding:11px 16px;font-size:13px;cursor:pointer;border-bottom:1px solid var(--border)}
+.pres-search-item:last-child{border-bottom:none}
+.pres-search-item:hover{background:var(--cream)}
+.pres-search-item .pres-search-art{color:var(--light);font-size:11px;margin-left:6px}
+.pres-search-empty{padding:11px 16px;font-size:13px;color:var(--mid)}
+.pres-brand-block{margin-bottom:2.5rem}
+.pres-brand-hdr{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:2px solid var(--ink);margin-bottom:1rem}
+.pres-brand-logo{height:38px;max-width:110px;object-fit:contain}
+.pres-brand-name{font-family:'Playfair Display',serif;font-size:21px;font-weight:900;color:var(--ink)}
+.pres-brand-desc{font-size:12px;color:var(--mid);margin-top:2px;max-width:520px}
+.home-sel-wrap{margin:2.5rem 0}
+.home-sel-more{text-align:center;font-size:13px;font-weight:600;color:var(--red);cursor:pointer;padding:12px 0 4px;letter-spacing:.02em}
+.home-sel-more:hover{text-decoration:underline}
+.pres-prod-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px}
+.pres-card{background:var(--white);border:1px solid var(--border);border-radius:14px;overflow:hidden;position:relative;display:flex;flex-direction:column;box-shadow:0 2px 8px rgba(26,26,24,.04)}
+.pres-remove{position:absolute;top:6px;right:6px;width:24px;height:24px;border-radius:50%;border:none;background:rgba(26,26,24,.55);color:#fff;font-size:12px;cursor:pointer;z-index:2;display:flex;align-items:center;justify-content:center}
+.pres-img{width:100%;aspect-ratio:1;object-fit:cover;display:block;cursor:pointer;background:var(--cream)}
+.pres-name{font-size:13px;font-weight:600;color:var(--ink);padding:10px 10px 0;line-height:1.25}
+.pres-price{font-size:17px;font-weight:700;color:var(--ink);padding:4px 10px 0}
+.pres-price-unit{font-size:11px;font-weight:500;color:var(--mid)}
+.pres-add{width:calc(100% - 20px);margin:10px auto 12px;padding:9px 0;background:var(--ink);color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif}
+.pres-add.in-cart{background:#3a7d44}
+.pres-add:active{opacity:.85}
+@media(min-width:1025px){
+  .pres-prod-grid{grid-template-columns:repeat(auto-fill,minmax(180px,1fr))}
+  .pres-name{font-size:14px}
+  .pres-price{font-size:19px}
+}
+@media(min-width:721px){
+  .cat-prod-grid{grid-template-columns:repeat(6,1fr);gap:8px}
+  .cat-prod-name{font-size:10px}
+  .cat-prod-price-pack{font-size:11px}
+  .cat-prod-price-unit{font-size:10px}
+  .cat-prod-add{font-size:10px;padding:5px 0}
+}
+.fum-2col{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.fum-sec{background:var(--white);border:1px solid var(--border);border-radius:16px;overflow:hidden}
+.fum-sec-hdr{padding:22px;display:flex;align-items:center;gap:14px}
+.fum-sec-hdr.h{background:var(--ink)}
+.fum-sec-hdr.f{background:var(--ink2)}
+.fum-sec-icon{font-size:32px}
+.fum-sec-title{font-family:'Playfair Display',serif;font-size:20px;font-weight:900;color:#fff}
+.fum-sec-sub{font-size:12px;color:rgba(255,255,255,.45);margin-top:2px}
+.fum-sec-body{padding:20px}
+.fum-placeholder{padding:24px;text-align:center;border:1px dashed var(--border);border-radius:10px;color:var(--mid);font-size:13px;line-height:1.7}
+.fum-placeholder strong{display:block;margin-bottom:6px;font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:var(--ink)}
+.fum-tel{color:var(--red);font-weight:500}
+
+/* CART */
+.overlay{position:fixed;inset:0;background:rgba(26,26,24,.5);z-index:90;display:none}
+.overlay.open{display:block}
+.cart-panel{position:fixed;top:0;right:0;width:340px;height:100%;background:var(--white);border-left:1px solid var(--border);overflow-y:auto;z-index:100;transform:translateX(100%);transition:transform .25s ease;display:flex;flex-direction:column}
+.cart-panel.open{transform:translateX(0)}
+/* Panel siempre visible en desktop */
+
+.cart-hdr{display:flex;justify-content:space-between;align-items:center;padding:1.25rem 1.5rem;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--white);z-index:1}
+.cart-ttl{font-family:'Playfair Display',serif;font-size:20px;font-weight:900;color:var(--ink)}
+.close-btn{background:none;border:none;font-size:20px;cursor:pointer;color:var(--light);line-height:1}
+.close-btn:hover{color:var(--ink)}
+.cart-body{flex:1;padding:0 1.5rem}
+.cart-item{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--border)}
+.ci-em{font-size:22px;min-width:32px;margin-top:2px}
+.ci-info{flex:1}
+.ci-name{font-size:13px;font-weight:500;line-height:1.3;color:var(--ink)}
+.ci-brand{font-size:10px;color:var(--light);text-transform:uppercase;letter-spacing:.04em;margin-top:1px}
+.ci-price{font-size:13px;font-weight:500;color:var(--red);margin-top:3px}
+.ci-act{display:flex;align-items:center;gap:6px;margin-top:6px}
+.sqb{width:22px;height:22px;border:1px solid var(--border);border-radius:4px;background:var(--cream);cursor:pointer;font-size:13px;display:flex;align-items:center;justify-content:center;color:var(--mid)}
+.ci-qty{font-size:12px;font-weight:500;min-width:18px;text-align:center;color:var(--ink)}
+.rm-btn{background:none;border:none;font-size:11px;color:var(--light);cursor:pointer;margin-left:4px}
+.rm-btn:hover{color:var(--red)}
+.cart-foot{padding:1.25rem 1.5rem;border-top:1px solid var(--border);position:sticky;bottom:0;background:var(--white)}
+.total-row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px}
+.total-lbl{font-size:13px;color:var(--mid)}
+.total-val{font-family:'Playfair Display',serif;font-size:26px;font-weight:900;color:var(--ink)}
+.wsp-btn{width:100%;background:#25D366;color:#fff;border:none;border-radius:10px;padding:13px;font-size:14px;font-weight:500;font-family:'DM Sans',sans-serif;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:background .15s}
+.wsp-btn:hover{background:#1aab52}
+.step-btn{width:100%;background:var(--ink);color:#fff;border:none;border-radius:10px;padding:13px;font-size:13px;font-weight:500;font-family:'DM Sans',sans-serif;cursor:pointer;transition:background .15s}
+.step-btn:hover{background:var(--ink2)}
+.checkout-form label{font-size:10px;color:var(--light);display:block;margin:12px 0 4px;letter-spacing:.08em;text-transform:uppercase}
+.checkout-form input,.checkout-form textarea{width:100%;padding:9px 11px;border:1px solid var(--border);border-radius:7px;font-family:'DM Sans',sans-serif;font-size:13px;background:var(--cream);color:var(--ink);outline:none}
+.checkout-form input:focus,.checkout-form textarea:focus{border-color:var(--red)}
+.confirm-box{text-align:center;padding:2.5rem 1rem;background:var(--cream);border-radius:12px;margin:1rem 0}
+.confirm-icon{font-size:40px;margin-bottom:12px}
+.confirm-ttl{font-family:'Playfair Display',serif;font-size:20px;font-weight:900;color:var(--ink);margin-bottom:8px}
+.confirm-txt{font-size:13px;color:var(--mid);line-height:1.7}
+.confirm-tel{color:var(--red);font-weight:500}
+.new-btn{margin-top:16px;background:none;border:1px solid var(--border);border-radius:8px;padding:9px 20px;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--mid)}
+.new-btn:hover{border-color:var(--border2)}
+
+/* PWA Install */
+.pwa-install-box{
+  background:var(--cream2);border:1px solid var(--border);
+  border-radius:12px;padding:16px;margin-top:14px;
+  display:none;text-align:center;
+}
+.pwa-install-box.visible{display:block}
+.pwa-install-title{font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:var(--ink);margin-bottom:4px}
+.pwa-install-sub{font-size:12px;color:var(--mid);margin-bottom:10px}
+.pwa-install-btn{
+  background:var(--ink);color:#fff;border:none;
+  border-radius:8px;padding:10px 20px;
+  font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;
+  cursor:pointer;transition:background .15s;
+}
+.pwa-install-btn:hover{background:var(--ink2)}
+.empty-cart-box{text-align:center;padding:3rem 1.5rem;color:var(--light)}
+.empty-cart-icon{font-size:40px;display:block;margin-bottom:10px}
+
+/* BACK BUTTON */
+.back-btn{background:var(--cream);border:1px solid var(--border);border-radius:8px;width:34px;height:34px;display:none;align-items:center;justify-content:center;cursor:pointer;font-size:16px;color:var(--ink);transition:background .15s,border-color .15s;margin-right:10px;flex-shrink:0}
+.back-btn.visible{display:flex}
+.back-btn:hover{background:var(--cream2);border-color:var(--border2)}
+</style>
 </head>
 <body>
 
-<div id="screen-main" class="screen active">
-  <header class="app-header">
-    <div class="brand">
-      <div class="brand-icon">
-        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
-      </div>
-      <div>
-        <span class="brand-name">mimundial</span>
-        <div class="brand-sub">Campeonato Mundial de Fútbol 2026</div>
-
-      </div>
-    </div>
-    <div class="live-badge" id="live-badge"><div class="live-dot"></div> EN VIVO</div>
-  </header>
-
-  <!-- PARTIDOS EN VIVO — aparece solo cuando hay alguno -->
-  <div id="live-now-bar" style="display:none">
-    <div class="live-now-label"><span class="live-dot"></span> EN VIVO AHORA<span id="sync-elapsed" style="margin-left:auto;font-size:.6rem;font-weight:600;color:rgba(255,77,77,.6);letter-spacing:.03em"></span></div>
-    <div id="live-now-cards"></div>
+<div class="topbar">
+  <div class="logo">
+    <button class="back-btn" id="back-btn" onclick="goBack()" aria-label="Volver">←</button>
+    <div class="logo-name" onclick="goHome()" style="cursor:pointer"><span>Pel</span>SAS</div>
+    <div class="logo-divider"></div>
+    <div class="logo-city">Montevideo</div>
   </div>
-
-  <div class="tabs-bar" id="tabs-bar">
-    <button class="tab-btn active" data-tab="hoy"       onclick="setTab('hoy')">Hoy</button>
-    <button class="tab-btn"        data-tab="envivo"    onclick="setTab('envivo')">En Vivo</button>
-    <button class="tab-btn"        data-tab="pendientes" onclick="setTab('pendientes')">Pendientes</button>
-    <button class="tab-btn"        data-tab="terminados" onclick="setTab('terminados')">Terminados</button>
-    <button class="tab-btn"        data-tab="goleadores" onclick="setTab('goleadores')">Goleadores</button>
+  <div class="topbar-right">
+    <span class="tel">096 190 002</span>
+    <button class="cart-btn" onclick="toggleCart()">
+      <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M1 1h2l2.4 7h6.4l2-5H4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="7" cy="13" r="1" fill="currentColor"/><circle cx="12" cy="13" r="1" fill="currentColor"/></svg>
+      <span>Seguí tu pedido</span> <span class="badge" id="cart-count">0</span>
+    </button>
   </div>
-
-  <div id="tab-body"></div>
 </div>
 
-<div class="toast" id="toast"></div>
-<div class="goal-toast" id="goal-toast"></div>
+<div class="gsearch">
+  <div class="gsearch-wrap">
+    <span class="gsearch-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="7" cy="7" r="5" stroke="#8C8578" stroke-width="1.6"/><path d="m11 11 3.5 3.5" stroke="#8C8578" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+    <input type="text" class="gsearch-input" id="gsinput" placeholder="Buscar producto por nombre o artículo..." oninput="onGSearch()" onfocus="onGSearch()" onblur="onGSBlur()" autocomplete="off">
+    <button class="gsearch-clear" id="gsclear" onclick="clearGS()" aria-label="Limpiar">×</button>
+    <div class="gsearch-results" id="gsresults"></div>
+  </div>
+</div>
+
+<div id="main-view"></div>
+
+<div class="lightbox" id="lightbox" onclick="lbBgClose(event)">
+  <div class="lb-hint">Pellizcá para acercar · Doble tap para zoom</div>
+  <button class="lb-close" onclick="closeLB()" aria-label="Cerrar">×</button>
+  <img class="lb-img" id="lb-img" src="" alt="" ontouchstart="onLBTouchStart(event)" ontouchmove="onLBTouchMove(event)" onwheel="onLBWheel(event)" ondblclick="onLBDbl(event)">
+  <div class="lb-controls">
+    <button class="lb-btn" onclick="lbZoom(-1)" aria-label="Alejar">−</button>
+    <button class="lb-btn" onclick="lbReset()" aria-label="Tamaño original">⟲</button>
+    <button class="lb-btn" onclick="lbZoom(1)" aria-label="Acercar">+</button>
+  </div>
+</div>
 
 <nav class="bottom-nav" id="bottom-nav">
-  <button type="button" class="nav-item active" data-nav="hoy" onclick="setTab('hoy')">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-    Hoy
+  <button class="bn-item" id="bn-home" onclick="goHome()">
+    <span class="bn-icon">🏠</span>
+    <span class="bn-label">Inicio</span>
   </button>
-  <button type="button" class="nav-item" data-nav="envivo" onclick="setTab('envivo')">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-    En Vivo
+  <button class="bn-item" id="bn-marcas" onclick="goMarcas()">
+    <span class="bn-icon">🏷️</span>
+    <span class="bn-label">Marcas</span>
   </button>
-  <button type="button" class="nav-item" data-nav="pendientes" onclick="setTab('pendientes')">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-    Pendientes
+  <button class="bn-item" id="bn-catalogo" onclick="goCatalogo()">
+    <span class="bn-icon">📋</span>
+    <span class="bn-label">Catálogo</span>
   </button>
-  <button type="button" class="nav-item" data-nav="terminados" onclick="setTab('terminados')">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
-    Terminados
+  <button class="bn-item" id="bn-fichas" onclick="goFichas()">
+    <span class="bn-icon">📸</span>
+    <span class="bn-label">Fichas</span>
   </button>
-  <button type="button" class="nav-item" data-nav="goleadores" onclick="setTab('goleadores')">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M6 20v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/></svg>
-    Goleadores
+  <button class="bn-item" id="bn-visita" onclick="goPresentacion()">
+    <span class="bn-icon">🤝</span>
+    <span class="bn-label">Visita</span>
+  </button>
+  <button class="bn-item" id="bn-cart" onclick="toggleCart()">
+    <span class="bn-icon">🛒</span>
+    <span class="bn-label">Pedido</span>
+    <span class="bn-badge zero" id="bn-badge">0</span>
   </button>
 </nav>
 
+<button class="wa-fab" onclick="waConsulta()" aria-label="Consultar por WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.528 5.855L.057 23.428a.75.75 0 00.916.916l5.573-1.471A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.885 0-3.651-.511-5.168-1.401l-.371-.219-3.849 1.016 1.016-3.849-.219-.371A9.953 9.953 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+</button>
+
+<div class="overlay" id="overlay" onclick="toggleCart()"></div>
+<div class="cart-panel" id="cart-panel">
+  <div class="cart-hdr">
+    <span class="cart-ttl">Pedido en curso</span>
+    <button class="close-btn" onclick="toggleCart()">✕</button>
+  </div>
+  <div class="cart-body" id="cart-body"></div>
+  <div id="cart-foot-area"></div>
+</div>
+
 <script>
-/* ════════ CONFIG ════════ */
-const KICKOFF = new Date('2026-06-11T19:00:00Z');
-const ADMIN_SECRET = 'mimundial2026';
+const WA='59896190002';
+// ── Configuración GitHub ─────────────────────────────────────────────────────
+const GH_OWNER = 'fdovat-cell';
+const GH_REPO  = 'pelsas-distribuidora';
+const GH_BRANCH = 'main';
+const DATA_URL = `https://raw.githubusercontent.com/${GH_OWNER}/${GH_REPO}/${GH_BRANCH}/data.json`;
 
-const FLAGS = {
-  MEX:'🇲🇽',RSA:'🇿🇦',KOR:'🇰🇷',CAN:'🇨🇦',QAT:'🇶🇦',SUI:'🇨🇭',
-  BRA:'🇧🇷',MAR:'🇲🇦',HAI:'🇭🇹',SCO:'🏴󠁧󠁢󠁳󠁣󠁴󠁿',USA:'🇺🇸',PAR:'🇵🇾',
-  AUS:'🇦🇺',GER:'🇩🇪',CUW:'🇨🇼',CIV:'🇨🇮',ECU:'🇪🇨',NED:'🇳🇱',
-  JPN:'🇯🇵',BEL:'🇧🇪',EGY:'🇪🇬',IRN:'🇮🇷',NZL:'🇳🇿',ESP:'🇪🇸',
-  CPV:'🇨🇻',KSA:'🇸🇦',URU:'🇺🇾',FRA:'🇫🇷',SEN:'🇸🇳',NOR:'🇳🇴',
-  ARG:'🇦🇷',ALG:'🇩🇿',AUT:'🇦🇹',JOR:'🇯🇴',POR:'🇵🇹',COL:'🇨🇴',
-  UZB:'🇺🇿',ENG:'🏴󠁧󠁢󠁥󠁮󠁧󠁿',CRO:'🇭🇷',GHA:'🇬🇭',PAN:'🇵🇦',COD:'🇨🇩',
-  TUR:'🇹🇷',SWE:'🇸🇪',TUN:'🇹🇳',BIH:'🇧🇦',CZE:'🇨🇿',IRQ:'🇮🇶',
-};
+let brands = [];
+let products = {};
 
-const TLA_FIX = {
-  'URY':'URU','ZAF':'RSA','IRI':'IRN','HRV':'CRO','DRC':'COD',
-  'SAU':'KSA','HTI':'HAI','SCO':'SCO','BIH':'BIH','TUN':'TUN',
-};
+let cart={},qtys={},view='home',curBrand=null,activeFilter='todos',checkout=false,done=false,pagoMethod='';
+let presentExtra=[],presentHidden=new Set();
+let pidToBrand={};
+const fmt=n=>'$'+n.toLocaleString('es-UY',{minimumFractionDigits:2,maximumFractionDigits:2});
+const allP=()=>Object.values(products).flat().filter(p=>p.activo!==false);
+const getBrand=id=>brands.find(b=>b.id===id);
+const alBrands=()=>brands.filter(b=>b.sid==='alimentos'&&b.activo!==false);
+const fumBrands=()=>brands.filter(b=>b.sid==='fumadores'&&b.activo!==false);
+const alCount=()=>alBrands().reduce((a,b)=>(products[b.id]||[]).filter(p=>p.activo!==false).length+a,0);
+const fumCount=()=>fumBrands().reduce((a,b)=>(products[b.id]||[]).filter(p=>p.activo!==false).length+a,0);
 
-const NOMBRES_ES = {
-  MEX:'México',RSA:'Sudáfrica',KOR:'Corea del Sur',CAN:'Canadá',
-  QAT:'Qatar',SUI:'Suiza',BRA:'Brasil',MAR:'Marruecos',
-  HAI:'Haití',SCO:'Escocia',USA:'Estados Unidos',PAR:'Paraguay',
-  AUS:'Australia',GER:'Alemania',CUW:'Curazao',CIV:'Costa de Marfil',
-  ECU:'Ecuador',NED:'Países Bajos',JPN:'Japón',BEL:'Bélgica',
-  EGY:'Egipto',IRN:'Irán',NZL:'Nueva Zelanda',ESP:'España',
-  CPV:'Cabo Verde',KSA:'Arabia Saudita',URU:'Uruguay',FRA:'Francia',
-  SEN:'Senegal',NOR:'Noruega',ARG:'Argentina',ALG:'Argelia',
-  AUT:'Austria',JOR:'Jordania',POR:'Portugal',COL:'Colombia',
-  UZB:'Uzbekistán',ENG:'Inglaterra',CRO:'Croacia',GHA:'Ghana',
-  PAN:'Panamá',COD:'RD Congo',TUR:'Turquía',SWE:'Suecia',
-  TUN:'Túnez',BIH:'Bosnia y Herz.',CZE:'Rep. Checa',IRQ:'Iraq',
-};
-
-/* Corrige status zombie: si la API dejó IN_PLAY pero ya pasaron +3hs, lo tratamos FINISHED */
-function resolvedStatus(m){
-  // Normalizar variantes de status que usa FD.org en el Mundial 2026
-  let s=m.status;
-  if(s==='LIVE')      s='IN_PLAY'; // FD.org WC 2026 usa LIVE en lugar de IN_PLAY
-  if(s==='HALF_TIME') s='PAUSED';  // FD.org puede usar HALF_TIME en lugar de PAUSED
-  if(s==='EXTRA_TIME') s='IN_PLAY'; // tiempo extra
-  if(s==='PENALTY')    s='IN_PLAY'; // tanda de penales
-  if(s==='IN_PLAY'||s==='PAUSED'){
-    const start=new Date(m.utcDate);
-    const horasTranscurridas=(Date.now()-start)/3600000;
-    if(horasTranscurridas>3) return 'FINISHED';
-  }
-  return s;
-}
-
-function teamName(m, side){
-  const tla = normTla(m[side]?.tla||'');
-  return NOMBRES_ES[tla] || m[side]?.shortName || m[side]?.name || 'Por definir';
-}
-
-const STAGE_NAMES = {
-  GROUP_STAGE:'Fase de Grupos',
-  LAST_32:'Ronda de 32',
-  LAST_16:'Octavos de Final',
-  QUARTER_FINALS:'Cuartos de Final',
-  SEMI_FINALS:'Semifinales',
-  THIRD_PLACE:'Tercer Puesto',
-  FINAL:'Final',
-};
-
-/* Sedes para partidos que aún no tienen venue en la API */
-const SEDES_FIXTURE = {
-  /* Grupo A */
-  'MEX-RSA':'Estadio Azteca, CDMX','KOR-CZE':'Estadio Akron, Guadalajara',
-  'CZE-RSA':'Estadio BBVA, Monterrey','MEX-KOR':'Estadio Azteca, CDMX',
-  'CZE-MEX':'Estadio Azteca, CDMX','RSA-KOR':'Estadio Akron, Guadalajara',
-  /* Grupo B */
-  'CAN-BIH':'BMO Field, Toronto','QAT-SUI':'Lumen Field, Seattle',
-  'SUI-BIH':'BC Place, Vancouver','CAN-QAT':'BMO Field, Toronto',
-  'SUI-CAN':'Lumen Field, Seattle','BIH-QAT':'BC Place, Vancouver',
-  /* Grupo C */
-  'BRA-MAR':'MetLife Stadium, NJ','HAI-SCO':'Hard Rock Stadium, Miami',
-  'SCO-MAR':'Gillette Stadium, Boston','BRA-HAI':'Lincoln Financial, Philadelphia',
-  'SCO-BRA':'MetLife Stadium, NJ','MAR-HAI':'Hard Rock Stadium, Miami',
-  /* Grupo D */
-  'USA-PAR':'SoFi Stadium, Los Ángeles','AUS-TUR':'BC Place, Vancouver',
-  'USA-AUS':'SoFi Stadium, Los Ángeles','TUR-PAR':'Lumen Field, Seattle',
-  'TUR-USA':'SoFi Stadium, Los Ángeles','PAR-AUS':'Levi\'s Stadium, San Francisco',
-  /* Grupo E */
-  'GER-CUW':'NRG Stadium, Houston','CIV-ECU':'Lincoln Financial, Philadelphia',
-  'GER-CIV':'BMO Field, Toronto','ECU-CUW':'Arrowhead Stadium, Kansas City',
-  'CUW-CIV':'MetLife Stadium, NJ','ECU-GER':'Lincoln Financial, Philadelphia',
-  /* Grupo F */
-  'NED-JPN':'AT&T Stadium, Dallas','SWE-TUN':'Estadio BBVA, Monterrey',
-  'NED-SWE':'AT&T Stadium, Dallas','TUN-JPN':'NRG Stadium, Houston',
-  'JPN-SWE':'Arrowhead Stadium, Kansas City','TUN-NED':'AT&T Stadium, Dallas',
-  /* Grupo G */
-  'BEL-EGY':'Lumen Field, Seattle','IRN-NZL':'SoFi Stadium, Los Ángeles',
-  'BEL-IRN':'BC Place, Vancouver','NZL-EGY':'Lumen Field, Seattle',
-  'EGY-IRN':'SoFi Stadium, Los Ángeles','NZL-BEL':'BC Place, Vancouver',
-  /* Grupo H */
-  'ESP-CPV':'Mercedes-Benz, Atlanta','KSA-URU':'Hard Rock Stadium, Miami',
-  'ESP-KSA':'Mercedes-Benz, Atlanta','URU-CPV':'NRG Stadium, Houston',
-  'CPV-KSA':'Estadio Akron, Guadalajara','URU-ESP':'Hard Rock Stadium, Miami',
-  /* Grupo I */
-  'FRA-SEN':'MetLife Stadium, NJ','IRQ-NOR':'Gillette Stadium, Boston',
-  'FRA-IRQ':'Lincoln Financial, Philadelphia','NOR-SEN':'BMO Field, Toronto',
-  'NOR-FRA':'MetLife Stadium, NJ','SEN-IRQ':'Gillette Stadium, Boston',
-  /* Grupo J */
-  'ARG-ALG':'Arrowhead Stadium, Kansas City','AUT-JOR':'Levi\'s Stadium, San Francisco',
-  'ARG-AUT':'Levi\'s Stadium, San Francisco','JOR-ALG':'AT&T Stadium, Dallas',
-  'ALG-AUT':'AT&T Stadium, Dallas','JOR-ARG':'Arrowhead Stadium, Kansas City',
-  /* Grupo K */
-  'POR-COD':'NRG Stadium, Houston','UZB-COL':'Estadio Azteca, CDMX',
-  'POR-UZB':'NRG Stadium, Houston','COL-COD':'Estadio Akron, Guadalajara',
-  'COL-POR':'Hard Rock Stadium, Miami','COD-UZB':'Mercedes-Benz, Atlanta',
-  /* Grupo L */
-  'ENG-CRO':'AT&T Stadium, Dallas','GHA-PAN':'BMO Field, Toronto',
-  'ENG-GHA':'Gillette Stadium, Boston','PAN-CRO':'MetLife Stadium, NJ',
-  'PAN-ENG':'Lincoln Financial, Philadelphia','CRO-GHA':'AT&T Stadium, Dallas',
-};
-
-/* Cruces oficiales de la Ronda de 32 (Dieciseisavos), según el bracket
-   publicado por FIFA. Es informativo: "1A" = 1° del Grupo A, "2B" = 2° del
-   Grupo B, "3XYZ.." = mejor tercero entre esos grupos (se define al cerrar
-   toda la fase de grupos). No depende de apiMatches: es una referencia fija,
-   no se cruza ni se compara con los datos en vivo. */
-const RONDA32_FIFA = [
-  {p:'P73', fecha:'28/06', hora:'16:00', sede:'SoFi Stadium, Los Ángeles',       a:'2A',  b:'2B'},
-  {p:'P76', fecha:'29/06', hora:'14:00', sede:'Lumen Field, Seattle',             a:'1C',  b:'2F'},
-  {p:'P74', fecha:'29/06', hora:'17:00', sede:'Gillette Stadium, Foxborough',     a:'1E',  b:'3ABCDF'},
-  {p:'P75', fecha:'30/06', hora:'14:00', sede:'Estadio BBVA, Guadalupe',          a:'1F',  b:'2C'},
-  {p:'P78', fecha:'30/06', hora:'17:00', sede:'AT&T Stadium, Arlington',          a:'2E',  b:'2I'},
-  {p:'P77', fecha:'30/06', hora:'19:00', sede:'MetLife Stadium, East Rutherford', a:'1I',  b:'3CDFGH'},
-  {p:'P79', fecha:'01/07', hora:'14:00', sede:'MetLife Stadium, East Rutherford', a:'1A',  b:'3CEFHI'},
-  {p:'P80', fecha:'01/07', hora:'17:00', sede:'SoFi Stadium, Los Ángeles',        a:'1L',  b:'3EHIJK'},
-  {p:'P82', fecha:'01/07', hora:'19:00', sede:'Mercedes-Benz Stadium, Atlanta',   a:'1G',  b:'3AEHIJ'},
-  {p:'P81', fecha:'02/07', hora:'14:00', sede:"Levi's Stadium, Santa Clara",      a:'1D',  b:'3BEFIJ'},
-  {p:'P84', fecha:'02/07', hora:'17:00', sede:'Hard Rock Stadium, Miami',         a:'1H',  b:'2J'},
-  {p:'P83', fecha:'02/07', hora:'19:00', sede:'Estadio Akron, Guadalajara',       a:'2K',  b:'2L'},
-  {p:'P88', fecha:'03/07', hora:'14:00', sede:'Estadio Azteca, CDMX',             a:'2D',  b:'2G'},
-  {p:'P86', fecha:'03/07', hora:'17:00', sede:'Gillette Stadium, Foxborough',     a:'1J',  b:'2H'},
-  {p:'P85', fecha:'03/07', hora:'19:00', sede:'AT&T Stadium, Arlington',          a:'1B',  b:'3EFGIJ'},
-  {p:'P87', fecha:'04/07', hora:'19:00', sede:'Arrowhead Stadium, Kansas City',   a:'1K',  b:'3DEIJL'},
-];
-
-/* Cruces de Octavos de Final (Ronda de 16) — bracket oficial FIFA.
-   Cada partido indica qué dos partidos de R32 alimentan ese cruce.
-   Los equipos se resuelven en tiempo real según resultados de R32.
-   Orden del array: primero los 4 que alimentan la Llave A (→ P97/P98 → P101),
-   después los 4 que alimentan la Llave B (→ P99/P100 → P102), así el árbol
-   visual (slice(0,4)/slice(4)) queda parejo al cruce real. */
-const RONDA16_FIFA = [
-  /* ── Llave A (→ Semifinal P101, Dallas) ── */
-  {p:'P89', fecha:'04/07', hora:'18:00', sede:'Lincoln Financial Field, Philadelphia', r32a:'P74', r32b:'P77'},
-  {p:'P90', fecha:'04/07', hora:'14:00', sede:'NRG Stadium, Houston',                  r32a:'P73', r32b:'P75'},
-  {p:'P93', fecha:'06/07', hora:'16:00', sede:'AT&T Stadium, Dallas',                  r32a:'P83', r32b:'P84'},
-  {p:'P94', fecha:'06/07', hora:'21:00', sede:'Lumen Field, Seattle',                  r32a:'P81', r32b:'P82'},
-  /* ── Llave B (→ Semifinal P102, Atlanta) ── */
-  {p:'P91', fecha:'05/07', hora:'17:00', sede:'MetLife Stadium, East Rutherford',      r32a:'P76', r32b:'P78'},
-  {p:'P92', fecha:'05/07', hora:'21:00', sede:'Estadio Azteca, CDMX',                  r32a:'P79', r32b:'P80'},
-  {p:'P95', fecha:'07/07', hora:'13:00', sede:'Mercedes-Benz Stadium, Atlanta',        r32a:'P86', r32b:'P88'},
-  {p:'P96', fecha:'07/07', hora:'17:00', sede:'BC Place, Vancouver',                   r32a:'P85', r32b:'P87'},
-];
-
-/* Cuartos de Final — bracket oficial FIFA */
-const RONDAQF_FIFA = [
-  /* ── Llave A ── */
-  {p:'P97',  fecha:'09/07', hora:'17:00', sede:'Gillette Stadium, Foxborough',    r16a:'P89', r16b:'P90'},
-  {p:'P98',  fecha:'10/07', hora:'16:00', sede:'SoFi Stadium, Los Ángeles',       r16a:'P93', r16b:'P94'},
-  /* ── Llave B ── */
-  {p:'P99',  fecha:'11/07', hora:'18:00', sede:'Hard Rock Stadium, Miami',        r16a:'P91', r16b:'P92'},
-  {p:'P100', fecha:'11/07', hora:'22:00', sede:'Arrowhead Stadium, Kansas City',  r16a:'P95', r16b:'P96'},
-];
-
-/* Semifinales */
-const RONDASF_FIFA = [
-  {p:'P101', fecha:'14/07', hora:'16:00', sede:'AT&T Stadium, Dallas',           qfa:'P97',  qfb:'P98'},
-  {p:'P102', fecha:'15/07', hora:'16:00', sede:'Mercedes-Benz Stadium, Atlanta', qfa:'P99',  qfb:'P100'},
-];
-
-/* Convierte un código corto (1A, 2B, 3CEFHI) a una etiqueta legible */
-function rondaCodeLabel(code){
-  const pos=code[0];
-  const grupos=code.slice(1).split('').join('/');
-  if(pos==='3') return `Mejor 3° (Grupos ${grupos})`;
-  const ordinal=pos==='1'?'1°':'2°';
-  return `${ordinal} Grupo ${grupos}`;
-}
-
-/* ════════ ESTADO ════════ */
-let currentTab = 'hoy';
-let apiMatches = [];
-let apiStandings = [];
-let apiScorers = [];
-let isLoading = false;
-let cdTimer = null;
-let refreshTimer = null;
-let lastUpdated = null;
-let elapsedTimer = null;
-let clockTimer = null;
-let liveTimer = null;
-let liveOverrides = {}; // matchId(football-data) -> { home, away, state, clock, clockSeconds, goals, fetchedAt }
-let favoriteTeam = ls('mm_fav', null); // TLA del equipo favorito (guardado en localStorage)
-let prevLiveScores = {};   // matchId -> {h, a} — para detectar goles nuevos en fetchLiveData
-let prevLiveStatuses = {}; // matchId -> status — para detectar cuando arranca un partido
-const expandedGoals = new Set(); // IDs de partidos con historial de goles expandido
-let liveFetchFailed = false; // true si /api/live respondió error en el último intento
-
-/* ════════ UTILS ════════ */
-function esc(s){return String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-function pad(n){return String(n).padStart(2,'0')}
-function normTla(t){return TLA_FIX[t]||t}
-function flag(tla){return FLAGS[normTla(tla)]||'🏳️'}
-function ls(k,d){try{return JSON.parse(localStorage.getItem(k)||'null')??d}catch{return d}}
-function lsSave(k,v){localStorage.setItem(k,JSON.stringify(v))}
-
-function showToast(msg,ms=2500){
-  const t=document.getElementById('toast');
-  t.textContent=msg; t.classList.add('visible');
-  setTimeout(()=>t.classList.remove('visible'),ms);
-}
-
-function showGoalToast(msg,ms=4000){
-  const t=document.getElementById('goal-toast');
-  if(!t) return;
-  clearTimeout(t._timer);
-  t.textContent=msg; t.classList.add('visible');
-  t._timer=setTimeout(()=>t.classList.remove('visible'),ms);
-}
-
-/* ════════ FAVORITO ════════ */
-function toggleFavorite(tla,e){
-  if(e){e.stopPropagation();}
-  favoriteTeam=(favoriteTeam===tla)?null:tla;
-  lsSave('mm_fav',favoriteTeam);
-  const msg=favoriteTeam?`⭐ ${NOMBRES_ES[tla]||tla} marcado como favorito`:'Favorito eliminado';
-  showToast(msg,2000);
-  render();
-}
-
-function hasFavorite(m){
-  if(!favoriteTeam) return false;
-  return normTla(m.homeTeam?.tla||'')===favoriteTeam||normTla(m.awayTeam?.tla||'')===favoriteTeam;
-}
-
-function sortWithFavorite(matches){
-  if(!favoriteTeam) return matches;
-  return [...matches].sort((a,b)=>{
-    const fa=hasFavorite(a)?0:1, fb=hasFavorite(b)?0:1;
-    if(fa!==fb) return fa-fb;
-    return new Date(a.utcDate)-new Date(b.utcDate);
-  });
-}
-
-/* ════════ NOTIFICACIONES DEL NAVEGADOR ════════ */
-function requestNotifPermission(){
-  if('Notification' in window && Notification.permission==='default'){
-    Notification.requestPermission();
-  }
-}
-
-function sendBrowserNotif(title,body,tag){
-  if(!('Notification' in window)||Notification.permission!=='granted') return;
-  try{ new Notification(title,{body,icon:'/favicon.ico',tag,renotify:false}); }catch(e){}
-}
-
-/* ════════ HISTORIAL DE GOLES ════════ */
-function toggleGoals(id,e){
-  if(e) e.stopPropagation();
-  const sid=String(id);
-  const body=document.querySelector(`.match-goals-body[data-id="${sid}"]`);
-  const lbl=document.querySelector(`.goals-toggle-btn[data-id="${sid}"] .tgl-lbl`);
-  if(!body) return;
-  if(expandedGoals.has(sid)){
-    expandedGoals.delete(sid);
-    body.style.maxHeight='0';
-    body.style.opacity='0';
-    if(lbl) lbl.textContent='Ver goles';
-  } else {
-    expandedGoals.add(sid);
-    body.style.maxHeight=body.scrollHeight+'px';
-    body.style.opacity='1';
-    if(lbl) lbl.textContent='Ocultar';
-  }
-}
-
-/* Obtener sede del partido */
-/* Sedes KO — fallback para cuando la API no trae venue aún */
-const SEDES_KO_FIJAS = {
-  FINAL:       'MetLife Stadium, East Rutherford',
-  THIRD_PLACE: 'Hard Rock Stadium, Miami',
-};
-
-/* Mapa P-código → sede para todos los partidos KO */
-const SEDES_KO_P = {
-  P73:'SoFi Stadium, Los Ángeles',      P74:'Gillette Stadium, Foxborough',
-  P75:'Estadio BBVA, Guadalupe',        P76:'Lumen Field, Seattle',
-  P77:'MetLife Stadium, East Rutherford',P78:'AT&T Stadium, Arlington',
-  P79:'MetLife Stadium, East Rutherford',P80:'SoFi Stadium, Los Ángeles',
-  P81:"Levi's Stadium, Santa Clara",    P82:'Mercedes-Benz Stadium, Atlanta',
-  P83:'Estadio Akron, Guadalajara',     P84:'Hard Rock Stadium, Miami',
-  P85:'AT&T Stadium, Arlington',        P86:'Gillette Stadium, Foxborough',
-  P87:'Arrowhead Stadium, Kansas City', P88:'Estadio Azteca, CDMX',
-  P89:'Lincoln Financial Field, Philadelphia', P90:'NRG Stadium, Houston',
-  P91:'MetLife Stadium, East Rutherford',      P92:'Estadio Azteca, CDMX',
-  P93:'AT&T Stadium, Dallas',                  P94:'Lumen Field, Seattle',
-  P95:'Mercedes-Benz Stadium, Atlanta',        P96:'BC Place, Vancouver',
-  P97:'Gillette Stadium, Foxborough',   P98:'SoFi Stadium, Los Ángeles',
-  P99:'Hard Rock Stadium, Miami',       P100:'Arrowhead Stadium, Kansas City',
-  P101:'AT&T Stadium, Dallas',          P102:'Mercedes-Benz Stadium, Atlanta',
-};
-
-/* Obtiene el P-código de un partido KO buscando por fecha y stage en nuestras tablas */
-function getKOPCode(m){
-  const dateUY=fechaCortaUY(m.utcDate);
-  let fixtures=[];
-  if(m.stage==='LAST_32')        fixtures=RONDA32_FIFA;
-  else if(m.stage==='LAST_16')   fixtures=RONDA16_FIFA;
-  else if(m.stage==='QUARTER_FINALS') fixtures=RONDAQF_FIFA;
-  else if(m.stage==='SEMI_FINALS')    fixtures=RONDASF_FIFA;
-  if(!fixtures.length) return null;
-  const sameDayFix=fixtures.filter(r=>r.fecha===dateUY);
-  if(!sameDayFix.length) return null;
-  if(sameDayFix.length===1) return sameDayFix[0].p;
-  /* Varios partidos el mismo día: emparejar por posición según UTC */
-  const sameDayApi=apiMatches.filter(am=>{
-    if(am.stage!==m.stage) return false;
-    return fechaCortaUY(am.utcDate)===dateUY;
-  }).sort((a,b)=>new Date(a.utcDate)-new Date(b.utcDate));
-  const idx=sameDayApi.findIndex(am=>am.id===m.id);
-  if(idx>=0&&sameDayFix[idx]) return sameDayFix[idx].p;
-  return sameDayFix[0].p;
-}
-
-function getVenue(m){
-  if(m.venue) return typeof m.venue==='string'?m.venue:(m.venue.name||null);
-  const home=normTla(m.homeTeam?.tla||'');
-  const away=normTla(m.awayTeam?.tla||'');
-  return SEDES_FIXTURE[`${home}-${away}`]
-    || SEDES_FIXTURE[`${away}-${home}`]
-    || (()=>{const p=getKOPCode(m);return p?SEDES_KO_P[p]:null;})()
-    || SEDES_KO_FIJAS[m.stage]
-    || null;
-}
-
-/* Fecha local UY del partido (YYYY-MM-DD) */
-function matchDateUY(m){
-  return new Date(m.utcDate).toLocaleDateString('es-UY',{timeZone:'America/Montevideo'}).split('/').reverse().map((p,i)=>i===0?p:p.padStart(2,'0')).join('-');
-}
-function todayUY(){
-  return new Date().toLocaleDateString('es-UY',{timeZone:'America/Montevideo'}).split('/').reverse().map((p,i)=>i===0?p:p.padStart(2,'0')).join('-');
-}
-/* Fecha local UY en formato "DD/MM" (con cero adelante), para comparar contra
-   el campo "fecha" de RONDA32_FIFA/RONDA16_FIFA/etc. NO usar
-   toLocaleDateString con {day:'2-digit',month:'2-digit'} directo para esto:
-   según el motor/ICU disponible, el mes puede devolver sin cero adelante
-   (ej "28/6" en vez de "28/06"), lo que rompe la comparación de string. */
-function fechaCortaUY(dateInput){
-  const p=new Date(dateInput).toLocaleDateString('es-UY',{timeZone:'America/Montevideo'}).split('/');
-  return `${p[0].padStart(2,'0')}/${p[1].padStart(2,'0')}`;
-}
-
-/* ════════ TABS ════════ */
-function setTab(tab){
-  currentTab=tab;
-  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab));
-  document.querySelectorAll('.nav-item').forEach(b=>b.classList.toggle('active',b.dataset.nav===tab));
-  render();
-  window.scrollTo(0,0);
-}
-
-/* ════════ RENDER ════════ */
-function render(){
-  const body=document.getElementById('tab-body');
-  if(currentTab==='hoy'){body.innerHTML=renderHoy();if(window.NewsModule)window.NewsModule.appendToHoy();}
-  else if(currentTab==='envivo')     body.innerHTML=renderEnVivo();
-  else if(currentTab==='pendientes') body.innerHTML=renderPendientes();
-  else if(currentTab==='terminados') body.innerHTML=renderTerminados();
-  else if(currentTab==='goleadores') body.innerHTML=renderGoleadores();
-  else if(currentTab==='admin')      body.innerHTML=renderAdmin();
-  updateLiveBadge();
-}
-
-/* ════════ HELPERS FILTROS ════════ */
-function getMatchesByStatus(...statuses){
-  return apiMatches.filter(m=>statuses.includes(resolvedStatus(m)));
-}
-function emptyState(icon,title,sub){
-  return `<div class="empty-state"><div class="empty-icon">${icon}</div><div class="empty-title">${title}</div><div class="empty-sub">${sub}</div></div>`;
-}
-function renderMatchList(matches, showDateHdr=false){
-  if(!matches.length) return '';
-  if(!showDateHdr) return matches.map(m=>matchCard(m)).join('');
-  // Agrupar por fecha UY
-  const byDate={};
-  matches.forEach(m=>{
-    const d=matchDateUY(m);
-    if(!byDate[d]) byDate[d]=[];
-    byDate[d].push(m);
-  });
-  return Object.entries(byDate).sort(([a],[b])=>a.localeCompare(b)).map(([fecha,ms])=>{
-    const d=new Date(fecha+'T12:00:00');
-    const label=d.toLocaleDateString('es-UY',{weekday:'long',day:'numeric',month:'long'});
-    return `<div class="fixture-date-hdr">${label.charAt(0).toUpperCase()+label.slice(1)}</div>`
-      + ms.sort((a,b)=>new Date(a.utcDate)-new Date(b.utcDate)).map(m=>matchCard(m)).join('');
-  }).join('');
-}
-
-/* ════════ TAB: HOY ════════ */
-function renderHoy(){
-  const now=new Date();
-  if(now<KICKOFF && !apiMatches.length) return renderCountdown()+'<div id="news-mount"></div>';
-  if(isLoading && !apiMatches.length) return `<div class="loading-wrap"><div class="spinner"></div>Cargando partidos...</div><div id="news-mount"></div>`;
-
-  const hoy=todayUY();
-  const matchesHoy=apiMatches.filter(m=>matchDateUY(m)===hoy)
-    .sort((a,b)=>new Date(a.utcDate)-new Date(b.utcDate));
-
-  if(!matchesHoy.length){
-    // Buscar próximo día con partidos
-    const proximos=apiMatches
-      .filter(m=>resolvedStatus(m)==='SCHEDULED'||resolvedStatus(m)==='TIMED')
-      .sort((a,b)=>new Date(a.utcDate)-new Date(b.utcDate));
-    if(!proximos.length) return emptyState('📅','Sin partidos hoy','No hay partidos programados para hoy.')+'<div id="news-mount"></div>';
-    const proxFecha=matchDateUY(proximos[0]);
-    const d=new Date(proximos[0].utcDate);
-    const label=d.toLocaleDateString('es-UY',{weekday:'long',day:'numeric',month:'long',timeZone:'America/Montevideo'});
-    const matchesProx=proximos.filter(m=>matchDateUY(m)===proxFecha);
-    return `<div class="empty-state" style="padding-bottom:.5rem">
-        <div class="empty-icon">📅</div>
-        <div class="empty-title">Sin partidos hoy</div>
-        <div class="empty-sub">Próxima jornada: <strong style="color:var(--green)">${label.charAt(0).toUpperCase()+label.slice(1)}</strong></div>
-      </div>
-      <p class="section-hdr">Próximos partidos</p>
-      ${matchesProx.map(m=>matchCard(m)).join('')}<div id="news-mount"></div>`;
-  }
-
-  // FIX: incluir partidos que ESPN ya marcó en vivo aunque FD.org diga SCHEDULED/TIMED
-  const vivos=matchesHoy.filter(m=>{
-    const s=resolvedStatus(m);
-    if(s==='IN_PLAY'||s==='PAUSED') return true;
-    const o=getLiveOverride(m.id);
-    return o?.espnLive && (s==='SCHEDULED'||s==='TIMED');
-  });
-  const pendHoy=matchesHoy.filter(m=>{
-    const s=resolvedStatus(m);
-    const o=getLiveOverride(m.id);
-    return (s==='SCHEDULED'||s==='TIMED') && !o?.espnLive;
-  });
-  const termHoy=matchesHoy.filter(m=>resolvedStatus(m)==='FINISHED');
-
-  let html=`<p class="section-hdr" style="padding-top:.75rem">Partidos de hoy — ${matchesHoy.length} ${matchesHoy.length===1?'partido':'partidos'}</p>`;
-  if(vivos.length){
-    html+=`<div class="sub-hdr live-sub">⚡ En vivo ahora</div>`;
-    html+=sortWithFavorite(vivos).map(m=>matchCard(m)).join('');
-  }
-  if(pendHoy.length){
-    if(vivos.length) html+=`<div class="sub-hdr">🕐 Próximamente</div>`;
-    html+=sortWithFavorite(pendHoy).map(m=>matchCard(m)).join('');
-  }
-  if(termHoy.length){
-    html+=`<div class="sub-hdr">✓ Finalizados</div>`;
-    html+=sortWithFavorite(termHoy).map(m=>matchCard(m)).join('');
-  }
-  return html+'<div id="news-mount"></div>';
-}
-
-/* ════════ TAB: EN VIVO ════════ */
-function renderEnVivo(){
-  if(isLoading && !apiMatches.length) return `<div class="loading-wrap"><div class="spinner"></div>Cargando...</div>`;
-  // FIX: incluir partidos que ESPN ya marcó como en vivo aunque FD.org todavía diga SCHEDULED/TIMED
-  const vivosRaw=apiMatches.filter(m=>{
-    const s=resolvedStatus(m);
-    if(s==='IN_PLAY'||s==='PAUSED') return true;
-    const o=getLiveOverride(m.id);
-    return o?.espnLive && (s==='SCHEDULED'||s==='TIMED');
-  }).sort((a,b)=>new Date(a.utcDate)-new Date(b.utcDate));
-  if(!vivosRaw.length) return emptyState('🟢','Sin partidos en vivo','Cuando arranque un partido aparecerá acá en tiempo real.');
-  const vivos=sortWithFavorite(vivosRaw);
-  return `<p class="section-hdr">⚡ En vivo ahora — ${vivos.length} ${vivos.length===1?'partido':'partidos'}</p>`
-    + vivos.map(m=>matchCard(m)).join('');
-}
-
-/* ════════ TAB: PENDIENTES ════════ */
-function renderPendientes(){
-  if(isLoading && !apiMatches.length) return `<div class="loading-wrap"><div class="spinner"></div>Cargando...</div>`;
-  if(!apiMatches.length) return emptyState('⚽','Sin datos','Actualizá desde el panel admin.') + renderRonda32Info();
-  const pend=getMatchesByStatus('SCHEDULED','TIMED').sort((a,b)=>new Date(a.utcDate)-new Date(b.utcDate));
-  if(!pend.length) return emptyState('✅','Todo jugado','No quedan partidos pendientes.') + renderRonda32Info();
-
-  // Agrupar por fase
-  const grupos=pend.filter(m=>m.stage==='GROUP_STAGE');
-  const ko=pend.filter(m=>m.stage!=='GROUP_STAGE');
-  let html='';
-  if(grupos.length){
-    html+=`<p class="section-hdr">Fase de Grupos — ${grupos.length} partidos</p>`;
-    html+=renderMatchList(grupos, true);
-  }
-  if(ko.length){
-    const byStage={};
-    ko.forEach(m=>{if(!byStage[m.stage])byStage[m.stage]=[];byStage[m.stage].push(m);});
-    const order=['LAST_32','LAST_16','QUARTER_FINALS','SEMI_FINALS','THIRD_PLACE','FINAL'];
-    order.forEach(stage=>{
-      const ms=byStage[stage]; if(!ms?.length) return;
-      html+=`<div class="stage-hdr">🏆 ${STAGE_NAMES[stage]||stage}</div>`;
-      html+=ms.sort((a,b)=>new Date(a.utcDate)-new Date(b.utcDate)).map(m=>matchCard(m)).join('');
-    });
-  }
-  // Sección informativa fija con los cruces oficiales de Ronda de 32.
-  // Se muestra siempre (no depende de apiMatches) salvo que la API ya
-  // esté entregando esos partidos reales (LAST_32), para no duplicar info.
-  const yaHayLast32Real=ko.some(m=>m.stage==='LAST_32');
-  if(!yaHayLast32Real){
-    html+=renderRonda32Info();
-  }
-  return html;
-}
-
-/* ════════ RONDA DE 32 (INFORMATIVO) ════════ */
-function renderRonda32Info(){
-  const rows=RONDA32_FIFA.map(c=>`
-    <div class="r32-card">
-      <span class="r32-code">${c.p}</span>
-      <span class="r32-teams">${rondaCodeLabel(c.a)}<span class="r32-vs">vs</span>${rondaCodeLabel(c.b)}</span>
-      <span class="r32-date">${c.fecha}</span>
-    </div>`).join('');
-  return `
-    <div class="stage-hdr">🏆 Ronda de 32 (Dieciseisavos)</div>
-    <div class="info-banner">ℹ️ <strong>A título informativo.</strong> Estos son los cruces oficiales definidos por FIFA según posición de grupo. Los nombres de los equipos reales se confirman recién cuando termina toda la fase de grupos (los "Mejores 3°" dependen de una tabla comparativa entre los 12 grupos).</div>
-    ${rows}`;
-}
-
-/* ════════ TAB: TERMINADOS ════════ */
-function renderTerminados(){
-  if(isLoading && !apiMatches.length) return `<div class="loading-wrap"><div class="spinner"></div>Cargando...</div>`;
-  const term=getMatchesByStatus('FINISHED','AWARDED').sort((a,b)=>new Date(b.utcDate)-new Date(a.utcDate));
-  if(!term.length) return emptyState('⏳','Sin partidos jugados','Los resultados aparecerán cuando terminen los partidos.');
-  return `<p class="section-hdr">Terminados — ${term.length} ${term.length===1?'partido':'partidos'}</p>`
-    + renderMatchListDesc(term);
-}
-
-/* Igual a renderMatchList pero agrupando por fecha en orden DESCENDENTE
-   (los días más recientes arriba, y dentro de cada día el partido más
-   reciente primero). Se usa solo en "Terminados" para no afectar a
-   renderMatchList (usado por Pendientes, que debe seguir ascendente). */
-function renderMatchListDesc(matches){
-  if(!matches.length) return '';
-  const byDate={};
-  matches.forEach(m=>{
-    const d=matchDateUY(m);
-    if(!byDate[d]) byDate[d]=[];
-    byDate[d].push(m);
-  });
-  return Object.entries(byDate).sort(([a],[b])=>b.localeCompare(a)).map(([fecha,ms])=>{
-    const d=new Date(fecha+'T12:00:00');
-    const label=d.toLocaleDateString('es-UY',{weekday:'long',day:'numeric',month:'long'});
-    return `<div class="fixture-date-hdr">${label.charAt(0).toUpperCase()+label.slice(1)}</div>`
-      + ms.sort((a,b)=>new Date(b.utcDate)-new Date(a.utcDate)).map(m=>matchCard(m)).join('');
-  }).join('');
-}
-
-/* ════════ FUENTE LIVE (matchService) ════════
-   football-data.org sigue siendo la fuente de verdad para todo:
-   fixtures, equipos, grupos, tablas, resultado final. Pero su feed
-   en vivo mostró datos incorrectos (ej: gol anulado por VAR que
-   football-data.org no corrigió durante varios minutos).
-   Para partidos EN VIVO, intentamos reemplazar marcador/estado/goles
-   por ESPN (gratis, sin token, sin SLA oficial). Si ESPN falla o no
-   hay match, se usa football-data.org tal cual (fallback). */
-
-function getLiveOverride(matchId){
-  const o=liveOverrides[matchId];
-  if(!o) return null;
-  // Vencimiento de seguridad: si el override tiene más de 90s, lo
-  // tratamos como stale y dejamos de confiar en él (puede pasar si
-  // dejó de actualizarse silenciosamente, ej. ESPN cambió el id).
-  if(Date.now()-o.fetchedAt>90*1000) return null;
-  return o;
-}
-
-/* Matchea un partido de football-data.org contra los eventos de ESPN
-   por código de equipo (tla, 3 letras FIFA — mismo formato en ambas
-   fuentes) + ventana de fecha amplia (±6h) para tolerar diferencias
-   de reloj/timezone entre ambas fuentes. */
-function findEspnMatch(m,espnEvents){
-  const homeTla=normTla(m.homeTeam?.tla||'');
-  const awayTla=normTla(m.awayTeam?.tla||'');
-  if(!homeTla||!awayTla) return null;
-  const kickoff=new Date(m.utcDate).getTime();
-  return espnEvents.find(ev=>{
-    if(!ev.home||!ev.away) return false;
-    const evHome=normTla(ev.home.tla||'');
-    const evAway=normTla(ev.away.tla||'');
-    const mismosEquipos=(evHome===homeTla&&evAway===awayTla)||(evHome===awayTla&&evAway===homeTla);
-    if(!mismosEquipos) return false;
-    const evKickoff=new Date(ev.date).getTime();
-    return Math.abs(evKickoff-kickoff)<6*60*60*1000;
-  })||null;
-}
-
-/* Parsea el displayClock de ESPN ("67'", "45+2'", "HT", "FT") a
-   {minute, injuryTime} en el mismo formato que usa liveClockLabel. */
-function parseEspnClock(displayClock){
-  if(!displayClock) return {minute:null,injuryTime:0};
-  const m=displayClock.match(/(\d+)(?:\+(\d+))?/);
-  if(!m) return {minute:null,injuryTime:0};
-  const base=Number(m[1]);
-  const extra=m[2]?Number(m[2]):0;
-  return {minute:base+extra,injuryTime:extra};
-}
-
-async function fetchLiveData(){
-  try{
-    const resp=await fetch('/api/live');
-    if(!resp.ok) throw new Error('live '+resp.status);
-    const data=await resp.json();
-    const espnEvents=data.events||[];
-
-    // FIX: También mirar SCHEDULED/TIMED — FD.org tarda 1-5 min en actualizar
-    // el status a IN_PLAY. ESPN sabe antes que el partido arrancó.
-    const candidatos=apiMatches.filter(m=>{
-      const s=resolvedStatus(m);
-      return s==='IN_PLAY'||s==='PAUSED'||s==='SCHEDULED'||s==='TIMED';
-    });
-    const nextOverrides={};
-    candidatos.forEach(m=>{
-      const ev=findEspnMatch(m,espnEvents);
-      if(!ev||ev.state!=='in') return; // ESPN no lo marca como en juego: ignorar
-      const homeTla=normTla(m.homeTeam?.tla||'');
-      const evHome=normTla(ev.home.tla||'');
-      const espnHomeIsFdHome=(evHome===homeTla);
-      const {minute,injuryTime}=parseEspnClock(ev.clock);
-      const fdStatus=resolvedStatus(m);
-      nextOverrides[m.id]={
-        homeScore: espnHomeIsFdHome ? ev.home.score : ev.away.score,
-        awayScore: espnHomeIsFdHome ? ev.away.score : ev.home.score,
-        minute, injuryTime,
-        fetchedAt: Date.now(),
-        espnLive: fdStatus==='SCHEDULED'||fdStatus==='TIMED',
-        // Goles de ESPN — reorientar isHome si ESPN y FD.org tienen local/visitante invertidos
-        goals: (ev.goals||[]).map(g=>espnHomeIsFdHome ? g : {...g, isHome: !g.isHome}),
-      };
-    });
-    // Detectar goles nuevos comparando vs el ciclo anterior
-    Object.entries(nextOverrides).forEach(([id,next])=>{
-      const prev=prevLiveScores[id];
-      if(prev&&(next.homeScore!==prev.h||next.awayScore!==prev.a)){
-        const m=apiMatches.find(mm=>String(mm.id)===String(id));
-        if(m){
-          const hName=teamName(m,'homeTeam');
-          const aName=teamName(m,'awayTeam');
-          const hF=flag(normTla(m.homeTeam?.tla||''));
-          const aF=flag(normTla(m.awayTeam?.tla||''));
-          const gMsg=`⚽ GOL! ${hF} ${hName} ${next.homeScore}–${next.awayScore} ${aName} ${aF}`;
-          showGoalToast(gMsg,5000);
-          sendBrowserNotif('⚽ ¡GOOOL!',`${hName} ${next.homeScore}–${next.awayScore} ${aName}`,'goal-'+id);
-        }
-      }
-      prevLiveScores[id]={h:next.homeScore,a:next.awayScore};
-    });
-
-    liveOverrides=nextOverrides;
-    liveFetchFailed=false;
-  }catch(e){
-    // Fallback: no tocamos liveOverrides existentes más que dejarlos
-    // expirar por su propio chequeo de 90s; matchCard cae sola a
-    // football-data.org cuando getLiveOverride devuelve null.
-    liveFetchFailed=true;
-    console.warn('[mimundial] fuente LIVE no disponible, usando football-data.org:',e);
-  }
-}
-
-function scheduleLiveRefresh(){
-  if(liveTimer) clearInterval(liveTimer);
-  const hasLive=apiMatches.some(m=>{const s=resolvedStatus(m);return s==='IN_PLAY'||s==='PAUSED'});
-  // FIX: también arrancar el timer si ESPN ya detectó partidos aunque FD.org no actualizó todavía
-  const hasEspnLive=Object.values(liveOverrides).some(o=>o.espnLive);
-  if(!hasLive && !hasEspnLive){ liveOverrides={}; return; }
-  /* No relanzamos fetchLiveData() aquí: fetchAndUpdate() ya lo esperó
-     antes de llamar a esta función, así que liveOverrides ya está al
-     día en el momento en que arrancamos este timer. */
-  liveTimer=setInterval(async ()=>{
-    await fetchLiveData();
+async function initApp() {
+  try {
+    const res = await fetch(DATA_URL + '?t=' + Date.now());
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
+    brands   = data.brands   || [];
+    products = data.products || {};
+    Object.values(products).flat().forEach(p=>{qtys[p.id]=1});
+    pidToBrand={};
+    Object.keys(products).forEach(bid=>{(products[bid]||[]).forEach(p=>{pidToBrand[p.id]=bid})});
     render();
-  },15*1000); // 15s — más agresivo que el polling de football-data.org porque es liviano (sin token, cache corto)
+  } catch(e) {
+    console.error('Error cargando catálogo:', e);
+    document.getElementById('main-view').innerHTML =
+      '<div style="text-align:center;padding:4rem 2rem;color:#7A7468">' +
+      '<div style="font-size:48px;margin-bottom:1rem">⚠️</div>' +
+      '<div style="font-size:16px;margin-bottom:.5rem">No se pudo cargar el catálogo</div>' +
+      '<div style="font-size:13px">Revisá tu conexión e intentá de nuevo</div>' +
+      '<button onclick="initApp()" style="margin-top:1.5rem;padding:10px 24px;background:#1A1A18;color:#fff;border:none;border-radius:8px;font-size:14px;cursor:pointer">Reintentar</button>' +
+      '</div>';
+  }
 }
 
+function render(){
+  pushState(view,curBrand);
+  const mv=document.getElementById('main-view');
+  if(view==='home')mv.innerHTML=renderHome();
+  else if(view==='section')mv.innerHTML=renderSection();
+  else if(view==='brand')mv.innerHTML=renderBrandPage();
+  else if(view==='fumadores')mv.innerHTML=renderFumadores();
+  else if(view==='sintacc')mv.innerHTML=renderSintacc();
+  else if(view==='catalogo')mv.innerHTML=renderCatalogo();
+  else if(view==='fichas')mv.innerHTML=renderFichas();
+  else if(view==='presentacion')mv.innerHTML=renderPresentacion();
+  const back=document.getElementById('back-btn');
+  if(back)back.classList.toggle('visible',view!=='home');
+  document.querySelectorAll('.bn-item').forEach(b=>b.classList.remove('active'));
+  if(view==='home')document.getElementById('bn-home')?.classList.add('active');
+  else if(view==='section'||view==='brand'||view==='fumadores'||view==='sintacc')document.getElementById('bn-marcas')?.classList.add('active');
+  else if(view==='catalogo')document.getElementById('bn-catalogo')?.classList.add('active');
+  else if(view==='fichas')document.getElementById('bn-fichas')?.classList.add('active');
+  else if(view==='presentacion')document.getElementById('bn-visita')?.classList.add('active');
+  window.scrollTo({top:0,behavior:'instant'});
+}
+function goBack(){
+  if(view==='brand'){
+    const b=getBrand(curBrand);
+    if(b&&b.sid==='fumadores')goFumadores();
+    else if(curBrand&&['celisano','agridulce','smams','sanosinharina','suavipan','nutsbar','molinosala'].includes(curBrand)&&prevView==='sintacc')goSintacc();
+    else goSection();
+  } else if(view==='section'||view==='fumadores'||view==='sintacc'||view==='catalogo'||view==='fichas'||view==='presentacion')goHome();
+}
+let prevView='home';
+let catTab='alimentos';
+function goSintacc(){prevView=view;view='sintacc';curBrand=null;activeFilter='todos';render()}
+function goCatalogo(tab){catTab=tab||'alimentos';view='catalogo';curBrand=null;render()}
+function goFichas(){view='fichas';curBrand=null;render()}
+function setCatTab(tab){catTab=tab;document.querySelectorAll('.cat-tab').forEach(t=>t.classList.remove('active'));document.getElementById('cattab-'+tab)?.classList.add('active');document.getElementById('cat-content').innerHTML=renderCatContent()}
 
-/* Nodo de "posible cruce": si esa fase/código ya tiene equipos reales
-   asignados (aunque el partido no se haya jugado), devuelve un nodo
-   'known' con los 2 equipos. Si no, baja un nivel (Cuartos→Octavos,
-   Semis→Cuartos, y si Cuartos tampoco está resuelto, sigue bajando
-   solo hasta llegar a Octavos, que siempre tiene equipos reales una
-   vez terminada la Ronda de 32) y devuelve un nodo 'pending' con los
-   dos sub-cruces que lo van a definir. */
-function feederNode(stage, pcode){
-  if(!pcode) return null;
-  const rm=apiMatches.find(x=>x.stage===stage && getKOPCode(x)===pcode);
-  if(rm && (rm.homeTeam?.tla || rm.awayTeam?.tla)){
-    return {type:'known',
-      h:teamName(rm,'homeTeam'), a:teamName(rm,'awayTeam'),
-      hf:rm.homeTeam?.tla?flag(normTla(rm.homeTeam.tla)):'🏳️',
-      af:rm.awayTeam?.tla?flag(normTla(rm.awayTeam.tla)):'🏳️'};
-  }
-  if(stage==='QUARTER_FINALS'){
-    const r=RONDAQF_FIFA.find(x=>x.p===pcode);
-    if(!r) return null;
-    return {type:'pending', a:feederNode('LAST_16', r.r16a), b:feederNode('LAST_16', r.r16b)};
-  }
-  if(stage==='SEMI_FINALS'){
-    const r=RONDASF_FIFA.find(x=>x.p===pcode);
-    if(!r) return null;
-    return {type:'pending', a:feederNode('QUARTER_FINALS', r.qfa), b:feederNode('QUARTER_FINALS', r.qfb)};
-  }
-  return null;
+const freeIds=new Set(['celisano','agridulce','smams','sanosinharina','suavipan','nutsbar','molinosala']);
+const freeProdCats=new Set(['sin gluten','sin azucar','sin lactosa','budines','proteina','bombones']);
+function isFree(bid,p){
+  if(freeIds.has(bid))return true;
+  if(bid==='agridulce'&&p.cat==='sin azucar')return true;
+  if(bid==='smams'&&(p.cat==='sin gluten'||p.cat==='sin azucar'))return true;
+  return false;
 }
 
-/* Dibuja el nodo con el mismo estilo de fila que usa Octavos (bandera +
-   nombre a cada lado). Si es 'pending', se llama a sí misma para
-   mostrar los dos sub-cruces que lo van a definir (así llega solo
-   hasta Octavos cuando hace falta bajar 2 niveles, ej. desde Semis). */
-function renderFeederTree(node){
-  if(!node) return `<div style="text-align:center;font-size:.62rem;font-style:italic;color:rgba(220,220,240,.3);padding:4px 0">Por definir</div>`;
-  if(node.type==='known'){
-    return `<div style="display:flex;align-items:center;justify-content:center;gap:6px;padding:3px 4px">
-      <span style="font-size:.65rem;font-weight:700;display:inline-flex;align-items:center;gap:3px;white-space:nowrap">${node.hf} ${esc(node.h)}</span>
-      <span style="font-size:.55rem;color:var(--text-muted);font-weight:700">vs</span>
-      <span style="font-size:.65rem;font-weight:700;display:inline-flex;align-items:center;gap:3px;white-space:nowrap">${node.af} ${esc(node.a)}</span>
-    </div>`;
-  }
-  return `<div style="border:1px dashed rgba(255,255,255,.14);border-radius:8px;padding:3px 4px;margin:2px 0">
-    ${renderFeederTree(node.a)}
-    <div style="text-align:center;font-size:.48rem;color:rgba(220,220,240,.28);font-weight:800;margin:0">▼</div>
-    ${renderFeederTree(node.b)}
-  </div>`;
-}
-
-/* Línea "posibles cruces" para partidos de Cuartos/Semis que todavía no
-   tienen equipos reales asignados: reemplaza el hueco en blanco por el
-   árbol de arriba, con el mismo estilo (bandera + nombre) que Octavos. */
-function posiblesCrucesLine(m){
-  if(m.homeTeam?.tla || m.awayTeam?.tla) return ''; // ya hay equipo real, no hace falta
-  if(m.stage!=='QUARTER_FINALS' && m.stage!=='SEMI_FINALS') return '';
-  const code=getKOPCode(m);
-  const node=feederNode(m.stage, code);
-  if(!node || node.type==='known') return '';
-  return `<div class="match-possible-hint" style="padding:6px 10px 10px">
-    <div style="font-size:.55rem;color:var(--text-muted);text-align:center;margin-bottom:4px;font-weight:700;letter-spacing:.04em">🔮 POSIBLES CRUCES</div>
-    <div style="display:flex;align-items:stretch;gap:6px">
-      <div style="flex:1;min-width:0">${renderFeederTree(node.a)}</div>
-      <div style="align-self:center;font-size:.6rem;font-weight:800;color:var(--gold)">VS</div>
-      <div style="flex:1;min-width:0">${renderFeederTree(node.b)}</div>
-    </div>
-  </div>`;
-}
-
-function matchCard(m){
-  const homeTla=m.homeTeam?.tla ? normTla(m.homeTeam.tla) : null;
-  const awayTla=m.awayTeam?.tla ? normTla(m.awayTeam.tla) : null;
-  const homeName=teamName(m,'homeTeam');
-  const awayName=teamName(m,'awayTeam');
-  const homeFlag=homeTla?flag(homeTla):'🏳️';
-  const awayFlag=awayTla?flag(awayTla):'🏳️';
-
-  const status=resolvedStatus(m);
-  const _espnOverride=getLiveOverride(m.id);
-  // FIX: tratar como LIVE si FD.org dice SCHEDULED/TIMED pero ESPN ya lo marcó en juego
-  const isLive=(status==='IN_PLAY'||status==='PAUSED')||(_espnOverride?.espnLive&&(status==='SCHEDULED'||status==='TIMED'));
-  const isPaused=status==='PAUSED'; // entretiempo: el reloj NO debe avanzar
-  const isFin=status==='FINISHED';
-  const scoreH=m.score?.fullTime?.home;
-  const scoreA=m.score?.fullTime?.away;
-
-  const utc=new Date(m.utcDate);
-  const timeStr=utc.toLocaleTimeString('es-UY',{hour:'2-digit',minute:'2-digit',timeZone:'America/Montevideo'});
-
-  /* Sede */
-  const venue=getVenue(m);
-
-  /* Grupo */
-  const groupLabel=m.group?('Grupo '+m.group.replace('GROUP_','')):
-                   m.stage?STAGE_NAMES[m.stage]||m.stage:'';
-
-  /* Score / status */
-  let scoreHtml,statusHtml;
-  if(isLive){
-    const override=getLiveOverride(m.id);
-    const h=override ? override.homeScore : (scoreH??m.score?.halfTime?.home??0);
-    const a=override ? override.awayScore : (scoreA??m.score?.halfTime?.away??0);
-    const minute=override ? override.minute : m.minute;
-    const injuryTime=override ? override.injuryTime : m.injuryTime;
-    const clockBase=override ? override.fetchedAt : (lastUpdated||Date.now());
-    scoreHtml=`<div class="match-score">${h} - ${a}</div>`;
-    if(isPaused){
-      /* Entretiempo: el reloj se queda fijo en el último minuto real
-         conocido (normalmente 45' o 45+N'). data-clock-paused="1" le
-         dice a clockTick() que no le sume segundos — si lo dejáramos
-         correr, terminaría sumando los ~10-15 min reales de descanso
-         como si fueran minutos de juego (bug real que se reportó). */
-      statusHtml=`<div class="match-time live">
-        <span class="live-dot-small"></span>ENTRETIEMPO
-        <span class="match-clock" data-clock-paused="1" data-clock-min="${minute??''}" data-clock-injury="${injuryTime??''}" data-clock-base="${clockBase}">${liveClockLabel(minute,injuryTime,0)}</span>
-      </div>`;
-    } else {
-      /* El minuto avanza vía clockTick() cada segundo, sin re-renderizar
-         toda la tarjeta. data-clock-base = timestamp del último dato
-         real (de ESPN si hay override, o de football-data.org si no);
-         a partir de ahí se extrapola el minuto visualmente. */
-      statusHtml=`<div class="match-time live">
-        <span class="live-dot-small"></span>EN VIVO
-        <span class="match-clock" data-clock-min="${minute??''}" data-clock-injury="${injuryTime??''}" data-clock-base="${clockBase}">${liveClockLabel(minute,injuryTime,0)}</span>
-      </div>`;
-    }
-  } else if(isFin && scoreH!=null){
-    const etH=m.score?.extraTime?.home;
-    const etA=m.score?.extraTime?.away;
-    const penH=m.score?.penalties?.home;
-    const penA=m.score?.penalties?.away;
-    let dispH,dispA,finalLabel;
-    if(penH!=null){
-      /* Partido definido por penales: marcador regular en grande + "Pen X-Y" */
-      dispH=scoreH; dispA=scoreA;
-      finalLabel=`Final &nbsp;<span class="final-tag pen">Pen. ${penH}-${penA}</span>`;
-    } else if(etH!=null){
-      /* Prórroga sin penales: mostrar marcador final de ET */
-      dispH=etH; dispA=etA;
-      finalLabel='Final &nbsp;<span class="final-tag et">Prórroga</span>';
-    } else {
-      dispH=scoreH; dispA=scoreA;
-      finalLabel='Final';
-    }
-    scoreHtml=`<div class="match-score">${dispH} - ${dispA}</div>`;
-    statusHtml=`<div class="match-time">${finalLabel}</div>`;
-  } else {
-    const dateStr=utc.toLocaleDateString('es-UY',{weekday:'short',day:'numeric',month:'short',timeZone:'America/Montevideo'});
-    scoreHtml=`<div class="match-score pending" style="font-size:.9rem;line-height:1.15">${timeStr}<div style="font-size:.58rem;font-weight:700;letter-spacing:.03em;margin-top:3px;color:var(--text-muted)">${dateStr}</div></div>`;
-    statusHtml=`<div class="match-time">${timeStr} UY</div>`;
-  }
-
-  const isFav=hasFavorite(m);
-  const cls=`${isLive?'live':isFin?'finished':''} ${isFav?'fav':''}`.trim();
-
-  const homeFavBtn=homeTla?`<button class="fav-star ${favoriteTeam===homeTla?'active':''}" onclick="toggleFavorite('${homeTla}',event)" title="${favoriteTeam===homeTla?'Quitar favorito':'Marcar como favorito'}">★</button>`:'';
-  const awayFavBtn=awayTla?`<button class="fav-star ${favoriteTeam===awayTla?'active':''}" onclick="toggleFavorite('${awayTla}',event)" title="${favoriteTeam===awayTla?'Quitar favorito':'Marcar como favorito'}">★</button>`:'';
-
-  /* ── GOLES EXPANDIBLES ──
-     Si hay override de ESPN activo, solo mostramos la lista de
-     goleadores (que viene de football-data.org, m.goals) cuando su
-     cantidad total coincide con el marcador que confirmó ESPN.
-     Si no coincide (ej: gol anulado por VAR que football-data.org
-     no actualizó todavía), preferimos no mostrar nada antes que
-     mostrar un goleador que ya no es válido. */
-  let goalsSection='';
-  const goals=m.goals||[];
-  const liveOverrideForGoals=isLive?getLiveOverride(m.id):null;
-  const espnGoals=liveOverrideForGoals?.goals||[];
-  const espnTotal=espnGoals.length;
-  const fdTotal=goals.length;
-  const espnLiveScore = liveOverrideForGoals
-    ? (liveOverrideForGoals.homeScore + liveOverrideForGoals.awayScore) : 0;
-  const goalsConfiables = !liveOverrideForGoals || fdTotal <= espnLiveScore + 1;
-
-  const sid=String(m.id);
-  const isOpen=expandedGoals.has(sid);
-
-  const anyGoalsData = fdTotal > 0 || espnTotal > 0
-    || (liveOverrideForGoals && espnLiveScore > 0);
-  if((isLive||isFin) && anyGoalsData){
-    let rows='';
-
-    if(goalsConfiables && fdTotal>0){
-      // Fuente primaria: FD.org (tiene nombre completo en español si está disponible)
-      const homeId=m.homeTeam?.id;
-      rows=goals.map(g=>{
-        const isHome=g.team?.id===homeId;
-        const scorerTla=normTla(g.team?.tla||'');
-        const scorerFlag=scorerTla?flag(scorerTla):(isHome?homeFlag:awayFlag);
-        const name=g.scorer?.name||'Gol propio';
-        const min=g.minute!=null?(g.minute+(g.injuryTime?'+'+g.injuryTime:''))+"'":'-';
-        let typeTag='';
-        if(g.type==='OWN_GOAL') typeTag=`<span class="goal-type og">OG</span>`;
-        else if(g.type==='PENALTY') typeTag=`<span class="goal-type pen">P</span>`;
-        return `<div class="match-goals-row">
-          <span class="goal-flag">${scorerFlag}</span>
-          <span class="goal-scorer">${esc(name)}</span>${typeTag}
-          <span class="goal-min">${min}</span>
-        </div>`;
-      }).join('');
-    } else if(espnTotal>0){
-      // Fallback: goles de ESPN cuando FD.org no coincide o todavía no los tiene
-      rows=espnGoals.map(g=>{
-        const scorerFlag=g.isHome?homeFlag:awayFlag;
-        const name=g.scorer||'Gol propio';
-        const min=g.minute||'-';
-        let typeTag='';
-        if(g.ownGoal) typeTag=`<span class="goal-type og">OG</span>`;
-        else if(g.penalty) typeTag=`<span class="goal-type pen">P</span>`;
-        return `<div class="match-goals-row">
-          <span class="goal-flag">${scorerFlag}</span>
-          <span class="goal-scorer">${esc(name)}</span>${typeTag}
-          <span class="goal-min">${min}</span>
-        </div>`;
-      }).join('');
-    }
-
-    if(!rows && liveOverrideForGoals && espnLiveScore > 0){
-      rows = '<div class="match-goals-row" style="opacity:.5;font-style:italic;justify-content:center">'
-           + '<span class="goal-scorer">⚽ Gol — goleador actualizándose</span>'
-           + '</div>';
-    }
-    if(rows){
-      const count=goalsConfiables&&fdTotal>0?fdTotal:espnTotal;
-      const goalsInner=`<div class="match-goals">${rows}</div>`;
-      goalsSection=`
-        <button class="goals-toggle-btn" data-id="${sid}" onclick="toggleGoals(${sid},event)">
-          <span>⚽</span>
-          <span class="tgl-lbl">${isOpen?'Ocultar':'Ver goles'}</span>
-          <span class="tgl-count">${count}</span>
-        </button>
-        <div class="match-goals-body" data-id="${sid}" style="max-height:${isOpen?'600px':'0'};opacity:${isOpen?'1':'0'}">
-          ${goalsInner}
-        </div>`;
-    }
-  }
-
-  return `<div class="match-card ${cls}">
-    <div class="match-meta">
-      <span class="match-meta-group">${esc(groupLabel)}</span>
-      ${venue?`<span class="match-venue">📍 ${esc(venue)}</span>`:`<span></span>`}
-    </div>
-    <div class="match-body">
-      <div class="match-team">
-        <span class="match-flag">${homeFlag}</span>
-        <span class="match-name">${esc(homeName)}</span>
-        ${homeFavBtn}
+function renderCatContent(){
+  const sid=catTab;
+  const blist=brands.filter(b=>b.sid===sid);
+  return blist.map(b=>{
+    const ps=products[b.id]||[];
+    if(!ps.length)return'';
+    const hasFree=freeIds.has(b.id)||(b.id==='agridulce'&&ps.some(p=>p.cat==='sin azucar'))||(b.id==='smams'&&ps.some(p=>p.cat==='sin gluten'||p.cat==='sin azucar'));
+    return`<div class="cat-brand-block">
+      <div class="cat-brand-hdr">
+        <img class="cat-brand-logo" src="${b.logo}" alt="${b.name}" onerror="this.outerHTML='<span style=\\'font-size:22px\\'>${b.emoji}</span>'">
+        <span class="cat-brand-name">${b.name}</span>
+        ${hasFree?`<span class="cat-free-badge">🌿 Free</span>`:''}
+        <span class="cat-brand-count">${ps.length} prod.</span>
       </div>
-      <div class="match-center">${scoreHtml}${statusHtml}</div>
-      <div class="match-team right">
-        ${awayFavBtn}
-        <span class="match-name">${esc(awayName)}</span>
-        <span class="match-flag">${awayFlag}</span>
+      <div class="cat-prod-grid">${ps.map(p=>{
+        const free=isFree(b.id,p);
+        const k=p.id+'_'+(p.venta===1?'unit':'caja');
+        const inCart=cart[k]&&cart[k].qty>0;
+        return`<div class="cat-prod-card${free?' free-highlight':''}">
+          <img class="cat-prod-img" src="${getProdImg(b.id,p.art)}" alt="${p.name}" onerror="this.onerror=null;this.src='img/placeholder.webp'" onclick="openLB('img/${p.art}.webp')">
+          <div class="cat-prod-body">
+            <div class="cat-prod-name">${p.name}</div>
+            <div class="cat-prod-prices">
+              <div class="cat-prod-price-pack">Pack $${p.caja.toFixed(0)}</div>
+              <div class="cat-prod-price-unit">$${p.unit.toFixed(0)} c/u</div>
+            </div>
+          </div>
+          <button class="cat-prod-add${inCart?' in-cart':''}" onclick="addC('${p.id}')">${inCart?'✓':'+ Agregar'}</button>
+        </div>`;
+      }).join('')}</div>
+    </div>`;
+  }).join('');
+}
+
+function renderCatalogo(){
+  return`<div class="cat-wrap">
+    <div class="breadcrumb" onclick="goHome()">← Inicio</div>
+    <div class="section-title">Catálogo completo</div>
+    <div class="section-rule"></div>
+    <div class="cat-tabs">
+      <button class="cat-tab${catTab==='alimentos'?' active':''}" id="cattab-alimentos" onclick="setCatTab('alimentos')">🍬 Alimentos &amp; Snacks</button>
+      <button class="cat-tab${catTab==='fumadores'?' active':''}" id="cattab-fumadores" onclick="setCatTab('fumadores')">🚬 Fumadores</button>
+    </div>
+    <div id="cat-content">${renderCatContent()}</div>
+  </div>`;
+}
+function renderFichas(){
+  const list=brands.filter(b=>b.activo!==false);
+  return`<div class="section-wrap">
+    <div class="breadcrumb" onclick="goHome()">← Inicio</div>
+    <div class="section-title">Fichas de marcas</div>
+    <div class="section-rule"></div>
+    <div class="section-meta">Tocá una marca para ver su ficha completa</div>
+    <div class="fichas-grid">${list.map(b=>`
+      <div class="fichas-card" onclick="openFicha('${b.id}')">
+        <img class="fichas-logo" src="${b.logo}" alt="${b.name}" onerror="this.outerHTML='<span style=\\'font-size:28px\\'>${b.emoji}</span>'">
+        <div class="fichas-name">${b.name}</div>
+      </div>`).join('')}
+    </div>
+  </div>`;
+}
+function openFicha(bid){
+  const img=new Image();
+  img.onload=()=>openLBraw('img/fichas/'+bid+'.jpg');
+  img.onerror=()=>alert('Todavía no hay ficha cargada para esta marca.');
+  img.src='img/fichas/'+bid+'.jpg';
+}
+function goPresentacion(){view='presentacion';curBrand=null;render()}
+function presentList(){
+  const curated=allP().filter(p=>p.destacado&&!presentHidden.has(p.id));
+  const ids=new Set(curated.map(p=>p.id));
+  const extra=presentExtra.map(id=>allP().find(p=>p.id===id)).filter(p=>p&&!ids.has(p.id));
+  return curated.concat(extra);
+}
+function presentGroups(){
+  const byBrand={};
+  presentList().forEach(p=>{
+    const bid=pidToBrand[p.id];
+    if(!bid)return;
+    if(!byBrand[bid])byBrand[bid]=[];
+    byBrand[bid].push(p);
+  });
+  return Object.keys(byBrand).map(bid=>({brand:getBrand(bid),products:byBrand[bid]})).filter(g=>g.brand);
+}
+function renderPresentacion(){
+  return`<div class="section-wrap">
+    <div class="breadcrumb" onclick="goHome()">← Inicio</div>
+    <div class="section-title">🤝 Modo visita</div>
+    <div class="section-rule"></div>
+    <div class="section-meta">Selección para mostrarle a un cliente nuevo. Sumá o sacá productos según cómo vaya la charla.</div>
+    <div class="pres-search-wrap">
+      <input type="text" id="pres-search" class="pres-search-input" placeholder="Buscar producto para sumar…" oninput="onPresSearch(this.value)">
+      <div id="pres-search-results" class="pres-search-results"></div>
+    </div>
+    <div id="pres-groups">${renderPresGroupsHtml()}</div>
+  </div>`;
+}
+function renderPresGroupsHtml(){
+  const groups=presentGroups();
+  if(!groups.length)return'<div class="empty-g">Todavía no marcaste productos para el Modo Visita. Marcalos desde el panel admin (tildá "Incluir en Modo Visita" al editar un producto) o sumalos acá arriba con el buscador.</div>';
+  return groups.map(renderPresBrandBlock).join('');
+}
+function renderPresBrandBlock(g){
+  const desc=getBrandDesc(g.brand.id);
+  return`<div class="pres-brand-block">
+    <div class="pres-brand-hdr" onclick="goBrand('${g.brand.id}')" style="cursor:pointer">
+      <img class="pres-brand-logo" src="${g.brand.logo}" alt="${g.brand.name}" onerror="this.outerHTML='<span style=\\'font-size:22px\\'>${g.brand.emoji}</span>'">
+      <div>
+        <div class="pres-brand-name">${g.brand.name}</div>
+        ${desc?`<div class="pres-brand-desc">${desc}</div>`:''}
       </div>
     </div>
-    ${goalsSection}
-    ${posiblesCrucesLine(m)}
+    <div class="pres-prod-grid">${g.products.map(p=>renderPresCard(p,g.brand.id)).join('')}</div>
+  </div>`;
+}
+function renderPresCard(p,bid){
+  const modo=p.venta===1?'unit':'caja';
+  const cartKey=p.id+'_'+modo;
+  const inCart=cart[cartKey]>0;
+  const precio=modo==='unit'?p.unit:p.caja;
+  const imgSrc=getProdImg(bid,p.art);
+  return`<div class="pres-card">
+    <button class="pres-remove" onclick="removeFromPresentacion('${p.id}')" title="Sacar de esta visita">✕</button>
+    <img class="pres-img" src="${imgSrc}" alt="${p.name}" loading="lazy" onclick="openLB('${p.art}')" onerror="this.onerror=null">
+    <div class="pres-name">${p.name}</div>
+    <div class="pres-price">${fmt(precio)}<span class="pres-price-unit"> / ${modo==='unit'?'unidad':'pack'}</span></div>
+    <button class="pres-add${inCart?' in-cart':''}" onclick="addC('${p.id}')">${inCart?'✓ En pedido':'+ Agregar'}</button>
+  </div>`;
+}
+function refreshPresGrid(){
+  const g=document.getElementById('pres-groups');
+  if(!g)return;
+  g.innerHTML=renderPresGroupsHtml();
+}
+function onPresSearch(v){
+  const box=document.getElementById('pres-search-results');
+  if(!v.trim()){box.innerHTML='';box.classList.remove('show');return}
+  const q=v.toLowerCase();
+  const matches=allP().filter(p=>p.name.toLowerCase().includes(q)||p.art.includes(q)).slice(0,8);
+  box.classList.add('show');
+  box.innerHTML=matches.length?matches.map(p=>`<div class="pres-search-item" onclick="addToPresentacion('${p.id}')">${p.name} <span class="pres-search-art">${p.art}</span></div>`).join(''):'<div class="pres-search-empty">Sin resultados</div>';
+}
+function addToPresentacion(id){
+  presentHidden.delete(id);
+  if(!presentExtra.includes(id))presentExtra.push(id);
+  const inp=document.getElementById('pres-search');if(inp)inp.value='';
+  const box=document.getElementById('pres-search-results');if(box){box.innerHTML='';box.classList.remove('show')}
+  refreshPresGrid();
+}
+function removeFromPresentacion(id){
+  presentHidden.add(id);
+  presentExtra=presentExtra.filter(x=>x!==id);
+  refreshPresGrid();
+}
+const HOME_SEL_LIMIT=6;
+function renderHomeSelHtml(){
+  const groups=presentGroups().slice(0,HOME_SEL_LIMIT);
+  if(!groups.length)return'';
+  return`<div class="section-eyebrow" style="margin-bottom:.5rem">Seleccionados</div>
+    <div class="section-rule-line" style="margin-bottom:1rem"></div>
+    ${groups.map(renderHomeSelBlock).join('')}
+    <div class="home-sel-more" onclick="goPresentacion()">Ver toda la selección →</div>`;
+}
+function renderHomeSelBlock(g){
+  const desc=getBrandDesc(g.brand.id);
+  return`<div class="pres-brand-block">
+    <div class="pres-brand-hdr" onclick="goBrand('${g.brand.id}')" style="cursor:pointer">
+      <img class="pres-brand-logo" src="${g.brand.logo}" alt="${g.brand.name}" onerror="this.outerHTML='<span style=\\'font-size:22px\\'>${g.brand.emoji}</span>'">
+      <div>
+        <div class="pres-brand-name">${g.brand.name}</div>
+        ${desc?`<div class="pres-brand-desc">${desc}</div>`:''}
+      </div>
+    </div>
+    <div class="pres-prod-grid">${g.products.map(p=>renderHomeSelCard(p,g.brand.id)).join('')}</div>
+  </div>`;
+}
+function renderHomeSelCard(p,bid){
+  const modo=p.venta===1?'unit':'caja';
+  const cartKey=p.id+'_'+modo;
+  const inCart=cart[cartKey]>0;
+  const precio=modo==='unit'?p.unit:p.caja;
+  const imgSrc=getProdImg(bid,p.art);
+  return`<div class="pres-card">
+    <img class="pres-img" src="${imgSrc}" alt="${p.name}" loading="lazy" onclick="openLB('${p.art}')" onerror="this.onerror=null">
+    <div class="pres-name">${p.name}</div>
+    <div class="pres-price">${fmt(precio)}<span class="pres-price-unit"> / ${modo==='unit'?'unidad':'pack'}</span></div>
+    <button class="pres-add${inCart?' in-cart':''}" onclick="addC('${p.id}')">${inCart?'✓ En pedido':'+ Agregar'}</button>
+  </div>`;
+}
+function refreshHomeSel(){
+  const w=document.getElementById('home-sel-wrap');
+  if(!w)return;
+  w.innerHTML=renderHomeSelHtml();
+}
+function sintaccBrands(){
+  const ids=['nutsbar','molinosala','celisano','agridulce','smams','sanosinharina','suavipan'];
+  return ids.map(id=>getBrand(id)).filter(Boolean);
+}
+function sintaccProducts(bid){
+  const all=products[bid]||[];
+  if(bid==='celisano'||bid==='sanosinharina'||bid==='suavipan'||bid==='nutsbar'||bid==='molinosala')return all;
+  if(bid==='agridulce')return all.filter(p=>p.cat==='sin azucar');
+  if(bid==='smams')return all.filter(p=>p.cat==='sin gluten'||p.cat==='sin azucar');
+  return all;
+}
+const brandGenImg={
+  raw:'img/gen-raw.webp',
+  smoking:'img/gen-smoking.webp',
+  darkhorse:'img/gen-darkhorse.webp',
+  elements:'img/gen-elements.webp',
+};
+const hasOwnPhoto=new Set(['4000','4001','4002','4003','4004','4005','4006','4007','3000']);
+function getProdImg(bid,art){
+  if(hasOwnPhoto.has(art))return`img/${art}.webp`;
+  if(brandGenImg[bid])return brandGenImg[bid];
+  return`img/${art}.webp`;
+}
+const brandDesc={
+  nutsbar:'Sin gluten · Sin azúcares agregados (Stevia) · Sin sodio agregado. Barras de cereales y bombones naturales.',
+  molinosala:'Tostaditas de arroz naturalmente libres de gluten. Ideales para celíacos y quienes buscan alternativas livianas al trigo.',
+  celisano:'Alfajores artesanales certificados sin gluten y sin lactosa. Para celíacos y personas con intolerancia a la lactosa.',
+  agridulce:'Barras de cereal sin azúcar añadida. Endulzadas naturalmente, ideales para quienes cuidan su consumo de azúcar.',
+  smams:'Galletas sin gluten y sin azúcar. Elaboradas sin TACC, aptas para celíacos y personas con diabetes o restricción de azúcar.',
+  sanosinharina:'Productos elaborados sin harinas convencionales ni gluten. Pan, budines y bizcochuelos para una alimentación sin restricciones.',
+  suavipan:'Budines individuales zero azúcar en distintos sabores. Sin azúcar agregada, ideales para quienes cuidan su ingesta calórica.',
+  dori:'Golosinas y maní en múltiples presentaciones para distribución.',
+  mazarena:'Alfajores artesanales de receta tradicional uruguaya.',
+  agridulce_gen:'Barras de cereal en variantes clásicas y sin azúcar.',
+  rebelnut:'Barras veganas elaboradas con ingredientes naturales.',
+  granolate:'Alfajores de granola artesanales.',
+  santaelena:'Maní en variedad de presentaciones y sabores.',
+  lorenz:'Papas naturals artesanales en sabores premium. Elaboradas con papas seleccionadas, horneadas con ingredientes naturales.',
+};
+function getBrandDesc(bid){return brandDesc[bid]||''}
+function sintaccCount(){return sintaccBrands().reduce((a,b)=>a+sintaccProducts(b.id).length,0)}
+function renderSintacc(){
+  const blist=sintaccBrands();
+  return`<div class="section-wrap">
+    <div class="breadcrumb" onclick="goHome()">← Inicio</div>
+    <div class="section-title">Sin TACC / Sin Azúcar</div>
+    <div class="section-rule"></div>
+    <div class="section-meta">${sintaccCount()} productos · precios con IVA incluido</div>
+    <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1.5rem">
+      <span class="sintacc-tag">Sin gluten</span>
+      <span class="sintacc-tag">Sin azúcar</span>
+      <span class="sintacc-tag">Sin lactosa</span>
+    </div>
+    ${blist.map(b=>{
+      const ps=sintaccProducts(b.id);
+      if(!ps.length)return'';
+      const desc=getBrandDesc(b.id);
+      return`<div class="sintacc-brand-group">
+        <div class="sintacc-brand-hdr">
+          <img class="sintacc-brand-logo" src="${b.logo}" alt="${b.name}" onerror="this.outerHTML='<span style=\\'font-size:20px\\'>${b.emoji}</span>'">
+          <span class="sintacc-brand-name">${b.name}</span>
+          <span class="sintacc-brand-count">${ps.length} productos</span>
+        </div>
+        ${desc?`<div class="sintacc-brand-desc">${desc}</div>`:''}
+        <div class="prod-grid">${renderCards(ps,b.id)}</div>
+      </div>`;
+    }).join('')}
   </div>`;
 }
 
-/* ════════ GRUPOS ════════ */
-
-/* ════════ GOLEADORES ════════ */
-function renderGoleadores(){
-  if(isLoading && !apiScorers.length) return `<div class="loading-wrap"><div class="spinner"></div>Cargando goleadores...</div>`;
-  if(!apiScorers.length) return `<div class="empty-state"><div class="empty-icon">⚽</div><div class="empty-title">Sin goles aún</div><div class="empty-sub">Los goleadores aparecerán cuando arranquen los partidos.</div></div>`;
-
-  const rankColors=['gold','silver','bronze'];
-  return `<p class="section-hdr">Tabla de goleadores</p>
-    <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:14px;margin:0 1rem 1rem;overflow:hidden">
-      ${apiScorers.map((s,i)=>{
-        const tla=normTla(s.team?.tla||'');
-        const f=tla?flag(tla):'🏳️';
-        const teamNombre=NOMBRES_ES[tla]||s.team?.shortName||s.team?.name||'';
-        return `<div class="scorer-row">
-          <span class="scorer-rank ${rankColors[i]||''}">${i+1}</span>
-          <div class="scorer-info">
-            <div class="scorer-name">${esc(s.player?.name||'—')}</div>
-            <div class="scorer-team"><span>${f}</span><span>${esc(teamNombre)}</span></div>
+function renderHome(){
+  return`<div class="home-wrap">
+    <div class="hero-split">
+      <div class="hero-left">
+        <div class="hero-eyebrow">PelSAS · Montevideo</div>
+        <div class="hero-title">La app de<br><em>lo que<br>se vende.</em></div>
+        <div class="hero-rule"></div>
+        <div class="hero-body">Elegí tu categoría, armá tu pedido y envialo por WhatsApp.</div>
+        <div class="home-banner pago">
+          <div class="home-banner-icon">💳</div>
+          <div class="home-banner-texts">
+            <div class="home-banner-title">Métodos de pago</div>
+            <div class="pago-methods">
+              <div class="pago-method-item">🏦 Transferencia bancaria</div>
+              <div class="pago-method-item">📱 QR Brou</div>
+              <div class="pago-method-item">🚚 Contra entrega (efectivo o cheque)</div>
+            </div>
           </div>
-          <div class="scorer-goals">
-            <span class="scorer-goals-num">${s.goals}</span>
-            <span class="scorer-goals-lbl">${s.goals===1?'gol':'goles'}</span>
+        </div>
+      </div>
+      <div class="hero-cats">
+        <div class="section-eyebrow" style="margin-bottom:.5rem">¿Qué estás buscando?</div>
+        <div class="section-rule-line" style="margin-bottom:1rem"></div>
+        <div class="home-cats-grid">
+          <div class="col-card alimentos" onclick="goSection()">
+            <div class="col-visual">
+              <img src="img/collage-alimentos.webp" alt="Alimentos y Snacks" onerror="this.style.display='none'">
+              <div class="col-cta">Ver catálogo →</div>
+            </div>
+            <div class="col-foot">
+              <div>
+                <div class="col-foot-name">Alimentos &amp; Snacks</div>
+                <div class="col-foot-sub">${alBrands().length} marcas · ${alCount()} productos</div>
+              </div>
+              <div class="col-arrow">→</div>
+            </div>
           </div>
-        </div>`;
-      }).join('')}
+          <div class="col-card sintacc" onclick="goSintacc()">
+            <div class="col-visual sintacc-visual">
+              <img src="img/collage-sintacc.webp" alt="Sin TACC / Sin Azúcar" onerror="this.outerHTML='<div class=\\'sintacc-placeholder\\'><div class=\\'sintacc-placeholder-icon\\'>🌿</div><div class=\\'sintacc-placeholder-tags\\'><span class=\\'sintacc-placeholder-tag\\'>Sin gluten</span><span class=\\'sintacc-placeholder-tag\\'>Sin azúcar</span><span class=\\'sintacc-placeholder-tag\\'>Sin lactosa</span></div></div>'">
+              <div class="col-cta" style="background:rgba(58,125,68,.75)">Ver catálogo →</div>
+            </div>
+            <div class="col-foot" style="background:#f0f7f1">
+              <div>
+                <div class="col-foot-name" style="color:#2d6235">Sin TACC / Sin Azúcar</div>
+                <div class="col-foot-sub">${sintaccBrands().length} marcas · ${sintaccCount()} productos</div>
+              </div>
+              <div class="col-arrow" style="background:#3a7d44">→</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="home-sel-wrap" id="home-sel-wrap">${renderHomeSelHtml()}</div>
+
+    <div class="home-mobile-only home-mobile-pago" style="background:var(--cream);border:1px solid var(--border);border-radius:14px;display:none;align-items:center;gap:14px;padding:14px 18px;margin-bottom:1.5rem;">
+      <div class="home-banner-icon">💳</div>
+      <div class="home-banner-texts">
+        <div class="home-banner-title" style="font-size:10px;font-family:'DM Sans',sans-serif;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ink2)">Métodos de pago</div>
+        <div class="pago-methods">
+          <div class="pago-method-item">🏦 Transferencia bancaria</div>
+          <div class="pago-method-item">📱 QR Brou</div>
+          <div class="pago-method-item">🚚 Contra entrega (efectivo o cheque)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="promo-strip">
+      <div class="promo-text">
+        <div class="promo-title">Pedidos por WhatsApp, sin complicaciones</div>
+        <div class="promo-body">Armá tu pedido desde el catálogo, completá tus datos y te enviamos el detalle directo a nuestro WhatsApp. Confirmación y coordinación de entrega en menos de 24 horas.</div>
+      </div>
+      <button class="promo-cta" onclick="window.open('https://wa.me/${WA}','_blank')">Contactar ahora</button>
+    </div>
+  </div>`;
+}
+
+function renderSection(){
+  return`<div class="section-wrap">
+    <div class="breadcrumb" onclick="goHome()">← Inicio</div>
+    <div class="section-title">Alimentos &amp; Snacks</div>
+    <div class="section-rule"></div>
+    <div class="section-meta">${alBrands().length} marcas disponibles · precios con IVA incluido</div>
+    <div class="brands-grid">
+      ${alBrands().map(b=>`<div class="brand-tile-lg" onclick="goBrand('${b.id}')">
+        <img class="btl-logo${b.id==='elements'?' logo-elements':''}" src="${b.logo}" alt="${b.name}" onerror="this.outerHTML='<span class=\\'btl-emoji\\'>${b.emoji}</span>'">
+        <div class="btl-name">${b.name}</div>
+        <span class="btl-count">${(products[b.id]||[]).length} productos</span>
+      </div>`).join('')}
+    </div>
+  </div>`;
+}
+
+function renderBrandPage(){
+  const b=getBrand(curBrand);
+  const ps=products[curBrand]||[];
+  const cats=['todos',...new Set(ps.map(p=>p.cat))];
+  const secLabel=b.sid==='fumadores'?'Artículos para fumadores':'Alimentos &amp; Snacks';
+  const secFn=b.sid==='fumadores'?'goFumadores()':'goSection()';
+  const bName=b.name;const bEmoji=b.emoji;
+  return`<div class="section-wrap">
+    <div class="breadcrumb" onclick="${secFn}">← ${secLabel} / <span class="bc-active">${b.name}</span></div>
+    <div class="brand-header-logo"><img src="${b.logo}" alt="${b.name}" onerror="this.outerHTML='<div class=\'section-title\'>${bEmoji} ${bName}</div>'"></div>
+    <div class="section-rule"></div>
+    <div class="section-meta">${ps.length} productos · precios con IVA incluido</div>
+    <div class="toolbar">
+      <div class="search-wrap">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="7" cy="7" r="5" stroke="#B0AA9E" stroke-width="1.5"/><path d="m11 11 3 3" stroke="#B0AA9E" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <input type="text" id="sinput" placeholder="Buscar por nombre o artículo..." oninput="reGrid()">
+      </div>
+      <div class="filters">
+        ${cats.map(c=>`<button class="fbtn${activeFilter===c?' active':''}" onclick="setF('${c}',this)">${c==='baja rotacion'?'consultar disp.':c}</button>`).join('')}
+      </div>
+    </div>
+    <div class="prod-grid" id="pgrid">${renderCards(getFiltered(ps),curBrand)}</div>
+  </div>`;
+}
+
+function getFiltered(ps){
+  const q=((document.getElementById('sinput')||{}).value||'').toLowerCase();
+  return ps.filter(p=>{
+    const mc=activeFilter==='todos'||p.cat===activeFilter;
+    const mq=!q||p.name.toLowerCase().includes(q)||p.art.includes(q);
+    return mc&&mq;
+  });
+}
+
+function renderCards(filtered,bid){
+  if(!filtered.length)return'<div class="empty-g">Sin resultados</div>';
+  return filtered.map(p=>{
+    const modo=p.venta===1?'unit':'caja';
+    const cartKey=p.id+'_'+modo;
+    const inCart=cart[cartKey]>0;
+    const isBaja=p.cat==='baja rotacion';
+    const imgSrc=bid?getProdImg(bid,p.art):`img/${p.art}.webp`;
+    const genImg=bid&&brandGenImg[bid]?brandGenImg[bid]:'';
+    const onerrorFallback=genImg?`this.onerror=null;this.src='${genImg}'`:`this.onerror=null`;
+    const precioMostrado=modo==='unit'?p.unit:p.caja;
+    return`<div class="prod-card${isBaja?' baja-rot':''}" data-pid="${p.id}">
+      ${isBaja?'<span class="baja-rot-tag">Consultar disponibilidad</span>':''}
+      <div class="prod-icon"><img src="${imgSrc}" alt="${p.name}" loading="lazy" onclick="openLB('${p.art}')" onerror="${onerrorFallback}"></div>
+      <div class="prod-art">Art. ${p.art}</div>
+      <div class="prod-name">${p.name}</div>
+      <div class="prod-present">${p.present}</div>
+      <div>
+        <div class="prod-pu">${fmt(precioMostrado)}<em> / ${modo==='unit'?'unidad':'pack'}</em></div>
+        <div class="prod-pc">${modo==='unit'?`Pack: ${fmt(p.caja)}`:`Unidad: ${fmt(p.unit)}`}</div>
+      </div>
+      <div class="qty-row">
+        <button class="qbtn" onclick="chQ('${p.id}',-1)">−</button>
+        <span class="qnum" id="q${p.id}">${qtys[p.id]}</span>
+        <button class="qbtn" onclick="chQ('${p.id}',1)">+</button>
+        <button class="abtn${inCart?' added':''}" onclick="addC('${p.id}')">${inCart?'En pedido':'Agregar'}</button>
+      </div>
     </div>`;
+  }).join('');
 }
 
-/* ════════ COUNTDOWN ════════ */
-function renderCountdown(){
-  if(cdTimer) clearInterval(cdTimer);
-  cdTimer=setInterval(()=>{if(currentTab==='partidos') render(); else clearInterval(cdTimer)},1000);
-  const diff=Math.max(0,KICKOFF-Date.now());
-  const d=Math.floor(diff/86400000);
-  const h=Math.floor((diff%86400000)/3600000);
-  const mn=Math.floor((diff%3600000)/60000);
-  const s=Math.floor((diff%60000)/1000);
-  return `<div class="hero-banner"><div class="hero-banner-content">
-    <div class="hero-label">Cuenta regresiva</div>
-    <div class="hero-title">Falta para el<br>kick-off ⚽</div>
-    <div class="countdown-grid">
-      <div class="cd-unit"><div class="cd-num">${d}</div><div class="cd-lbl">Días</div></div>
-      <div class="cd-unit"><div class="cd-num">${pad(h)}</div><div class="cd-lbl">Horas</div></div>
-      <div class="cd-unit"><div class="cd-num">${pad(mn)}</div><div class="cd-lbl">Min</div></div>
-      <div class="cd-unit"><div class="cd-num">${pad(s)}</div><div class="cd-lbl">Seg</div></div>
+function renderFumadores(){
+  return`<div class="section-wrap">
+    <div class="breadcrumb" onclick="goHome()">← Inicio</div>
+    <div class="section-title">🌿 Artículos para fumadores</div>
+    <div class="section-rule"></div>
+    <div class="section-meta">${fumBrands().length} marcas · ${fumCount()} productos · precios con IVA incluido</div>
+    <div class="brands-grid">
+      ${fumBrands().map(b=>`<div class="brand-tile-lg" onclick="goBrand('${b.id}')">
+        <img class="btl-logo" src="${b.logo}" alt="${b.name}" onerror="this.outerHTML='<span class=\\'btl-emoji\\'>${b.emoji}</span>'">
+        <div class="btl-name">${b.name}</div>
+        <span class="btl-count">${(products[b.id]||[]).length} productos</span>
+      </div>`).join('')}
     </div>
-    <p class="hero-date">11 de junio de 2026 · USA / CAN / MEX</p>
-  </div></div>`;
-}
-
-/* ════════ LIVE BADGE ════════ */
-function updateLiveBadge(){
-  // FIX: incluir partidos que ESPN ya marcó en vivo aunque FD.org diga SCHEDULED/TIMED
-  const vivos=apiMatches.filter(m=>{
-    const s=resolvedStatus(m);
-    if(s==='IN_PLAY'||s==='PAUSED') return true;
-    const o=getLiveOverride(m.id);
-    return o?.espnLive && (s==='SCHEDULED'||s==='TIMED');
-  });
-  const hasLive=vivos.length>0;
-  document.getElementById('live-badge').classList.toggle('visible',hasLive);
-
-  // Live now bar — encima de las tabs.
-  // Se oculta en "Hoy" y "En Vivo" porque esas tabs ya muestran los
-  // partidos en vivo dentro del cuerpo (evita verlos duplicados).
-  const bar=document.getElementById('live-now-bar');
-  const cardsEl=document.getElementById('live-now-cards');
-  if(!bar||!cardsEl) return;
-  const yaVisibleEnTab=(currentTab==='hoy'||currentTab==='envivo');
-  if(!hasLive || yaVisibleEnTab){ bar.style.display='none'; return; }
-  bar.style.display='block';
-  cardsEl.innerHTML=vivos.sort((a,b)=>new Date(a.utcDate)-new Date(b.utcDate)).map(m=>matchCard(m)).join('');
-}
-
-/* ════════ ADMIN ════════ */
-function isAdmin(){return new URLSearchParams(location.search).get('admin')===ADMIN_SECRET}
-
-function initAdmin(){
-  const bar=document.getElementById('tabs-bar');
-  const btn=document.createElement('button');
-  btn.className='tab-btn'; btn.dataset.tab='admin';
-  btn.textContent='⚙️ Admin';
-  btn.onclick=()=>setTab('admin');
-  bar.appendChild(btn);
-}
-
-function renderAdmin(){
-  const key=localStorage.getItem('mimundial_livegoals_key')||'';
-  const liveCount=apiMatches.filter(m=>m.status==='IN_PLAY'||m.status==='PAUSED').length;
-  const finCount=apiMatches.filter(m=>m.status==='FINISHED').length;
-  return `<div class="admin-screen">
-    <div class="admin-title">⚙️ Panel Admin</div>
-    <div class="admin-stat-box">
-      Partidos cargados: <strong style="color:var(--text)">${apiMatches.length}</strong><br>
-      Terminados: <strong style="color:var(--text)">${finCount}</strong><br>
-      En vivo: <strong style="color:var(--red)">${liveCount}</strong><br>
-      Grupos con tabla: <strong style="color:var(--text)">${apiStandings.length}</strong><br>
-      Goleadores: <strong style="color:var(--text)">${apiScorers.length}</strong>
-    </div>
-    <label style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--text-muted);display:block;margin-bottom:.4rem">API Key — football-data.org</label>
-    <input type="text" id="admin-key" class="admin-input" autocomplete="off" placeholder="Tu clave de API" value="${esc(key)}">
-    <button type="button" class="admin-btn ghost" onclick="saveAdminKey()">💾 Guardar clave</button>
-    <div class="admin-status" id="key-status"></div>
-    <br>
-    <button type="button" class="admin-btn" id="btn-update" onclick="adminUpdate()">↻ Actualizar resultados ahora</button>
-    <div class="admin-status" id="update-status"></div>
-    <br>
-    <button type="button" class="admin-btn ghost" onclick="clearData()">🗑 Borrar datos en caché</button>
-    ${window.NewsModule ? window.NewsModule.adminNewsHtml() : ''}
   </div>`;
 }
 
-function saveAdminKey(){
-  const key=document.getElementById('admin-key')?.value?.trim();
-  if(!key){document.getElementById('key-status').textContent='⚠ Ingresá una clave válida';return}
-  localStorage.setItem('mimundial_livegoals_key',key);
-  const el=document.getElementById('key-status');
-  el.textContent='✓ Clave guardada'; el.className='admin-status ok';
+function goHome(){view='home';curBrand=null;activeFilter='todos';render()}
+function goSection(){view='section';render()}
+function goBrand(id){view='brand';curBrand=id;activeFilter='todos';render()}
+function goFumadores(){view='fumadores';render()}
+function goMarcas(){
+  if(view==='fumadores'||(view==='brand'&&getBrand(curBrand)?.sid==='fumadores'))goFumadores();
+  else goSection();
 }
-
-async function adminUpdate(){
-  const btn=document.getElementById('btn-update');
-  const status=document.getElementById('update-status');
-  btn.disabled=true; btn.textContent='⏳ Consultando...';
-  status.textContent=''; status.className='admin-status';
-  try{
-    await fetchAndUpdate();
-    status.textContent=`✓ Actualizado — ${new Date().toLocaleTimeString('es-UY')}`;
-    status.className='admin-status ok';
-    showToast('✓ Datos actualizados');
-  }catch(e){
-    status.textContent='✗ Error: '+e.message;
-    status.className='admin-status err';
-  }finally{
-    btn.disabled=false; btn.textContent='↻ Actualizar resultados ahora';
+function setF(f,btn){activeFilter=f;document.querySelectorAll('.fbtn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');reGrid()}
+function chQ(id,d){qtys[id]=Math.max(1,(qtys[id]||1)+d);const el=document.getElementById('q'+id);if(el)el.textContent=qtys[id]}
+function addC(id){
+  const p=allP().find(x=>x.id===id);if(!p)return;
+  const modo=p.venta===1?'unit':'caja';
+  const precio=modo==='unit'?p.unit:p.caja;
+  const label=modo==='unit'?'unidad':'pack';
+  const cartKey=id+'_'+modo;
+  if(!cart[cartKey])cart[cartKey]={qty:0,precio,label,pid:id};
+  cart[cartKey].qty+=(qtys[id]||1);
+  updateBadge();reGrid();
+  if(view==='presentacion')refreshPresGrid();
+  if(view==='home')refreshHomeSel();
+}
+function updateBadge(){
+  const n=Object.values(cart).reduce((a,b)=>a+(b.qty||0),0);
+  document.getElementById('cart-count').textContent=n;
+  const bn=document.getElementById('bn-badge');
+  if(bn){bn.textContent=n;bn.classList.toggle('zero',n===0)}
+}
+function toggleCart(){
+  document.getElementById('cart-panel').classList.toggle('open');
+  document.getElementById('overlay').classList.toggle('open');
+  checkout=false;done=false;renderCart()
+}
+function renderCart(){
+  const body=document.getElementById('cart-body');
+  const foot=document.getElementById('cart-foot-area');
+  const keys=Object.keys(cart).filter(k=>cart[k]&&cart[k].qty>0);
+  if(done){
+    body.innerHTML=`<div class="confirm-box"><div class="confirm-icon">✅</div><div class="confirm-ttl">¡Pedido enviado!</div><div class="confirm-txt">Abrimos WhatsApp con el detalle.<br>Te contactamos a la brevedad.<br><br><span class="confirm-tel">PelSAS · 096 190 002</span></div><button class="new-btn" onclick="newOrder()">Nuevo pedido</button></div><div class="pwa-install-box" id="pwa-box"><div class="pwa-install-title">¿Querés tener PelSAS siempre a mano?</div><div class="pwa-install-sub">Instalá la app en tu celular y accedé directo, sin abrir el navegador.</div><button class="pwa-install-btn" onclick="installPWA()">Instalar PelSAS</button></div>`;
+    setTimeout(showInstallPrompt, 300);
+    foot.innerHTML='';return;
   }
-}
-
-function clearData(){
-  if(!confirm('¿Borrar datos en caché?')) return;
-  ['mm_matches','mm_standings','mm_scorers'].forEach(k=>localStorage.removeItem(k));
-  apiMatches=[]; apiStandings=[]; apiScorers=[];
-  render();
-  showToast('Datos borrados');
-}
-
-/* ════════ FETCH ════════ */
-async function fetchAndUpdate(){
-  const key=localStorage.getItem('mimundial_livegoals_key')||'6ba9bc9e2b8344bf88a4af3ef75ecc1d';
-  isLoading=true;
-  let resp;
-  try{
-    resp=await fetch(`/api/results?key=${encodeURIComponent(key)}`);
-  }catch(e){ isLoading=false; throw e; }
-  if(!resp.ok){ isLoading=false; throw new Error('Error '+resp.status); }
-  const data=await resp.json();
-
-  // Guardia 1: no reemplazar apiMatches si la respuesta viene vacía (error, rate limit, etc.)
-  const newMatches=data.matches?.matches||[];
-  if(newMatches.length>0||apiMatches.length===0){
-    // Guardia 2: no aceptar FINISHED prematuro. FD.org a veces marca FINISHED
-    // por error y lo corrige en el siguiente ciclo. Si el partido estaba en vivo
-    // y FD.org dice FINISHED pero llevamos menos de 85 minutos, lo ignoramos.
-    const guardedMatches=newMatches.map(m=>{
-      if(resolvedStatus(m)!=='FINISHED') return m;
-      const prev=prevLiveStatuses[m.id];
-      const wasLive=prev==='IN_PLAY'||prev==='PAUSED';
-      if(!wasLive) return m;
-      const elapsed=(Date.now()-new Date(m.utcDate))/60000;
-      if(elapsed<85) return {...m, status: 'LIVE'}; // revertir hasta el próximo ciclo
-      return m;
-    });
-    // Detectar partidos que acaban de arrancar (SCHEDULED/TIMED → IN_PLAY)
-    if(Object.keys(prevLiveStatuses).length>0){
-      guardedMatches.forEach(m=>{
-        const prev=prevLiveStatuses[m.id];
-        const curr=resolvedStatus(m);
-        if(prev&&(prev==='SCHEDULED'||prev==='TIMED')&&(curr==='IN_PLAY'||curr==='PAUSED')){
-          const hName=teamName(m,'homeTeam');
-          const aName=teamName(m,'awayTeam');
-          sendBrowserNotif('⚡ ¡Arranca ahora!',`${hName} vs ${aName}`,'start-'+m.id);
-        }
-      });
-    }
-    apiMatches=guardedMatches;
-    lsSave('mm_matches',apiMatches);
-    apiMatches.forEach(m=>{prevLiveStatuses[m.id]=resolvedStatus(m);});
-  }
-
-  const rawStandings=data.standings?.standings||[];
-  apiStandings=rawStandings.filter(s=>s.type==='TOTAL');
-  lsSave('mm_standings',apiStandings);
-
-  apiScorers=data.scorers?.scorers||[];
-  lsSave('mm_scorers',apiScorers);
-
-  /* Si hay partidos en vivo o recién comenzados (dentro de ±30 min del horario),
-     consultamos ESPN antes de pintar. FD.org tiene 1-5 min de delay para pasar
-     de SCHEDULED → IN_PLAY, así que también consultamos ESPN cuando hay partidos
-     que deberían estar arrancando según el horario. */
-  const hasLive=apiMatches.some(m=>{const s=resolvedStatus(m);return s==='IN_PLAY'||s==='PAUSED'});
-  const hayProximosORecientes=apiMatches.some(m=>{
-    const s=resolvedStatus(m);
-    if(s!=='SCHEDULED'&&s!=='TIMED') return false;
-    const diff=(new Date(m.utcDate)-Date.now())/60000; // minutos hasta el partido
-    return diff>-35 && diff<5; // dentro de 35 min después o 5 min antes del horario
-  });
-  if(hasLive||hayProximosORecientes) await fetchLiveData();
-
-  isLoading=false;
-  lastUpdated=Date.now();
-  render();
-  scheduleRefresh();
-  scheduleLiveRefresh();
-}
-
-function loadLocal(){
-  const m=ls('mm_matches',null);
-  const s=ls('mm_standings',null);
-  const sc=ls('mm_scorers',null);
-  if(m) apiMatches=m;
-  if(s) apiStandings=s;
-  if(sc) apiScorers=sc;
-}
-
-
-
-/* Marcador "real" de un partido: football-data.org, cuando el partido se
-   define por penales, mete los goles del shootout DENTRO de score.fullTime
-   (ver docs: duration=PENALTY_SHOOTOUT ⇒ fullTime = regularTime + extraTime
-   + penalties). Si contamos fullTime tal cual, un 1-1 que se definió 4-3 en
-   penales aparece como si hubiera terminado 5-4. Acá se descsurvienen los
-   penales y se deja sólo lo jugado en cancha (90' + alargue si hubo). */
-function realScore(m){
-  const sc=m.score;
-  if(!sc) return {home:0,away:0};
-  if(sc.duration==='PENALTY_SHOOTOUT'){
-    const rt=sc.regularTime||{home:0,away:0};
-    const et=sc.extraTime||{home:0,away:0};
-    return {home:(rt.home??0)+(et.home??0), away:(rt.away??0)+(et.away??0)};
-  }
-  return {home:sc.fullTime?.home??0, away:sc.fullTime?.away??0};
-}
-
-/* ════════ TAB: PROYECCIÓN DE CRUCES ════════ */
-
-/* ════════ TAB: ESTADÍSTICAS ════════ */
-
-
-
-
-/* ════════ RELOJ LOCAL DE PARTIDOS EN VIVO ════════
-   Entre cada fetch a la API (cada 30s), avanzamos el minuto
-   visualmente en el cliente para dar sensación de tiempo real.
-   No inventa datos: extrapola desde el último minuto real conocido. */
-function liveClockLabel(apiMinute,injuryTime,extraSeconds){
-  if(apiMinute==null) return '';
-  extraSeconds=extraSeconds||0;
-  /* football-data.org, cuando hay descuento, manda minute ya sumado
-     (ej: minute=47, injuryTime=3 significa "45+2"). Detectamos el
-     límite de la parte real restando el descuento ya transcurrido. */
-  const baseHalf=apiMinute-(injuryTime||0)<=45?45:90;
-  const inInjury=injuryTime>0 && apiMinute>=baseHalf;
-
-  if(inInjury){
-    let extraMin=apiMinute-baseHalf; // 0 = recién empieza el descuento
-    let sec=extraSeconds%60;
-    extraMin=extraMin+Math.floor(extraSeconds/60);
-    if(extraMin>=injuryTime){extraMin=injuryTime;sec=0;} // tope: no inventar más descuento del informado
-    return `${baseHalf}+${extraMin}:${String(sec).padStart(2,'0')}`;
-  }
-
-  /* El reloj avanza siempre, sin pausas de espera: simplificado a
-     propósito tras un bug donde el reloj quedaba "trancado" varios
-     segundos justo después de un reload (esperando confirmación de
-     descuento que no llegaba a tiempo). El próximo fetch real (cada
-     15-30s) corrige el minuto si hace falta, así que es preferible
-     un reloj siempre predecible a uno que se pausa esperando datos. */
-  let totalSec=apiMinute*60+extraSeconds;
-  let min=Math.floor(totalSec/60);
-  const sec=totalSec%60;
-  return `${min}:${String(sec).padStart(2,'0')}`;
-}
-
-function clockTick(){
-  const found=document.querySelectorAll('.match-clock');
-  found.forEach(el=>{
-    const apiMin=el.dataset.clockMin;
-    if(apiMin===''||apiMin==null) return;
-    if(el.dataset.clockPaused==='1') return; // entretiempo: no avanzar, dejar el texto tal cual quedó
-    const base=Number(el.dataset.clockBase)||Date.now();
-    const injuryTime=Number(el.dataset.clockInjury)||0;
-    const elapsedSec=Math.floor((Date.now()-base)/1000);
-    el.textContent=liveClockLabel(Number(apiMin),injuryTime,elapsedSec);
-  });
-  if(isDebug()) updateDebugPanel(found);
-}
-
-/* ════════ PANEL DE DIAGNÓSTICO (?debug=1) ════════
-   Para investigar el bug del reloj trancado sin necesitar devtools
-   en el celular. No requiere ninguna acción del usuario más que
-   abrir la URL con ?debug=1 — el panel aparece flotando abajo. */
-function isDebug(){return new URLSearchParams(location.search).get('debug')==='1'}
-
-function ensureDebugPanel(){
-  if(document.getElementById('debug-panel')) return;
-  const div=document.createElement('div');
-  div.id='debug-panel';
-  div.style.cssText='position:fixed;bottom:0;left:0;right:0;background:#000;color:#0f0;font:11px monospace;padding:8px;z-index:99999;max-height:40vh;overflow:auto;white-space:pre-wrap;border-top:2px solid #0f0';
-  document.body.appendChild(div);
-}
-
-function updateDebugPanel(clockEls){
-  ensureDebugPanel();
-  const panel=document.getElementById('debug-panel');
-  let lines=[`[DEBUG] ${new Date().toLocaleTimeString()} — Date.now()=${Date.now()}`];
-  lines.push(`clockTimer activo: ${clockTimer!==null}`);
-  lines.push(`elementos .match-clock encontrados: ${clockEls.length}`);
-  clockEls.forEach((el,i)=>{
-    const base=Number(el.dataset.clockBase);
-    lines.push(`  #${i}: texto="${el.textContent}" min=${el.dataset.clockMin} injury=${el.dataset.clockInjury} base=${base} diffSeg=${Math.floor((Date.now()-base)/1000)}`);
-  });
-  lines.push(`liveOverrides: ${JSON.stringify(liveOverrides)}`);
-  lines.push(`lastUpdated: ${lastUpdated} (hace ${lastUpdated?Math.floor((Date.now()-lastUpdated)/1000):'?'}s)`);
-  panel.textContent=lines.join('\n');
-}
-
-/* ════════ INDICADOR DE ACTUALIZACIÓN ════════ */
-function updateElapsed(){
-  const el=document.getElementById('sync-elapsed');
-  if(!el) return;
-  if(!lastUpdated){el.textContent='';return;}
-  const sec=Math.floor((Date.now()-lastUpdated)/1000);
-  if(sec<10) el.textContent='Actualizado ahora';
-  else if(sec<60) el.textContent=`Actualizado hace ${sec}s`;
-  else el.textContent=`Actualizado hace ${Math.floor(sec/60)}m`;
-}
-
-function scheduleRefresh(){
-  if(refreshTimer) clearInterval(refreshTimer);
-  const hasLive=apiMatches.some(m=>{const s=resolvedStatus(m);return s==='IN_PLAY'||s==='PAUSED'});
-  // FIX: también refrescar cada 30s si ESPN ya detectó partidos vivos
-  const hasEspnLive=Object.values(liveOverrides).some(o=>o.espnLive);
-  // FIX: intervalo corto (90s) cuando hay partidos por arrancar en los próximos 30 min
-  // así no tardamos 10 min en detectar el inicio del partido
-  const proximos=apiMatches.some(m=>{
-    const s=resolvedStatus(m);
-    if(s!=='SCHEDULED'&&s!=='TIMED') return false;
-    const diff=(new Date(m.utcDate)-Date.now())/60000;
-    return diff>-5 && diff<30; // entre 5 min antes y 30 min después de la hora programada
-  });
-  const interval=(hasLive||hasEspnLive) ? 30*1000 : proximos ? 90*1000 : 10*60*1000;
-  refreshTimer=setInterval(async ()=>{
-    try{
-      await fetchAndUpdate();
-      /* fetchAndUpdate llama a scheduleRefresh() al final,
-         así que el intervalo se recalcula automáticamente
-         si cambia el estado (vivo ↔ sin partido) */
-    }catch(e){ console.warn('[mimundial] refresh:',e); }
-  },interval);
-}
-
-/* ════════ BOOT ════════ */
-async function boot(){
-  loadLocal();
-  if(isAdmin()) initAdmin();
-  render();
-  // Pedimos permiso de notificaciones la primera vez que el usuario interactúa
-  document.addEventListener('click',requestNotifPermission,{once:true});
-  elapsedTimer=setInterval(updateElapsed,1000);
-  clockTimer=setInterval(clockTick,1000);
-  if(new Date()>=KICKOFF){
-    isLoading=true; render();
-    try{ await fetchAndUpdate(); }
-    catch(e){ isLoading=false; render(); console.warn('[mimundial]',e); }
+  if(!keys.length){body.innerHTML=`<div class="empty-cart-box"><span class="empty-cart-icon">🛒</span>El pedido está vacío.</div>`;foot.innerHTML='';return}
+  let total=0;
+  body.innerHTML=keys.map(k=>{
+    const item=cart[k];
+    const p=allP().find(x=>x.id===item.pid);if(!p)return'';
+    const br=brands.find(x=>products[x.id]&&products[x.id].find(pp=>pp.id===item.pid));
+    const sub=item.precio*item.qty;total+=sub;
+    return`<div class="cart-item"><span class="ci-em">${p.emoji}</span><div class="ci-info"><div class="ci-name">${p.name}</div><div class="ci-brand">${br?br.name:''} · ${item.label}</div><div class="ci-price">${fmt(sub)}</div><div class="ci-act"><button class="sqb" onclick="cQ('${k}',-1)">−</button><span class="ci-qty">${item.qty}</span><button class="sqb" onclick="cQ('${k}',1)">+</button><button class="rm-btn" onclick="rmItem('${k}')">Eliminar</button></div></div></div>`;
+  }).join('');
+  if(checkout){
+    foot.innerHTML=`<div class="pago-selector">
+      <div class="pago-sel-title">¿Cómo vas a pagar?</div>
+      <div class="pago-sel-opts">
+        <button class="pago-sel-btn${pagoMethod==='transferencia'?' selected':''}" onclick="selPago('transferencia')"><span class="pago-sel-icon">🏦</span>Transferencia bancaria</button>
+        <button class="pago-sel-btn${pagoMethod==='qr'?' selected':''}" onclick="selPago('qr')"><span class="pago-sel-icon">📱</span>QR Brou</button>
+        <button class="pago-sel-btn${pagoMethod==='entrega'?' selected':''}" onclick="selPago('entrega')"><span class="pago-sel-icon">🚚</span>Contra entrega (efectivo o cheque)</button>
+      </div>
+    </div>
+    <div class="cart-foot"><div class="total-row"><span class="total-lbl">Total estimado</span><span class="total-val">${fmt(total)}</span></div><div class="checkout-form"><label>Nombre o negocio</label><input type="text" id="cfn" placeholder="Tu nombre o razón social"><label>WhatsApp</label><input type="text" id="cft" placeholder="09x xxx xxx"><label>Dirección</label><input type="text" id="cfd" placeholder="Calle, número, ciudad"><label>Notas</label><textarea id="cfno" rows="2" placeholder="Horario, indicaciones..."></textarea></div><button class="wsp-btn" onclick="sendOrder()" style="margin-top:14px"><svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.528 5.855L.057 23.428a.75.75 0 00.916.916l5.573-1.471A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.885 0-3.651-.511-5.168-1.401l-.371-.219-3.849 1.016 1.016-3.849-.219-.371A9.953 9.953 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>Enviar por WhatsApp</button></div>`;
   } else {
-    /* Antes del torneo: igual programar refresh para cuando arranque */
-    scheduleRefresh();
+    foot.innerHTML=`<div class="cart-foot"><div class="total-row"><span class="total-lbl">Total estimado</span><span class="total-val">${fmt(total)}</span></div><button class="step-btn" onclick="showCheckout()">Confirmar y enviar por WhatsApp →</button><button class="new-btn" style="width:100%;margin-top:8px;text-align:center" onclick="toggleCart()">← Seguir agregando</button></div>`;
   }
 }
+function cQ(k,d){if(!cart[k])return;cart[k].qty=Math.max(1,cart[k].qty+d);updateBadge();renderCart()}
+function rmItem(k){delete cart[k];updateBadge();renderCart();if(view==='brand')reGrid()}
+function selPago(m){pagoMethod=m;renderCart()}
+function showCheckout(){checkout=true;pagoMethod='';renderCart()}
+function sendOrder(){
+  const n=(document.getElementById('cfn')||{}).value||'';
+  const t=(document.getElementById('cft')||{}).value||'';
+  const d=(document.getElementById('cfd')||{}).value||'';
+  const no=(document.getElementById('cfno')||{}).value||'';
+  if(!n||!t){alert('Completá nombre y teléfono');return}
+  if(!pagoMethod){alert('Seleccioná un método de pago');return}
+  const pagoLabels={transferencia:'🏦 Transferencia bancaria',qr:'📱 QR Brou',entrega:'🚚 Contra entrega (efectivo o cheque)'};
+  const keys=Object.keys(cart).filter(k=>cart[k]&&cart[k].qty>0);
+  let msg='*Pedido PelSAS*\n\n';let total=0;
+  keys.forEach(k=>{
+    const item=cart[k];
+    const p=allP().find(x=>x.id===item.pid);if(!p)return;
+    const br=brands.find(x=>products[x.id]&&products[x.id].find(pp=>pp.id===item.pid));
+    const sub=item.precio*item.qty;total+=sub;
+    msg+=`• ${br?br.name+' · ':''}${p.name} (${item.label})\n  ${item.qty} × $${item.precio.toFixed(2)} = $${sub.toFixed(2)}\n`;
+  });
+  msg+=`\n*Total estimado: $${total.toFixed(2)}*\n\n💳 Pago: ${pagoLabels[pagoMethod]}\n\n👤 ${n}\n📱 ${t}`;
+  if(d)msg+=`\n📍 ${d}`;if(no)msg+=`\n📝 ${no}`;
+  window.open(`https://wa.me/${WA}?text=${encodeURIComponent(msg)}`,'_blank');
+  cart={};pagoMethod='';updateBadge();done=true;renderCart();if(view==='brand')reGrid();
+}
+function newOrder(){done=false;toggleCart()}
+function waConsulta(){window.open(`https://wa.me/${WA}?text=${encodeURIComponent('Hola! Quería hacer una consulta.')}`,'_blank')}
+function reGrid(){const g=document.getElementById('pgrid');if(!g)return;g.innerHTML=renderCards(getFiltered(products[curBrand]||[]),curBrand)}
 
-boot();
+/* BUSCADOR PREDICTIVO */
+function _norm(s){return(s||'').toString().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'')}
+function onGSearch(){
+  const inp=document.getElementById('gsinput');
+  const cl=document.getElementById('gsclear');
+  const res=document.getElementById('gsresults');
+  const raw=inp.value.trim();
+  const q=_norm(raw);
+  cl.classList.toggle('visible',raw.length>0);
+  if(q.length<2){res.classList.remove('visible');res.innerHTML='';return}
+  const all=Object.entries(products).flatMap(([bid,arr])=>arr.map(p=>Object.assign({bid},p)));
+  const matches=all.filter(p=>_norm(p.name).includes(q)||p.art.includes(q)).slice(0,10);
+  if(!matches.length){
+    res.innerHTML='<div class="gsr-empty">Sin resultados para "'+raw.replace(/[<>&]/g,'')+'"</div>';
+  } else {
+    res.innerHTML=matches.map(p=>{
+      const b=getBrand(p.bid);
+      return'<div class="gsr-item" onmousedown="gsGo(\''+p.bid+'\',\''+p.id+'\')">'
+        +'<div class="gsr-img"><img src="img/'+p.art+'.webp" alt="" onerror="this.parentNode.innerHTML=\''+p.emoji+'\'"></div>'
+        +'<div class="gsr-text"><div class="gsr-name">'+p.name+'</div>'
+        +'<div class="gsr-meta">'+b.name+' · Art. '+p.art+'</div></div>'
+        +'<div class="gsr-price">'+fmt(p.caja)+'</div>'
+        +'</div>';
+    }).join('');
+  }
+  res.classList.add('visible');
+}
+function onGSBlur(){setTimeout(()=>{const r=document.getElementById('gsresults');if(r)r.classList.remove('visible')},180)}
+function clearGS(){
+  const inp=document.getElementById('gsinput');
+  inp.value='';
+  document.getElementById('gsclear').classList.remove('visible');
+  document.getElementById('gsresults').classList.remove('visible');
+  inp.focus();
+}
+function gsGo(bid,pid){
+  curBrand=bid;view='brand';activeFilter='todos';
+  document.getElementById('gsinput').value='';
+  document.getElementById('gsclear').classList.remove('visible');
+  document.getElementById('gsresults').classList.remove('visible');
+  document.getElementById('gsinput').blur();
+  render();
+  setTimeout(()=>{
+    const card=document.querySelector('[data-pid="'+pid+'"]');
+    if(card){card.scrollIntoView({behavior:'smooth',block:'center'});card.classList.add('flash');setTimeout(()=>card.classList.remove('flash'),1700)}
+  },80);
+}
 
+/* LIGHTBOX */
+let lbScale=1,lbTx=0,lbTy=0,_lbInitDist=0,_lbInitScale=1,_lbPanX=0,_lbPanY=0,_lbInitTx=0,_lbInitTy=0;
+function _lbApply(){const im=document.getElementById('lb-img');im.style.transform='translate('+lbTx+'px,'+lbTy+'px) scale('+lbScale+')'}
+function lbReset(){lbScale=1;lbTx=0;lbTy=0;_lbApply()}
+function openLB(art){
+  const lb=document.getElementById('lightbox');
+  const im=document.getElementById('lb-img');
+  im.src='img/'+art+'.webp';
+  lb.classList.add('open');lbReset();
+  document.body.style.overflow='hidden';
+}
+function openLBraw(src){
+  const lb=document.getElementById('lightbox');
+  const im=document.getElementById('lb-img');
+  im.src=src;
+  lb.classList.add('open');lbReset();
+  document.body.style.overflow='hidden';
+}
+function closeLB(){document.getElementById('lightbox').classList.remove('open');document.body.style.overflow=''}
+function lbBgClose(e){if(e.target.id==='lightbox')closeLB()}
+function lbZoom(d){lbScale=Math.max(1,Math.min(6,lbScale*(d>0?1.3:1/1.3)));if(lbScale===1){lbTx=0;lbTy=0}_lbApply()}
+function _lbDist(t){return Math.hypot(t[0].clientX-t[1].clientX,t[0].clientY-t[1].clientY)}
+function onLBTouchStart(e){
+  if(e.touches.length===2){e.preventDefault();_lbInitDist=_lbDist(e.touches);_lbInitScale=lbScale}
+  else if(e.touches.length===1&&lbScale>1){_lbPanX=e.touches[0].clientX;_lbPanY=e.touches[0].clientY;_lbInitTx=lbTx;_lbInitTy=lbTy}
+}
+function onLBTouchMove(e){
+  if(e.touches.length===2){e.preventDefault();const d=_lbDist(e.touches);if(_lbInitDist>0)lbScale=Math.max(1,Math.min(6,_lbInitScale*(d/_lbInitDist)));_lbApply()}
+  else if(e.touches.length===1&&lbScale>1){e.preventDefault();lbTx=_lbInitTx+(e.touches[0].clientX-_lbPanX);lbTy=_lbInitTy+(e.touches[0].clientY-_lbPanY);_lbApply()}
+}
+function onLBWheel(e){e.preventDefault();const d=-e.deltaY*0.0025;lbScale=Math.max(1,Math.min(6,lbScale*(1+d)));if(lbScale===1){lbTx=0;lbTy=0}_lbApply()}
+function onLBDbl(e){e.preventDefault();if(lbScale>1)lbReset();else{lbScale=2.5;_lbApply()}}
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&document.getElementById('lightbox').classList.contains('open'))closeLB()});
+
+/* HISTORY API */
+function pushState(v,b){
+  const state={view:v,brand:b};
+  history.pushState(state,'','#'+v+(b?'-'+b:''));
+}
+window.addEventListener('popstate',function(e){
+  if(e.state){
+    view=e.state.view||'home';
+    curBrand=e.state.brand||null;
+    activeFilter='todos';
+    renderOnly();
+  } else {
+    view='home';curBrand=null;activeFilter='todos';renderOnly();
+  }
+});
+function renderOnly(){
+  const mv=document.getElementById('main-view');
+  if(view==='home')mv.innerHTML=renderHome();
+  else if(view==='section')mv.innerHTML=renderSection();
+  else if(view==='brand')mv.innerHTML=renderBrandPage();
+  else if(view==='fumadores')mv.innerHTML=renderFumadores();
+  else if(view==='sintacc')mv.innerHTML=renderSintacc();
+  else if(view==='catalogo')mv.innerHTML=renderCatalogo();
+  else if(view==='fichas')mv.innerHTML=renderFichas();
+  else if(view==='presentacion')mv.innerHTML=renderPresentacion();
+  const back=document.getElementById('back-btn');
+  if(back)back.classList.toggle('visible',view!=='home');
+  document.querySelectorAll('.bn-item').forEach(b=>b.classList.remove('active'));
+  if(view==='home')document.getElementById('bn-home')?.classList.add('active');
+  else if(view==='section'||view==='brand'||view==='fumadores'||view==='sintacc')document.getElementById('bn-marcas')?.classList.add('active');
+  else if(view==='catalogo')document.getElementById('bn-catalogo')?.classList.add('active');
+  else if(view==='fichas')document.getElementById('bn-fichas')?.classList.add('active');
+  else if(view==='presentacion')document.getElementById('bn-visita')?.classList.add('active');
+  window.scrollTo({top:0,behavior:'instant'});
+}
+
+/* PWA */
+let _deferredPrompt=null;
+window.addEventListener('beforeinstallprompt',e=>{
+  e.preventDefault();
+  _deferredPrompt=e;
+});
+function showInstallPrompt(){
+  const box=document.getElementById('pwa-box');
+  if(box&&_deferredPrompt)box.classList.add('visible');
+}
+function installPWA(){
+  if(!_deferredPrompt)return;
+  _deferredPrompt.prompt();
+  _deferredPrompt.userChoice.then(()=>{
+    _deferredPrompt=null;
+    const box=document.getElementById('pwa-box');
+    if(box)box.classList.remove('visible');
+  });
+}
 if('serviceWorker' in navigator){
-  window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
+  window.addEventListener('load',()=>{
+    navigator.serviceWorker.register('sw.js').catch(()=>{});
+  });
 }
+
+initApp();
+// Panel siempre visible en desktop
+
 </script>
-<script src="js/news.js"></script>
 </body>
 </html>
