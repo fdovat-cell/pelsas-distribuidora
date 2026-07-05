@@ -3676,7 +3676,8 @@
         "present": "bolsa x 133u.",
         "emoji": "📦",
         "venta": 1,
-        "activo": true
+        "activo": true,
+        "destacado": true
       },
       {
         "id": "golosinas_1782239213488",
@@ -3700,7 +3701,8 @@
         "present": "caja x 12u.",
         "emoji": "📦",
         "venta": 1,
-        "activo": true
+        "activo": true,
+        "destacado": true
       },
       {
         "id": "golosinas_1782239568192",
@@ -3712,7 +3714,8 @@
         "present": "84gr",
         "emoji": "📦",
         "venta": 1,
-        "activo": true
+        "activo": true,
+        "destacado": true
       }
     ],
     "bombones": [
