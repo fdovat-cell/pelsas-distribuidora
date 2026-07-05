@@ -887,9 +887,10 @@
         "art": "9211",
         "unit": 52,
         "caja": 624,
-        "emoji": "",
+        "emoji": "📦",
         "venta": 2,
-        "activo": true
+        "activo": true,
+        "destacado": false
       },
       {
         "id": "m14",
@@ -911,9 +912,10 @@
         "art": "9309",
         "unit": 16.3,
         "caja": 489,
-        "emoji": "",
+        "emoji": "📦",
         "venta": 2,
-        "activo": true
+        "activo": true,
+        "destacado": true
       },
       {
         "id": "m16",
@@ -937,7 +939,8 @@
         "present": "caja x 12 u.",
         "emoji": "📦",
         "venta": 2,
-        "activo": true
+        "activo": true,
+        "destacado": true
       },
       {
         "id": "mazarena_1783089780227",
@@ -2721,7 +2724,8 @@
         "caja": 682.8,
         "emoji": "📦",
         "venta": 1,
-        "activo": true
+        "activo": true,
+        "destacado": true
       },
       {
         "id": "ce2",
@@ -2781,7 +2785,8 @@
         "present": "CAJA X 6 U. 70GR",
         "emoji": "📦",
         "venta": 1,
-        "activo": true
+        "activo": true,
+        "destacado": true
       },
       {
         "id": "celisano_1781540676096",
@@ -2817,7 +2822,8 @@
         "present": "CAJA X 6 U. 70GR",
         "emoji": "📦",
         "venta": 1,
-        "activo": true
+        "activo": true,
+        "destacado": true
       }
     ],
     "smams": [
@@ -3464,14 +3470,15 @@
       {
         "id": "encendedores_1782233008610",
         "name": "ENCENDEDOR MONSTER ELECTRONICO x25 Unidades - Transparente",
-        "unit": 7.44,
-        "caja": 186,
+        "unit": 9.96,
+        "caja": 249,
         "cat": "Encendedores",
         "art": "31817",
         "present": "Pack x 25u.",
         "emoji": "📦",
         "venta": 1,
-        "activo": true
+        "activo": true,
+        "destacado": false
       },
       {
         "id": "encendedores_1782233203447",
