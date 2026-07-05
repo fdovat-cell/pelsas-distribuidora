@@ -3478,7 +3478,7 @@
         "emoji": "📦",
         "venta": 1,
         "activo": true,
-        "destacado": false
+        "destacado": true
       },
       {
         "id": "encendedores_1782233203447",
@@ -3514,7 +3514,8 @@
         "present": "blister x 12",
         "emoji": "📦",
         "venta": 1,
-        "activo": true
+        "activo": true,
+        "destacado": true
       },
       {
         "id": "encendedores_1782233543364",
@@ -3550,7 +3551,8 @@
         "present": "Pack x 50u",
         "emoji": "📦",
         "venta": 1,
-        "activo": true
+        "activo": true,
+        "destacado": true
       },
       {
         "id": "encendedores_1782233865919",
