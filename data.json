@@ -1100,9 +1100,10 @@
         "art": "2066",
         "unit": 71.9,
         "caja": 862.79,
-        "emoji": "",
+        "emoji": "📦",
         "venta": 2,
-        "activo": true
+        "activo": true,
+        "destacado": true
       },
       {
         "id": "g2",
