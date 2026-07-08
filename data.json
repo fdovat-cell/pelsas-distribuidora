@@ -2752,7 +2752,8 @@
         "caja": 583.2,
         "emoji": "📦",
         "venta": 1,
-        "activo": true
+        "activo": true,
+        "destacado": true
       },
       {
         "id": "ce5",
