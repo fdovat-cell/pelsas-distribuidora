@@ -3768,7 +3768,8 @@
         "present": "caja x 18 u",
         "emoji": "📦",
         "venta": 2,
-        "activo": true
+        "activo": true,
+        "destacado": true
       }
     ],
     "caramelos": []
