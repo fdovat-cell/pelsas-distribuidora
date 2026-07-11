@@ -275,31 +275,33 @@
         "caja": 3001.35,
         "emoji": "",
         "venta": 1,
-        "activo": true
+        "activo": false
       },
       {
         "id": "d5",
-        "name": "Caramelo menta Dori",
+        "name": "Caramelo menta Dori SC",
         "cat": "caramelos",
-        "present": "Caja x 24 bolsas 600g",
+        "present": "bolsas 600g",
         "art": "6180",
-        "unit": 125.06,
-        "caja": 3001.35,
-        "emoji": "",
+        "unit": 135,
+        "caja": 135,
+        "emoji": "📦",
         "venta": 1,
-        "activo": true
+        "activo": true,
+        "destacado": false
       },
       {
         "id": "d6",
-        "name": "Caramelo frutilla Dori",
+        "name": "Caramelo frutilla Dori SC",
         "cat": "caramelos",
-        "present": "Caja x 24 bolsas 600g",
+        "present": "bolsas 600g",
         "art": "6181",
-        "unit": 125.06,
-        "caja": 3001.35,
-        "emoji": "",
+        "unit": 135,
+        "caja": 135,
+        "emoji": "📦",
         "venta": 1,
-        "activo": true
+        "activo": true,
+        "destacado": false
       },
       {
         "id": "d7",
