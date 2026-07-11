@@ -3776,6 +3776,20 @@
         "destacado": true
       }
     ],
-    "caramelos": []
+    "caramelos": [
+      {
+        "id": "caramelos_1783783443957",
+        "name": "\"Caramelo Ben Hur  Menta-Surtidas-Acidos-Gajos  1kgrs",
+        "unit": 535,
+        "caja": 535,
+        "cat": "caramelos",
+        "art": "56161",
+        "present": "Bolsa 1 kg",
+        "emoji": "📦",
+        "venta": 1,
+        "destacado": false,
+        "activo": true
+      }
+    ]
   }
 }
