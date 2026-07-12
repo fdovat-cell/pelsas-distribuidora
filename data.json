@@ -3945,6 +3945,19 @@
         "venta": 1,
         "destacado": false,
         "activo": true
+      },
+      {
+        "id": "caramelos_1783885496182",
+        "name": "Caramelo Erlan Saquitos 500grs 100pcs Mix Fruta-Frutilla",
+        "unit": 114,
+        "caja": 114,
+        "cat": "caramelos",
+        "art": "7705",
+        "present": "bolsa 500gr",
+        "emoji": "📦",
+        "venta": 1,
+        "destacado": false,
+        "activo": true
       }
     ]
   }
