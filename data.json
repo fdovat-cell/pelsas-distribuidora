@@ -3841,6 +3841,19 @@
         "venta": 1,
         "destacado": false,
         "activo": true
+      },
+      {
+        "id": "caramelos_1783884922926",
+        "name": "Caramelo Cafe Simonetto Coffee King 500gr",
+        "unit": 99,
+        "caja": 99,
+        "cat": "",
+        "art": "19737",
+        "present": "bolsa 500gr",
+        "emoji": "📦",
+        "venta": 1,
+        "destacado": false,
+        "activo": true
       }
     ]
   }
