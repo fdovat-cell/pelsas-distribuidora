@@ -3789,6 +3789,32 @@
         "venta": 1,
         "destacado": false,
         "activo": true
+      },
+      {
+        "id": "caramelos_1783884242881",
+        "name": "Caramelo Ben Hur(07) Crocante 1kgs 175u",
+        "unit": 611,
+        "caja": 611,
+        "cat": "caramelos",
+        "art": "5624",
+        "present": "Bolsa 1 kg",
+        "emoji": "📦",
+        "venta": 1,
+        "destacado": false,
+        "activo": false
+      },
+      {
+        "id": "caramelos_1783884367925",
+        "name": "Caramelo Ben Hur (Miel y Miel+Guaco-) 1kgs 170u",
+        "unit": 578,
+        "caja": 578,
+        "cat": "caramelos",
+        "art": "19543",
+        "present": "Bolsa 1 kg",
+        "emoji": "📦",
+        "venta": 1,
+        "destacado": false,
+        "activo": true
       }
     ]
   }
