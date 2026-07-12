@@ -3828,6 +3828,19 @@
         "venta": 1,
         "destacado": false,
         "activo": true
+      },
+      {
+        "id": "caramelos_1783884863233",
+        "name": "Caramelo Cafe Riclan Cofee 500 Grs(22005)151pcs",
+        "unit": 141,
+        "caja": 141,
+        "cat": "caramelos",
+        "art": "12301",
+        "present": "bolsa 500gr",
+        "emoji": "📦",
+        "venta": 1,
+        "destacado": false,
+        "activo": true
       }
     ]
   }
