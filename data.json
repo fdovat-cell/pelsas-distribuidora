@@ -3893,6 +3893,19 @@
         "venta": 1,
         "destacado": false,
         "activo": true
+      },
+      {
+        "id": "caramelos_1783885191914",
+        "name": "Caramelo Candel Ronda X 80u 500grs",
+        "unit": 257,
+        "caja": 257,
+        "cat": "caramelos",
+        "art": "21140",
+        "present": "bolsas 600g",
+        "emoji": "📦",
+        "venta": 1,
+        "destacado": false,
+        "activo": true
       }
     ]
   }
