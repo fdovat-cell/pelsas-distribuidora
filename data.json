@@ -3815,6 +3815,19 @@
         "venta": 1,
         "destacado": false,
         "activo": true
+      },
+      {
+        "id": "caramelos_1783884796198",
+        "name": "Caramelo Ben Hur(07) Crocante 1kgs 175u",
+        "unit": 578,
+        "caja": 578,
+        "cat": "caramelos",
+        "art": "5624",
+        "present": "Bolsa 1 kg",
+        "emoji": "📦",
+        "venta": 1,
+        "destacado": false,
+        "activo": true
       }
     ]
   }
