@@ -3932,6 +3932,19 @@
         "venta": 1,
         "destacado": false,
         "activo": true
+      },
+      {
+        "id": "caramelos_1783885375037",
+        "name": "Caramelo Erlan Menta - Miel - Fruta 500grs 100pcs",
+        "unit": 109,
+        "caja": 109,
+        "cat": "caramelos",
+        "art": "5170",
+        "present": "bolsa 500gr",
+        "emoji": "📦",
+        "venta": 1,
+        "destacado": false,
+        "activo": true
       }
     ]
   }
