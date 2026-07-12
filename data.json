@@ -3919,6 +3919,19 @@
         "venta": 1,
         "destacado": false,
         "activo": true
+      },
+      {
+        "id": "caramelos_1783885312705",
+        "name": "Caramelo Docile Rolly Minty Tubo 16 29g",
+        "unit": 423,
+        "caja": 423,
+        "cat": "caramelos",
+        "art": "15152",
+        "present": "tubo x 16",
+        "emoji": "📦",
+        "venta": 1,
+        "destacado": false,
+        "activo": true
       }
     ]
   }
