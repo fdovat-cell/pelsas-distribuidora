@@ -3867,6 +3867,19 @@
         "venta": 1,
         "destacado": false,
         "activo": true
+      },
+      {
+        "id": "caramelos_1783885095053",
+        "name": "Caramelo Calavera Distrigol 30pcs",
+        "unit": 250,
+        "caja": 250,
+        "cat": "caramelos",
+        "art": "32424",
+        "present": "30 pcs",
+        "emoji": "📦",
+        "venta": 1,
+        "destacado": false,
+        "activo": true
       }
     ]
   }
