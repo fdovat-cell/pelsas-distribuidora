@@ -3906,6 +3906,19 @@
         "venta": 1,
         "destacado": false,
         "activo": true
+      },
+      {
+        "id": "caramelos_1783885260718",
+        "name": "Caramelo Capsulas 30pcs 300grs(Pote Chico)Masticable. C/Liq",
+        "unit": 225,
+        "caja": 225,
+        "cat": "caramelos",
+        "art": "32132",
+        "present": "cápsula 300 gr",
+        "emoji": "📦",
+        "venta": 1,
+        "destacado": false,
+        "activo": true
       }
     ]
   }
