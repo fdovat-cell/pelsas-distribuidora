@@ -3854,6 +3854,19 @@
         "venta": 1,
         "destacado": false,
         "activo": true
+      },
+      {
+        "id": "caramelos_1783884982361",
+        "name": "Caramelo Cafe. Brazilian Florestal Cofee 500grs (Bolsa)",
+        "unit": 220,
+        "caja": 220,
+        "cat": "caramelos",
+        "art": "30328",
+        "present": "bolsa 500gr",
+        "emoji": "📦",
+        "venta": 1,
+        "destacado": false,
+        "activo": true
       }
     ]
   }
