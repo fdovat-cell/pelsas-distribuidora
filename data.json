@@ -3880,6 +3880,19 @@
         "venta": 1,
         "destacado": false,
         "activo": true
+      },
+      {
+        "id": "caramelos_1783885144142",
+        "name": "Caramelo Candel Astra X 100u 600grs",
+        "unit": 389,
+        "caja": 389,
+        "cat": "",
+        "art": "347",
+        "present": "bolsas 600g",
+        "emoji": "📦",
+        "venta": 1,
+        "destacado": false,
+        "activo": true
       }
     ]
   }
