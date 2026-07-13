@@ -239,7 +239,8 @@
       "emoji": "📦",
       "desc": "alfajores sin azucar",
       "logo": "img/logo-alimendra.webp",
-      "activo": true
+      "activo": true,
+      "sintacc": true
     }
   ],
   "products": {
