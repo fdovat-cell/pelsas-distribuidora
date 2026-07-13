@@ -224,6 +224,15 @@
       "desc": "Caramelos",
       "logo": "img/logo-caramelos.webp",
       "activo": true
+    },
+    {
+      "id": "alimendra",
+      "sid": "alimentos",
+      "name": "alimendra",
+      "emoji": "📦",
+      "desc": "alfajores sin azucar",
+      "logo": "img/logo-alimendra.webp",
+      "activo": true
     }
   ],
   "products": {
@@ -3959,6 +3968,7 @@
         "destacado": false,
         "activo": true
       }
-    ]
+    ],
+    "alimendra": []
   }
 }
