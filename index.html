@@ -1012,15 +1012,12 @@ function removeFromPresentacion(id){
   refreshPresGrid();
 }
 function sintaccBrands(){
-  const ids=['nutsbar','molinosala','celisano','agridulce','smams','sanosinharina','suavipan'];
-  return ids.map(id=>getBrand(id)).filter(Boolean);
+  return brands.filter(b=>b.sintacc&&b.activo!==false);
 }
 function sintaccProducts(bid){
   const all=products[bid]||[];
-  if(bid==='celisano'||bid==='sanosinharina'||bid==='suavipan'||bid==='nutsbar'||bid==='molinosala')return all;
-  if(bid==='agridulce')return all.filter(p=>p.cat==='sin azucar');
-  if(bid==='smams')return all.filter(p=>p.cat==='sin gluten'||p.cat==='sin azucar');
-  return all;
+  const marked=all.filter(p=>p.sintacc);
+  return marked.length?marked:all;
 }
 const brandGenImg={
   raw:'img/gen-raw.webp',

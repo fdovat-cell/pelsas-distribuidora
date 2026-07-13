@@ -25,7 +25,8 @@
       "emoji": "",
       "desc": "Barras de cereal",
       "logo": "img/logo-agridulce.webp",
-      "activo": true
+      "activo": true,
+      "sintacc": true
     },
     {
       "id": "rebelnut",
@@ -106,7 +107,8 @@
       "emoji": "",
       "desc": "Productos sin harina y sin gluten",
       "logo": "img/logo-sanosinharina.webp",
-      "activo": true
+      "activo": true,
+      "sintacc": true
     },
     {
       "id": "celisano",
@@ -115,7 +117,8 @@
       "emoji": "",
       "desc": "Alfajores sin gluten y sin lactosa",
       "logo": "img/logo-celisano.webp",
-      "activo": true
+      "activo": true,
+      "sintacc": true
     },
     {
       "id": "smams",
@@ -124,7 +127,8 @@
       "emoji": "",
       "desc": "Galletas sin gluten y sin azúcar",
       "logo": "img/logo-smams.webp",
-      "activo": true
+      "activo": true,
+      "sintacc": true
     },
     {
       "id": "molinosala",
@@ -133,7 +137,8 @@
       "emoji": "",
       "desc": "Tostaditas de arroz",
       "logo": "img/logo-molinosala.webp",
-      "activo": true
+      "activo": true,
+      "sintacc": true
     },
     {
       "id": "suavipan",
@@ -142,7 +147,8 @@
       "emoji": "",
       "desc": "Budines zero azúcar",
       "logo": "img/logo-suavipan.webp",
-      "activo": true
+      "activo": true,
+      "sintacc": true
     },
     {
       "id": "nutsbar",
@@ -151,7 +157,8 @@
       "emoji": "",
       "desc": "Barras y bombones sin gluten, sin azúcares agregados",
       "logo": "img/logo-nutsbar.webp",
-      "activo": true
+      "activo": true,
+      "sintacc": true
     },
     {
       "id": "lorenz",
@@ -1049,7 +1056,8 @@
         "caja": 738.38,
         "emoji": "",
         "venta": 2,
-        "activo": true
+        "activo": true,
+        "sintacc": true
       },
       {
         "id": "a7",
@@ -1061,7 +1069,8 @@
         "caja": 738.38,
         "emoji": "",
         "venta": 2,
-        "activo": true
+        "activo": true,
+        "sintacc": true
       },
       {
         "id": "a8",
@@ -1073,7 +1082,8 @@
         "caja": 738.38,
         "emoji": "",
         "venta": 1,
-        "activo": true
+        "activo": true,
+        "sintacc": true
       }
     ],
     "rebelnut": [
@@ -2865,7 +2875,8 @@
         "caja": 3456,
         "emoji": "",
         "venta": 2,
-        "activo": true
+        "activo": true,
+        "sintacc": true
       },
       {
         "id": "sm_3",
@@ -2877,7 +2888,8 @@
         "caja": 2652,
         "emoji": "",
         "venta": 2,
-        "activo": true
+        "activo": true,
+        "sintacc": true
       },
       {
         "id": "sm_4",
@@ -2901,7 +2913,8 @@
         "caja": 1611,
         "emoji": "",
         "venta": 2,
-        "activo": true
+        "activo": true,
+        "sintacc": true
       },
       {
         "id": "sm_6",
@@ -2913,7 +2926,8 @@
         "caja": 1890,
         "emoji": "",
         "venta": 2,
-        "activo": true
+        "activo": true,
+        "sintacc": true
       },
       {
         "id": "sm_7",
@@ -2937,7 +2951,8 @@
         "caja": 1611,
         "emoji": "",
         "venta": 2,
-        "activo": true
+        "activo": true,
+        "sintacc": true
       },
       {
         "id": "sm_9",
@@ -2949,7 +2964,8 @@
         "caja": 1611,
         "emoji": "",
         "venta": 2,
-        "activo": true
+        "activo": true,
+        "sintacc": true
       },
       {
         "id": "sm_10",
@@ -2973,7 +2989,8 @@
         "caja": 2616,
         "emoji": "",
         "venta": 2,
-        "activo": true
+        "activo": true,
+        "sintacc": true
       }
     ],
     "molinosala": [

@@ -245,6 +245,12 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
         Incluir en Modo Visita (selección para mostrarle a clientes nuevos)
       </label>
     </div>
+    <div class="form-row">
+      <label style="display:flex;align-items:center;gap:8px;cursor:pointer">
+        <input type="checkbox" id="f-sintacc" style="width:auto">
+        Incluir en Sin TACC / Sin Azúcar
+      </label>
+    </div>
     <div class="modal-actions">
       <button class="modal-cancel" onclick="closeModal()">Cancelar</button>
       <button class="modal-save" onclick="saveProduct()">Guardar producto</button>
@@ -301,6 +307,10 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
         <label>Logo (ruta)</label>
         <input type="text" id="fb-logo" placeholder="img/logo-dori.webp">
       </div>
+    </div>
+    <div class="form-row" style="flex-direction:row;align-items:center;gap:8px;">
+      <input type="checkbox" id="fb-sintacc" style="width:auto;">
+      <label for="fb-sintacc" style="margin:0;">Aparece en Sin TACC / Sin Azúcar</label>
     </div>
     <div class="modal-actions">
       <button class="modal-cancel" onclick="closeBrandModal()">Cancelar</button>
@@ -1151,6 +1161,7 @@ function openModal(pid) {
     document.getElementById('f-emoji').value = p.emoji;
     document.getElementById('f-venta').value = p.venta || 1;
     document.getElementById('f-destacado').checked = !!p.destacado;
+    document.getElementById('f-sintacc').checked = !!p.sintacc;
   } else {
     document.getElementById('f-name').value = '';
     document.getElementById('f-unit').value = '';
@@ -1161,6 +1172,7 @@ function openModal(pid) {
     document.getElementById('f-emoji').value = '📦';
     document.getElementById('f-venta').value = 1;
     document.getElementById('f-destacado').checked = false;
+    document.getElementById('f-sintacc').checked = false;
   }
   document.getElementById('modal-bg').classList.add('open');
   document.getElementById('f-name').focus();
@@ -1181,6 +1193,7 @@ function saveProduct() {
   const emoji = document.getElementById('f-emoji').value.trim() || '📦';
   const venta = parseInt(document.getElementById('f-venta').value);
   const destacado = document.getElementById('f-destacado').checked;
+  const sintacc = document.getElementById('f-sintacc').checked;
 
   if (!name || isNaN(unit) || isNaN(caja)) {
     alert('Completá al menos nombre, precio unitario y precio caja');
@@ -1192,7 +1205,7 @@ function saveProduct() {
     for (const bid of Object.keys(data.products)) {
       const p = data.products[bid].find(x => x.id === editingId);
       if (p) {
-        Object.assign(p, { name, unit, caja, cat, art, present, emoji, venta, destacado });
+        Object.assign(p, { name, unit, caja, cat, art, present, emoji, venta, destacado, sintacc });
         break;
       }
     }
@@ -1201,7 +1214,7 @@ function saveProduct() {
     if (!currentBrand) { alert('Seleccioná una marca primero'); return; }
     if (!data.products[currentBrand]) data.products[currentBrand] = [];
     const newId = currentBrand + '_' + Date.now();
-    data.products[currentBrand].push({ id: newId, name, unit, caja, cat, art, present, emoji, venta, destacado, activo: true });
+    data.products[currentBrand].push({ id: newId, name, unit, caja, cat, art, present, emoji, venta, destacado, sintacc, activo: true });
   }
 
   markUnsaved();
@@ -1236,6 +1249,7 @@ function openBrandModal(bid, sid) {
     document.getElementById('fb-desc').value = b.desc || '';
     document.getElementById('fb-emoji').value = b.emoji || '';
     document.getElementById('fb-logo').value = b.logo || '';
+    document.getElementById('fb-sintacc').checked = !!b.sintacc;
   } else {
     newBrandSid = sid || 'alimentos';
     document.getElementById('brand-modal-title').textContent = 'Nueva marca';
@@ -1246,6 +1260,7 @@ function openBrandModal(bid, sid) {
     document.getElementById('fb-desc').value = '';
     document.getElementById('fb-emoji').value = '📦';
     document.getElementById('fb-logo').value = '';
+    document.getElementById('fb-sintacc').checked = false;
   }
   document.getElementById('brand-modal-bg').classList.add('open');
   document.getElementById('fb-name').focus();
@@ -1268,18 +1283,19 @@ function saveBrand() {
   const desc = document.getElementById('fb-desc').value.trim();
   const emoji = document.getElementById('fb-emoji').value.trim() || '📦';
   const logo = document.getElementById('fb-logo').value.trim() || 'img/placeholder.webp';
+  const sintacc = document.getElementById('fb-sintacc').checked;
 
   if (!name) { alert('Completá el nombre de la marca'); return; }
 
   if (editingBrandId) {
     const b = data.brands.find(x => x.id === editingBrandId);
-    Object.assign(b, { name, sid, desc, emoji, logo });
+    Object.assign(b, { name, sid, desc, emoji, logo, sintacc });
   } else {
     let id = document.getElementById('fb-id').value.trim();
     id = id ? slugify(id) : slugify(name);
     if (!id) { alert('Ingresá un ID válido para la marca'); return; }
     if (data.brands.some(b => b.id === id)) { alert('Ya existe una marca con ese ID'); return; }
-    data.brands.push({ id, sid, name, emoji, desc, logo, activo: true });
+    data.brands.push({ id, sid, name, emoji, desc, logo, activo: true, sintacc });
     if (!data.products[id]) data.products[id] = [];
   }
 
