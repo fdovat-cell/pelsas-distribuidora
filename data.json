@@ -4028,6 +4028,20 @@
         "destacado": false,
         "sintacc": true,
         "activo": true
+      },
+      {
+        "id": "alimendra_1783977916251",
+        "name": "Alfajor de almendras & castañas de cajú sin azúcares agregados relleno  con dulce de leche, cubierto con baño de repostería semi amargo 70gs.  (ALMENDRAS DDL) Producto sin octogonos",
+        "unit": 71.88,
+        "caja": 575,
+        "cat": "alfajores",
+        "art": "1008",
+        "present": "caja x 8 u.",
+        "emoji": "📦",
+        "venta": 2,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true
       }
     ]
   }
