@@ -4040,7 +4040,21 @@
         "emoji": "📦",
         "venta": 2,
         "destacado": false,
-        "sintacc": false,
+        "sintacc": true,
+        "activo": true
+      },
+      {
+        "id": "alimendra_1783978104868",
+        "name": "Alfajor de almendras & castañas de cajú sin azúcares agregados y vegano  relleno con mantequilla de maní, cubierto con baño de repostería semi  amargo 70gs. (ALMENDRAS MANÍ)  Producto sin octogonos",
+        "unit": 71.88,
+        "caja": 575,
+        "cat": "alfajores",
+        "art": "1009",
+        "present": "caja x 8u",
+        "emoji": "📦",
+        "venta": 2,
+        "destacado": false,
+        "sintacc": true,
         "activo": true
       }
     ]
