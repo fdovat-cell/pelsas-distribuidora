@@ -4014,6 +4014,20 @@
         "destacado": true,
         "sintacc": true,
         "activo": true
+      },
+      {
+        "id": "alimendra_1783977652009",
+        "name": "Alfajor de semillas y fruos secos relleno con mantequilla de maní, cubierto  con baño de repostería semi amargo 70gs. (VEGANO)",
+        "unit": 71.88,
+        "caja": 575,
+        "cat": "alfajores",
+        "art": "1007",
+        "present": "caja x 8 u",
+        "emoji": "📦",
+        "venta": 2,
+        "destacado": false,
+        "sintacc": true,
+        "activo": true
       }
     ]
   }
