@@ -4011,7 +4011,7 @@
         "present": "caja x 8u.",
         "emoji": "📦",
         "venta": 2,
-        "destacado": true,
+        "destacado": false,
         "sintacc": true,
         "activo": true
       },
