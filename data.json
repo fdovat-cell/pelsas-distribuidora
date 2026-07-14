@@ -241,6 +241,16 @@
       "logo": "img/logo-alimendra.webp",
       "activo": true,
       "sintacc": true
+    },
+    {
+      "id": "puntadeleite",
+      "sid": "alimentos",
+      "name": "Puntadeleite",
+      "emoji": "📦",
+      "desc": "alfajores",
+      "logo": "img/placeholder.webp",
+      "activo": true,
+      "sintacc": false
     }
   ],
   "products": {
@@ -4069,6 +4079,22 @@
         "emoji": "📦",
         "venta": 1,
         "destacado": true,
+        "sintacc": false,
+        "activo": true
+      }
+    ],
+    "puntadeleite": [
+      {
+        "id": "puntadeleite_1784029896576",
+        "name": "Alfajor de chocolate negro con doble relleno de (DULCE DE LECHE Y  MARACUYÁ)",
+        "unit": 53.12,
+        "caja": 425,
+        "cat": "alfajores",
+        "art": "3001",
+        "present": "caja x 8u.",
+        "emoji": "📦",
+        "venta": 2,
+        "destacado": false,
         "sintacc": false,
         "activo": true
       }
