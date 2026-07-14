@@ -4097,6 +4097,20 @@
         "destacado": false,
         "sintacc": false,
         "activo": true
+      },
+      {
+        "id": "puntadeleite_1784030083503",
+        "name": "Alfajor de chocolate negro con doble relleno de (DULCE DE LECHE Y  FRUTOS ROJOS)",
+        "unit": 53.12,
+        "caja": 425,
+        "cat": "alfajores",
+        "art": "3003",
+        "present": "caja x 8u",
+        "emoji": "📦",
+        "venta": 2,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true
       }
     ]
   }
