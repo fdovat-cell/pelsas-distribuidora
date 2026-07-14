@@ -3748,15 +3748,16 @@
       {
         "id": "golosinas_1782239333760",
         "name": "Pastillas FREEGELLS x12 Unidades",
-        "unit": 77,
-        "caja": 77,
+        "unit": 81,
+        "caja": 81,
         "cat": "",
         "art": "54101",
         "present": "caja x 12u.",
         "emoji": "📦",
         "venta": 1,
         "activo": true,
-        "destacado": true
+        "destacado": true,
+        "sintacc": false
       },
       {
         "id": "golosinas_1782239568192",
