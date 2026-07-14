@@ -4111,6 +4111,20 @@
         "destacado": false,
         "sintacc": false,
         "activo": true
+      },
+      {
+        "id": "puntadeleite_1784030157919",
+        "name": "Alfajor Doble Relleno: Dulce de leche + Corazón de Pistacho & Limón  (DUBAI",
+        "unit": 60.56,
+        "caja": 485,
+        "cat": "",
+        "art": "3002",
+        "present": "caja x 8u",
+        "emoji": "📦",
+        "venta": 2,
+        "destacado": true,
+        "sintacc": false,
+        "activo": true
       }
     ]
   }
