@@ -251,6 +251,16 @@
       "logo": "img/placeholder.webp",
       "activo": true,
       "sintacc": false
+    },
+    {
+      "id": "hojillas",
+      "sid": "fumadores",
+      "name": "Dark Horse",
+      "emoji": "📦",
+      "desc": "hojillas",
+      "logo": "img/placeholder.webp",
+      "activo": true,
+      "sintacc": false
     }
   ],
   "products": {
@@ -4126,6 +4136,7 @@
         "sintacc": false,
         "activo": true
       }
-    ]
+    ],
+    "hojillas": []
   }
 }
