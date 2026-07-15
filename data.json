@@ -259,7 +259,7 @@
       "emoji": "📦",
       "desc": "hojillas",
       "logo": "img/placeholder.webp",
-      "activo": true,
+      "activo": false,
       "sintacc": false
     }
   ],
