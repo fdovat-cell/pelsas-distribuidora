@@ -893,7 +893,7 @@ function renderCatalogo(){
     <div class="section-rule"></div>
     <div class="cat-tabs">
       <button class="cat-tab${catTab==='alimentos'?' active':''}" id="cattab-alimentos" onclick="setCatTab('alimentos')">🍬 Alimentos &amp; Snacks</button>
-      <button class="cat-tab${catTab==='fumadores'?' active':''}" id="cattab-fumadores" onclick="setCatTab('fumadores')">🚬 Fumadores</button>
+      <button class="cat-tab${catTab==='fumadores'?' active':''}" id="cattab-fumadores" onclick="setCatTab('fumadores')">📎 Papelería</button>
     </div>
     <div id="cat-content">${renderCatContent()}</div>
   </div>`;
@@ -1175,7 +1175,7 @@ function renderBrandPage(){
   const b=getBrand(curBrand);
   const ps=products[curBrand]||[];
   const cats=['todos',...new Set(ps.map(p=>p.cat))];
-  const secLabel=b.sid==='fumadores'?'Artículos para fumadores':'Alimentos &amp; Snacks';
+  const secLabel=b.sid==='fumadores'?'Papelería':'Alimentos &amp; Snacks';
   const secFn=b.sid==='fumadores'?'goFumadores()':'goSection()';
   const bName=b.name;const bEmoji=b.emoji;
   return`<div class="section-wrap">
@@ -1239,7 +1239,7 @@ function renderCards(filtered,bid){
 function renderFumadores(){
   return`<div class="section-wrap">
     <div class="breadcrumb" onclick="goHome()">← Inicio</div>
-    <div class="section-title">🌿 Artículos para fumadores</div>
+    <div class="section-title">📎 Papelería</div>
     <div class="section-rule"></div>
     <div class="section-meta">${fumBrands().length} marcas · ${fumCount()} productos · precios con IVA incluido</div>
     <div class="brands-grid">
