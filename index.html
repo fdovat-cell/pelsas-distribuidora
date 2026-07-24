@@ -1311,7 +1311,7 @@ function renderCart(){
         <button class="pago-sel-btn${pagoMethod==='entrega'?' selected':''}" onclick="selPago('entrega')"><span class="pago-sel-icon">🚚</span>Contra entrega (efectivo o cheque)</button>
       </div>
     </div>
-    <div class="cart-foot"><div class="total-row"><span class="total-lbl">Total estimado</span><span class="total-val">${fmt(total)}</span></div><div class="checkout-form"><label>Nombre o negocio</label><input type="text" id="cfn" placeholder="Tu nombre o razón social"><label>WhatsApp</label><input type="text" id="cft" placeholder="09x xxx xxx"><label>Dirección</label><input type="text" id="cfd" placeholder="Calle, número, ciudad"><label>Notas</label><textarea id="cfno" rows="2" placeholder="Horario, indicaciones..."></textarea></div><button class="wsp-btn" onclick="sendOrder()" style="margin-top:14px"><svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.528 5.855L.057 23.428a.75.75 0 00.916.916l5.573-1.471A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.885 0-3.651-.511-5.168-1.401l-.371-.219-3.849 1.016 1.016-3.849-.219-.371A9.953 9.953 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>Enviar por WhatsApp</button></div>`;
+    <div class="cart-foot"><div class="total-row"><span class="total-lbl">Total estimado</span><span class="total-val">${fmt(total)}</span></div><div class="checkout-form"><label>Nombre o negocio</label><input type="text" id="cfn" placeholder="Tu nombre o razón social"><label>WhatsApp</label><input type="text" id="cft" placeholder="09x xxx xxx"><label>Dirección</label><input type="text" id="cfd" placeholder="Calle, número, ciudad"><label>Notas</label><textarea id="cfno" rows="2" placeholder="Horario, indicaciones..."></textarea></div><button class="new-btn" style="width:100%;margin-top:14px;text-align:center" onclick="saveOrder()">📥 Guardar pedido</button><button class="wsp-btn" onclick="sendOrder()" style="margin-top:8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.528 5.855L.057 23.428a.75.75 0 00.916.916l5.573-1.471A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.885 0-3.651-.511-5.168-1.401l-.371-.219-3.849 1.016 1.016-3.849-.219-.371A9.953 9.953 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>Enviar por WhatsApp</button></div>`;
   } else {
     foot.innerHTML=`<div class="cart-foot"><div class="total-row"><span class="total-lbl">Total estimado</span><span class="total-val">${fmt(total)}</span></div><button class="step-btn" onclick="showCheckout()">Confirmar y enviar por WhatsApp →</button><button class="new-btn" style="width:100%;margin-top:8px;text-align:center" onclick="toggleCart()">← Seguir agregando</button></div>`;
   }
@@ -1320,13 +1320,13 @@ function cQ(k,d){if(!cart[k])return;cart[k].qty=Math.max(1,cart[k].qty+d);update
 function rmItem(k){delete cart[k];updateBadge();renderCart();if(view==='brand')reGrid()}
 function selPago(m){pagoMethod=m;renderCart()}
 function showCheckout(){checkout=true;pagoMethod='';renderCart()}
-function sendOrder(){
+function buildOrderMsg(){
   const n=(document.getElementById('cfn')||{}).value||'';
   const t=(document.getElementById('cft')||{}).value||'';
   const d=(document.getElementById('cfd')||{}).value||'';
   const no=(document.getElementById('cfno')||{}).value||'';
-  if(!n||!t){alert('Completá nombre y teléfono');return}
-  if(!pagoMethod){alert('Seleccioná un método de pago');return}
+  if(!n||!t){alert('Completá nombre y teléfono');return null}
+  if(!pagoMethod){alert('Seleccioná un método de pago');return null}
   const pagoLabels={transferencia:'🏦 Transferencia bancaria',qr:'📱 QR Brou',entrega:'🚚 Contra entrega (efectivo o cheque)'};
   const keys=Object.keys(cart).filter(k=>cart[k]&&cart[k].qty>0);
   let msg='*Pedido PelSAS*\n\n';let total=0;
@@ -1335,11 +1335,27 @@ function sendOrder(){
     const p=allP().find(x=>x.id===item.pid);if(!p)return;
     const br=brands.find(x=>products[x.id]&&products[x.id].find(pp=>pp.id===item.pid));
     const sub=item.precio*item.qty;total+=sub;
-    msg+=`• ${br?br.name+' · ':''}${p.name} (${item.label})\n  ${item.qty} × $${item.precio.toFixed(2)} = $${sub.toFixed(2)}\n`;
+    msg+=`• [${p.art||'s/n'}] ${br?br.name+' · ':''}${p.name} (${item.label})\n  ${item.qty} × $${item.precio.toFixed(2)} = $${sub.toFixed(2)}\n`;
   });
   msg+=`\n*Total estimado: $${total.toFixed(2)}*\n\n💳 Pago: ${pagoLabels[pagoMethod]}\n\n👤 ${n}\n📱 ${t}`;
   if(d)msg+=`\n📍 ${d}`;if(no)msg+=`\n📝 ${no}`;
-  window.open(`https://wa.me/${WA}?text=${encodeURIComponent(msg)}`,'_blank');
+  return {msg,n};
+}
+function saveOrder(){
+  const r=buildOrderMsg();if(!r)return;
+  const plain=r.msg.replace(/\*/g,'');
+  const blob=new Blob([plain],{type:'text/plain'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  const fecha=new Date().toISOString().slice(0,10);
+  const nombre=(r.n||'pedido').replace(/[^a-z0-9]+/gi,'_');
+  a.href=url;a.download=`Pedido_PelSAS_${nombre}_${fecha}.txt`;
+  document.body.appendChild(a);a.click();document.body.removeChild(a);
+  setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+function sendOrder(){
+  const r=buildOrderMsg();if(!r)return;
+  window.open(`https://wa.me/${WA}?text=${encodeURIComponent(r.msg)}`,'_blank');
   cart={};pagoMethod='';updateBadge();done=true;renderCart();if(view==='brand')reGrid();
 }
 function newOrder(){done=false;toggleCart()}
