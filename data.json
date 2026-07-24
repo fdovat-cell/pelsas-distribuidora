@@ -80,7 +80,7 @@
       "emoji": "",
       "desc": "Hojillas y filtros",
       "logo": "img/logo-darkHorse.webp",
-      "activo": true
+      "activo": false
     },
     {
       "id": "elements",
