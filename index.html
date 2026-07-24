@@ -139,7 +139,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 }
 .col-card.sintacc:hover .col-visual img{transform:scale(1.03)}
 .col-card.fumadores .col-visual{
-  background:var(--ink);
+  background:#EAEEF3;
   height:300px;
   padding:0;
   display:block;
@@ -152,15 +152,15 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 
 .fum-visual-inner{display:flex;gap:16px;align-items:center;justify-content:center;height:100%}
 .fum-vis-block{
-  background:rgba(255,255,255,.07);
-  border:1px solid rgba(255,255,255,.12);
+  background:rgba(74,90,112,.06);
+  border:1px solid rgba(74,90,112,.15);
   border-radius:12px;padding:20px 18px;
   display:flex;flex-direction:column;align-items:center;gap:8px;
   min-width:110px;
 }
 .fum-vis-icon{font-size:32px}
-.fum-vis-name{font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:#fff}
-.fum-vis-tag{font-size:10px;color:rgba(255,255,255,.4)}
+.fum-vis-name{font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:#4A5A70}
+.fum-vis-tag{font-size:10px;color:#8b96a3}
 
 
 .col-cta{
@@ -1143,14 +1143,14 @@ function renderHome(){
                   <div class="fum-vis-tag">Artículos de oficina</div>
                 </div>
               </div>
-              <div class="col-cta" style="background:rgba(255,255,255,.15)">Ver catálogo →</div>
+              <div class="col-cta" style="background:rgba(74,90,112,.75)">Ver catálogo →</div>
             </div>
-            <div class="col-foot" style="background:var(--ink)">
+            <div class="col-foot" style="background:#EAEEF3">
               <div>
-                <div class="col-foot-name" style="color:#fff">Papelería</div>
-                <div class="col-foot-sub" style="color:rgba(255,255,255,.5)">${fumBrands().length} marcas · ${fumCount()} productos</div>
+                <div class="col-foot-name" style="color:#4A5A70">Papelería</div>
+                <div class="col-foot-sub">${fumBrands().length} marcas · ${fumCount()} productos</div>
               </div>
-              <div class="col-arrow" style="background:rgba(255,255,255,.15)">→</div>
+              <div class="col-arrow" style="background:#4A5A70">→</div>
             </div>
           </div>
         </div>
