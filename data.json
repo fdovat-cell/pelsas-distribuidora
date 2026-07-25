@@ -3032,14 +3032,15 @@
         "id": "pap8",
         "name": "Banderitas Adhesivas",
         "cat": "papeleria",
-        "present": "Paq. x 12 · Caja x 1440",
+        "present": "Paq. x 5",
         "art": "P008",
         "unit": 19.5,
-        "caja": 2340,
+        "caja": 97.5,
         "emoji": "📎",
-        "venta": 1,
-        "activo": false,
-        "destacado": false
+        "venta": 2,
+        "activo": true,
+        "destacado": false,
+        "sintacc": false
       },
       {
         "id": "pap9",
