@@ -2948,14 +2948,15 @@
         "id": "pap6",
         "name": "Aprietapapel Dobleclip 25mm",
         "cat": "papeleria",
-        "present": "Paq. x 20 · Caja x 3600",
+        "present": "Paq. x 12",
         "art": "P006",
         "unit": 6.5,
-        "caja": 1170,
+        "caja": 78,
         "emoji": "📎",
-        "venta": 1,
-        "activo": false,
-        "destacado": false
+        "venta": 2,
+        "activo": true,
+        "destacado": false,
+        "sintacc": false
       },
       {
         "id": "pap7",
