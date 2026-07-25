@@ -2876,7 +2876,7 @@
     "papeleria": [
       {
         "id": "pap1",
-        "name": "Abrochadora 24/6 26/6 Economica 20hs",
+        "name": "Abrochadora 24/6 26/6 Economica 20 hojas",
         "cat": "papeleria",
         "present": "Por unidad",
         "art": "P001",
@@ -2906,27 +2906,29 @@
         "id": "pap3",
         "name": "Abrochadora Metalica para 100 Hojas",
         "cat": "papeleria",
-        "present": "Paq. x 1 · Caja x 48",
+        "present": "por unidad",
         "art": "P003",
         "unit": 585,
-        "caja": 28080,
+        "caja": 585,
         "emoji": "📎",
         "venta": 1,
-        "activo": false,
-        "destacado": false
+        "activo": true,
+        "destacado": false,
+        "sintacc": false
       },
       {
         "id": "pap4",
         "name": "Alfiler para Corcho",
         "cat": "papeleria",
-        "present": "Paq. x 10 · Caja x 500",
+        "present": "Paq. x 10 ·",
         "art": "P004",
-        "unit": 27.62,
-        "caja": 1381,
+        "unit": 29,
+        "caja": 290,
         "emoji": "📎",
-        "venta": 1,
-        "activo": false,
-        "destacado": false
+        "venta": 2,
+        "activo": true,
+        "destacado": false,
+        "sintacc": false
       },
       {
         "id": "pap5",
