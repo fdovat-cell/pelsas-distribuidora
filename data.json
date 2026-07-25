@@ -2948,14 +2948,15 @@
         "id": "pap108",
         "name": "Aprietapapel Dobleclip 19mm",
         "cat": "papeleria",
-        "present": "Paq. x 20 · Caja x 3600",
+        "present": "Paq. x 10",
         "art": "P108",
-        "unit": 5.2,
-        "caja": 936,
+        "unit": 6,
+        "caja": 60,
         "emoji": "📎",
         "venta": 1,
         "activo": true,
-        "destacado": false
+        "destacado": false,
+        "sintacc": false
       },
       {
         "id": "pap6",
@@ -2967,7 +2968,7 @@
         "caja": 1170,
         "emoji": "📎",
         "venta": 1,
-        "activo": true,
+        "activo": false,
         "destacado": false
       },
       {
@@ -2980,7 +2981,7 @@
         "caja": 561.6,
         "emoji": "📎",
         "venta": 1,
-        "activo": true,
+        "activo": false,
         "destacado": false
       },
       {
@@ -2993,7 +2994,7 @@
         "caja": 655.2,
         "emoji": "📎",
         "venta": 1,
-        "activo": true,
+        "activo": false,
         "destacado": false
       },
       {
@@ -3006,7 +3007,7 @@
         "caja": 374.4,
         "emoji": "📎",
         "venta": 1,
-        "activo": true,
+        "activo": false,
         "destacado": false
       },
       {
