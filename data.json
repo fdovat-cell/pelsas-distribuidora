@@ -2950,7 +2950,7 @@
         "caja": 1170,
         "emoji": "📎",
         "venta": 1,
-        "activo": false,
+        "activo": true,
         "destacado": false
       },
       {
@@ -4276,7 +4276,7 @@
         "caja": 936,
         "emoji": "📎",
         "venta": 1,
-        "activo": false,
+        "activo": true,
         "destacado": false
       },
       {
@@ -4289,7 +4289,7 @@
         "caja": 561.6,
         "emoji": "📎",
         "venta": 1,
-        "activo": false,
+        "activo": true,
         "destacado": false
       },
       {
@@ -4302,7 +4302,7 @@
         "caja": 655.2,
         "emoji": "📎",
         "venta": 1,
-        "activo": false,
+        "activo": true,
         "destacado": false
       },
       {
@@ -4315,7 +4315,7 @@
         "caja": 374.4,
         "emoji": "📎",
         "venta": 1,
-        "activo": false,
+        "activo": true,
         "destacado": false
       },
       {
