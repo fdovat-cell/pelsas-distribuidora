@@ -290,7 +290,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
         <label>Sección</label>
         <select id="fb-sid">
           <option value="alimentos">Alimentos &amp; Snacks</option>
-          <option value="fumadores">Fumadores</option>
+          <option value="fumadores">Papelería</option>
         </select>
       </div>
     </div>
@@ -436,7 +436,7 @@ function renderSidebar() {
     </button>
   </div>`;
   html += renderBrandGroup('&#127851; Alimentos', alBrands, 'alimentos');
-  html += renderBrandGroup('&#128680; Fumadores', fumBrands, 'fumadores');
+  html += renderBrandGroup('&#128204; Papelería', fumBrands, 'fumadores');
   document.getElementById('sidebar').innerHTML = html;
 }
 function renderBrandGroup(label, brands, sid) {
