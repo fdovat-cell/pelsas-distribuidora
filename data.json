@@ -2892,14 +2892,15 @@
         "id": "pap2",
         "name": "Abrochadora Metalica 24/6 Premium",
         "cat": "papeleria",
-        "present": "Paq. x 20 · Caja x 96",
+        "present": "por unidad",
         "art": "P002",
         "unit": 201.5,
-        "caja": 967.2,
+        "caja": 201.5,
         "emoji": "📎",
         "venta": 1,
-        "activo": false,
-        "destacado": false
+        "activo": true,
+        "destacado": false,
+        "sintacc": false
       },
       {
         "id": "pap3",
