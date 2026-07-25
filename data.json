@@ -3101,27 +3101,29 @@
         "id": "pap11",
         "name": "Biliorato de Cartón Oficio",
         "cat": "papeleria",
-        "present": "Paq. x 1 · Caja x 50",
+        "present": "por unidad",
         "art": "P011",
         "unit": 97.5,
-        "caja": 4875,
+        "caja": 97.5,
         "emoji": "📎",
         "venta": 1,
-        "activo": false,
-        "destacado": false
+        "activo": true,
+        "destacado": false,
+        "sintacc": false
       },
       {
         "id": "pap12",
         "name": "Biliorato Plastificado A4 Pvc",
         "cat": "papeleria",
-        "present": "Paq. x 1 · Caja x 50",
+        "present": "por unidad",
         "art": "P012",
         "unit": 97.5,
-        "caja": 4875,
+        "caja": 97.5,
         "emoji": "📎",
         "venta": 1,
-        "activo": false,
-        "destacado": false
+        "activo": true,
+        "destacado": false,
+        "sintacc": false
       },
       {
         "id": "pap13",
