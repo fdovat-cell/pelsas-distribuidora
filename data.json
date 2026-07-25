@@ -58,11 +58,12 @@
     {
       "id": "raw",
       "sid": "fumadores",
-      "name": "RAW",
-      "emoji": "",
-      "desc": "Hojillas clásicas y especiales",
-      "logo": "img/logo-raw.webp",
-      "activo": false
+      "name": "Papelería",
+      "emoji": "📦",
+      "desc": "Papelería",
+      "logo": "img/logo-papelería.webp",
+      "activo": true,
+      "sintacc": false
     },
     {
       "id": "smoking",
