@@ -391,16 +391,28 @@ async function saveToGitHub() {
   const btn = document.getElementById('save-btn');
   btn.disabled = true;
   showStatus('Guardando en GitHub…');
+  const content = btoa(unescape(encodeURIComponent(JSON.stringify(data, null, 2))));
+  const doPut = (sha) => ghFetch(DATA_PATH, {
+    method: 'PUT',
+    body: JSON.stringify({
+      message: `Admin: actualización catálogo ${new Date().toLocaleString('es-UY')}`,
+      content,
+      sha
+    })
+  });
   try {
-    const content = btoa(unescape(encodeURIComponent(JSON.stringify(data, null, 2))));
-    const result = await ghFetch(DATA_PATH, {
-      method: 'PUT',
-      body: JSON.stringify({
-        message: `Admin: actualización catálogo ${new Date().toLocaleString('es-UY')}`,
-        content,
-        sha: GH_SHA
-      })
-    });
+    let result;
+    try {
+      result = await doPut(GH_SHA);
+    } catch(e) {
+      if (String(e.message).includes('409')) {
+        showStatus('El archivo cambió afuera del admin, reintentando…');
+        const fresh = await ghFetch(DATA_PATH);
+        result = await doPut(fresh.sha);
+      } else {
+        throw e;
+      }
+    }
     GH_SHA = result.content.sha;
     hasUnsaved = false;
     document.getElementById('unsaved-dot').classList.remove('show');
