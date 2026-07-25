@@ -2920,14 +2920,15 @@
         "id": "pap4",
         "name": "Alfiler para Corcho",
         "cat": "papeleria",
-        "present": "Paq. x 10 · Caja x 500",
+        "present": "Paq. x 5",
         "art": "P004",
-        "unit": 27.62,
-        "caja": 1381,
+        "unit": 29,
+        "caja": 145,
         "emoji": "📎",
-        "venta": 1,
-        "activo": false,
-        "destacado": false
+        "venta": 2,
+        "activo": true,
+        "destacado": false,
+        "sintacc": false
       },
       {
         "id": "pap5",
