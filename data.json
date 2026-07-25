@@ -3018,14 +3018,15 @@
         "id": "pap7",
         "name": "Bandas Elásticas 200g",
         "cat": "papeleria",
-        "present": "Paq. x 10 · Caja x 100",
+        "present": "por unidad",
         "art": "P007",
         "unit": 97.5,
-        "caja": 975,
+        "caja": 97.5,
         "emoji": "📎",
         "venta": 1,
-        "activo": false,
-        "destacado": false
+        "activo": true,
+        "destacado": false,
+        "sintacc": false
       },
       {
         "id": "pap8",
