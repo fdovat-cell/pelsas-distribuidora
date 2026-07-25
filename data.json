@@ -1838,6 +1838,20 @@
         "emoji": "",
         "venta": 1,
         "activo": false
+      },
+      {
+        "id": "raw_1784985062106",
+        "name": "prueba",
+        "unit": 10,
+        "caja": 10,
+        "cat": "sobres",
+        "art": "10",
+        "present": "Pack x 50u",
+        "emoji": "📦",
+        "venta": 2,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true
       }
     ],
     "smoking": [
