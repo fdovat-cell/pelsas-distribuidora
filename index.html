@@ -1207,7 +1207,7 @@ function renderBrandPage(){
     <div class="breadcrumb" onclick="${secFn}">← ${secLabel} / <span class="bc-active">${b.name}</span></div>
     <div class="brand-header-logo"><img src="${b.logo}" alt="${b.name}" onerror="this.outerHTML='<div class=\'section-title\'>${bEmoji} ${bName}</div>'"></div>
     <div class="section-rule"></div>
-    <div class="section-meta">${ps.length} productos · precios con IVA incluido</div>
+    <div class="section-meta">${ps.filter(p=>p.activo!==false).length} productos · precios con IVA incluido</div>
     <div class="toolbar">
       <div class="search-wrap">
         <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="7" cy="7" r="5" stroke="#B0AA9E" stroke-width="1.5"/><path d="m11 11 3 3" stroke="#B0AA9E" stroke-width="1.5" stroke-linecap="round"/></svg>
@@ -1224,6 +1224,7 @@ function renderBrandPage(){
 function getFiltered(ps){
   const q=((document.getElementById('sinput')||{}).value||'').toLowerCase();
   return ps.filter(p=>{
+    if(p.activo===false)return false;
     const mc=activeFilter==='todos'||p.cat===activeFilter;
     const mq=!q||p.name.toLowerCase().includes(q)||p.art.includes(q);
     return mc&&mq;
@@ -1397,7 +1398,7 @@ function onGSearch(){
   const q=_norm(raw);
   cl.classList.toggle('visible',raw.length>0);
   if(q.length<2){res.classList.remove('visible');res.innerHTML='';return}
-  const all=Object.entries(products).flatMap(([bid,arr])=>arr.map(p=>Object.assign({bid},p)));
+  const all=Object.entries(products).flatMap(([bid,arr])=>arr.filter(p=>p.activo!==false).map(p=>Object.assign({bid},p)));
   const matches=all.filter(p=>_norm(p.name).includes(q)||p.art.includes(q)).slice(0,10);
   if(!matches.length){
     res.innerHTML='<div class="gsr-empty">Sin resultados para "'+raw.replace(/[<>&]/g,'')+'"</div>';
