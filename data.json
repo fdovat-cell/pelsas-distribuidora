@@ -1537,7 +1537,7 @@
         "caja": 420,
         "emoji": "",
         "venta": 2,
-        "activo": true
+        "activo": false
       },
       {
         "id": "r02",
@@ -1549,7 +1549,7 @@
         "caja": 1500,
         "emoji": "",
         "venta": 1,
-        "activo": true
+        "activo": false
       },
       {
         "id": "r03",
@@ -1561,7 +1561,7 @@
         "caja": 2100,
         "emoji": "",
         "venta": 1,
-        "activo": true
+        "activo": false
       },
       {
         "id": "r04",
@@ -1573,7 +1573,7 @@
         "caja": 2160,
         "emoji": "",
         "venta": 1,
-        "activo": true
+        "activo": false
       },
       {
         "id": "r05",
@@ -1585,7 +1585,7 @@
         "caja": 1000,
         "emoji": "",
         "venta": 1,
-        "activo": true
+        "activo": false
       },
       {
         "id": "r06",
@@ -1597,7 +1597,7 @@
         "caja": 1560,
         "emoji": "",
         "venta": 1,
-        "activo": true
+        "activo": false
       },
       {
         "id": "r07",
@@ -1609,7 +1609,7 @@
         "caja": 2250,
         "emoji": "",
         "venta": 1,
-        "activo": true
+        "activo": false
       },
       {
         "id": "r08",
@@ -1621,7 +1621,7 @@
         "caja": 2280,
         "emoji": "",
         "venta": 1,
-        "activo": true
+        "activo": false
       },
       {
         "id": "r09",
@@ -1633,7 +1633,7 @@
         "caja": 3750,
         "emoji": "",
         "venta": 1,
-        "activo": true
+        "activo": false
       },
       {
         "id": "r10",
@@ -1645,7 +1645,7 @@
         "caja": 1800,
         "emoji": "",
         "venta": 1,
-        "activo": true
+        "activo": false
       },
       {
         "id": "r11",
@@ -1657,7 +1657,7 @@
         "caja": 4000,
         "emoji": "",
         "venta": 1,
-        "activo": true
+        "activo": false
       },
       {
         "id": "r12",
@@ -1669,7 +1669,7 @@
         "caja": 2280,
         "emoji": "",
         "venta": 1,
-        "activo": true
+        "activo": false
       },
       {
         "id": "r13",
@@ -1681,7 +1681,7 @@
         "caja": 2880,
         "emoji": "",
         "venta": 1,
-        "activo": true
+        "activo": false
       },
       {
         "id": "r14",
@@ -1693,7 +1693,7 @@
         "caja": 1320,
         "emoji": "",
         "venta": 1,
-        "activo": true
+        "activo": false
       },
       {
         "id": "r15",
@@ -1705,7 +1705,7 @@
         "caja": 1560,
         "emoji": "",
         "venta": 1,
-        "activo": true
+        "activo": false
       },
       {
         "id": "r16",
@@ -1717,7 +1717,7 @@
         "caja": 1440,
         "emoji": "",
         "venta": 1,
-        "activo": true
+        "activo": false
       },
       {
         "id": "r17",
@@ -1729,7 +1729,7 @@
         "caja": 1680,
         "emoji": "",
         "venta": 1,
-        "activo": true
+        "activo": false
       },
       {
         "id": "r18",
@@ -1741,7 +1741,7 @@
         "caja": 2880,
         "emoji": "",
         "venta": 1,
-        "activo": true
+        "activo": false
       },
       {
         "id": "r19",
@@ -1753,7 +1753,7 @@
         "caja": 3120,
         "emoji": "",
         "venta": 1,
-        "activo": true
+        "activo": false
       },
       {
         "id": "r20",
@@ -1765,7 +1765,7 @@
         "caja": 3960,
         "emoji": "",
         "venta": 1,
-        "activo": true
+        "activo": false
       },
       {
         "id": "r21",
@@ -1777,7 +1777,7 @@
         "caja": 2250,
         "emoji": "",
         "venta": 1,
-        "activo": true
+        "activo": false
       },
       {
         "id": "r22",
@@ -1789,7 +1789,7 @@
         "caja": 9000,
         "emoji": "",
         "venta": 1,
-        "activo": true
+        "activo": false
       },
       {
         "id": "r23",
@@ -1801,7 +1801,7 @@
         "caja": 3300,
         "emoji": "",
         "venta": 1,
-        "activo": true
+        "activo": false
       },
       {
         "id": "r24",
@@ -1813,7 +1813,7 @@
         "caja": 7600,
         "emoji": "",
         "venta": 1,
-        "activo": true
+        "activo": false
       },
       {
         "id": "r25",
@@ -1825,7 +1825,7 @@
         "caja": 4000,
         "emoji": "",
         "venta": 1,
-        "activo": true
+        "activo": false
       },
       {
         "id": "r26",
@@ -1837,7 +1837,7 @@
         "caja": 5700,
         "emoji": "",
         "venta": 1,
-        "activo": true
+        "activo": false
       }
     ],
     "smoking": [
