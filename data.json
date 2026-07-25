@@ -206,6 +206,16 @@
       "logo": "img/placeholder.webp",
       "activo": true,
       "sintacc": false
+    },
+    {
+      "id": "papeleria",
+      "sid": "fumadores",
+      "name": "Papeleria",
+      "emoji": "📦",
+      "desc": "Papeleria",
+      "logo": "img/logo-papeleria.webp",
+      "activo": true,
+      "sintacc": false
     }
   ],
   "products": {
@@ -2859,6 +2869,22 @@
         "emoji": "📦",
         "venta": 2,
         "destacado": true,
+        "sintacc": false,
+        "activo": true
+      }
+    ],
+    "papeleria": [
+      {
+        "id": "papeleria_1784987107993",
+        "name": "sobres prueba",
+        "unit": 10,
+        "caja": 10,
+        "cat": "papeleria",
+        "art": "10",
+        "present": "Pack x 50u",
+        "emoji": "📦",
+        "venta": 2,
+        "destacado": false,
         "sintacc": false,
         "activo": true
       }
