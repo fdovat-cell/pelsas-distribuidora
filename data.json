@@ -2934,14 +2934,15 @@
         "id": "pap5",
         "name": "Almohadilla para Sello 10x7",
         "cat": "papeleria",
-        "present": "Paq. x 12 · Caja x 240",
+        "present": "por unidad",
         "art": "P005",
-        "unit": 51.19,
-        "caja": 1023.8,
+        "unit": 52,
+        "caja": 52,
         "emoji": "📎",
         "venta": 1,
-        "activo": false,
-        "destacado": false
+        "activo": true,
+        "destacado": false,
+        "sintacc": false
       },
       {
         "id": "pap6",
