@@ -1326,7 +1326,7 @@ function renderCart(){
     const p=allP().find(x=>x.id===item.pid);if(!p)return'';
     const br=brands.find(x=>products[x.id]&&products[x.id].find(pp=>pp.id===item.pid));
     const sub=item.precio*item.qty;total+=sub;
-    return`<div class="cart-item"><span class="ci-em">${p.emoji}</span><div class="ci-info"><div class="ci-name">${p.name}</div><div class="ci-brand">${br?br.name:''} · ${item.label}</div><div class="ci-price">${fmt(sub)}</div><div class="ci-act"><button class="sqb" onclick="cQ('${k}',-1)">−</button><span class="ci-qty">${item.qty}</span><button class="sqb" onclick="cQ('${k}',1)">+</button><button class="rm-btn" onclick="rmItem('${k}')">Eliminar</button></div></div></div>`;
+    return`<div class="cart-item"><span class="ci-em">${p.emoji}</span><div class="ci-info"><div class="ci-name">${p.name}</div><div class="ci-brand">${br?br.name:''} · Art. ${p.art} · ${item.label}</div><div class="ci-price">${fmt(sub)}</div><div class="ci-act"><button class="sqb" onclick="cQ('${k}',-1)">−</button><span class="ci-qty">${item.qty}</span><button class="sqb" onclick="cQ('${k}',1)">+</button><button class="rm-btn" onclick="rmItem('${k}')">Eliminar</button></div></div></div>`;
   }).join('');
   if(checkout){
     foot.innerHTML=`<div class="pago-selector">
