@@ -4074,40 +4074,43 @@
         "id": "pap46",
         "name": "Etiqueta Precios Linea Roja x 10",
         "cat": "papeleria",
-        "present": "Paq. x 12 · Caja x 1200",
+        "present": "por unidad",
         "art": "P046",
-        "unit": 123.5,
-        "caja": 12350,
+        "unit": 124,
+        "caja": 124,
         "emoji": "📎",
         "venta": 1,
-        "activo": false,
-        "destacado": false
+        "activo": true,
+        "destacado": false,
+        "sintacc": false
       },
       {
         "id": "pap47",
         "name": "Etiquetas Autoadhesivas Rotola de Mano",
         "cat": "papeleria",
-        "present": "Paq. x 1 · Caja x 20",
+        "present": "Paq. x 1 ·",
         "art": "P047",
-        "unit": 166.4,
-        "caja": 3328,
+        "unit": 169,
+        "caja": 169,
         "emoji": "📎",
         "venta": 1,
-        "activo": false,
-        "destacado": false
+        "activo": true,
+        "destacado": false,
+        "sintacc": false
       },
       {
         "id": "pap48",
         "name": "Funda A4",
         "cat": "papeleria",
-        "present": "Paq. x 100 · Caja x 1000",
+        "present": "Paq. x 100 ·",
         "art": "P048",
-        "unit": 1.46,
-        "caja": 14.6,
+        "unit": 1.5,
+        "caja": 150,
         "emoji": "📎",
-        "venta": 1,
-        "activo": false,
-        "destacado": false
+        "venta": 2,
+        "activo": true,
+        "destacado": false,
+        "sintacc": false
       },
       {
         "id": "pap49",
@@ -4119,7 +4122,7 @@
         "caja": 673.2,
         "emoji": "📎",
         "venta": 1,
-        "activo": false,
+        "activo": true,
         "destacado": false
       },
       {
