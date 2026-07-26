@@ -5089,40 +5089,43 @@
         "id": "pap170",
         "name": "Sobre Comercial 11x22",
         "cat": "papeleria",
-        "present": "Paq. x 5000 · Caja x 1000",
+        "present": "Paq. x 100",
         "art": "P170",
         "unit": 3.25,
-        "caja": 0.65,
+        "caja": 325,
         "emoji": "📎",
-        "venta": 1,
-        "activo": false,
-        "destacado": false
+        "venta": 2,
+        "activo": true,
+        "destacado": false,
+        "sintacc": false
       },
       {
         "id": "pap98",
         "name": "Sobre Manila A4",
         "cat": "papeleria",
-        "present": "Paq. x 500 · Caja x 1000",
+        "present": "Paq. x 50",
         "art": "P098",
         "unit": 5.69,
-        "caja": 11.38,
+        "caja": 284,
         "emoji": "📎",
-        "venta": 1,
-        "activo": false,
-        "destacado": false
+        "venta": 2,
+        "activo": true,
+        "destacado": false,
+        "sintacc": false
       },
       {
         "id": "pap99",
         "name": "Tabla Aprietapapel A4 Acrilico",
         "cat": "papeleria",
-        "present": "Paq. x 12 · Caja x 144",
+        "present": "por unidad",
         "art": "P099",
-        "unit": 118.62,
-        "caja": 1423.44,
+        "unit": 120,
+        "caja": 120,
         "emoji": "📎",
         "venta": 1,
-        "activo": false,
-        "destacado": false
+        "activo": true,
+        "destacado": false,
+        "sintacc": false
       },
       {
         "id": "pap100",
@@ -5133,9 +5136,10 @@
         "unit": 15.6,
         "caja": 187.2,
         "emoji": "📎",
-        "venta": 1,
-        "activo": false,
-        "destacado": false
+        "venta": 2,
+        "activo": true,
+        "destacado": false,
+        "sintacc": false
       },
       {
         "id": "pap101",
