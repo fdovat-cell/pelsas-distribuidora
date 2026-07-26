@@ -5164,6 +5164,20 @@
         "venta": 1,
         "activo": false,
         "destacado": false
+      },
+      {
+        "id": "papeleria_1785093274261",
+        "name": "Fundas oficio",
+        "unit": 1.6,
+        "caja": 160,
+        "cat": "papeleria",
+        "art": "",
+        "present": "caja x 100",
+        "emoji": "📦",
+        "venta": 2,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true
       }
     ]
   }
