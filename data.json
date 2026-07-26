@@ -3281,14 +3281,15 @@
         "id": "pap16",
         "name": "Boligrafo Cristal Azul, Negro, Rojo y Verde",
         "cat": "papeleria",
-        "present": "Paq. x 50 · Caja x 4000",
+        "present": "Paq. x 50 ·",
         "art": "P016",
         "unit": 10.4,
-        "caja": 832,
+        "caja": 520,
         "emoji": "📎",
-        "venta": 1,
-        "activo": false,
-        "destacado": false
+        "venta": 2,
+        "activo": true,
+        "destacado": false,
+        "sintacc": false
       },
       {
         "id": "pap17",
