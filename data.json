@@ -3990,14 +3990,15 @@
         "id": "pap44",
         "name": "Cuchillas x 10",
         "cat": "papeleria",
-        "present": "Paq. x 1 · Caja x 360",
+        "present": "Paq. x 1 ·",
         "art": "P044",
-        "unit": 48.75,
-        "caja": 17550,
+        "unit": 49,
+        "caja": 49,
         "emoji": "📎",
         "venta": 1,
-        "activo": false,
-        "destacado": false
+        "activo": true,
+        "destacado": false,
+        "sintacc": false
       },
       {
         "id": "pap45",
