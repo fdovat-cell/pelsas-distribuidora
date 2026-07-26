@@ -3267,14 +3267,15 @@
         "id": "pap15",
         "name": "Borrador Pizarra",
         "cat": "papeleria",
-        "present": "Paq. x 12 · Caja x 480",
+        "present": "Paq. x 3",
         "art": "P015",
-        "unit": 21.12,
-        "caja": 844.8,
+        "unit": 22,
+        "caja": 66,
         "emoji": "📎",
-        "venta": 1,
-        "activo": false,
-        "destacado": false
+        "venta": 2,
+        "activo": true,
+        "destacado": false,
+        "sintacc": false
       },
       {
         "id": "pap16",
