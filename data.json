@@ -3253,14 +3253,15 @@
         "id": "pap14",
         "name": "Block Cartulina A4",
         "cat": "papeleria",
-        "present": "Paq. x 10 · Caja x 200",
+        "present": "Paq. x 3",
         "art": "P014",
-        "unit": 92.62,
-        "caja": 1852.4,
+        "unit": 93,
+        "caja": 279,
         "emoji": "📎",
         "venta": 1,
-        "activo": false,
-        "destacado": false
+        "activo": true,
+        "destacado": false,
+        "sintacc": false
       },
       {
         "id": "pap15",
