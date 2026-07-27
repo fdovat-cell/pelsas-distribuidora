@@ -2265,9 +2265,10 @@
         "art": "31817",
         "present": "Pack x 25u.",
         "emoji": "📦",
-        "venta": 1,
+        "venta": 2,
         "activo": true,
-        "destacado": true
+        "destacado": true,
+        "sintacc": false
       },
       {
         "id": "encendedores_1782233203447",
@@ -2302,9 +2303,10 @@
         "art": "8498",
         "present": "blister x 12",
         "emoji": "📦",
-        "venta": 1,
+        "venta": 2,
         "activo": true,
-        "destacado": true
+        "destacado": true,
+        "sintacc": false
       },
       {
         "id": "encendedores_1782233543364",
@@ -2329,8 +2331,10 @@
         "art": "16741",
         "present": "pack x 25u",
         "emoji": "📦",
-        "venta": 1,
-        "activo": true
+        "venta": 2,
+        "activo": true,
+        "destacado": false,
+        "sintacc": false
       },
       {
         "id": "encendedores_1782233775580",
@@ -2341,9 +2345,10 @@
         "art": "19251",
         "present": "Pack x 50u",
         "emoji": "📦",
-        "venta": 1,
+        "venta": 2,
         "activo": true,
-        "destacado": true
+        "destacado": true,
+        "sintacc": false
       },
       {
         "id": "encendedores_1782233865919",
