@@ -2315,8 +2315,10 @@
         "art": "7200",
         "present": "blister x 12u",
         "emoji": "📦",
-        "venta": 1,
-        "activo": true
+        "venta": 2,
+        "activo": true,
+        "destacado": false,
+        "sintacc": false
       },
       {
         "id": "encendedores_1782233635311",
