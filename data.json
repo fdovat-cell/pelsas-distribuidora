@@ -699,11 +699,13 @@
         "cat": "mani",
         "present": "Caja x 30 u 100g",
         "art": "3644",
-        "unit": 32.01,
-        "caja": 960.4,
-        "emoji": "",
+        "unit": 37.9,
+        "caja": 1137,
+        "emoji": "📦",
         "venta": 2,
-        "activo": true
+        "activo": true,
+        "destacado": false,
+        "sintacc": false
       },
       {
         "id": "d43",
