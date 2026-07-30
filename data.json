@@ -685,11 +685,13 @@
         "cat": "mani",
         "present": "Caja x 30 u 70g",
         "art": "3642",
-        "unit": 23.93,
-        "caja": 717.83,
-        "emoji": "",
+        "unit": 29.7,
+        "caja": 891,
+        "emoji": "📦",
         "venta": 2,
-        "activo": true
+        "activo": true,
+        "destacado": false,
+        "sintacc": false
       },
       {
         "id": "d42",
