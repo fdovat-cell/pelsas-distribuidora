@@ -615,9 +615,11 @@
         "art": "5730",
         "unit": 29.8,
         "caja": 894.1,
-        "emoji": "",
-        "venta": 1,
-        "activo": true
+        "emoji": "📦",
+        "venta": 2,
+        "activo": true,
+        "destacado": false,
+        "sintacc": false
       },
       {
         "id": "d36",
