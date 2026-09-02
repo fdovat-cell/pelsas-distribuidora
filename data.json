@@ -597,15 +597,17 @@
       },
       {
         "id": "d34",
-        "name": "Maní japonés 70g",
+        "name": "Maní Dori japonés 70g",
         "cat": "mani",
         "present": "Caja x 30 bolsas 70g",
         "art": "5725",
-        "unit": 22.09,
-        "caja": 662.69,
-        "emoji": "",
+        "unit": 23.6,
+        "caja": 708,
+        "emoji": "📦",
         "venta": 2,
-        "activo": true
+        "activo": true,
+        "destacado": false,
+        "sintacc": false
       },
       {
         "id": "d35",
@@ -683,12 +685,12 @@
       },
       {
         "id": "d41",
-        "name": "Maní con chocolate 70g",
+        "name": "Maní Dori con chocolate 70g",
         "cat": "mani",
         "present": "Caja x 30 u 70g",
         "art": "3642",
-        "unit": 29.7,
-        "caja": 891,
+        "unit": 24.6,
+        "caja": 738,
         "emoji": "📦",
         "venta": 2,
         "activo": true,
