@@ -2572,6 +2572,20 @@
         "venta": 2,
         "activo": true,
         "destacado": true
+      },
+      {
+        "id": "bombones_1788387338660",
+        "name": "Bombonera E.Wedel Barrilels Licor",
+        "unit": 298,
+        "caja": 298,
+        "cat": "Bombones",
+        "art": "4993",
+        "present": "",
+        "emoji": "📦",
+        "venta": 1,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true
       }
     ],
     "caramelos": [
