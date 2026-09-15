@@ -471,9 +471,11 @@
         "art": "6542",
         "unit": 30.18,
         "caja": 482.8,
-        "emoji": "",
-        "venta": 2,
-        "activo": true
+        "emoji": "📦",
+        "venta": 1,
+        "activo": true,
+        "destacado": false,
+        "sintacc": false
       },
       {
         "id": "d24",
