@@ -1649,12 +1649,13 @@
         "cat": "sin azucar",
         "present": "Caja x 24u",
         "art": "4781",
-        "unit": 144,
-        "caja": 3456,
-        "emoji": "",
-        "venta": 2,
+        "unit": 157,
+        "caja": 3768,
+        "emoji": "📦",
+        "venta": 1,
         "activo": true,
-        "sintacc": true
+        "sintacc": true,
+        "destacado": false
       },
       {
         "id": "sm_3",
