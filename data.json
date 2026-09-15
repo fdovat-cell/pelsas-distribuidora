@@ -1691,10 +1691,11 @@
         "art": "4665",
         "unit": 89.5,
         "caja": 1611,
-        "emoji": "",
-        "venta": 2,
+        "emoji": "📦",
+        "venta": 1,
         "activo": true,
-        "sintacc": true
+        "sintacc": true,
+        "destacado": false
       },
       {
         "id": "sm_6",
