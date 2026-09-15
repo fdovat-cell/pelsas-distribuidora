@@ -1663,12 +1663,13 @@
         "cat": "sin gluten",
         "present": "Caja x 24u",
         "art": "4661",
-        "unit": 110.5,
-        "caja": 2652,
-        "emoji": "",
-        "venta": 2,
+        "unit": 125,
+        "caja": 3000,
+        "emoji": "📦",
+        "venta": 1,
         "activo": true,
-        "sintacc": true
+        "sintacc": true,
+        "destacado": false
       },
       {
         "id": "sm_4",
