@@ -1702,12 +1702,13 @@
         "cat": "sin gluten",
         "present": "Caja x 18u",
         "art": "4662",
-        "unit": 105,
-        "caja": 1890,
-        "emoji": "",
-        "venta": 2,
+        "unit": 123,
+        "caja": 2217,
+        "emoji": "📦",
+        "venta": 1,
         "activo": true,
-        "sintacc": true
+        "sintacc": true,
+        "destacado": false
       },
       {
         "id": "sm_7",
