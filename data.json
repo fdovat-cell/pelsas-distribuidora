@@ -617,10 +617,10 @@
         "cat": "mani",
         "present": "Caja x 30 bolsas 100g",
         "art": "5730",
-        "unit": 29.8,
-        "caja": 894.1,
+        "unit": 31.7,
+        "caja": 951,
         "emoji": "📦",
-        "venta": 2,
+        "venta": 1,
         "activo": true,
         "destacado": false,
         "sintacc": false
