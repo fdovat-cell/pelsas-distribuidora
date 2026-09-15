@@ -1486,6 +1486,20 @@
         "emoji": "",
         "venta": 2,
         "activo": true
+      },
+      {
+        "id": "santaelena_1789495485956",
+        "name": "Snack Trofeu churrasc 40gr caja x 20",
+        "unit": 14.5,
+        "caja": 290,
+        "cat": "Santa Elena",
+        "art": "",
+        "present": "Caja x 20u 40g",
+        "emoji": "📦",
+        "venta": 2,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true
       }
     ],
     "celisano": [
