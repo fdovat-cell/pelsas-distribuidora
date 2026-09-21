@@ -5313,6 +5313,21 @@
         "activo": true
       }
     ],
-    "barquilandia": []
+    "barquilandia": [
+      {
+        "id": "barquilandia_1789989897034",
+        "name": "Antorchas Barquilandia (8u)",
+        "unit": 96,
+        "caja": 2304,
+        "cat": "barquillos",
+        "art": "6766",
+        "present": "Caja x 24u",
+        "emoji": "📦",
+        "venta": 1,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true
+      }
+    ]
   }
 }
