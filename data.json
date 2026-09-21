@@ -216,6 +216,16 @@
       "logo": "",
       "activo": true,
       "sintacc": false
+    },
+    {
+      "id": "barquilandia",
+      "sid": "alimentos",
+      "name": "Barquilandia",
+      "emoji": "📦",
+      "desc": "",
+      "logo": "img/placeholder.webp",
+      "activo": true,
+      "sintacc": false
     }
   ],
   "products": {
@@ -5302,6 +5312,7 @@
         "sintacc": false,
         "activo": true
       }
-    ]
+    ],
+    "barquilandia": []
   }
 }
