@@ -5383,6 +5383,20 @@
         "destacado": false,
         "sintacc": false,
         "activo": true
+      },
+      {
+        "id": "barquilandia_1790168883846",
+        "name": "Barquillos finos con línea de color 40u.",
+        "unit": 124,
+        "caja": 2232,
+        "cat": "Barquillos",
+        "art": "6770",
+        "present": "caja x 18u.",
+        "emoji": "📦",
+        "venta": 1,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true
       }
     ]
   }
