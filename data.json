@@ -5327,6 +5327,34 @@
         "destacado": false,
         "sintacc": false,
         "activo": true
+      },
+      {
+        "id": "barquilandia_1790168403621",
+        "name": "Barquillos Barquilandia",
+        "unit": 131,
+        "caja": 2620,
+        "cat": "barquillos",
+        "art": "",
+        "present": "caja x 20u.",
+        "emoji": "📦",
+        "venta": 1,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true
+      },
+      {
+        "id": "barquilandia_1790168497434",
+        "name": "Cucuruchos Barquilandia 6u",
+        "unit": 131,
+        "caja": 1572,
+        "cat": "Cucuruchos",
+        "art": "",
+        "present": "caja x 12",
+        "emoji": "📦",
+        "venta": 1,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true
       }
     ]
   }
