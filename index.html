@@ -1351,8 +1351,6 @@ function buildOrderMsg(){
   const t=(document.getElementById('cft')||{}).value||'';
   const d=(document.getElementById('cfd')||{}).value||'';
   const no=(document.getElementById('cfno')||{}).value||'';
-  if(!n||!t){alert('Completá nombre y teléfono');return null}
-  if(!pagoMethod){alert('Seleccioná un método de pago');return null}
   const pagoLabels={transferencia:'🏦 Transferencia bancaria',qr:'📱 QR Brou',entrega:'🚚 Contra entrega (efectivo o cheque)'};
   const keys=Object.keys(cart).filter(k=>cart[k]&&cart[k].qty>0);
   let msg='*Pedido PelSAS*\n\n';let total=0;
@@ -1363,7 +1361,11 @@ function buildOrderMsg(){
     const sub=item.precio*item.qty;total+=sub;
     msg+=`• [${p.art||'s/n'}] ${br?br.name+' · ':''}${p.name} (${item.label})\n  ${item.qty} × $${item.precio.toFixed(2)} = $${sub.toFixed(2)}\n`;
   });
-  msg+=`\n*Total estimado: $${total.toFixed(2)}*\n\n💳 Pago: ${pagoLabels[pagoMethod]}\n\n👤 ${n}\n📱 ${t}`;
+  msg+=`\n*Total estimado: $${total.toFixed(2)}*`;
+  if(pagoMethod)msg+=`\n\n💳 Pago: ${pagoLabels[pagoMethod]}`;
+  if(n||t)msg+=`\n`;
+  if(n)msg+=`\n👤 ${n}`;
+  if(t)msg+=`\n📱 ${t}`;
   if(d)msg+=`\n📍 ${d}`;if(no)msg+=`\n📝 ${no}`;
   return {msg,n};
 }
