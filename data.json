@@ -226,6 +226,16 @@
       "logo": "img/logo-barquilandia.webp",
       "activo": true,
       "sintacc": false
+    },
+    {
+      "id": "valman",
+      "sid": "fumadores",
+      "name": "Valman",
+      "emoji": "📦",
+      "desc": "Papeleria",
+      "logo": "img/placeholder.webp",
+      "activo": true,
+      "sintacc": false
     }
   ],
   "products": {
@@ -5398,6 +5408,7 @@
         "sintacc": false,
         "activo": true
       }
-    ]
+    ],
+    "valman": []
   }
 }
