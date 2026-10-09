@@ -5409,6 +5409,35 @@
         "activo": true
       }
     ],
-    "valman": []
+    "valman": [
+      {
+        "id": "valman_1791551255715",
+        "name": "Rollo térmico para POS 57mm",
+        "unit": 12.5,
+        "caja": 976,
+        "cat": "rollos térmicos",
+        "art": "900",
+        "present": "Caja x 80 u.",
+        "emoji": "📦",
+        "venta": 1,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true
+      },
+      {
+        "id": "valman_1791551372808",
+        "name": "Rollo térmico para facturar 80mm",
+        "unit": 54.9,
+        "caja": 2196,
+        "cat": "rollos térmicos",
+        "art": "901",
+        "present": "Caja x 40 u.",
+        "emoji": "📦",
+        "venta": 1,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true
+      }
+    ]
   }
 }
