@@ -5437,6 +5437,20 @@
         "destacado": false,
         "sintacc": false,
         "activo": true
+      },
+      {
+        "id": "valman_1791551475309",
+        "name": "Papel fotocopia Eclipse 75gr A4",
+        "unit": 215,
+        "caja": 1075,
+        "cat": "Papeleria",
+        "art": "910",
+        "present": "Caja x 5 u.",
+        "emoji": "📦",
+        "venta": 1,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true
       }
     ]
   }
