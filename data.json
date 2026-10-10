@@ -236,6 +236,16 @@
       "logo": "img/placeholder.webp",
       "activo": true,
       "sintacc": false
+    },
+    {
+      "id": "budinespanettonesturrones",
+      "sid": "alimentos",
+      "name": "Budines-Panettones-Turrones",
+      "emoji": "📦",
+      "desc": "",
+      "logo": "img/placeholder.webp",
+      "activo": true,
+      "sintacc": false
     }
   ],
   "products": {
@@ -5452,6 +5462,7 @@
         "sintacc": false,
         "activo": true
       }
-    ]
+    ],
+    "budinespanettonesturrones": []
   }
 }
