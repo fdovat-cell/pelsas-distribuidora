@@ -5596,6 +5596,20 @@
         "destacado": false,
         "sintacc": false,
         "activo": true
+      },
+      {
+        "id": "budinespanettonesturrones_1791672497007",
+        "name": "Budín chocolate 100g",
+        "unit": 26.8,
+        "caja": 321.6,
+        "cat": "Budines Romanato",
+        "art": "3875",
+        "present": "",
+        "emoji": "📦",
+        "venta": 2,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true
       }
     ]
   }
