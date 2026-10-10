@@ -5473,7 +5473,7 @@
     "budinespanettonesturrones": [
       {
         "id": "budinespanettonesturrones_1791668260276",
-        "name": "Bundín marmolado",
+        "name": "Budín marmolado 200gr",
         "unit": 52.4,
         "caja": 1257.6,
         "cat": "Budines Santa Edwiges",
@@ -5497,7 +5497,7 @@
         "venta": 1,
         "destacado": false,
         "sintacc": false,
-        "activo": true
+        "activo": false
       }
     ]
   }
