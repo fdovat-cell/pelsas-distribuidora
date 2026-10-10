@@ -5498,6 +5498,20 @@
         "destacado": false,
         "sintacc": false,
         "activo": false
+      },
+      {
+        "id": "budinespanettonesturrones_1791668744477",
+        "name": "Budín chocolate 200gr",
+        "unit": 52.4,
+        "caja": 1257.6,
+        "cat": "Budines Santa Edwiges",
+        "art": "3705",
+        "present": "Caja x 24u",
+        "emoji": "📦",
+        "venta": 1,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true
       }
     ]
   }
