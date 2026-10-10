@@ -245,7 +245,14 @@
       "desc": "",
       "logo": "img/placeholder.webp",
       "activo": true,
-      "sintacc": false
+      "sintacc": false,
+      "subcats": [
+        "Budines Santa Edwiges",
+        "Budines Romanato",
+        "Pantettones",
+        "Panettones Romanato",
+        "Turrones Ronda"
+      ]
     }
   ],
   "products": {
@@ -5463,6 +5470,35 @@
         "activo": true
       }
     ],
-    "budinespanettonesturrones": []
+    "budinespanettonesturrones": [
+      {
+        "id": "budinespanettonesturrones_1791668260276",
+        "name": "Bundín marmolado",
+        "unit": 52.4,
+        "caja": 1257.6,
+        "cat": "Budines Santa Edwiges",
+        "art": "3704",
+        "present": "Caja x 24u.",
+        "emoji": "📦",
+        "venta": 1,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true
+      },
+      {
+        "id": "budinespanettonesturrones_1791668373731",
+        "name": "Budín Chcolate",
+        "unit": 52.4,
+        "caja": 1257.6,
+        "cat": "Budines Santa Edwiges",
+        "art": "3705",
+        "present": "Caja x 24u",
+        "emoji": "📦",
+        "venta": 1,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true
+      }
+    ]
   }
 }
