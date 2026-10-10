@@ -5582,6 +5582,20 @@
         "destacado": false,
         "sintacc": false,
         "activo": true
+      },
+      {
+        "id": "budinespanettonesturrones_1791671373361",
+        "name": "Budín mezclado 100g",
+        "unit": 26.8,
+        "caja": 321.6,
+        "cat": "Budines Romanato",
+        "art": "3876",
+        "present": "Caja x 12 u.",
+        "emoji": "📦",
+        "venta": 1,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true
       }
     ]
   }
