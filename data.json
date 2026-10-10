@@ -253,6 +253,17 @@
         "Panettones Romanato",
         "Turrones Ronda"
       ]
+    },
+    {
+      "id": "bebidasfiestasfrizz",
+      "sid": "alimentos",
+      "name": "Bebidas \"Fiestas Frizz \"",
+      "emoji": "📦",
+      "desc": "Bebidas-Frizz",
+      "logo": "",
+      "activo": true,
+      "sintacc": false,
+      "sinfoto": true
     }
   ],
   "products": {
@@ -5667,6 +5678,7 @@
         "sintacc": false,
         "activo": true
       }
-    ]
+    ],
+    "bebidasfiestasfrizz": []
   }
 }
