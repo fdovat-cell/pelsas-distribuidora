@@ -5652,6 +5652,20 @@
         "destacado": false,
         "sintacc": false,
         "activo": true
+      },
+      {
+        "id": "budinespanettonesturrones_1791673432351",
+        "name": "Budín naranja 200g",
+        "unit": 61.9,
+        "caja": 1485.6,
+        "cat": "Budines Romanato",
+        "art": "3884",
+        "present": "Caja x 24u",
+        "emoji": "📦",
+        "venta": 1,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true
       }
     ]
   }
