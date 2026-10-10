@@ -5512,6 +5512,20 @@
         "destacado": false,
         "sintacc": false,
         "activo": true
+      },
+      {
+        "id": "budinespanettonesturrones_1791669530710",
+        "name": "Budín con gotas de chocolate 200gr",
+        "unit": 52.4,
+        "caja": 1257.6,
+        "cat": "Budines Santa Edwiges",
+        "art": "3703",
+        "present": "Caja x 24u",
+        "emoji": "📦",
+        "venta": 1,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true
       }
     ]
   }
