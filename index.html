@@ -260,6 +260,11 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 .fbtn:hover{border-color:var(--red);color:var(--red)}
 .fbtn.active{background:var(--red);border-color:var(--red);color:#fff}
 
+.sub-hdr{grid-column:1/-1;font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--ink);padding:10px 0 6px;margin-top:6px;border-bottom:1px solid var(--border);display:flex;align-items:baseline;gap:8px}
+.sub-hdr:first-child{margin-top:0}
+.sub-hdr em{font-family:'DM Sans',sans-serif;font-style:normal;font-size:11px;font-weight:400;color:var(--light)}
+.cat-sub-hdr{grid-column:1/-1;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mid);padding:8px 0 4px;border-bottom:1px solid var(--border);margin-top:6px}
+.cat-sub-hdr:first-child{margin-top:0}
 .prod-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px}
 .prod-card{
   background:var(--white);border:1px solid var(--border);
@@ -871,7 +876,7 @@ function renderCatContent(){
         ${hasFree?`<span class="cat-free-badge">🌿 Free</span>`:''}
         <span class="cat-brand-count">${ps.length} prod.</span>
       </div>
-      <div class="cat-prod-grid">${ps.map(p=>{
+      <div class="cat-prod-grid">${renderCardsGrouped(ps,b.id,(lst)=>lst.map(p=>{
         const free=isFree(b.id,p);
         const k=p.id+'_'+(p.venta===1?'unit':'caja');
         const inCart=cart[k]&&cart[k].qty>0;
@@ -886,7 +891,7 @@ function renderCatContent(){
           </div>
           <button class="cat-prod-add${inCart?' in-cart':''}" onclick="addC('${p.id}')">${inCart?'✓':'+ Agregar'}</button>
         </div>`;
-      }).join('')}</div>
+      }).join(''),'cat-sub-hdr',false)}</div>
     </div>`;
   }).join('');
 }
@@ -1219,7 +1224,7 @@ function renderBrandPage(){
         ${cats.map(c=>`<button class="fbtn${activeFilter===c?' active':''}" onclick="setF(this.dataset.f,this)" data-f="${String(c).replace(/&/g,'&amp;').replace(/"/g,'&quot;')}">${c==='baja rotacion'?'consultar disp.':c}</button>`).join('')}
       </div>
     </div>
-    <div class="prod-grid" id="pgrid">${renderCards(getFiltered(ps),curBrand)}</div>
+    <div class="prod-grid" id="pgrid">${gridHtml(getFiltered(ps),curBrand)}</div>
   </div>`;
 }
 
@@ -1233,6 +1238,22 @@ function getFiltered(ps){
   });
 }
 
+function gridHtml(list,bid){
+  return activeFilter==='todos'?renderCardsGrouped(list,bid,renderCards,'sub-hdr',true):renderCards(list,bid);
+}
+function groupBySub(list,bid){
+  const b=getBrand(bid)||{};
+  const order=Array.isArray(b.subcats)?b.subcats:[];
+  const groups=new Map();
+  order.forEach(c=>groups.set(c,[]));
+  list.forEach(p=>{const c=p.cat||'';if(!groups.has(c))groups.set(c,[]);groups.get(c).push(p)});
+  return [...groups].filter(([,ps])=>ps.length);
+}
+function renderCardsGrouped(filtered,bid,cardsFn,hdrCls,withCount){
+  const groups=groupBySub(filtered,bid);
+  if(groups.length<2||!groups.some(([c])=>c))return cardsFn(filtered,bid);
+  return groups.map(([c,ps])=>`<div class="${hdrCls}">${c||'Otros'}${withCount?`<em>${ps.length} prod.</em>`:''}</div>${cardsFn(ps,bid)}`).join('');
+}
 function renderCards(filtered,bid){
   if(!filtered.length)return'<div class="empty-g">Sin resultados</div>';
   return filtered.map(p=>{
@@ -1390,7 +1411,7 @@ function sendOrder(){
 }
 function newOrder(){done=false;toggleCart()}
 function waConsulta(){window.open(`https://wa.me/${WA}?text=${encodeURIComponent('Hola! Quería hacer una consulta.')}`,'_blank')}
-function reGrid(){const g=document.getElementById('pgrid');if(!g)return;g.innerHTML=renderCards(getFiltered(products[curBrand]||[]),curBrand)}
+function reGrid(){const g=document.getElementById('pgrid');if(!g)return;g.innerHTML=gridHtml(getFiltered(products[curBrand]||[]),curBrand)}
 
 /* BUSCADOR PREDICTIVO */
 function _norm(s){return(s||'').toString().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'')}
