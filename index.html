@@ -350,6 +350,27 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 }
 .abtn:hover{background:var(--ink2)}
 .abtn.added{background:#1E6B3C}
+/* Marcas sin foto: lista compacta */
+.prod-grid.lista{grid-template-columns:repeat(auto-fill,minmax(380px,1fr));gap:8px}
+.prod-row{background:var(--white);border:1px solid var(--border);border-radius:11px;padding:10px 14px;display:flex;align-items:center;gap:6px 14px;flex-wrap:wrap;transition:border-color .15s,box-shadow .15s}
+.prod-row:hover{border-color:var(--border2);box-shadow:0 3px 12px rgba(26,26,24,.06)}
+.prod-row.flash{border-color:var(--red);box-shadow:0 0 0 3px rgba(192,42,42,.18);animation:flashPulse 1.6s ease-out}
+.pr-info{flex:1 1 170px;min-width:0}
+.pr-name{font-family:'Playfair Display',serif;font-size:13px;font-weight:700;line-height:1.3;color:var(--ink)}
+.pr-sub{font-size:10px;color:var(--light);letter-spacing:.04em;margin-top:2px}
+.pr-price{text-align:right;min-width:92px}
+.pr-pu{font-size:16px;font-weight:500;color:var(--ink);white-space:nowrap}
+.pr-pu em{font-size:10px;font-style:normal;color:var(--light)}
+.pr-pc{font-size:11px;color:var(--mid);margin-top:1px;white-space:nowrap}
+.pr-qty{margin-top:0}
+.pr-qty .abtn{flex:none;padding:8px 14px}
+@media(max-width:640px){
+  .prod-grid.lista{grid-template-columns:1fr;gap:6px}
+  .prod-row{padding:9px 11px}
+  .pr-info{flex:1 1 100%}
+  .pr-price{text-align:left;flex:1}
+  .pr-qty .abtn{padding:9px 12px}
+}
 .prod-card.baja-rot{border-style:dashed;opacity:.85}
 .baja-rot-tag{font-size:10px;color:var(--mid);background:var(--cream2);border-radius:4px;padding:2px 6px;display:inline-block;margin-bottom:2px}
 
@@ -876,7 +897,7 @@ function renderCatContent(){
         ${hasFree?`<span class="cat-free-badge">🌿 Free</span>`:''}
         <span class="cat-brand-count">${ps.length} prod.</span>
       </div>
-      <div class="cat-prod-grid">${renderCardsGrouped(ps,b.id,(lst)=>lst.map(p=>{
+      ${isSinFoto(b.id)?`<div class="prod-grid lista">${renderCardsGrouped(ps.filter(p=>p.activo!==false),b.id,renderCardsLista,'sub-hdr',true)}</div>`:`<div class="cat-prod-grid">${renderCardsGrouped(ps,b.id,(lst)=>lst.map(p=>{
         const free=isFree(b.id,p);
         const k=p.id+'_'+(p.venta===1?'unit':'caja');
         const inCart=cart[k]&&cart[k].qty>0;
@@ -891,7 +912,7 @@ function renderCatContent(){
           </div>
           <button class="cat-prod-add${inCart?' in-cart':''}" onclick="addC('${p.id}')">${inCart?'✓':'+ Agregar'}</button>
         </div>`;
-      }).join(''),'cat-sub-hdr',false)}</div>
+      }).join(''),'cat-sub-hdr',false)}</div>`}
     </div>`;
   }).join('');
 }
@@ -1082,7 +1103,7 @@ function renderSintacc(){
           <span class="sintacc-brand-count">${ps.length} productos</span>
         </div>
         ${desc?`<div class="sintacc-brand-desc">${desc}</div>`:''}
-        <div class="prod-grid">${renderCards(ps,b.id)}</div>
+        <div class="${gridCls(b.id)}">${cardsFor(b.id)(ps,b.id)}</div>
       </div>`;
     }).join('')}
   </div>`;
@@ -1224,7 +1245,7 @@ function renderBrandPage(){
         ${cats.map(c=>`<button class="fbtn${activeFilter===c?' active':''}" onclick="setF(this.dataset.f,this)" data-f="${String(c).replace(/&/g,'&amp;').replace(/"/g,'&quot;')}">${c==='baja rotacion'?'consultar disp.':c}</button>`).join('')}
       </div>
     </div>
-    <div class="prod-grid" id="pgrid">${gridHtml(getFiltered(ps),curBrand)}</div>
+    <div class="${gridCls(curBrand)}" id="pgrid">${gridHtml(getFiltered(ps),curBrand)}</div>
   </div>`;
 }
 
@@ -1238,8 +1259,35 @@ function getFiltered(ps){
   });
 }
 
+const isSinFoto=bid=>!!(getBrand(bid)||{}).sinfoto;
+const cardsFor=bid=>isSinFoto(bid)?renderCardsLista:renderCards;
+const gridCls=bid=>isSinFoto(bid)?'prod-grid lista':'prod-grid';
 function gridHtml(list,bid){
-  return activeFilter==='todos'?renderCardsGrouped(list,bid,renderCards,'sub-hdr',true):renderCards(list,bid);
+  const fn=cardsFor(bid);
+  return activeFilter==='todos'?renderCardsGrouped(list,bid,fn,'sub-hdr',true):fn(list,bid);
+}
+function renderCardsLista(filtered,bid){
+  if(!filtered.length)return'<div class="empty-g">Sin resultados</div>';
+  return filtered.map(p=>{
+    const modo=p.venta===1?'unit':'caja';
+    const k=p.id+'_'+modo;
+    const inCart=cart[k]&&cart[k].qty>0;
+    const precio=modo==='unit'?p.unit:p.caja;
+    const sub=[p.art?'Art. '+p.art:'',p.present||''].filter(Boolean).join(' · ');
+    return`<div class="prod-row" data-pid="${p.id}">
+      <div class="pr-info"><div class="pr-name">${p.name}</div>${sub?`<div class="pr-sub">${sub}</div>`:''}</div>
+      <div class="pr-price">
+        <div class="pr-pu">${fmt(precio)}<em> / ${modo==='unit'?'unidad':'pack'}</em></div>
+        <div class="pr-pc">${modo==='unit'?`Pack: ${fmt(p.caja)}`:`Unidad: ${fmt(p.unit)}`}</div>
+      </div>
+      <div class="qty-row pr-qty">
+        <button class="qbtn" onclick="chQ('${p.id}',-1)">−</button>
+        <span class="qnum" id="q${p.id}">${qtys[p.id]}</span>
+        <button class="qbtn" onclick="chQ('${p.id}',1)">+</button>
+        <button class="abtn${inCart?' added':''}" onclick="addC('${p.id}')">${inCart?'En pedido':'Agregar'}</button>
+      </div>
+    </div>`;
+  }).join('');
 }
 function groupBySub(list,bid){
   const b=getBrand(bid)||{};

@@ -350,6 +350,13 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
         <input type="text" id="fb-logo" placeholder="img/logo-dori.webp">
       </div>
     </div>
+    <div class="form-row">
+      <label>Diseño de los productos</label>
+      <select id="fb-sinfoto">
+        <option value="0">Con foto (tarjetas con imagen)</option>
+        <option value="1">Sin foto (lista compacta)</option>
+      </select>
+    </div>
     <div class="form-row" style="flex-direction:row;align-items:center;gap:8px;">
       <input type="checkbox" id="fb-sintacc" style="width:auto;">
       <label for="fb-sintacc" style="margin:0;">Aparece en Sin TACC / Sin Azúcar</label>
@@ -579,7 +586,7 @@ function renderContent() {
       ? `<div class="empty-state"><span class="empty-icon">📦</span><div>No hay productos${searchQ?' para "'+searchQ+'"':''}</div></div>`
       : `<table class="prod-table">
           <thead><tr>
-            <th>Foto</th>
+            ${brandSinFoto(currentBrand) ? '' : '<th>Foto</th>'}
             <th>Producto</th>
             <th>Subcat.</th>
             <th>Art.</th>
@@ -594,10 +601,11 @@ function renderContent() {
   `;
 }
 
+const brandSinFoto = bid => !!((data.brands.find(b => b.id === bid)) || {}).sinfoto;
 function renderRow(p, bid) {
   const inactive = p.activo === false ? ' inactive-row' : '';
   return `<tr class="${inactive}" id="row-${p.id}">
-    <td><img class="prod-img" src="img/${p.art}.webp" alt="" onerror="this.outerHTML='<span style=\\'font-size:24px\\'>${p.emoji}</span>'"></td>
+    ${brandSinFoto(bid) ? '' : `<td><img class="prod-img" src="img/${p.art}.webp" alt="" onerror="this.outerHTML='<span style=\\'font-size:24px\\'>${p.emoji}</span>'"></td>`}
     <td><div class="prod-name-cell">${p.destacado?'<span title="Incluido en Modo Visita">🤝 </span>':''}${p.name}</div></td>
     <td><span class="prod-cat">${escHtml(p.cat||"—")}</span></td>
     <td><span class="art-badge">${p.art}</span></td>
@@ -1495,6 +1503,7 @@ function openBrandModal(bid, sid) {
     document.getElementById('fb-emoji').value = b.emoji || '';
     document.getElementById('fb-logo').value = b.logo || '';
     document.getElementById('fb-sintacc').checked = !!b.sintacc;
+    document.getElementById('fb-sinfoto').value = b.sinfoto ? '1' : '0';
   } else {
     newBrandSid = sid || 'alimentos';
     document.getElementById('brand-modal-title').textContent = 'Nueva marca';
@@ -1506,6 +1515,7 @@ function openBrandModal(bid, sid) {
     document.getElementById('fb-emoji').value = '📦';
     document.getElementById('fb-logo').value = '';
     document.getElementById('fb-sintacc').checked = false;
+    document.getElementById('fb-sinfoto').value = '0';
   }
   document.getElementById('brand-modal-bg').classList.add('open');
   document.getElementById('fb-name').focus();
@@ -1527,20 +1537,21 @@ function saveBrand() {
   const sid  = document.getElementById('fb-sid').value;
   const desc = document.getElementById('fb-desc').value.trim();
   const emoji = document.getElementById('fb-emoji').value.trim() || '📦';
-  const logo = document.getElementById('fb-logo').value.trim() || 'img/placeholder.webp';
+  const sinfoto = document.getElementById('fb-sinfoto').value === '1';
+  const logo = document.getElementById('fb-logo').value.trim() || (sinfoto ? '' : 'img/placeholder.webp');
   const sintacc = document.getElementById('fb-sintacc').checked;
 
   if (!name) { alert('Completá el nombre de la marca'); return; }
 
   if (editingBrandId) {
     const b = data.brands.find(x => x.id === editingBrandId);
-    Object.assign(b, { name, sid, desc, emoji, logo, sintacc });
+    Object.assign(b, { name, sid, desc, emoji, logo, sintacc, sinfoto });
   } else {
     let id = document.getElementById('fb-id').value.trim();
     id = id ? slugify(id) : slugify(name);
     if (!id) { alert('Ingresá un ID válido para la marca'); return; }
     if (data.brands.some(b => b.id === id)) { alert('Ya existe una marca con ese ID'); return; }
-    data.brands.push({ id, sid, name, emoji, desc, logo, activo: true, sintacc });
+    data.brands.push({ id, sid, name, emoji, desc, logo, activo: true, sintacc, sinfoto });
     if (!data.products[id]) data.products[id] = [];
   }
 
