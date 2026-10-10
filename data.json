@@ -5568,6 +5568,20 @@
         "destacado": false,
         "sintacc": false,
         "activo": true
+      },
+      {
+        "id": "budinespanettonesturrones_1791670971600",
+        "name": "Budín relleno con limón 250g",
+        "unit": 61.9,
+        "caja": 1485.6,
+        "cat": "Budines Santa Edwiges",
+        "art": "3768",
+        "present": "Caja x 24u",
+        "emoji": "📦",
+        "venta": 1,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true
       }
     ]
   }
