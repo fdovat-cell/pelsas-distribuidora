@@ -5526,6 +5526,20 @@
         "destacado": false,
         "sintacc": false,
         "activo": true
+      },
+      {
+        "id": "budinespanettonesturrones_1791669785503",
+        "name": "Budín naranja 200gr",
+        "unit": 52.4,
+        "caja": 1257.6,
+        "cat": "Budines Santa Edwiges",
+        "art": "3818",
+        "present": "Caja x 24u",
+        "emoji": "📦",
+        "venta": 1,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true
       }
     ]
   }
