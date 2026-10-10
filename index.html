@@ -1199,7 +1199,9 @@ function renderSection(){
 function renderBrandPage(){
   const b=getBrand(curBrand);
   const ps=products[curBrand]||[];
-  const cats=['todos',...new Set(ps.map(p=>p.cat))];
+  const bsubs=Array.isArray(b.subcats)?b.subcats:[];
+  const usedC=new Set(ps.filter(p=>p.activo!==false).map(p=>p.cat).filter(Boolean));
+  const cats=['todos',...bsubs.filter(c=>usedC.has(c)),...[...usedC].filter(c=>!bsubs.includes(c))];
   const secLabel=b.sid==='fumadores'?'Papelería':'Alimentos &amp; Snacks';
   const secFn=b.sid==='fumadores'?'goFumadores()':'goSection()';
   const bName=b.name;const bEmoji=b.emoji;
@@ -1214,7 +1216,7 @@ function renderBrandPage(){
         <input type="text" id="sinput" placeholder="Buscar por nombre o artículo..." oninput="reGrid()">
       </div>
       <div class="filters">
-        ${cats.map(c=>`<button class="fbtn${activeFilter===c?' active':''}" onclick="setF('${c}',this)">${c==='baja rotacion'?'consultar disp.':c}</button>`).join('')}
+        ${cats.map(c=>`<button class="fbtn${activeFilter===c?' active':''}" onclick="setF(this.dataset.f,this)" data-f="${String(c).replace(/&/g,'&amp;').replace(/"/g,'&quot;')}">${c==='baja rotacion'?'consultar disp.':c}</button>`).join('')}
       </div>
     </div>
     <div class="prod-grid" id="pgrid">${renderCards(getFiltered(ps),curBrand)}</div>

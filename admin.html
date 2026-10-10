@@ -78,6 +78,21 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 .toggle-thumb{position:absolute;top:3px;left:3px;width:18px;height:18px;background:#fff;border-radius:50%;transition:transform .2s;box-shadow:0 1px 4px rgba(0,0,0,.2)}
 .toggle-track.on .toggle-thumb{transform:translateX(20px)}
 
+/* SUBCATEGORIAS */
+.sub-bar{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:1rem}
+.sub-bar-label{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--light);font-weight:600;margin-right:4px}
+.sub-chip{background:var(--white);border:1px solid var(--border);border-radius:20px;padding:5px 12px;font-family:'DM Sans',sans-serif;font-size:12px;color:var(--mid);cursor:pointer}
+.sub-chip:hover{border-color:var(--ink);color:var(--ink)}
+.sub-chip.on{background:var(--ink);border-color:var(--ink);color:#fff}
+.sub-chip .n{opacity:.6;margin-left:4px;font-size:11px}
+.sub-manage{background:var(--cream2);border:1px dashed var(--mid);border-radius:20px;padding:5px 12px;font-family:'DM Sans',sans-serif;font-size:12px;color:var(--ink);cursor:pointer;font-weight:500}
+.sub-manage:hover{border-style:solid;background:var(--cream)}
+.sub-row{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.sub-row input{flex:1;padding:9px 12px;border:1.5px solid var(--border);border-radius:8px;font-family:'DM Sans',sans-serif;font-size:13px;outline:none}
+.sub-row input:focus{border-color:var(--red)}
+.sub-row .sub-n{font-size:11px;color:var(--mid);min-width:52px;text-align:right}
+.sub-empty{font-size:12px;color:var(--mid);margin-bottom:10px}
+
 /* PRODUCTS TABLE */
 .prod-table{width:100%;border-collapse:collapse;background:var(--white);border:1px solid var(--border);border-radius:12px;overflow:hidden}
 .prod-table th{padding:10px 14px;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--light);font-weight:600;text-align:left;background:var(--cream);border-bottom:1px solid var(--border)}
@@ -214,8 +229,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
     </div>
     <div class="form-grid">
       <div class="form-row">
-        <label>Categoría</label>
-        <input type="text" id="f-cat" placeholder="Ej: gomitas">
+        <label>Subcategoría</label>
+        <select id="f-cat" onchange="onCatChange(this)"></select>
       </div>
       <div class="form-row">
         <label>Artículo (código)</label>
@@ -270,6 +285,22 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
       <button class="modal-save" style="background:var(--cream2);color:var(--ink)" onclick="closeChoiceModal();openBrandModal(null, currentBrand ? (data.brands.find(b=>b.id===currentBrand)||{}).sid : 'alimentos')">+ Marca nueva</button>
     </div>
     <button class="modal-cancel" style="margin-top:10px;width:100%" onclick="closeChoiceModal()">Cancelar</button>
+  </div>
+</div>
+
+<!-- MODAL subcategorías de la marca -->
+<div class="modal-bg" id="sub-modal-bg">
+  <div class="modal">
+    <div class="modal-title" id="sub-modal-title">Subcategorías</div>
+    <div id="sub-list"></div>
+    <div class="sub-row" style="margin-top:14px">
+      <input type="text" id="sub-new" placeholder="Nueva subcategoría (Ej: Gomitas)" onkeydown="if(event.key==='Enter'){event.preventDefault();subAdd()}">
+      <button class="edit-btn" onclick="subAdd()">+ Agregar</button>
+    </div>
+    <div class="modal-actions">
+      <button class="modal-cancel" onclick="closeSubModal()">Cancelar</button>
+      <button class="modal-save" onclick="saveSubModal()">Guardar subcategorías</button>
+    </div>
   </div>
 </div>
 
@@ -329,6 +360,7 @@ let editingId = null;
 let showInactive = false;
 let hasUnsaved = false;
 let searchQ = '';
+let subFilter = 'todos';
 let modSearchQ = '';
 let modFilter = 'todos';
 
@@ -473,6 +505,7 @@ function selectBrand(bid) {
   currentBrand = bid;
   view = 'brand';
   searchQ = '';
+  subFilter = 'todos';
   renderSidebar();
   renderContent();
 }
@@ -484,7 +517,18 @@ function renderContent() {
   const prods = data.products[currentBrand] || [];
   const filtered = prods
     .filter(p => showInactive || p.activo !== false)
-    .filter(p => !searchQ || p.name.toLowerCase().includes(searchQ) || p.art.includes(searchQ) || p.cat.includes(searchQ));
+    .filter(p => !searchQ || p.name.toLowerCase().includes(searchQ) || p.art.includes(searchQ) || (p.cat||'').toLowerCase().includes(searchQ))
+    .filter(p => subFilter === 'todos' || (subFilter === '__none__' ? !p.cat : p.cat === subFilter));
+  const subs = getSubcats(currentBrand);
+  if (subFilter !== 'todos' && subFilter !== '__none__' && !subs.includes(subFilter)) subFilter = 'todos';
+  const nNone = prods.filter(p => !p.cat).length;
+  const subBar = `<div class="sub-bar">
+      <span class="sub-bar-label">Subcategorías</span>
+      <button class="sub-chip${subFilter==='todos'?' on':''}" onclick="setSubFilter('todos')">Todas<span class="n">${prods.length}</span></button>
+      ${subs.map(s => `<button class="sub-chip${subFilter===s?' on':''}" onclick="setSubFilter(this.dataset.s)" data-s="${escAttr(s)}">${escHtml(s)}<span class="n">${prods.filter(p=>p.cat===s).length}</span></button>`).join('')}
+      ${nNone && subs.length ? `<button class="sub-chip${subFilter==='__none__'?' on':''}" onclick="setSubFilter('__none__')">Sin subcategoría<span class="n">${nNone}</span></button>` : ''}
+      <button class="sub-manage" onclick="openSubModal()">⚙ Gestionar subcategorías</button>
+    </div>`;
 
   document.getElementById('content').innerHTML = `
     <div class="content-hdr">
@@ -514,13 +558,15 @@ function renderContent() {
       </div>
     </div>
 
+    ${subBar}
+
     ${filtered.length === 0
       ? `<div class="empty-state"><span class="empty-icon">📦</span><div>No hay productos${searchQ?' para "'+searchQ+'"':''}</div></div>`
       : `<table class="prod-table">
           <thead><tr>
             <th>Foto</th>
             <th>Producto</th>
-            <th>Cat.</th>
+            <th>Subcat.</th>
             <th>Art.</th>
             <th>Precio unit.</th>
             <th>Precio caja</th>
@@ -538,7 +584,7 @@ function renderRow(p, bid) {
   return `<tr class="${inactive}" id="row-${p.id}">
     <td><img class="prod-img" src="img/${p.art}.webp" alt="" onerror="this.outerHTML='<span style=\\'font-size:24px\\'>${p.emoji}</span>'"></td>
     <td><div class="prod-name-cell">${p.destacado?'<span title="Incluido en Modo Visita">🤝 </span>':''}${p.name}</div></td>
-    <td><span class="prod-cat">${p.cat}</span></td>
+    <td><span class="prod-cat">${escHtml(p.cat||"—")}</span></td>
     <td><span class="art-badge">${p.art}</span></td>
     <td><div class="price-cell">$${p.unit.toFixed(2)}</div></td>
     <td><div class="price-cell">$${p.caja.toFixed(2)}<div class="price-unit">caja completa</div></div></td>
@@ -1153,9 +1199,107 @@ function toggleInactive() {
   renderContent();
 }
 
+// ── Subcategorías ─────────────────────────────────────────────────────────────
+function escHtml(s) { return String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function escAttr(s) { return escHtml(s).replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
+
+// Lista de subcategorías de una marca: las definidas + cualquier cat que ya usen sus productos
+function getSubcats(bid) {
+  const b = data.brands.find(x => x.id === bid);
+  const list = (b && Array.isArray(b.subcats)) ? [...b.subcats] : [];
+  (data.products[bid] || []).forEach(p => { if (p.cat && !list.includes(p.cat)) list.push(p.cat); });
+  return list;
+}
+
+function setSubFilter(s) { subFilter = s; renderContent(); }
+
+let modalBrandId = null;
+function fillCatSelect(selected) {
+  const sel = document.getElementById('f-cat');
+  const subs = getSubcats(modalBrandId);
+  if (selected && !subs.includes(selected)) subs.push(selected);
+  sel.innerHTML = '<option value="">— Sin subcategoría —</option>'
+    + subs.map(s => `<option value="${escAttr(s)}">${escHtml(s)}</option>`).join('')
+    + '<option value="__new__">＋ Nueva subcategoría…</option>';
+  sel.value = selected || '';
+  sel.dataset.prev = sel.value;
+}
+
+function onCatChange(sel) {
+  if (sel.value !== '__new__') { sel.dataset.prev = sel.value; return; }
+  const name = (prompt('Nombre de la nueva subcategoría:') || '').trim();
+  if (!name) { sel.value = sel.dataset.prev || ''; return; }
+  const b = data.brands.find(x => x.id === modalBrandId);
+  const existing = getSubcats(modalBrandId).find(s => s.toLowerCase() === name.toLowerCase());
+  if (existing) { fillCatSelect(existing); return; }
+  b.subcats = [...getSubcats(modalBrandId), name];
+  markUnsaved();
+  fillCatSelect(name);
+}
+
+let subDraft = [];
+function openSubModal() {
+  if (!currentBrand) return;
+  const b = data.brands.find(x => x.id === currentBrand);
+  document.getElementById('sub-modal-title').textContent = 'Subcategorías de ' + b.name;
+  subDraft = getSubcats(currentBrand).map(s => ({ orig: s, name: s, del: false }));
+  document.getElementById('sub-new').value = '';
+  renderSubList();
+  document.getElementById('sub-modal-bg').classList.add('open');
+  document.getElementById('sub-new').focus();
+}
+function closeSubModal() { document.getElementById('sub-modal-bg').classList.remove('open'); }
+function renderSubList() {
+  const prods = data.products[currentBrand] || [];
+  const rows = subDraft.map((d, i) => d.del ? '' : `<div class="sub-row">
+      <input type="text" value="${escAttr(d.name)}" oninput="subDraft[${i}].name=this.value">
+      <span class="sub-n">${d.orig === null ? 'nueva' : prods.filter(p=>p.cat===d.orig).length + ' prod.'}</span>
+      <button class="del-btn" onclick="subRemove(${i})">✕</button>
+    </div>`).join('');
+  document.getElementById('sub-list').innerHTML = rows || '<div class="sub-empty">Esta marca todavía no tiene subcategorías. Agregá la primera acá abajo.</div>';
+}
+function subAdd() {
+  const inp = document.getElementById('sub-new');
+  const name = inp.value.trim();
+  if (!name) return;
+  if (subDraft.some(d => !d.del && d.name.trim().toLowerCase() === name.toLowerCase())) { alert('Esa subcategoría ya existe'); return; }
+  subDraft.push({ orig: null, name, del: false });
+  inp.value = '';
+  renderSubList();
+  inp.focus();
+}
+function subRemove(i) {
+  const d = subDraft[i];
+  const n = d.orig === null ? 0 : (data.products[currentBrand] || []).filter(p => p.cat === d.orig).length;
+  if (n && !confirm(`"${d.orig}" tiene ${n} productos. Si la borrás quedan sin subcategoría. ¿Seguir?`)) return;
+  d.del = true;
+  renderSubList();
+}
+function saveSubModal() {
+  const b = data.brands.find(x => x.id === currentBrand);
+  const prods = data.products[currentBrand] || [];
+  const finalList = [];
+  const map = {}; // nombre viejo -> nombre nuevo ('' si se borró)
+  subDraft.forEach(d => {
+    const name = d.name.trim();
+    if (d.del || !name) { if (d.orig !== null) map[d.orig] = ''; return; }
+    const dup = finalList.find(s => s.toLowerCase() === name.toLowerCase());
+    const target = dup || name;           // si dos quedan con el mismo nombre se unifican
+    if (!dup) finalList.push(target);
+    if (d.orig !== null) map[d.orig] = target;
+  });
+  prods.forEach(p => { if (p.cat in map && p.cat !== map[p.cat]) p.cat = map[p.cat]; });
+  b.subcats = finalList;
+  markUnsaved();
+  closeSubModal();
+  renderContent();
+}
+
 // ── Modal ─────────────────────────────────────────────────────────────────────
 function openModal(pid) {
   editingId = pid;
+  modalBrandId = currentBrand;
+  if (pid) { for (const bid of Object.keys(data.products)) { if (data.products[bid].some(x => x.id === pid)) { modalBrandId = bid; break; } } }
   document.getElementById('modal-title').textContent = pid ? 'Editar producto' : 'Nuevo producto';
   if (pid) {
     let p = null;
@@ -1167,7 +1311,7 @@ function openModal(pid) {
     document.getElementById('f-name').value = p.name;
     document.getElementById('f-unit').value = p.unit;
     document.getElementById('f-caja').value = p.caja;
-    document.getElementById('f-cat').value = p.cat;
+    fillCatSelect(p.cat);
     document.getElementById('f-art').value = p.art;
     document.getElementById('f-present').value = p.present;
     document.getElementById('f-emoji').value = p.emoji;
@@ -1178,7 +1322,7 @@ function openModal(pid) {
     document.getElementById('f-name').value = '';
     document.getElementById('f-unit').value = '';
     document.getElementById('f-caja').value = '';
-    document.getElementById('f-cat').value = '';
+    fillCatSelect(subFilter !== 'todos' && subFilter !== '__none__' ? subFilter : '');
     document.getElementById('f-art').value = '';
     document.getElementById('f-present').value = '';
     document.getElementById('f-emoji').value = '📦';
@@ -1199,7 +1343,8 @@ function saveProduct() {
   const name = document.getElementById('f-name').value.trim();
   const unit = parseFloat(document.getElementById('f-unit').value);
   const caja = parseFloat(document.getElementById('f-caja').value);
-  const cat  = document.getElementById('f-cat').value.trim();
+  let cat  = document.getElementById('f-cat').value;
+  if (cat === '__new__') cat = '';
   const art  = document.getElementById('f-art').value.trim();
   const present = document.getElementById('f-present').value.trim();
   const emoji = document.getElementById('f-emoji').value.trim() || '📦';
