@@ -1538,7 +1538,7 @@ function saveBrand() {
   const desc = document.getElementById('fb-desc').value.trim();
   const emoji = document.getElementById('fb-emoji').value.trim() || '📦';
   const sinfoto = document.getElementById('fb-sinfoto').value === '1';
-  const logo = document.getElementById('fb-logo').value.trim() || (sinfoto ? '' : 'img/placeholder.webp');
+  const logo = document.getElementById('fb-logo').value.trim() || 'img/placeholder.webp';
   const sintacc = document.getElementById('fb-sintacc').checked;
 
   if (!name) { alert('Completá el nombre de la marca'); return; }
