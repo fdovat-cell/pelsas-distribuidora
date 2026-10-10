@@ -48,6 +48,16 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 .sidebar-label{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--light);font-weight:600;padding:0 .5rem;margin-bottom:.5rem;display:block}
 .brand-btn{display:flex;align-items:center;gap:10px;width:100%;padding:9px 12px;border:none;background:none;border-radius:9px;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--ink2);transition:background .12s;text-align:left}
 .brand-btn:hover{background:var(--cream)}
+.brand-btn[draggable=true]{cursor:grab}
+.brand-btn.dragging{opacity:.35}
+.brand-btn.drop-before{box-shadow:0 -2px 0 0 var(--red)}
+.brand-btn.drop-after{box-shadow:0 2px 0 0 var(--red)}
+.brand-btn .grip{color:var(--light);font-size:11px;letter-spacing:-2px;margin-right:-4px;user-select:none}
+.sidebar-hint{font-size:10px;color:var(--light);padding:0 .5rem;margin:-4px 0 6px;display:block}
+.sub-row .grip{cursor:grab;color:var(--mid);font-size:16px;padding:0 4px;user-select:none}
+.sub-row.dragging{opacity:.35}
+.sub-row.drop-before{box-shadow:0 -2px 0 0 var(--red)}
+.sub-row.drop-after{box-shadow:0 2px 0 0 var(--red)}
 .brand-btn.active{background:var(--cream2);color:var(--ink);font-weight:500}
 .brand-btn.inactive{opacity:.45}
 .brand-btn .b-count{margin-left:auto;font-size:10px;color:var(--light);background:var(--cream2);border-radius:10px;padding:1px 7px}
@@ -292,6 +302,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 <div class="modal-bg" id="sub-modal-bg">
   <div class="modal">
     <div class="modal-title" id="sub-modal-title">Subcategorías</div>
+    <div class="sub-empty" style="margin-bottom:10px">Arrastrá ⋮⋮ para cambiar el orden en que aparecen en la tienda.</div>
     <div id="sub-list"></div>
     <div class="sub-row" style="margin-top:14px">
       <input type="text" id="sub-new" placeholder="Nueva subcategoría (Ej: Gomitas)" onkeydown="if(event.key==='Enter'){event.preventDefault();subAdd()}">
@@ -486,12 +497,16 @@ function renderSidebar() {
 function renderBrandGroup(label, brands, sid) {
   return `<div class="sidebar-section">
     <span class="sidebar-label">${label}</span>
+    <span class="sidebar-hint">Arrastrá las marcas para ordenarlas</span>
     ${brands.map(b => {
       const count = (data.products[b.id]||[]).filter(p=>p.activo!==false).length;
       const total = (data.products[b.id]||[]).length;
       const active = currentBrand === b.id ? ' active' : '';
       const inactive = b.activo === false ? ' inactive' : '';
-      return `<button class="brand-btn${active}${inactive}" onclick="selectBrand('${b.id}')">
+      return `<button class="brand-btn${active}${inactive}" onclick="selectBrand('${b.id}')"
+        draggable="true" data-bid="${b.id}" title="Arrastrá para cambiar el orden"
+        ondragstart="brandDragStart(event)" ondragover="brandDragOver(event)" ondragleave="brandDragLeave(event)" ondrop="brandDrop(event)" ondragend="brandDragEnd(event)">
+        <span class="grip">⋮⋮</span>
         <span>${b.emoji}</span>
         <span>${b.name}</span>
         <span class="b-count">${count}/${total}</span>
@@ -1199,6 +1214,77 @@ function toggleInactive() {
   renderContent();
 }
 
+// ── Drag & drop: orden de marcas ─────────────────────────────────────────────
+let dragBrandId = null;
+function dropSide(e, el) { const r = el.getBoundingClientRect(); return (e.clientY - r.top) > r.height / 2 ? 'after' : 'before'; }
+function clearDropMarks(sel) { document.querySelectorAll(sel).forEach(x => x.classList.remove('drop-before', 'drop-after')); }
+function brandDragStart(e) {
+  dragBrandId = e.currentTarget.dataset.bid;
+  e.dataTransfer.effectAllowed = 'move';
+  e.dataTransfer.setData('text/plain', dragBrandId);
+  e.currentTarget.classList.add('dragging');
+}
+function brandDragOver(e) {
+  if (!dragBrandId) return;
+  const tid = e.currentTarget.dataset.bid;
+  const src = data.brands.find(b => b.id === dragBrandId), dst = data.brands.find(b => b.id === tid);
+  if (!src || !dst || src.sid !== dst.sid || tid === dragBrandId) return; // solo dentro de la misma sección
+  e.preventDefault();
+  clearDropMarks('.brand-btn');
+  e.currentTarget.classList.add('drop-' + dropSide(e, e.currentTarget));
+}
+function brandDragLeave(e) { e.currentTarget.classList.remove('drop-before', 'drop-after'); }
+function brandDrop(e) {
+  e.preventDefault();
+  const tid = e.currentTarget.dataset.bid;
+  const side = dropSide(e, e.currentTarget);
+  clearDropMarks('.brand-btn');
+  if (!dragBrandId || tid === dragBrandId) return;
+  const from = data.brands.findIndex(b => b.id === dragBrandId);
+  if (from < 0) return;
+  const [item] = data.brands.splice(from, 1);
+  let to = data.brands.findIndex(b => b.id === tid);
+  if (to < 0) { data.brands.splice(from, 0, item); return; }
+  if (side === 'after') to++;
+  data.brands.splice(to, 0, item);
+  dragBrandId = null;
+  markUnsaved();
+  renderSidebar();
+}
+function brandDragEnd(e) { dragBrandId = null; e.currentTarget.classList.remove('dragging'); clearDropMarks('.brand-btn'); }
+
+// ── Drag & drop: orden de subcategorías ──────────────────────────────────────
+let dragSubIdx = null;
+function subDragStart(e, i) {
+  dragSubIdx = i;
+  e.dataTransfer.effectAllowed = 'move';
+  e.dataTransfer.setData('text/plain', String(i));
+  const row = e.currentTarget.closest('.sub-row');
+  if (row) { e.dataTransfer.setDragImage(row, 10, 10); row.classList.add('dragging'); }
+}
+function subDragOver(e) {
+  if (dragSubIdx === null) return;
+  e.preventDefault();
+  clearDropMarks('.sub-row');
+  e.currentTarget.classList.add('drop-' + dropSide(e, e.currentTarget));
+}
+function subDragLeave(e) { e.currentTarget.classList.remove('drop-before', 'drop-after'); }
+function subDrop(e) {
+  e.preventDefault();
+  const side = dropSide(e, e.currentTarget);
+  const targetIdx = parseInt(e.currentTarget.dataset.i);
+  clearDropMarks('.sub-row');
+  if (dragSubIdx === null || targetIdx === dragSubIdx) return;
+  const moving = subDraft[dragSubIdx], target = subDraft[targetIdx];
+  subDraft.splice(dragSubIdx, 1);
+  let to = subDraft.indexOf(target);
+  if (side === 'after') to++;
+  subDraft.splice(to, 0, moving);
+  dragSubIdx = null;
+  renderSubList();
+}
+function subDragEnd(e) { dragSubIdx = null; clearDropMarks('.sub-row'); document.querySelectorAll('.sub-row.dragging').forEach(x => x.classList.remove('dragging')); }
+
 // ── Subcategorías ─────────────────────────────────────────────────────────────
 function escHtml(s) { return String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 function escAttr(s) { return escHtml(s).replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
@@ -1251,7 +1337,9 @@ function openSubModal() {
 function closeSubModal() { document.getElementById('sub-modal-bg').classList.remove('open'); }
 function renderSubList() {
   const prods = data.products[currentBrand] || [];
-  const rows = subDraft.map((d, i) => d.del ? '' : `<div class="sub-row">
+  const rows = subDraft.map((d, i) => d.del ? '' : `<div class="sub-row" data-i="${i}"
+      ondragover="subDragOver(event)" ondragleave="subDragLeave(event)" ondrop="subDrop(event)">
+      <span class="grip" draggable="true" title="Arrastrá para ordenar" ondragstart="subDragStart(event,${i})" ondragend="subDragEnd(event)">⋮⋮</span>
       <input type="text" value="${escAttr(d.name)}" oninput="subDraft[${i}].name=this.value">
       <span class="sub-n">${d.orig === null ? 'nueva' : prods.filter(p=>p.cat===d.orig).length + ' prod.'}</span>
       <button class="del-btn" onclick="subRemove(${i})">✕</button>
