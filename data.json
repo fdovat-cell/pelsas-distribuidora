@@ -5540,6 +5540,20 @@
         "destacado": false,
         "sintacc": false,
         "activo": true
+      },
+      {
+        "id": "budinespanettonesturrones_1791670354480",
+        "name": "Budín chocolate relleno de chocolate 250gr",
+        "unit": 61.9,
+        "caja": 1485.6,
+        "cat": "Budines Santa Edwiges",
+        "art": "3748",
+        "present": "Caja x 24u",
+        "emoji": "📦",
+        "venta": 1,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true
       }
     ]
   }
