@@ -5610,6 +5610,20 @@
         "destacado": false,
         "sintacc": false,
         "activo": true
+      },
+      {
+        "id": "budinespanettonesturrones_1791672692068",
+        "name": "Budín naranja 100g",
+        "unit": 26.8,
+        "caja": 321.6,
+        "cat": "Budines Romanato",
+        "art": "3874",
+        "present": "Caja x 12 u.",
+        "emoji": "📦",
+        "venta": 2,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true
       }
     ]
   }
