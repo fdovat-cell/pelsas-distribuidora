@@ -5559,6 +5559,34 @@
         "destacado": false,
         "sintacc": false,
         "activo": true
+      },
+      {
+        "id": "budinespanettonesturrones_1791737290189",
+        "name": "Pan dulce Romanato c/frutas 300gr",
+        "unit": 79.9,
+        "caja": 958.8,
+        "cat": "Panettones",
+        "art": "3833",
+        "present": "Caja x 12 u.",
+        "emoji": "📦",
+        "venta": 1,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true
+      },
+      {
+        "id": "budinespanettonesturrones_1791737333172",
+        "name": "Panettone Romanato c/gotas de chocolate 300gr",
+        "unit": 79.9,
+        "caja": 958.8,
+        "cat": "Panettones",
+        "art": "3885",
+        "present": "Caja x 12 u.",
+        "emoji": "📦",
+        "venta": 1,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true
       }
     ],
     "bebidasfiestasfrizz": [
