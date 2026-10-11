@@ -243,7 +243,11 @@
       "logo": "",
       "activo": true,
       "sintacc": false,
-      "sinfoto": true
+      "sinfoto": true,
+      "subcats": [
+        "Botella vidrio",
+        "Botella pet"
+      ]
     }
   ],
   "products": {
