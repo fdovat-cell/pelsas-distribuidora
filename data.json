@@ -5687,6 +5687,34 @@
         "destacado": false,
         "sintacc": false,
         "activo": true
+      },
+      {
+        "id": "bebidasfiestasfrizz_1791734937048",
+        "name": "Ananá Fizz Noche Buena PET 1,5L",
+        "unit": 65,
+        "caja": 390,
+        "cat": "Botella pet",
+        "art": "10139",
+        "present": "",
+        "emoji": "📦",
+        "venta": 2,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true
+      },
+      {
+        "id": "bebidasfiestasfrizz_1791735005626",
+        "name": "Frutilla Fizz Noche Buena PET 1,5L",
+        "unit": 65,
+        "caja": 390,
+        "cat": "Botella pet",
+        "art": "10181",
+        "present": "CAJA X 6 U.",
+        "emoji": "📦",
+        "venta": 2,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true
       }
     ]
   }
