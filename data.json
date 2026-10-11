@@ -19,6 +19,25 @@
       "activo": true
     },
     {
+      "id": "celisano",
+      "sid": "alimentos",
+      "name": "Celisano",
+      "emoji": "",
+      "desc": "Alfajores sin gluten y sin lactosa",
+      "logo": "img/logo-celisano.webp",
+      "activo": true,
+      "sintacc": true
+    },
+    {
+      "id": "santaelena",
+      "sid": "alimentos",
+      "name": "Santa Elena",
+      "emoji": "",
+      "desc": "Variedades de maní",
+      "logo": "img/logo-santaelena.webp",
+      "activo": true
+    },
+    {
       "id": "agridulce",
       "sid": "alimentos",
       "name": "Agridulce",
@@ -47,31 +66,12 @@
       "activo": true
     },
     {
-      "id": "santaelena",
+      "id": "nutsbar",
       "sid": "alimentos",
-      "name": "Santa Elena",
+      "name": "Nutsbar",
       "emoji": "",
-      "desc": "Variedades de maní",
-      "logo": "img/logo-santaelena.webp",
-      "activo": true
-    },
-    {
-      "id": "sanosinharina",
-      "sid": "alimentos",
-      "name": "Sanosinharina",
-      "emoji": "",
-      "desc": "Productos sin harina y sin gluten",
-      "logo": "img/logo-sanosinharina.webp",
-      "activo": true,
-      "sintacc": true
-    },
-    {
-      "id": "celisano",
-      "sid": "alimentos",
-      "name": "Celisano",
-      "emoji": "",
-      "desc": "Alfajores sin gluten y sin lactosa",
-      "logo": "img/logo-celisano.webp",
+      "desc": "Barras y bombones sin gluten, sin azúcares agregados",
+      "logo": "img/logo-nutsbar.webp",
       "activo": true,
       "sintacc": true
     },
@@ -106,12 +106,12 @@
       "sintacc": true
     },
     {
-      "id": "nutsbar",
+      "id": "sanosinharina",
       "sid": "alimentos",
-      "name": "Nutsbar",
+      "name": "Sanosinharina",
       "emoji": "",
-      "desc": "Barras y bombones sin gluten, sin azúcares agregados",
-      "logo": "img/logo-nutsbar.webp",
+      "desc": "Productos sin harina y sin gluten",
+      "logo": "img/logo-sanosinharina.webp",
       "activo": true,
       "sintacc": true
     },
@@ -186,16 +186,6 @@
       "desc": "Caramelos",
       "logo": "img/logo-caramelos.webp",
       "activo": true
-    },
-    {
-      "id": "alimendra",
-      "sid": "alimentos",
-      "name": "alimendra",
-      "emoji": "📦",
-      "desc": "alfajores sin azucar",
-      "logo": "img/logo-alimendra.webp",
-      "activo": true,
-      "sintacc": true
     },
     {
       "id": "papeleria",
@@ -2827,92 +2817,6 @@
         "emoji": "📦",
         "venta": 1,
         "destacado": false,
-        "activo": true
-      }
-    ],
-    "alimendra": [
-      {
-        "id": "alimendra_1783969422624",
-        "name": "Alfajor de semillas y frutos secos relleno con manteca de maní, cubierto con baño de reposteria semi amargo 70gs. (PROTEICO)",
-        "unit": 62.5,
-        "caja": 500,
-        "cat": "Alfajores",
-        "art": "1010",
-        "present": "caja x 8 u.",
-        "emoji": "📦",
-        "venta": 2,
-        "destacado": false,
-        "activo": true,
-        "sintacc": false
-      },
-      {
-        "id": "alimendra_1783977318970",
-        "name": "Alfajor de semillas y frutos secos sin azúcares agregados relleno con dulce  de leche, cubierto con baño de repostería semi amargo 70gs. (SIN  AZÚCAR)",
-        "unit": 71.88,
-        "caja": 575,
-        "cat": "alfajores",
-        "art": "1006",
-        "present": "caja x 8u.",
-        "emoji": "📦",
-        "venta": 2,
-        "destacado": false,
-        "sintacc": true,
-        "activo": true
-      },
-      {
-        "id": "alimendra_1783977652009",
-        "name": "Alfajor de semillas y frutos secos relleno con mantequilla de maní, cubierto  con baño de repostería semi amargo 70gs. (VEGANO)",
-        "unit": 71.88,
-        "caja": 575,
-        "cat": "alfajores",
-        "art": "1007",
-        "present": "caja x 8 u",
-        "emoji": "📦",
-        "venta": 2,
-        "destacado": false,
-        "sintacc": true,
-        "activo": true
-      },
-      {
-        "id": "alimendra_1783977916251",
-        "name": "Alfajor de almendras & castañas de cajú sin azúcares agregados relleno  con dulce de leche, cubierto con baño de repostería semi amargo 70gs.  (ALMENDRAS DDL) Producto sin octogonos",
-        "unit": 71.88,
-        "caja": 575,
-        "cat": "alfajores",
-        "art": "1008",
-        "present": "caja x 8 u.",
-        "emoji": "📦",
-        "venta": 2,
-        "destacado": false,
-        "sintacc": true,
-        "activo": true
-      },
-      {
-        "id": "alimendra_1783978104868",
-        "name": "Alfajor de almendras & castañas de cajú sin azúcares agregados y vegano  relleno con mantequilla de maní, cubierto con baño de repostería semi  amargo 70gs. (ALMENDRAS MANÍ)  Producto sin octogonos",
-        "unit": 71.88,
-        "caja": 575,
-        "cat": "alfajores",
-        "art": "1009",
-        "present": "caja x 8u",
-        "emoji": "📦",
-        "venta": 2,
-        "destacado": false,
-        "sintacc": true,
-        "activo": true
-      },
-      {
-        "id": "alimendra_1783978649383",
-        "name": "Alfajor de semillas y fruos secos relleno con dulce de leche, cubierto con  baño de reposteria semi amargo 70gs. (ORIGINAL)",
-        "unit": 56.88,
-        "caja": 455,
-        "cat": "alfajores",
-        "art": "1005",
-        "present": "caja x 8 u.",
-        "emoji": "📦",
-        "venta": 1,
-        "destacado": true,
-        "sintacc": false,
         "activo": true
       }
     ],
