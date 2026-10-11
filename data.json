@@ -5533,6 +5533,21 @@
         "activo": true
       }
     ],
-    "bebidasfiestasfrizz": []
+    "bebidasfiestasfrizz": [
+      {
+        "id": "bebidasfiestasfrizz_1791715970977",
+        "name": "Sidra Valle María botella de vidrio 950ml",
+        "unit": 145,
+        "caja": 870,
+        "cat": "",
+        "art": "10140",
+        "present": "CAJA X 6 U.",
+        "emoji": "📦",
+        "venta": 2,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true
+      }
+    ]
   }
 }
