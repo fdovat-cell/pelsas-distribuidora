@@ -5644,6 +5644,34 @@
         "destacado": false,
         "sintacc": false,
         "activo": true
+      },
+      {
+        "id": "budinespanettonesturrones_1791738186644",
+        "name": "Turrón Ronda crocante almendra 70gr",
+        "unit": 52.5,
+        "caja": 6300,
+        "cat": "Turrones Ronda",
+        "art": "5689",
+        "present": "caja x 120u",
+        "emoji": "📦",
+        "venta": 1,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true
+      },
+      {
+        "id": "budinespanettonesturrones_1791738246420",
+        "name": "Turrón Ronda crocante chocolate 70gr",
+        "unit": 52.5,
+        "caja": 6300,
+        "cat": "Turrones Ronda",
+        "art": "5690",
+        "present": "caja x 120u",
+        "emoji": "📦",
+        "venta": 1,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true
       }
     ],
     "bebidasfiestasfrizz": [
