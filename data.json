@@ -5715,6 +5715,20 @@
         "destacado": false,
         "sintacc": false,
         "activo": true
+      },
+      {
+        "id": "budinespanettonesturrones_1791739070781",
+        "name": "Turrón maní 70gr",
+        "unit": 21.5,
+        "caja": 258,
+        "cat": "Turrones Montevergine",
+        "art": "5982",
+        "present": "Caja x 12 u.",
+        "emoji": "📦",
+        "venta": 2,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true
       }
     ],
     "bebidasfiestasfrizz": [
