@@ -5673,6 +5673,20 @@
         "destacado": false,
         "sintacc": false,
         "activo": true
+      },
+      {
+        "id": "bebidasfiestasfrizz_1791734869529",
+        "name": "Sidra Noche Buena PET 1,5L",
+        "unit": 65,
+        "caja": 390,
+        "cat": "Botella pet",
+        "art": "10162",
+        "present": "CAJA X 6 U.",
+        "emoji": "📦",
+        "venta": 2,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true
       }
     ]
   }
