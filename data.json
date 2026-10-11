@@ -1,15 +1,6 @@
 {
   "brands": [
     {
-      "id": "dori",
-      "sid": "alimentos",
-      "name": "Dori",
-      "emoji": "",
-      "desc": "Golosinas y maní",
-      "logo": "img/logo-dori.webp",
-      "activo": true
-    },
-    {
       "id": "mazarena",
       "sid": "alimentos",
       "name": "Mazarena",
@@ -29,13 +20,55 @@
       "sintacc": true
     },
     {
-      "id": "santaelena",
+      "id": "budinespanettonesturrones",
       "sid": "alimentos",
-      "name": "Santa Elena",
+      "name": "Budines-Panettones-Turrones",
+      "emoji": "📦",
+      "desc": "",
+      "logo": "img/placeholder.webp",
+      "activo": true,
+      "sintacc": false,
+      "subcats": [
+        "Budines Romanato",
+        "Budines Santa Edwiges",
+        "Panettones",
+        "Panettones Romanato",
+        "Turrones Ronda"
+      ]
+    },
+    {
+      "id": "bebidasfiestasfrizz",
+      "sid": "alimentos",
+      "name": "Bebidas \"Fiestas Frizz \"",
+      "emoji": "📦",
+      "desc": "Bebidas-Frizz",
+      "logo": "",
+      "activo": true,
+      "sintacc": false,
+      "sinfoto": true,
+      "subcats": [
+        "Botella vidrio",
+        "Botella pet"
+      ]
+    },
+    {
+      "id": "dori",
+      "sid": "alimentos",
+      "name": "Dori",
       "emoji": "",
-      "desc": "Variedades de maní",
-      "logo": "img/logo-santaelena.webp",
+      "desc": "Golosinas y maní",
+      "logo": "img/logo-dori.webp",
       "activo": true
+    },
+    {
+      "id": "barquilandia",
+      "sid": "alimentos",
+      "name": "Barquilandia",
+      "emoji": "📦",
+      "desc": "",
+      "logo": "img/logo-barquilandia.webp",
+      "activo": true,
+      "sintacc": false
     },
     {
       "id": "agridulce",
@@ -46,6 +79,15 @@
       "logo": "img/logo-agridulce.webp",
       "activo": true,
       "sintacc": true
+    },
+    {
+      "id": "santaelena",
+      "sid": "alimentos",
+      "name": "Santa Elena",
+      "emoji": "",
+      "desc": "Variedades de maní",
+      "logo": "img/logo-santaelena.webp",
+      "activo": true
     },
     {
       "id": "rebelnut",
@@ -198,16 +240,6 @@
       "sintacc": false
     },
     {
-      "id": "barquilandia",
-      "sid": "alimentos",
-      "name": "Barquilandia",
-      "emoji": "📦",
-      "desc": "",
-      "logo": "img/logo-barquilandia.webp",
-      "activo": true,
-      "sintacc": false
-    },
-    {
       "id": "valman",
       "sid": "fumadores",
       "name": "Valman",
@@ -216,38 +248,6 @@
       "logo": "img/placeholder.webp",
       "activo": true,
       "sintacc": false
-    },
-    {
-      "id": "budinespanettonesturrones",
-      "sid": "alimentos",
-      "name": "Budines-Panettones-Turrones",
-      "emoji": "📦",
-      "desc": "",
-      "logo": "img/placeholder.webp",
-      "activo": true,
-      "sintacc": false,
-      "subcats": [
-        "Budines Romanato",
-        "Budines Santa Edwiges",
-        "Panettones",
-        "Panettones Romanato",
-        "Turrones Ronda"
-      ]
-    },
-    {
-      "id": "bebidasfiestasfrizz",
-      "sid": "alimentos",
-      "name": "Bebidas \"Fiestas Frizz \"",
-      "emoji": "📦",
-      "desc": "Bebidas-Frizz",
-      "logo": "",
-      "activo": true,
-      "sintacc": false,
-      "sinfoto": true,
-      "subcats": [
-        "Botella vidrio",
-        "Botella pet"
-      ]
     }
   ],
   "products": {
