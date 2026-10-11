@@ -34,7 +34,8 @@
         "Panettones",
         "Panettones Romanato",
         "Turrones Ronda",
-        "Panettone Marilan"
+        "Panettone Marilan",
+        "Turrones Montevergine"
       ]
     },
     {
@@ -5669,6 +5670,48 @@
         "present": "caja x 120u",
         "emoji": "📦",
         "venta": 1,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true
+      },
+      {
+        "id": "budinespanettonesturrones_1791738299102",
+        "name": "Turrón Ronda crocante coco 70gr",
+        "unit": 52.5,
+        "caja": 6300,
+        "cat": "Turrones Ronda",
+        "art": "5691",
+        "present": "caja x 120u",
+        "emoji": "📦",
+        "venta": 1,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true
+      },
+      {
+        "id": "budinespanettonesturrones_1791738410145",
+        "name": "Turrón con castañas de cajú 90gr",
+        "unit": 27.9,
+        "caja": 334.8,
+        "cat": "Turrones Montevergine",
+        "art": "5981",
+        "present": "Caja x 12 u.",
+        "emoji": "📦",
+        "venta": 2,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true
+      },
+      {
+        "id": "budinespanettonesturrones_1791738612774",
+        "name": "Turrón maní 90gr",
+        "unit": 27.9,
+        "caja": 334.8,
+        "cat": "Turrones Montevergine",
+        "art": "5983",
+        "present": "Caja x 12 u.",
+        "emoji": "📦",
+        "venta": 2,
         "destacado": false,
         "sintacc": false,
         "activo": true
