@@ -25,7 +25,7 @@
       "name": "Budines-Panettones-Turrones",
       "emoji": "📦",
       "desc": "",
-      "logo": "img/placeholder.webp",
+      "logo": "img/logo-turronespanettones.webp",
       "activo": true,
       "sintacc": false,
       "subcats": [
@@ -36,7 +36,8 @@
         "Turrones Ronda",
         "Panettone Marilan",
         "Turrones Montevergine"
-      ]
+      ],
+      "sinfoto": false
     },
     {
       "id": "bebidasfiestasfrizz",
