@@ -5743,6 +5743,20 @@
         "destacado": false,
         "sintacc": false,
         "activo": true
+      },
+      {
+        "id": "budinespanettonesturrones_1791739568872",
+        "name": "Turrón de maní, cacao y miel 45gr",
+        "unit": 15,
+        "caja": 180,
+        "cat": "Turrones Montevergine",
+        "art": "5986",
+        "present": "Caja x 12 u.",
+        "emoji": "📦",
+        "venta": 2,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true
       }
     ],
     "bebidasfiestasfrizz": [
