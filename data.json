@@ -5531,6 +5531,34 @@
         "destacado": false,
         "sintacc": false,
         "activo": true
+      },
+      {
+        "id": "budinespanettonesturrones_1791737121477",
+        "name": "Panettone Casa d'Oro bolsa frutas 300gr",
+        "unit": 79.9,
+        "caja": 958.8,
+        "cat": "Panettones",
+        "art": "3832",
+        "present": "Caja x 12 u.",
+        "emoji": "📦",
+        "venta": 1,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true
+      },
+      {
+        "id": "budinespanettonesturrones_1791737198795",
+        "name": "Panettone Casa d'Oro bolsa chocolate 300gr",
+        "unit": 79.9,
+        "caja": 958.8,
+        "cat": "Panettones",
+        "art": "4026",
+        "present": "CAJA X 12 U.",
+        "emoji": "📦",
+        "venta": 1,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true
       }
     ],
     "bebidasfiestasfrizz": [
