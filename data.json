@@ -5571,7 +5571,21 @@
         "art": "10143",
         "present": "caja x 6u.",
         "emoji": "📦",
-        "venta": 1,
+        "venta": 2,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true
+      },
+      {
+        "id": "bebidasfiestasfrizz_1791716548130",
+        "name": "Medio y medio Valle María blanco frizzante  750ml",
+        "unit": 151,
+        "caja": 906,
+        "cat": "Botella vidrio",
+        "art": "10157",
+        "present": "caja x 6u",
+        "emoji": "📦",
+        "venta": 2,
         "destacado": false,
         "sintacc": false,
         "activo": true
