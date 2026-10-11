@@ -5659,6 +5659,20 @@
         "destacado": false,
         "sintacc": false,
         "activo": true
+      },
+      {
+        "id": "bebidasfiestasfrizz_1791734704909",
+        "name": "María Frizz Pink vino rosado frizzante 750ml",
+        "unit": 199,
+        "caja": 1194,
+        "cat": "Botella vidrio",
+        "art": "10184",
+        "present": "CAJA X 6 U.",
+        "emoji": "📦",
+        "venta": 1,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true
       }
     ]
   }
