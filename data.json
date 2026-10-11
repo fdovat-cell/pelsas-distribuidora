@@ -33,7 +33,8 @@
         "Budines Santa Edwiges",
         "Panettones",
         "Panettones Romanato",
-        "Turrones Ronda"
+        "Turrones Ronda",
+        "Panettone Marilan"
       ]
     },
     {
@@ -5581,6 +5582,48 @@
         "caja": 958.8,
         "cat": "Panettones",
         "art": "3885",
+        "present": "Caja x 12 u.",
+        "emoji": "📦",
+        "venta": 1,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true
+      },
+      {
+        "id": "budinespanettonesturrones_1791737379366",
+        "name": "Panettone Italia Mia c/frutas 300gr",
+        "unit": 127.5,
+        "caja": 1530,
+        "cat": "Panettones",
+        "art": "3840",
+        "present": "Caja x 12 u.",
+        "emoji": "📦",
+        "venta": 1,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true
+      },
+      {
+        "id": "budinespanettonesturrones_1791737459963",
+        "name": "Panettone Italia Mia c/gotas de chocolate 300gr",
+        "unit": 127.5,
+        "caja": 1530,
+        "cat": "Panettones",
+        "art": "3834",
+        "present": "Caja x 12 u.",
+        "emoji": "📦",
+        "venta": 1,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true
+      },
+      {
+        "id": "budinespanettonesturrones_1791737780388",
+        "name": "Panettone Marilan chips de chocolate c/masa madre 400gr",
+        "unit": 130,
+        "caja": 1560,
+        "cat": "Panettone Marilan",
+        "art": "4996",
         "present": "Caja x 12 u.",
         "emoji": "📦",
         "venta": 1,
