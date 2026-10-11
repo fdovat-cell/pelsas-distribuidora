@@ -5561,6 +5561,20 @@
         "destacado": false,
         "sintacc": false,
         "activo": true
+      },
+      {
+        "id": "bebidasfiestasfrizz_1791716433410",
+        "name": "Clericó Fizz Valle María botella de vidrio 750ml",
+        "unit": 145,
+        "caja": 870,
+        "cat": "Botella vidrio",
+        "art": "10143",
+        "present": "caja x 6u.",
+        "emoji": "📦",
+        "venta": 1,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true
       }
     ]
   }
