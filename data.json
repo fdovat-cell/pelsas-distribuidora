@@ -198,16 +198,6 @@
       "sintacc": true
     },
     {
-      "id": "puntadeleite",
-      "sid": "alimentos",
-      "name": "Puntadeleite",
-      "emoji": "📦",
-      "desc": "alfajores",
-      "logo": "img/placeholder.webp",
-      "activo": true,
-      "sintacc": false
-    },
-    {
       "id": "papeleria",
       "sid": "fumadores",
       "name": "Papelería General",
@@ -2921,50 +2911,6 @@
         "present": "caja x 8 u.",
         "emoji": "📦",
         "venta": 1,
-        "destacado": true,
-        "sintacc": false,
-        "activo": true
-      }
-    ],
-    "puntadeleite": [
-      {
-        "id": "puntadeleite_1784029896576",
-        "name": "Alfajor de chocolate negro con doble relleno de (DULCE DE LECHE Y  MARACUYÁ)",
-        "unit": 53.12,
-        "caja": 425,
-        "cat": "alfajores",
-        "art": "3001",
-        "present": "caja x 8u.",
-        "emoji": "📦",
-        "venta": 2,
-        "destacado": false,
-        "sintacc": false,
-        "activo": true
-      },
-      {
-        "id": "puntadeleite_1784030083503",
-        "name": "Alfajor de chocolate negro con doble relleno de (DULCE DE LECHE Y  FRUTOS ROJOS)",
-        "unit": 53.12,
-        "caja": 425,
-        "cat": "alfajores",
-        "art": "3003",
-        "present": "caja x 8u",
-        "emoji": "📦",
-        "venta": 2,
-        "destacado": false,
-        "sintacc": false,
-        "activo": true
-      },
-      {
-        "id": "puntadeleite_1784030157919",
-        "name": "Alfajor Doble Relleno: Dulce de leche + Corazón de Pistacho & Limón  (DUBAI",
-        "unit": 60.56,
-        "caja": 485,
-        "cat": "",
-        "art": "3002",
-        "present": "caja x 8u",
-        "emoji": "📦",
-        "venta": 2,
         "destacado": true,
         "sintacc": false,
         "activo": true
