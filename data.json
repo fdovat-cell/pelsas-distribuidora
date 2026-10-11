@@ -5617,6 +5617,48 @@
         "destacado": false,
         "sintacc": false,
         "activo": true
+      },
+      {
+        "id": "bebidasfiestasfrizz_1791734565033",
+        "name": "María Frizz Gold frizzante blanco 750ml",
+        "unit": 199,
+        "caja": 1194,
+        "cat": "Botella vidrio",
+        "art": "10166",
+        "present": "CAJA X 6 U.",
+        "emoji": "📦",
+        "venta": 1,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true
+      },
+      {
+        "id": "bebidasfiestasfrizz_1791734613409",
+        "name": "María Frizz fresa frizzante 750ml",
+        "unit": 199,
+        "caja": 1194,
+        "cat": "Botella vidrio",
+        "art": "10168",
+        "present": "CAJA X 6 U.",
+        "emoji": "📦",
+        "venta": 1,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true
+      },
+      {
+        "id": "bebidasfiestasfrizz_1791734660949",
+        "name": "María Frizz maracuyá frizzante",
+        "unit": 199,
+        "caja": 1194,
+        "cat": "Botella vidrio",
+        "art": "10184",
+        "present": "CAJA X 6 U.",
+        "emoji": "📦",
+        "venta": 1,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true
       }
     ]
   }
