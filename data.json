@@ -5630,6 +5630,20 @@
         "destacado": false,
         "sintacc": false,
         "activo": true
+      },
+      {
+        "id": "budinespanettonesturrones_1791737841859",
+        "name": "Panettone Marilan c/frutas c/masa madre 400gr",
+        "unit": 130,
+        "caja": 1560,
+        "cat": "Panettone Marilan",
+        "art": "4997",
+        "present": "Caja x 12 u.",
+        "emoji": "📦",
+        "venta": 1,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true
       }
     ],
     "bebidasfiestasfrizz": [
