@@ -5547,6 +5547,20 @@
         "destacado": false,
         "sintacc": false,
         "activo": true
+      },
+      {
+        "id": "bebidasfiestasfrizz_1791716195410",
+        "name": "Fresa Fizz Valle María botella de vidrio 750ml",
+        "unit": 145,
+        "caja": 870,
+        "cat": "Botella vidrio",
+        "art": "10168",
+        "present": "caja x 6u.",
+        "emoji": "📦",
+        "venta": 2,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true
       }
     ]
   }
