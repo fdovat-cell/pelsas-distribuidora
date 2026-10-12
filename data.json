@@ -1227,12 +1227,13 @@
         "cat": "mani",
         "present": "Caja x 30u 70g",
         "art": "5640",
-        "unit": 14.5,
-        "caja": 435,
+        "unit": 18.7,
+        "caja": 561,
         "emoji": "📦",
         "venta": 2,
         "activo": true,
-        "destacado": true
+        "destacado": true,
+        "sintacc": false
       },
       {
         "id": "se2",
@@ -1244,7 +1245,7 @@
         "caja": 585,
         "emoji": "",
         "venta": 2,
-        "activo": true
+        "activo": false
       },
       {
         "id": "se3",
@@ -1256,7 +1257,7 @@
         "caja": 690,
         "emoji": "",
         "venta": 2,
-        "activo": true
+        "activo": false
       },
       {
         "id": "se4",
@@ -1280,7 +1281,7 @@
         "caja": 435,
         "emoji": "",
         "venta": 2,
-        "activo": true
+        "activo": false
       },
       {
         "id": "se6",
