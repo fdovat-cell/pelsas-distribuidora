@@ -1004,6 +1004,20 @@
         "emoji": "📦",
         "venta": 2,
         "activo": true
+      },
+      {
+        "id": "mazarena_1792100808653",
+        "name": "Ojitos Marmolados  x 33u.",
+        "unit": 18,
+        "caja": 594,
+        "cat": "",
+        "art": "9382",
+        "present": "Pack x 33u.",
+        "emoji": "📦",
+        "venta": 2,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true
       }
     ],
     "agridulce": [
