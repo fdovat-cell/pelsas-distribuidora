@@ -251,6 +251,17 @@
       "logo": "img/placeholder.webp",
       "activo": true,
       "sintacc": false
+    },
+    {
+      "id": "mantecolimglogomantecol",
+      "sid": "alimentos",
+      "name": "Mantecol",
+      "emoji": "📦",
+      "desc": "Mantecol",
+      "logo": "img:logo/mantecol.webp",
+      "activo": true,
+      "sintacc": false,
+      "sinfoto": false
     }
   ],
   "products": {
@@ -5958,6 +5969,7 @@
         "sintacc": false,
         "activo": true
       }
-    ]
+    ],
+    "mantecolimglogomantecol": []
   }
 }
