@@ -2554,15 +2554,16 @@
       {
         "id": "golosinas_1782238960640",
         "name": "Palitos de la Selva 133pcs 660grs",
-        "unit": 499,
-        "caja": 499,
+        "unit": 538,
+        "caja": 538,
         "cat": "golosinas",
         "art": "1288",
         "present": "bolsa x 133u.",
         "emoji": "📦",
         "venta": 1,
         "activo": true,
-        "destacado": true
+        "destacado": true,
+        "sintacc": false
       },
       {
         "id": "golosinas_1782239213488",
