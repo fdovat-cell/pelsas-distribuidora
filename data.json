@@ -55,6 +55,17 @@
       ]
     },
     {
+      "id": "mantecolimglogomantecol",
+      "sid": "alimentos",
+      "name": "Mantecol",
+      "emoji": "📦",
+      "desc": "Mantecol",
+      "logo": "img:logo/mantecol.webp",
+      "activo": true,
+      "sintacc": false,
+      "sinfoto": false
+    },
+    {
       "id": "dori",
       "sid": "alimentos",
       "name": "Dori",
@@ -251,17 +262,6 @@
       "logo": "img/placeholder.webp",
       "activo": true,
       "sintacc": false
-    },
-    {
-      "id": "mantecolimglogomantecol",
-      "sid": "alimentos",
-      "name": "Mantecol",
-      "emoji": "📦",
-      "desc": "Mantecol",
-      "logo": "img:logo/mantecol.webp",
-      "activo": true,
-      "sintacc": false,
-      "sinfoto": false
     }
   ],
   "products": {
@@ -5970,6 +5970,49 @@
         "activo": true
       }
     ],
-    "mantecolimglogomantecol": []
+    "mantecolimglogomantecol": [
+      {
+        "id": "mantecolimglogomantecol_1792158155855",
+        "name": "Mantecol 41gr",
+        "unit": 39.9,
+        "caja": 478.8,
+        "cat": "",
+        "art": "1071",
+        "present": "CAJA X 12 U.",
+        "emoji": "📦",
+        "venta": 2,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true
+      },
+      {
+        "id": "mantecolimglogomantecol_1792158284542",
+        "name": "Mantecol 111gr Tradicional",
+        "unit": 79.9,
+        "caja": 3196,
+        "cat": "",
+        "art": "6071",
+        "present": "Caja x 40u.",
+        "emoji": "📦",
+        "venta": 1,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true
+      },
+      {
+        "id": "mantecolimglogomantecol_1792158348519",
+        "name": "Mantecol 253gr",
+        "unit": 149.9,
+        "caja": 5396.4,
+        "cat": "",
+        "art": "15956",
+        "present": "Caja x 36 u.",
+        "emoji": "📦",
+        "venta": 1,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true
+      }
+    ]
   }
 }
