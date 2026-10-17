@@ -2616,7 +2616,7 @@
         "present": "caja x 98u.",
         "emoji": "📦",
         "venta": 1,
-        "activo": true
+        "activo": false
       },
       {
         "id": "bombones_1782909639869",
@@ -2640,7 +2640,7 @@
         "present": "pack x 40 u",
         "emoji": "📦",
         "venta": 2,
-        "activo": true
+        "activo": false
       },
       {
         "id": "bombones_1782909748892",
@@ -2652,7 +2652,7 @@
         "present": "caja x 18 u",
         "emoji": "📦",
         "venta": 2,
-        "activo": true,
+        "activo": false,
         "destacado": true
       },
       {
