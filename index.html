@@ -808,7 +808,7 @@ let cart={},qtys={},view='home',curBrand=null,activeFilter='todos',checkout=fals
 let presentExtra=[],presentHidden=new Set();
 let pidToBrand={};
 const fmt=n=>'$'+n.toLocaleString('es-UY',{minimumFractionDigits:2,maximumFractionDigits:2});
-const allP=()=>Object.values(products).flat().filter(p=>p.activo!==false);
+const allP=()=>Object.values(products).flat().filter(p=>p.activo!==false&&!p._dup);
 const getBrand=id=>brands.find(b=>b.id===id);
 const alBrands=()=>brands.filter(b=>b.sid==='alimentos'&&b.activo!==false);
 const fumBrands=()=>brands.filter(b=>b.sid==='fumadores'&&b.activo!==false);
@@ -822,9 +822,19 @@ async function initApp() {
     const data = await res.json();
     brands   = data.brands   || [];
     products = data.products || {};
+    // Artículos que aparecen en más de una categoría (p.extra = [{b:marca, cat:subcategoría}])
+    Object.keys(products).forEach(bid=>{
+      (products[bid]||[]).forEach(p=>{
+        if(p._dup||!Array.isArray(p.extra))return;
+        p.extra.forEach(x=>{
+          if(!x||!x.b||x.b===bid||!brands.some(b=>b.id===x.b))return;
+          (products[x.b]=products[x.b]||[]).push(Object.assign({},p,{cat:x.cat||'',_dup:true}));
+        });
+      });
+    });
     Object.values(products).flat().forEach(p=>{qtys[p.id]=1});
     pidToBrand={};
-    Object.keys(products).forEach(bid=>{(products[bid]||[]).forEach(p=>{pidToBrand[p.id]=bid})});
+    Object.keys(products).forEach(bid=>{(products[bid]||[]).forEach(p=>{if(!p._dup)pidToBrand[p.id]=bid})});
     render();
   } catch(e) {
     console.error('Error cargando catálogo:', e);
@@ -1358,7 +1368,7 @@ function goMarcas(){
   else goSection();
 }
 function setF(f,btn){activeFilter=f;document.querySelectorAll('.fbtn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');reGrid()}
-function chQ(id,d){qtys[id]=Math.max(1,(qtys[id]||1)+d);const el=document.getElementById('q'+id);if(el)el.textContent=qtys[id]}
+function chQ(id,d){qtys[id]=Math.max(1,(qtys[id]||1)+d);document.querySelectorAll('[id="q'+id+'"]').forEach(el=>{el.textContent=qtys[id]})}
 function addC(id){
   const p=allP().find(x=>x.id===id);if(!p)return;
   const modo=p.venta===1?'unit':'caja';
@@ -1395,7 +1405,7 @@ function renderCart(){
   body.innerHTML=keys.map(k=>{
     const item=cart[k];
     const p=allP().find(x=>x.id===item.pid);if(!p)return'';
-    const br=brands.find(x=>products[x.id]&&products[x.id].find(pp=>pp.id===item.pid));
+    const br=brands.find(x=>x.id===pidToBrand[item.pid]);
     const sub=item.precio*item.qty;total+=sub;
     return`<div class="cart-item"><span class="ci-em">${p.emoji}</span><div class="ci-info"><div class="ci-name">${p.name}</div><div class="ci-brand">${br?br.name:''} · Art. ${p.art} · ${item.label}</div><div class="ci-price">${fmt(sub)}</div><div class="ci-act"><button class="sqb" onclick="cQ('${k}',-1)">−</button><span class="ci-qty">${item.qty}</span><button class="sqb" onclick="cQ('${k}',1)">+</button><button class="rm-btn" onclick="rmItem('${k}')">Eliminar</button></div></div></div>`;
   }).join('');
@@ -1428,7 +1438,7 @@ function buildOrderMsg(){
   keys.forEach(k=>{
     const item=cart[k];
     const p=allP().find(x=>x.id===item.pid);if(!p)return;
-    const br=brands.find(x=>products[x.id]&&products[x.id].find(pp=>pp.id===item.pid));
+    const br=brands.find(x=>x.id===pidToBrand[item.pid]);
     const sub=item.precio*item.qty;total+=sub;
     msg+=`• [${p.art||'s/n'}] ${br?br.name+' · ':''}${p.name} (${item.label})\n  ${item.qty} × $${item.precio.toFixed(2)} = $${sub.toFixed(2)}\n`;
   });
@@ -1471,7 +1481,7 @@ function onGSearch(){
   const q=_norm(raw);
   cl.classList.toggle('visible',raw.length>0);
   if(q.length<2){res.classList.remove('visible');res.innerHTML='';return}
-  const all=Object.entries(products).flatMap(([bid,arr])=>arr.filter(p=>p.activo!==false).map(p=>Object.assign({bid},p)));
+  const all=Object.entries(products).flatMap(([bid,arr])=>arr.filter(p=>p.activo!==false&&!p._dup).map(p=>Object.assign({bid},p)));
   const matches=all.filter(p=>_norm(p.name).includes(q)||p.art.includes(q)).slice(0,10);
   if(!matches.length){
     res.innerHTML='<div class="gsr-empty">Sin resultados para "'+raw.replace(/[<>&]/g,'')+'"</div>';

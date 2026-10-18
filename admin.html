@@ -109,6 +109,15 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 .prod-table td{padding:10px 14px;font-size:13px;border-bottom:1px solid var(--border);vertical-align:middle}
 .prod-table tr:last-child td{border-bottom:none}
 .prod-table tr.inactive-row td{opacity:.4}
+.alias-tag{display:inline-block;background:var(--cream2);border:1px solid var(--border);color:var(--mid);border-radius:12px;padding:1px 8px;font-size:10px;font-weight:600;margin-right:6px;white-space:nowrap}
+.prod-table tr.alias-row td{background:rgba(26,26,24,.025)}
+.extra-box{border:1.5px solid var(--border);border-radius:8px;max-height:170px;overflow-y:auto;padding:4px 10px;background:var(--white)}
+.extra-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:5px 0;border-bottom:1px solid var(--border)}
+.extra-row:last-child{border-bottom:none}
+.extra-row label{display:flex;align-items:center;gap:7px;font-size:13px;cursor:pointer;margin:0;text-transform:none;letter-spacing:0;font-weight:400}
+.extra-row input[type=checkbox]{width:auto}
+.extra-row select{max-width:48%;padding:5px 8px;font-size:12px;border:1.5px solid var(--border);border-radius:6px;font-family:'DM Sans',sans-serif}
+.extra-help{font-size:11px;color:var(--light);margin-top:4px}
 .prod-table tr:hover td{background:var(--cream)}
 .prod-img{width:44px;height:44px;border-radius:7px;object-fit:contain;background:var(--cream);padding:2px}
 .prod-name-cell{font-weight:500;line-height:1.3}
@@ -246,6 +255,12 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
         <label>Artículo (código)</label>
         <input type="text" id="f-art" placeholder="Ej: 5732">
       </div>
+    </div>
+    <div class="form-row">
+      <label>También aparece en otras categorías</label>
+      <input type="text" id="f-extra-q" placeholder="Filtrar marcas…" oninput="filterExtra(this.value)" style="margin-bottom:6px">
+      <div id="f-extra" class="extra-box"></div>
+      <div class="extra-help">Es el mismo artículo: el precio y los datos se editan una sola vez, acá.</div>
     </div>
     <div class="form-row">
       <label>Presentación</label>
@@ -536,7 +551,16 @@ function renderContent() {
   if (!currentBrand) return;
   const brand = data.brands.find(b => b.id === currentBrand);
   if (!brand) return;
-  const prods = data.products[currentBrand] || [];
+  const own = data.products[currentBrand] || [];
+  const aliases = [];
+  Object.keys(data.products).forEach(ob => {
+    if (ob === currentBrand) return;
+    (data.products[ob] || []).forEach(p => {
+      const x = (p.extra || []).find(e => e.b === currentBrand);
+      if (x) aliases.push(Object.assign({}, p, { cat: x.cat || '', _from: ob }));
+    });
+  });
+  const prods = own.concat(aliases);
   const filtered = prods
     .filter(p => showInactive || p.activo !== false)
     .filter(p => !searchQ || p.name.toLowerCase().includes(searchQ) || p.art.includes(searchQ) || (p.cat||'').toLowerCase().includes(searchQ))
@@ -604,9 +628,11 @@ function renderContent() {
 const brandSinFoto = bid => !!((data.brands.find(b => b.id === bid)) || {}).sinfoto;
 function renderRow(p, bid) {
   const inactive = p.activo === false ? ' inactive-row' : '';
-  return `<tr class="${inactive}" id="row-${p.id}">
+  const isAlias = !!p._from;
+  const fromBrand = isAlias ? ((data.brands.find(b => b.id === p._from) || {}).name || p._from) : '';
+  return `<tr class="${inactive}${isAlias ? ' alias-row' : ''}" id="row-${p.id}${isAlias ? '-' + bid : ''}">
     ${brandSinFoto(bid) ? '' : `<td><img class="prod-img" src="img/${p.art}.webp" alt="" onerror="this.outerHTML='<span style=\\'font-size:24px\\'>${p.emoji}</span>'"></td>`}
-    <td><div class="prod-name-cell">${p.destacado?'<span title="Incluido en Modo Visita">🤝 </span>':''}${p.name}</div></td>
+    <td><div class="prod-name-cell">${isAlias ? `<span class="alias-tag" title="Mismo artículo cargado en ${escAttr(fromBrand)}">↪ ${escHtml(fromBrand)}</span>` : ''}${p.destacado?'<span title="Incluido en Modo Visita">🤝 </span>':''}${p.name}</div></td>
     <td><span class="prod-cat">${escHtml(p.cat||"—")}</span></td>
     <td><span class="art-badge">${p.art}</span></td>
     <td><div class="price-cell">$${p.unit.toFixed(2)}</div></td>
@@ -614,7 +640,7 @@ function renderRow(p, bid) {
     <td><span class="activo-toggle" onclick="toggleProduct('${p.id}')" title="Activar/desactivar">${p.activo!==false?'✅':'⬜'}</span></td>
     <td><div class="action-btns">
       <button class="edit-btn" onclick="openModal('${p.id}')">Editar</button>
-      <button class="del-btn" onclick="deleteProduct('${p.id}')">Borrar</button>
+      ${isAlias ? `<button class="del-btn" onclick="removeAlias('${p.id}','${bid}')" title="Lo saca de esta marca; el artículo sigue en ${escAttr(fromBrand)}">Quitar de acá</button>` : `<button class="del-btn" onclick="deleteProduct('${p.id}')">Borrar</button>`}
     </div></td>
   </tr>`;
 }
@@ -1293,6 +1319,51 @@ function subDrop(e) {
 }
 function subDragEnd(e) { dragSubIdx = null; clearDropMarks('.sub-row'); document.querySelectorAll('.sub-row.dragging').forEach(x => x.classList.remove('dragging')); }
 
+// ── Artículos en varias categorías ───────────────────────────────────────────
+function renderExtraBox(extra) {
+  const cur = {};
+  (extra || []).forEach(e => { cur[e.b] = e.cat || ''; });
+  document.getElementById('f-extra-q').value = '';
+  const rows = data.brands.filter(b => b.id !== modalBrandId).map(b => {
+    const on = b.id in cur;
+    const subs = getSubcats(b.id);
+    if (on && cur[b.id] && !subs.includes(cur[b.id])) subs.push(cur[b.id]);
+    return `<div class="extra-row" data-name="${escAttr((b.name || '').toLowerCase())}">
+      <label><input type="checkbox" data-b="${escAttr(b.id)}"${on ? ' checked' : ''} onchange="onExtraToggle(this)"> ${escHtml(b.emoji || '')} ${escHtml(b.name)}</label>
+      ${subs.length ? `<select style="${on ? '' : 'display:none'}"><option value="">— Sin subcategoría —</option>${subs.map(s => `<option value="${escAttr(s)}"${cur[b.id] === s ? ' selected' : ''}>${escHtml(s)}</option>`).join('')}</select>` : ''}
+    </div>`;
+  }).join('');
+  document.getElementById('f-extra').innerHTML = rows || '<div class="extra-help">No hay otras marcas.</div>';
+}
+function onExtraToggle(cb) {
+  const sel = cb.closest('.extra-row').querySelector('select');
+  if (sel) sel.style.display = cb.checked ? '' : 'none';
+}
+function filterExtra(q) {
+  q = (q || '').trim().toLowerCase();
+  document.querySelectorAll('#f-extra .extra-row').forEach(r => { r.style.display = (!q || r.dataset.name.includes(q)) ? '' : 'none'; });
+}
+function readExtra() {
+  const out = [];
+  document.querySelectorAll('#f-extra input[type=checkbox]:checked').forEach(cb => {
+    const sel = cb.closest('.extra-row').querySelector('select');
+    out.push({ b: cb.dataset.b, cat: sel ? sel.value : '' });
+  });
+  return out;
+}
+function removeAlias(pid, bid) {
+  for (const ob of Object.keys(data.products)) {
+    const p = data.products[ob].find(x => x.id === pid);
+    if (p) {
+      p.extra = (p.extra || []).filter(e => e.b !== bid);
+      if (!p.extra.length) delete p.extra;
+      break;
+    }
+  }
+  markUnsaved();
+  renderContent();
+}
+
 // ── Subcategorías ─────────────────────────────────────────────────────────────
 function escHtml(s) { return String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 function escAttr(s) { return escHtml(s).replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
@@ -1408,6 +1479,7 @@ function openModal(pid) {
     document.getElementById('f-unit').value = p.unit;
     document.getElementById('f-caja').value = p.caja;
     fillCatSelect(p.cat);
+    renderExtraBox(p.extra);
     document.getElementById('f-art').value = p.art;
     document.getElementById('f-present').value = p.present;
     document.getElementById('f-emoji').value = p.emoji;
@@ -1419,6 +1491,7 @@ function openModal(pid) {
     document.getElementById('f-unit').value = '';
     document.getElementById('f-caja').value = '';
     fillCatSelect(subFilter !== 'todos' && subFilter !== '__none__' ? subFilter : '');
+    renderExtraBox([]);
     document.getElementById('f-art').value = '';
     document.getElementById('f-present').value = '';
     document.getElementById('f-emoji').value = '📦';
@@ -1447,6 +1520,7 @@ function saveProduct() {
   const venta = parseInt(document.getElementById('f-venta').value);
   const destacado = document.getElementById('f-destacado').checked;
   const sintacc = document.getElementById('f-sintacc').checked;
+  const extra = readExtra();
 
   if (!name || isNaN(unit) || isNaN(caja)) {
     alert('Completá al menos nombre, precio unitario y precio caja');
@@ -1459,6 +1533,7 @@ function saveProduct() {
       const p = data.products[bid].find(x => x.id === editingId);
       if (p) {
         Object.assign(p, { name, unit, caja, cat, art, present, emoji, venta, destacado, sintacc });
+        if (extra.length) p.extra = extra; else delete p.extra;
         break;
       }
     }
@@ -1467,7 +1542,9 @@ function saveProduct() {
     if (!currentBrand) { alert('Seleccioná una marca primero'); return; }
     if (!data.products[currentBrand]) data.products[currentBrand] = [];
     const newId = currentBrand + '_' + Date.now();
-    data.products[currentBrand].push({ id: newId, name, unit, caja, cat, art, present, emoji, venta, destacado, sintacc, activo: true });
+    const np = { id: newId, name, unit, caja, cat, art, present, emoji, venta, destacado, sintacc, activo: true };
+    if (extra.length) np.extra = extra;
+    data.products[currentBrand].push(np);
   }
 
   markUnsaved();
@@ -1532,13 +1609,22 @@ function slugify(s) {
     .replace(/[^a-z0-9]+/g, '');
 }
 
+// Corrige rutas de logo mal tipeadas: "img:logo-x.webp", "logo-x.webp", "\\img\\logo-x.webp"
+function normLogo(v) {
+  v = (v || '').trim().replace(/\\/g, '/');
+  if (!v || /^https?:\/\//i.test(v)) return v;
+  v = v.replace(/^\/+/, '').replace(/^img\s*[:;]\s*/i, 'img/');
+  if (!v.startsWith('img/')) v = 'img/' + v;
+  return v;
+}
+
 function saveBrand() {
   const name = document.getElementById('fb-name').value.trim();
   const sid  = document.getElementById('fb-sid').value;
   const desc = document.getElementById('fb-desc').value.trim();
   const emoji = document.getElementById('fb-emoji').value.trim() || '📦';
   const sinfoto = document.getElementById('fb-sinfoto').value === '1';
-  const logo = document.getElementById('fb-logo').value.trim() || 'img/placeholder.webp';
+  const logo = normLogo(document.getElementById('fb-logo').value) || 'img/placeholder.webp';
   const sintacc = document.getElementById('fb-sintacc').checked;
 
   if (!name) { alert('Completá el nombre de la marca'); return; }
