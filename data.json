@@ -2918,6 +2918,20 @@
             "cat": "gomitas"
           }
         ]
+      },
+      {
+        "id": "golosinas_1792329937743",
+        "name": "Gomitas Bebeto fast food x 24u.",
+        "unit": 486,
+        "caja": 486,
+        "cat": "gomitas",
+        "art": "31917",
+        "present": "Caja x 24u",
+        "emoji": "📦",
+        "venta": 1,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true
       }
     ],
     "bombones": [
