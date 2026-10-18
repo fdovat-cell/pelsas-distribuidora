@@ -2613,6 +2613,20 @@
         "venta": 1,
         "activo": true,
         "destacado": true
+      },
+      {
+        "id": "golosinas_1792326877879",
+        "name": "Gomas tiras acidas x 2pcs",
+        "unit": 129,
+        "caja": 129,
+        "cat": "gomitas",
+        "art": "22244",
+        "present": "caja x 12u",
+        "emoji": "📦",
+        "venta": 1,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true
       }
     ],
     "bombones": [
