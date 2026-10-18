@@ -66,15 +66,6 @@
       "sinfoto": false
     },
     {
-      "id": "dori",
-      "sid": "alimentos",
-      "name": "Dori",
-      "emoji": "",
-      "desc": "Golosinas y maní",
-      "logo": "img/logo-dori.webp",
-      "activo": true
-    },
-    {
       "id": "golosinas",
       "sid": "alimentos",
       "name": "Golosinas",
@@ -89,6 +80,15 @@
         "pastillas",
         "chocolates"
       ]
+    },
+    {
+      "id": "dori",
+      "sid": "alimentos",
+      "name": "Dori",
+      "emoji": "",
+      "desc": "Golosinas y maní",
+      "logo": "img/logo-dori.webp",
+      "activo": true
     },
     {
       "id": "barquilandia",
