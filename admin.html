@@ -630,9 +630,11 @@ function renderRow(p, bid) {
   const inactive = p.activo === false ? ' inactive-row' : '';
   const isAlias = !!p._from;
   const fromBrand = isAlias ? ((data.brands.find(b => b.id === p._from) || {}).name || p._from) : '';
+  const alsoIn = (!isAlias && Array.isArray(p.extra))
+    ? p.extra.map(e => (data.brands.find(b => b.id === e.b) || {}).name).filter(Boolean).join(', ') : '';
   return `<tr class="${inactive}${isAlias ? ' alias-row' : ''}" id="row-${p.id}${isAlias ? '-' + bid : ''}">
     ${brandSinFoto(bid) ? '' : `<td><img class="prod-img" src="img/${p.art}.webp" alt="" onerror="this.outerHTML='<span style=\\'font-size:24px\\'>${p.emoji}</span>'"></td>`}
-    <td><div class="prod-name-cell">${isAlias ? `<span class="alias-tag" title="Mismo artículo cargado en ${escAttr(fromBrand)}">↪ ${escHtml(fromBrand)}</span>` : ''}${p.destacado?'<span title="Incluido en Modo Visita">🤝 </span>':''}${p.name}</div></td>
+    <td><div class="prod-name-cell">${isAlias ? `<span class="alias-tag" title="Mismo artículo cargado en ${escAttr(fromBrand)}">↪ ${escHtml(fromBrand)}</span>` : ''}${alsoIn ? `<span class="alias-tag" title="Este artículo también aparece en: ${escAttr(alsoIn)}">＋ también en ${escHtml(alsoIn)}</span>` : ''}${p.destacado?'<span title="Incluido en Modo Visita">🤝 </span>':''}${p.name}</div></td>
     <td><span class="prod-cat">${escHtml(p.cat||"—")}</span></td>
     <td><span class="art-badge">${p.art}</span></td>
     <td><div class="price-cell">$${p.unit.toFixed(2)}</div></td>
