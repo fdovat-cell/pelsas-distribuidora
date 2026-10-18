@@ -2961,6 +2961,20 @@
         "destacado": false,
         "sintacc": false,
         "activo": true
+      },
+      {
+        "id": "golosinas_1792366143712",
+        "name": "Chiclet Beldent Infinit x12u",
+        "unit": 59.9,
+        "caja": 719,
+        "cat": "chiclets",
+        "art": "2778",
+        "present": "",
+        "emoji": "📦",
+        "venta": 2,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true
       }
     ],
     "bombones": [
