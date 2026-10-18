@@ -413,11 +413,19 @@
         "cat": "gomitas",
         "present": "Caja x 30 bolsas 100g",
         "art": "5377",
-        "unit": 25.71,
-        "caja": 771.38,
-        "emoji": "",
-        "venta": 2,
-        "activo": true
+        "unit": 26.55,
+        "caja": 796.5,
+        "emoji": "📦",
+        "venta": 1,
+        "activo": true,
+        "destacado": false,
+        "sintacc": false,
+        "extra": [
+          {
+            "b": "golosinas",
+            "cat": "gomitas"
+          }
+        ]
       },
       {
         "id": "d13",
@@ -425,11 +433,19 @@
         "cat": "gomitas",
         "present": "Caja x 30 bolsas 100g",
         "art": "5378",
-        "unit": 25.71,
-        "caja": 771.38,
-        "emoji": "",
-        "venta": 2,
-        "activo": true
+        "unit": 26.55,
+        "caja": 796.5,
+        "emoji": "📦",
+        "venta": 1,
+        "activo": true,
+        "destacado": false,
+        "sintacc": false,
+        "extra": [
+          {
+            "b": "golosinas",
+            "cat": "gomitas"
+          }
+        ]
       },
       {
         "id": "d14",
@@ -437,11 +453,19 @@
         "cat": "gomitas",
         "present": "Caja x 30 bolsas 100g",
         "art": "5379",
-        "unit": 25.71,
-        "caja": 771.38,
-        "emoji": "",
-        "venta": 2,
-        "activo": true
+        "unit": 26.55,
+        "caja": 796.5,
+        "emoji": "📦",
+        "venta": 1,
+        "activo": true,
+        "destacado": false,
+        "sintacc": false,
+        "extra": [
+          {
+            "b": "golosinas",
+            "cat": "gomitas"
+          }
+        ]
       },
       {
         "id": "d15",
@@ -449,11 +473,19 @@
         "cat": "gomitas",
         "present": "Caja x 30 bolsas 100g",
         "art": "6748",
-        "unit": 25.71,
-        "caja": 771.38,
-        "emoji": "",
-        "venta": 2,
-        "activo": true
+        "unit": 26.55,
+        "caja": 796.5,
+        "emoji": "📦",
+        "venta": 1,
+        "activo": true,
+        "destacado": false,
+        "sintacc": false,
+        "extra": [
+          {
+            "b": "golosinas",
+            "cat": "gomitas"
+          }
+        ]
       },
       {
         "id": "d16",
