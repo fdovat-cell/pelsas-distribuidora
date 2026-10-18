@@ -2642,6 +2642,20 @@
         "destacado": false,
         "sintacc": false,
         "activo": true
+      },
+      {
+        "id": "golosinas_1792327640348",
+        "name": "Gomita helado ácido 30pcs",
+        "unit": 273,
+        "caja": 273,
+        "cat": "gomitas",
+        "art": "33190",
+        "present": "caja x 30u.",
+        "emoji": "📦",
+        "venta": 2,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true
       }
     ],
     "bombones": [
