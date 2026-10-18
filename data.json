@@ -2628,6 +2628,20 @@
         "destacado": false,
         "sintacc": false,
         "activo": true
+      },
+      {
+        "id": "golosinas_1792327295631",
+        "name": "Gomitas 3D pizza+pancho+burguer 30pc",
+        "unit": 248,
+        "caja": 248,
+        "cat": "gomitas",
+        "art": "33040",
+        "present": "caja x 30u.",
+        "emoji": "📦",
+        "venta": 2,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true
       }
     ],
     "bombones": [
