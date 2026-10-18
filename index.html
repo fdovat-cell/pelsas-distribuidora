@@ -815,11 +815,26 @@ const fumBrands=()=>brands.filter(b=>b.sid==='fumadores'&&b.activo!==false);
 const alCount=()=>alBrands().reduce((a,b)=>(products[b.id]||[]).filter(p=>p.activo!==false).length+a,0);
 const fumCount=()=>fumBrands().reduce((a,b)=>(products[b.id]||[]).filter(p=>p.activo!==false).length+a,0);
 
+// Los cambios del Admin se ven al instante: se lee por la API de GitHub (sin la caché de 5 min de raw).
+// Si la API no responde (límite de consultas, red), se usa raw como antes.
+async function loadCatalogData() {
+  try {
+    const r = await fetch(`https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/data.json?ref=${GH_BRANCH}`, {
+      headers: { 'Accept': 'application/vnd.github.raw+json' }, cache: 'no-store'
+    });
+    if (r.ok) {
+      const d = await r.json();
+      if (d && Array.isArray(d.brands) && d.products) return d;
+    }
+  } catch (e) { /* cae a raw */ }
+  const res = await fetch(DATA_URL + '?t=' + Date.now(), { cache: 'no-store' });
+  if (!res.ok) throw new Error('HTTP ' + res.status);
+  return await res.json();
+}
+
 async function initApp() {
   try {
-    const res = await fetch(DATA_URL + '?t=' + Date.now());
-    if (!res.ok) throw new Error('HTTP ' + res.status);
-    const data = await res.json();
+    const data = await loadCatalogData();
     brands   = data.brands   || [];
     products = data.products || {};
     // Artículos que aparecen en más de una categoría (p.extra = [{b:marca, cat:subcategoría}])
