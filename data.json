@@ -2556,7 +2556,9 @@
         "present": "display x 30u",
         "emoji": "📦",
         "venta": 1,
-        "activo": true
+        "activo": true,
+        "destacado": false,
+        "sintacc": false
       },
       {
         "id": "golosinas_1782238960640",
@@ -2577,12 +2579,14 @@
         "name": "Galletita OKEBON Molino Natural Tubo 240 Grs -",
         "unit": 85,
         "caja": 85,
-        "cat": "galletitas",
+        "cat": "galletas",
         "art": "270751",
         "present": "galletitas",
         "emoji": "📦",
         "venta": 1,
-        "activo": true
+        "activo": true,
+        "destacado": false,
+        "sintacc": false
       },
       {
         "id": "golosinas_1782239333760",
