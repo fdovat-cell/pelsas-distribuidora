@@ -331,9 +331,16 @@
         "unit": 135,
         "caja": 135,
         "emoji": "📦",
-        "venta": 1,
+        "venta": 2,
         "activo": true,
-        "destacado": false
+        "destacado": false,
+        "sintacc": false,
+        "extra": [
+          {
+            "b": "caramelos",
+            "cat": "caramelos"
+          }
+        ]
       },
       {
         "id": "d6",
