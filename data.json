@@ -79,7 +79,8 @@
         "galletas",
         "pastillas",
         "chocolates",
-        "caramelos"
+        "caramelos",
+        "chiclets"
       ]
     },
     {
@@ -2941,6 +2942,20 @@
         "cat": "gomitas",
         "art": "32409",
         "present": "",
+        "emoji": "📦",
+        "venta": 2,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true
+      },
+      {
+        "id": "golosinas_1792364432349",
+        "name": "Chiclets Beldent x 20u.",
+        "unit": 467,
+        "caja": 467,
+        "cat": "chiclets",
+        "art": "2071",
+        "present": "caja x 20u.",
         "emoji": "📦",
         "venta": 2,
         "destacado": false,
