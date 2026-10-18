@@ -2858,6 +2858,26 @@
             "cat": ""
           }
         ]
+      },
+      {
+        "id": "golosinas_1792329245449",
+        "name": "Gomitas Dori Gomets 100gr anillos",
+        "unit": 26.55,
+        "caja": 796.5,
+        "cat": "gomitas",
+        "art": "11856",
+        "present": "",
+        "emoji": "📦",
+        "venta": 1,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true,
+        "extra": [
+          {
+            "b": "dori",
+            "cat": "gomitas"
+          }
+        ]
       }
     ],
     "bombones": [
