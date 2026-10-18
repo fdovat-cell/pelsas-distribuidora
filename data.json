@@ -78,7 +78,8 @@
         "chupetines",
         "galletas",
         "pastillas",
-        "chocolates"
+        "chocolates",
+        "caramelos"
       ]
     },
     {
@@ -242,15 +243,6 @@
       "activo": true
     },
     {
-      "id": "caramelos",
-      "sid": "alimentos",
-      "name": "Caramelos",
-      "emoji": "📦",
-      "desc": "Caramelos",
-      "logo": "img/logo-caramelos.webp",
-      "activo": true
-    },
-    {
       "id": "papeleria",
       "sid": "fumadores",
       "name": "Papelería General",
@@ -337,8 +329,8 @@
         "sintacc": false,
         "extra": [
           {
-            "b": "caramelos",
-            "cat": ""
+            "b": "golosinas",
+            "cat": "caramelos"
           }
         ]
       },
@@ -2663,74 +2655,7 @@
         "destacado": false,
         "sintacc": false,
         "activo": true
-      }
-    ],
-    "bombones": [
-      {
-        "id": "bombones_1782909547597",
-        "name": "Bombones de licor con cerezas x 98u.",
-        "unit": 1323,
-        "caja": 1323,
-        "cat": "Bombones",
-        "art": "969",
-        "present": "caja x 98u.",
-        "emoji": "📦",
-        "venta": 1,
-        "activo": false
       },
-      {
-        "id": "bombones_1782909639869",
-        "name": "Bombones con licor de cereza x 71 u",
-        "unit": 799,
-        "caja": 799,
-        "cat": "Bombones",
-        "art": "970",
-        "present": "pack x 71 u",
-        "emoji": "📦",
-        "venta": 1,
-        "activo": true
-      },
-      {
-        "id": "bombones_1782909702989",
-        "name": "Bombones de licor con cerezas x 40 u",
-        "unit": 499,
-        "caja": 499,
-        "cat": "Bombones",
-        "art": "971",
-        "present": "pack x 40 u",
-        "emoji": "📦",
-        "venta": 2,
-        "activo": false
-      },
-      {
-        "id": "bombones_1782909748892",
-        "name": "Barriles chocolate rellenos c/whisky-licor-cocktail x 18u",
-        "unit": 536,
-        "caja": 536,
-        "cat": "Bombones",
-        "art": "972",
-        "present": "caja x 18 u",
-        "emoji": "📦",
-        "venta": 2,
-        "activo": false,
-        "destacado": true
-      },
-      {
-        "id": "bombones_1788387338660",
-        "name": "Bombonera E.Wedel Barrilels Licor",
-        "unit": 298,
-        "caja": 298,
-        "cat": "Bombones",
-        "art": "4993",
-        "present": "",
-        "emoji": "📦",
-        "venta": 1,
-        "destacado": false,
-        "sintacc": false,
-        "activo": true
-      }
-    ],
-    "caramelos": [
       {
         "id": "caramelos_1783783443957",
         "name": "Caramelo Ben Hur  Menta-Surtidas-Acidos-Gajos  1kgrs",
@@ -2801,7 +2726,7 @@
         "name": "Caramelo Cafe Simonetto Coffee King 500gr",
         "unit": 99,
         "caja": 99,
-        "cat": "",
+        "cat": "caramelos",
         "art": "19737",
         "present": "bolsa 500gr",
         "emoji": "📦",
@@ -2840,7 +2765,7 @@
         "name": "Caramelo Candel Astra X 100u 600grs",
         "unit": 389,
         "caja": 389,
-        "cat": "",
+        "cat": "caramelos",
         "art": "347",
         "present": "bolsas 600g",
         "emoji": "📦",
@@ -2911,6 +2836,71 @@
         "emoji": "📦",
         "venta": 1,
         "destacado": false,
+        "activo": true
+      }
+    ],
+    "bombones": [
+      {
+        "id": "bombones_1782909547597",
+        "name": "Bombones de licor con cerezas x 98u.",
+        "unit": 1323,
+        "caja": 1323,
+        "cat": "Bombones",
+        "art": "969",
+        "present": "caja x 98u.",
+        "emoji": "📦",
+        "venta": 1,
+        "activo": false
+      },
+      {
+        "id": "bombones_1782909639869",
+        "name": "Bombones con licor de cereza x 71 u",
+        "unit": 799,
+        "caja": 799,
+        "cat": "Bombones",
+        "art": "970",
+        "present": "pack x 71 u",
+        "emoji": "📦",
+        "venta": 1,
+        "activo": true
+      },
+      {
+        "id": "bombones_1782909702989",
+        "name": "Bombones de licor con cerezas x 40 u",
+        "unit": 499,
+        "caja": 499,
+        "cat": "Bombones",
+        "art": "971",
+        "present": "pack x 40 u",
+        "emoji": "📦",
+        "venta": 2,
+        "activo": false
+      },
+      {
+        "id": "bombones_1782909748892",
+        "name": "Barriles chocolate rellenos c/whisky-licor-cocktail x 18u",
+        "unit": 536,
+        "caja": 536,
+        "cat": "Bombones",
+        "art": "972",
+        "present": "caja x 18 u",
+        "emoji": "📦",
+        "venta": 2,
+        "activo": false,
+        "destacado": true
+      },
+      {
+        "id": "bombones_1788387338660",
+        "name": "Bombonera E.Wedel Barrilels Licor",
+        "unit": 298,
+        "caja": 298,
+        "cat": "Bombones",
+        "art": "4993",
+        "present": "",
+        "emoji": "📦",
+        "venta": 1,
+        "destacado": false,
+        "sintacc": false,
         "activo": true
       }
     ],
