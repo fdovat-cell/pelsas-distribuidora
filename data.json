@@ -2932,6 +2932,20 @@
         "destacado": false,
         "sintacc": false,
         "activo": true
+      },
+      {
+        "id": "golosinas_1792330101697",
+        "name": "Goma tubo Halloween Pinta Lengua",
+        "unit": 184.9,
+        "caja": 184.9,
+        "cat": "gomitas",
+        "art": "32409",
+        "present": "",
+        "emoji": "📦",
+        "venta": 2,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true
       }
     ],
     "bombones": [
