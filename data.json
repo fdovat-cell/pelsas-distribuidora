@@ -2838,6 +2838,26 @@
         "venta": 1,
         "destacado": false,
         "activo": true
+      },
+      {
+        "id": "golosinas_1792328847505",
+        "name": "Goma tubo Dori Gomets x 30u.",
+        "unit": 210,
+        "caja": 210,
+        "cat": "gomitas",
+        "art": "",
+        "present": "caja x 30u.",
+        "emoji": "📦",
+        "venta": 2,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true,
+        "extra": [
+          {
+            "b": "dori",
+            "cat": ""
+          }
+        ]
       }
     ],
     "bombones": [
