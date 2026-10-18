@@ -75,6 +75,15 @@
       "activo": true
     },
     {
+      "id": "golosinas",
+      "sid": "alimentos",
+      "name": "Golosinas",
+      "emoji": "📦",
+      "desc": "Golosinas",
+      "logo": "img/logo-golosinas.webp",
+      "activo": true
+    },
+    {
       "id": "barquilandia",
       "sid": "alimentos",
       "name": "Barquilandia",
@@ -214,15 +223,6 @@
       "emoji": "📦",
       "desc": "Edulcorantes/azucar",
       "logo": "img/logo-edulcorantes.webp",
-      "activo": true
-    },
-    {
-      "id": "golosinas",
-      "sid": "alimentos",
-      "name": "Golosinas",
-      "emoji": "📦",
-      "desc": "Golosinas",
-      "logo": "img/logo-golosinas.webp",
       "activo": true
     },
     {
