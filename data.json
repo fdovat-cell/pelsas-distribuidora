@@ -2975,6 +2975,20 @@
         "destacado": false,
         "sintacc": false,
         "activo": true
+      },
+      {
+        "id": "golosinas_1792366520503",
+        "name": "Chiclet Topline Seven x16u.",
+        "unit": 383,
+        "caja": 383,
+        "cat": "chiclets",
+        "art": "4054",
+        "present": "",
+        "emoji": "📦",
+        "venta": 2,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true
       }
     ],
     "bombones": [
