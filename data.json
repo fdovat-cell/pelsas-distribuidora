@@ -81,7 +81,13 @@
       "emoji": "📦",
       "desc": "Golosinas",
       "logo": "img/logo-golosinas.webp",
-      "activo": true
+      "activo": true,
+      "subcats": [
+        "gomitas",
+        "chocolates",
+        "galletitas",
+        "galletas"
+      ]
     },
     {
       "id": "barquilandia",
@@ -2544,7 +2550,7 @@
         "name": "CHUPETIN Y PASTILLA BOTELLITA Display x30 Unidades",
         "unit": 254,
         "caja": 254,
-        "cat": "golosinas",
+        "cat": "gomitas",
         "art": "32769",
         "present": "display x 30u",
         "emoji": "📦",
@@ -2556,7 +2562,7 @@
         "name": "Palitos de la Selva 133pcs 660grs",
         "unit": 538,
         "caja": 538,
-        "cat": "golosinas",
+        "cat": "gomitas",
         "art": "1288",
         "present": "bolsa x 133u.",
         "emoji": "📦",
