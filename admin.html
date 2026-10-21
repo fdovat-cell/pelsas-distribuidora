@@ -111,6 +111,12 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 .prod-table tr.inactive-row td{opacity:.4}
 .alias-tag{display:inline-block;background:var(--cream2);border:1px solid var(--border);color:var(--mid);border-radius:12px;padding:1px 8px;font-size:10px;font-weight:600;margin-right:6px;white-space:nowrap}
 .prod-table tr.alias-row td{background:rgba(26,26,24,.025)}
+.prod-table td.drag-cell{width:26px;padding-left:10px;padding-right:0;text-align:center}
+.prod-table .grip{cursor:grab;color:var(--light);font-size:15px;user-select:none;padding:4px 2px}
+.prod-table .grip:hover{color:var(--ink)}
+.prod-table tr.dragging td{opacity:.35}
+.prod-table tr.drop-before td{box-shadow:inset 0 2px 0 0 var(--red)}
+.prod-table tr.drop-after td{box-shadow:inset 0 -2px 0 0 var(--red)}
 .extra-box{border:1.5px solid var(--border);border-radius:8px;max-height:170px;overflow-y:auto;padding:4px 10px;background:var(--white)}
 .extra-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:5px 0;border-bottom:1px solid var(--border)}
 .extra-row:last-child{border-bottom:none}
@@ -610,6 +616,7 @@ function renderContent() {
       ? `<div class="empty-state"><span class="empty-icon">📦</span><div>No hay productos${searchQ?' para "'+searchQ+'"':''}</div></div>`
       : `<table class="prod-table">
           <thead><tr>
+            <th style="width:26px" title="Arrastrá ⋮⋮ para cambiar el orden"></th>
             ${brandSinFoto(currentBrand) ? '' : '<th>Foto</th>'}
             <th>Producto</th>
             <th>Subcat.</th>
@@ -632,7 +639,8 @@ function renderRow(p, bid) {
   const fromBrand = isAlias ? ((data.brands.find(b => b.id === p._from) || {}).name || p._from) : '';
   const alsoIn = (!isAlias && Array.isArray(p.extra))
     ? p.extra.map(e => (data.brands.find(b => b.id === e.b) || {}).name).filter(Boolean).join(', ') : '';
-  return `<tr class="${inactive}${isAlias ? ' alias-row' : ''}" id="row-${p.id}${isAlias ? '-' + bid : ''}">
+  return `<tr class="${inactive}${isAlias ? ' alias-row' : ''}" id="row-${p.id}${isAlias ? '-' + bid : ''}"${isAlias ? '' : ` data-pid="${p.id}" ondragover="prodDragOver(event)" ondragleave="prodDragLeave(event)" ondrop="prodDrop(event)"`}>
+    <td class="drag-cell">${isAlias ? '' : `<span class="grip" draggable="true" title="Arrastrá para cambiar el orden" ondragstart="prodDragStart(event,'${p.id}')" ondragend="prodDragEnd(event)">⋮⋮</span>`}</td>
     ${brandSinFoto(bid) ? '' : `<td><img class="prod-img" src="img/${p.art}.webp" alt="" onerror="this.outerHTML='<span style=\\'font-size:24px\\'>${p.emoji}</span>'"></td>`}
     <td><div class="prod-name-cell">${isAlias ? `<span class="alias-tag" title="Mismo artículo cargado en ${escAttr(fromBrand)}">↪ ${escHtml(fromBrand)}</span>` : ''}${alsoIn ? `<span class="alias-tag" title="Este artículo también aparece en: ${escAttr(alsoIn)}">＋ también en ${escHtml(alsoIn)}</span>` : ''}${p.destacado?'<span title="Incluido en Modo Visita">🤝 </span>':''}${p.name}</div></td>
     <td><span class="prod-cat">${escHtml(p.cat||"—")}</span></td>
@@ -1288,6 +1296,47 @@ function brandDrop(e) {
   renderSidebar();
 }
 function brandDragEnd(e) { dragBrandId = null; e.currentTarget.classList.remove('dragging'); clearDropMarks('.brand-btn'); }
+
+// ── Drag & drop: orden de productos dentro de la marca ───────────────────────
+let dragProdId = null;
+function prodDragStart(e, pid) {
+  dragProdId = pid;
+  e.dataTransfer.effectAllowed = 'move';
+  e.dataTransfer.setData('text/plain', pid);
+  const tr = e.currentTarget.closest('tr');
+  if (tr) { e.dataTransfer.setDragImage(tr, 20, 20); tr.classList.add('dragging'); }
+}
+function prodDragOver(e) {
+  if (!dragProdId) return;
+  const tr = e.currentTarget;
+  if (tr.dataset.pid === dragProdId) return;
+  e.preventDefault();
+  clearDropMarks('.prod-table tr');
+  tr.classList.add('drop-' + dropSide(e, tr));
+}
+function prodDragLeave(e) { e.currentTarget.classList.remove('drop-before', 'drop-after'); }
+function prodDrop(e) {
+  e.preventDefault();
+  const tr = e.currentTarget, tid = tr.dataset.pid, side = dropSide(e, tr);
+  clearDropMarks('.prod-table tr');
+  const arr = data.products[currentBrand];
+  if (!dragProdId || !arr || tid === dragProdId) return;
+  const from = arr.findIndex(p => p.id === dragProdId);
+  if (from < 0) return;
+  const [item] = arr.splice(from, 1);
+  let to = arr.findIndex(p => p.id === tid);
+  if (to < 0) { arr.splice(from, 0, item); return; }
+  if (side === 'after') to++;
+  arr.splice(to, 0, item);
+  dragProdId = null;
+  markUnsaved();
+  renderContent();
+}
+function prodDragEnd(e) {
+  dragProdId = null;
+  clearDropMarks('.prod-table tr');
+  document.querySelectorAll('.prod-table tr.dragging').forEach(x => x.classList.remove('dragging'));
+}
 
 // ── Drag & drop: orden de subcategorías ──────────────────────────────────────
 let dragSubIdx = null;
