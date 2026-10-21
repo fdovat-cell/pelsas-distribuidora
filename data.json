@@ -1076,6 +1076,34 @@
         "emoji": "📦",
         "venta": 2,
         "activo": true
+      },
+      {
+        "id": "mazarena_1792584871230",
+        "name": "Palmeras 180gr",
+        "unit": 116,
+        "caja": 116,
+        "cat": "especiales",
+        "art": "9240",
+        "present": "",
+        "emoji": "📦",
+        "venta": 1,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true
+      },
+      {
+        "id": "mazarena_1792584941128",
+        "name": "Palmeras x 450gr",
+        "unit": 285,
+        "caja": 285,
+        "cat": "especiales",
+        "art": "9247",
+        "present": "",
+        "emoji": "📦",
+        "venta": 1,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true
       }
     ],
     "agridulce": [
