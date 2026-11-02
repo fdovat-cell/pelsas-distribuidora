@@ -250,7 +250,7 @@
       "emoji": "📎",
       "desc": "Artículos de oficina y papelería.",
       "logo": "",
-      "activo": true,
+      "activo": false,
       "sintacc": false
     },
     {
