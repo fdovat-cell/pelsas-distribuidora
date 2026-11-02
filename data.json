@@ -261,7 +261,12 @@
       "desc": "Papeleria",
       "logo": "img/placeholder.webp",
       "activo": true,
-      "sintacc": false
+      "sintacc": false,
+      "subcats": [
+        "rollos térmicos",
+        "Papeleria",
+        "biromes"
+      ]
     }
   ],
   "products": {
@@ -5590,6 +5595,20 @@
         "present": "Caja x 5 u.",
         "emoji": "📦",
         "venta": 1,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true
+      },
+      {
+        "id": "valman_1793636889214",
+        "name": "Boligrafos BIC X 50 u,",
+        "unit": 980,
+        "caja": 980,
+        "cat": "biromes",
+        "art": "",
+        "present": "",
+        "emoji": "📦",
+        "venta": 2,
         "destacado": false,
         "sintacc": false,
         "activo": true
