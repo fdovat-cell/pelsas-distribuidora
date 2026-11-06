@@ -84,6 +84,17 @@
       ]
     },
     {
+      "id": "dorimani",
+      "sid": "alimentos",
+      "name": "MANÍ DORI",
+      "emoji": "📦",
+      "desc": "Maní DORI",
+      "logo": "img/placeholder.webp",
+      "activo": true,
+      "sintacc": false,
+      "sinfoto": false
+    },
+    {
       "id": "dori",
       "sid": "alimentos",
       "name": "Dori",
@@ -267,17 +278,6 @@
         "Papeleria",
         "biromes"
       ]
-    },
-    {
-      "id": "dorimani",
-      "sid": "alimentos",
-      "name": "MANÍ DORI",
-      "emoji": "📦",
-      "desc": "Maní DORI",
-      "logo": "img/placeholder.webp",
-      "activo": true,
-      "sintacc": false,
-      "sinfoto": false
     }
   ],
   "products": {
