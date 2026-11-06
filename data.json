@@ -718,7 +718,13 @@
         "venta": 2,
         "activo": true,
         "destacado": false,
-        "sintacc": false
+        "sintacc": false,
+        "extra": [
+          {
+            "b": "manidori",
+            "cat": ""
+          }
+        ]
       },
       {
         "id": "d35",
@@ -732,7 +738,13 @@
         "venta": 1,
         "activo": true,
         "destacado": false,
-        "sintacc": false
+        "sintacc": false,
+        "extra": [
+          {
+            "b": "manidori",
+            "cat": ""
+          }
+        ]
       },
       {
         "id": "d36",
@@ -754,9 +766,17 @@
         "art": "5731",
         "unit": 133.24,
         "caja": 2664.75,
-        "emoji": "",
+        "emoji": "📦",
         "venta": 1,
-        "activo": true
+        "activo": true,
+        "destacado": false,
+        "sintacc": false,
+        "extra": [
+          {
+            "b": "manidori",
+            "cat": ""
+          }
+        ]
       },
       {
         "id": "d38",
@@ -806,7 +826,13 @@
         "venta": 2,
         "activo": true,
         "destacado": false,
-        "sintacc": false
+        "sintacc": false,
+        "extra": [
+          {
+            "b": "manidori",
+            "cat": ""
+          }
+        ]
       },
       {
         "id": "d42",
@@ -820,7 +846,13 @@
         "venta": 2,
         "activo": true,
         "destacado": false,
-        "sintacc": false
+        "sintacc": false,
+        "extra": [
+          {
+            "b": "manidori",
+            "cat": ""
+          }
+        ]
       },
       {
         "id": "d43",
