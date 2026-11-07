@@ -6389,6 +6389,34 @@
         "destacado": false,
         "sintacc": false,
         "activo": true
+      },
+      {
+        "id": "jugosbigc_1794048556489",
+        "name": "Jugo Big C Durazno Light 200cc",
+        "unit": 1,
+        "caja": 1,
+        "cat": "",
+        "art": "9964",
+        "present": "Pack x 18u.",
+        "emoji": "📦",
+        "venta": 2,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true
+      },
+      {
+        "id": "jugosbigc_1794048601081",
+        "name": "Jugo Big C Naranja Light 200cc",
+        "unit": 1,
+        "caja": 1,
+        "cat": "",
+        "art": "9966",
+        "present": "Pack x 18u.",
+        "emoji": "📦",
+        "venta": 2,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true
       }
     ]
   }
