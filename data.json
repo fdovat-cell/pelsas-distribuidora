@@ -104,6 +104,17 @@
       "activo": true
     },
     {
+      "id": "jugosbigc",
+      "sid": "alimentos",
+      "name": "Jugos Big C",
+      "emoji": "📦",
+      "desc": "bigc",
+      "logo": "img/logo-bigc.webp",
+      "activo": true,
+      "sintacc": false,
+      "sinfoto": false
+    },
+    {
       "id": "barquilandia",
       "sid": "alimentos",
       "name": "Barquilandia",
@@ -278,17 +289,6 @@
         "Papeleria",
         "biromes"
       ]
-    },
-    {
-      "id": "jugosbigc",
-      "sid": "alimentos",
-      "name": "Jugos Big C",
-      "emoji": "📦",
-      "desc": "bigc",
-      "logo": "img/logo-bigc.webp",
-      "activo": true,
-      "sintacc": false,
-      "sinfoto": false
     }
   ],
   "products": {
