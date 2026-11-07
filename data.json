@@ -300,6 +300,17 @@
         "Papeleria",
         "biromes"
       ]
+    },
+    {
+      "id": "freegells",
+      "sid": "alimentos",
+      "name": "Freegells",
+      "emoji": "📦",
+      "desc": "pastillas",
+      "logo": "img/logo-freegells.webp",
+      "activo": true,
+      "sintacc": false,
+      "sinfoto": false
     }
   ],
   "products": {
@@ -6458,6 +6469,7 @@
         "activo": true
       }
     ],
-    "sak": []
+    "sak": [],
+    "freegells": []
   }
 }
