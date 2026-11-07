@@ -187,6 +187,19 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
   .content{padding:1rem}
   .form-grid{grid-template-columns:1fr}
 }
+/* ORDEN Y DESTACADAS */
+.ord-row{display:flex;align-items:center;gap:10px;background:var(--white);border:1px solid var(--border);border-radius:10px;padding:8px 12px;margin-bottom:6px}
+.ord-row .grip{cursor:grab;color:var(--mid);font-size:16px;padding:0 4px;user-select:none}
+.ord-row.dragging{opacity:.35}
+.ord-row.inactive{opacity:.5}
+.ord-row.drop-before{box-shadow:0 -2px 0 0 var(--red)}
+.ord-row.drop-after{box-shadow:0 2px 0 0 var(--red)}
+.ord-n{font-size:11px;color:var(--light);min-width:22px;text-align:right}
+.ord-name{flex:1;font-size:14px;font-weight:500;min-width:0}
+.ord-sec{font-size:11px;color:var(--mid);background:var(--cream2);border-radius:10px;padding:2px 9px;white-space:nowrap}
+.ord-star{background:none;border:1px solid var(--border);border-radius:8px;width:34px;height:30px;font-size:16px;cursor:pointer;color:var(--light)}
+.ord-star.on{border-color:#E0B000;background:#FFF8DC;color:#C99700}
+.edit-btn:disabled{opacity:.35;cursor:default}
 </style>
 </head>
 <body>
@@ -354,6 +367,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
         <select id="fb-sid">
           <option value="alimentos">Alimentos &amp; Snacks</option>
           <option value="fumadores">Papelería</option>
+          <option value="higiene">Higiene</option>
         </select>
       </div>
     </div>
@@ -381,6 +395,10 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
     <div class="form-row" style="flex-direction:row;align-items:center;gap:8px;">
       <input type="checkbox" id="fb-sintacc" style="width:auto;">
       <label for="fb-sintacc" style="margin:0;">Aparece en Sin TACC / Sin Azúcar</label>
+    </div>
+    <div class="form-row" style="flex-direction:row;align-items:center;gap:8px;">
+      <input type="checkbox" id="fb-destacada" style="width:auto;">
+      <label for="fb-destacada" style="margin:0;">⭐ Destacada: aparece en el collage del home</label>
     </div>
     <div class="modal-actions">
       <button class="modal-cancel" onclick="closeBrandModal()">Cancelar</button>
@@ -503,11 +521,31 @@ function markUnsaved() {
 }
 
 // ── Sidebar ──────────────────────────────────────────────────────────────────
+// Rubros (uso interno). Para sumar uno nuevo: una línea más acá y la misma en index.html
+const SECCIONES = [
+  { id: 'alimentos', label: 'Alimentos', emoji: '🍬' },
+  { id: 'fumadores', label: 'Papelería', emoji: '📌' },
+  { id: 'higiene',   label: 'Higiene',   emoji: '🧴' },
+];
+function seccionesEnUso() {
+  const used = new Set(data.brands.map(b => b.sid));
+  const known = SECCIONES.filter(s => used.has(s.id));
+  const extra = [...used].filter(id => id && !SECCIONES.some(s => s.id === id)).map(id => ({ id, label: id, emoji: '🏷️' }));
+  return known.concat(extra);
+}
+function secLabelOf(sid) {
+  const s = SECCIONES.find(x => x.id === sid);
+  return s ? s.emoji + ' ' + s.label : (sid || '');
+}
 function renderSidebar() {
-  const alBrands = data.brands.filter(b => b.sid === 'alimentos');
-  const fumBrands = data.brands.filter(b => b.sid === 'fumadores');
   let html = `<div class="sidebar-section">
     <span class="sidebar-label">🛠️ Herramientas</span>
+    <button class="brand-btn" onclick="openBrandModal(null,'alimentos')">
+      <span>➕</span><span>Nueva marca</span>
+    </button>
+    <button class="brand-btn${view==='orden'?' active':''}" onclick="goTool('orden')">
+      <span>↕️</span><span>Orden y destacadas</span>
+    </button>
     <button class="brand-btn${view==='webp'?' active':''}" onclick="goTool('webp')">
       <span>🖼️</span><span>Convertir a WebP</span>
     </button>
@@ -518,8 +556,9 @@ function renderSidebar() {
       <span>🔀</span><span>Modalidad de venta</span>
     </button>
   </div>`;
-  html += renderBrandGroup('&#127851; Alimentos', alBrands, 'alimentos');
-  html += renderBrandGroup('&#128204; Papelería', fumBrands, 'fumadores');
+  seccionesEnUso().forEach(s => {
+    html += renderBrandGroup(s.emoji + ' ' + s.label, data.brands.filter(b => b.sid === s.id), s.id);
+  });
   document.getElementById('sidebar').innerHTML = html;
 }
 function renderBrandGroup(label, brands, sid) {
@@ -663,6 +702,98 @@ function goTool(t) {
   if (t === 'webp') renderToolWebp();
   else if (t === 'fichas') renderToolFichas();
   else if (t === 'modalidad') renderToolModalidad();
+  else if (t === 'orden') renderToolOrden();
+}
+
+// ── Orden de marcas y destacadas (home) ──────────────────────────────────────
+function renderOrdList() {
+  const n = data.brands.length;
+  return data.brands.map((b, i) => `<div class="ord-row${b.activo===false?' inactive':''}" data-bid="${escAttr(b.id)}"
+      ondragover="ordDragOver(event)" ondragleave="ordDragLeave(event)" ondrop="ordDrop(event)">
+      <span class="grip" draggable="true" title="Arrastrá para ordenar" ondragstart="ordDragStart(event)" ondragend="ordDragEnd(event)">⋮⋮</span>
+      <span class="ord-n">${i + 1}</span>
+      <span class="ord-name">${escHtml(b.emoji || '')} ${escHtml(b.name)}</span>
+      <span class="ord-sec">${escHtml(secLabelOf(b.sid))}</span>
+      <button class="ord-star${b.destacada?' on':''}" onclick="ordToggleStar('${escAttr(b.id)}')" title="Destacada en el collage del home">${b.destacada ? '⭐' : '☆'}</button>
+      <button class="edit-btn" onclick="ordMove('${escAttr(b.id)}',-1)"${i === 0 ? ' disabled' : ''}>▲</button>
+      <button class="edit-btn" onclick="ordMove('${escAttr(b.id)}',1)"${i === n - 1 ? ' disabled' : ''}>▼</button>
+    </div>`).join('');
+}
+function ordCountDest() { return data.brands.filter(b => b.destacada && b.activo !== false).length; }
+function renderToolOrden() {
+  document.getElementById('content').innerHTML = `
+    <div class="content-hdr">
+      <div class="content-title">↕️ Orden y destacadas</div>
+    </div>
+    <div style="padding:0 2rem 2rem;max-width:780px">
+      <p style="font-size:13px;color:var(--mid);margin-bottom:1rem;line-height:1.6">
+        Este es el orden en que se ven las marcas en la tienda, todas juntas. Arrastrá ⋮⋮ o usá las flechas ▲▼.<br>
+        Tocá ⭐ para que una marca aparezca en el collage del home (se muestran hasta 9, en este mismo orden). Hoy hay <strong id="ord-count">${ordCountDest()}</strong> destacadas.<br>
+        Los cambios quedan pendientes hasta que apretés <strong>Guardar</strong> arriba a la derecha.
+      </p>
+      <div id="ord-list">${renderOrdList()}</div>
+    </div>`;
+}
+function refreshOrd() {
+  const l = document.getElementById('ord-list');
+  if (l) l.innerHTML = renderOrdList();
+  const c = document.getElementById('ord-count');
+  if (c) c.textContent = ordCountDest();
+  renderSidebar();
+}
+let dragOrdId = null;
+function ordDragStart(e) {
+  const row = e.currentTarget.closest('.ord-row');
+  dragOrdId = row.dataset.bid;
+  e.dataTransfer.effectAllowed = 'move';
+  e.dataTransfer.setData('text/plain', dragOrdId);
+  e.dataTransfer.setDragImage(row, 10, 10);
+  row.classList.add('dragging');
+}
+function ordDragOver(e) {
+  if (!dragOrdId) return;
+  e.preventDefault();
+  clearDropMarks('.ord-row');
+  e.currentTarget.classList.add('drop-' + dropSide(e, e.currentTarget));
+}
+function ordDragLeave(e) { e.currentTarget.classList.remove('drop-before', 'drop-after'); }
+function ordDrop(e) {
+  e.preventDefault();
+  const tid = e.currentTarget.dataset.bid;
+  const side = dropSide(e, e.currentTarget);
+  clearDropMarks('.ord-row');
+  if (!dragOrdId || tid === dragOrdId) { dragOrdId = null; return; }
+  const from = data.brands.findIndex(b => b.id === dragOrdId);
+  if (from < 0) { dragOrdId = null; return; }
+  const [item] = data.brands.splice(from, 1);
+  let to = data.brands.findIndex(b => b.id === tid);
+  if (to < 0) { data.brands.splice(from, 0, item); dragOrdId = null; return; }
+  if (side === 'after') to++;
+  data.brands.splice(to, 0, item);
+  dragOrdId = null;
+  markUnsaved();
+  refreshOrd();
+}
+function ordDragEnd(e) {
+  dragOrdId = null;
+  clearDropMarks('.ord-row');
+  document.querySelectorAll('.ord-row.dragging').forEach(x => x.classList.remove('dragging'));
+}
+function ordMove(bid, d) {
+  const i = data.brands.findIndex(b => b.id === bid);
+  const j = i + d;
+  if (i < 0 || j < 0 || j >= data.brands.length) return;
+  const [it] = data.brands.splice(i, 1);
+  data.brands.splice(j, 0, it);
+  markUnsaved();
+  refreshOrd();
+}
+function ordToggleStar(bid) {
+  const b = data.brands.find(x => x.id === bid);
+  if (!b) return;
+  if (b.destacada) delete b.destacada; else b.destacada = true;
+  markUnsaved();
+  refreshOrd();
 }
 
 // ── Modalidad de venta (revisión masiva) ────────────────────────────────────
@@ -1632,6 +1763,7 @@ function openBrandModal(bid, sid) {
     document.getElementById('fb-logo').value = b.logo || '';
     document.getElementById('fb-sintacc').checked = !!b.sintacc;
     document.getElementById('fb-sinfoto').value = b.sinfoto ? '1' : '0';
+    document.getElementById('fb-destacada').checked = !!b.destacada;
   } else {
     newBrandSid = sid || 'alimentos';
     document.getElementById('brand-modal-title').textContent = 'Nueva marca';
@@ -1644,6 +1776,7 @@ function openBrandModal(bid, sid) {
     document.getElementById('fb-logo').value = '';
     document.getElementById('fb-sintacc').checked = false;
     document.getElementById('fb-sinfoto').value = '0';
+    document.getElementById('fb-destacada').checked = false;
   }
   document.getElementById('brand-modal-bg').classList.add('open');
   document.getElementById('fb-name').focus();
@@ -1677,18 +1810,20 @@ function saveBrand() {
   const sinfoto = document.getElementById('fb-sinfoto').value === '1';
   const logo = normLogo(document.getElementById('fb-logo').value) || 'img/placeholder.webp';
   const sintacc = document.getElementById('fb-sintacc').checked;
+  const destacada = document.getElementById('fb-destacada').checked;
 
   if (!name) { alert('Completá el nombre de la marca'); return; }
 
   if (editingBrandId) {
     const b = data.brands.find(x => x.id === editingBrandId);
     Object.assign(b, { name, sid, desc, emoji, logo, sintacc, sinfoto });
+    if (destacada) b.destacada = true; else delete b.destacada;
   } else {
     let id = document.getElementById('fb-id').value.trim();
     id = id ? slugify(id) : slugify(name);
     if (!id) { alert('Ingresá un ID válido para la marca'); return; }
     if (data.brands.some(b => b.id === id)) { alert('Ya existe una marca con ese ID'); return; }
-    data.brands.push({ id, sid, name, emoji, desc, logo, activo: true, sintacc, sinfoto });
+    data.brands.push({ id, sid, name, emoji, desc, logo, activo: true, sintacc, sinfoto, ...(destacada ? { destacada: true } : {}) });
     if (!data.products[id]) data.products[id] = [];
   }
 

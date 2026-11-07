@@ -709,6 +709,35 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 .back-btn{background:var(--cream);border:1px solid var(--border);border-radius:8px;width:34px;height:34px;display:none;align-items:center;justify-content:center;cursor:pointer;font-size:16px;color:var(--ink);transition:background .15s,border-color .15s;margin-right:10px;flex-shrink:0}
 .back-btn.visible{display:flex}
 .back-btn:hover{background:var(--cream2);border-color:var(--border2)}
+
+/* HOME — collage de marcas destacadas */
+.hero-cta{display:inline-flex;align-items:center;gap:10px;background:var(--ink);color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;cursor:pointer;margin-bottom:1.75rem;transition:background .15s,transform .15s;box-shadow:0 6px 18px rgba(26,26,24,.18)}
+.hero-cta:hover{background:var(--red);transform:translateY(-1px)}
+.hero-stage{background:linear-gradient(145deg,#1A1A18 0%,#2A2521 60%,#3a1f1f 100%);border-radius:22px;padding:14px;box-shadow:0 18px 50px rgba(26,26,24,.18);position:relative;overflow:hidden}
+.hero-stage::before{content:'';position:absolute;right:-80px;top:-80px;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(176,32,32,.35),transparent 70%);pointer-events:none}
+.hero-mosaic{position:relative;display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:150px;gap:10px;grid-auto-flow:dense}
+.hero-tile{position:relative;background:#fff;border-radius:14px;overflow:hidden;cursor:pointer;transition:transform .2s,box-shadow .2s}
+.hero-tile:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(0,0,0,.35)}
+.hero-tile.big{grid-column:span 2;grid-row:span 2}
+.hero-tile img{width:100%;height:100%;object-fit:contain;padding:8px 8px 30px;display:block;transition:transform .3s}
+.hero-tile:hover img{transform:scale(1.05)}
+.hero-tile-emoji{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:44px;padding-bottom:22px}
+.hero-tile-name{position:absolute;left:0;right:0;bottom:0;padding:16px 10px 8px;background:linear-gradient(to top,rgba(255,255,255,.97) 55%,rgba(255,255,255,0));font-family:'Playfair Display',serif;font-size:12px;font-weight:700;color:var(--ink);text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hero-tile.big .hero-tile-name{font-size:16px;padding-bottom:12px}
+.hero-stage-foot{position:relative;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 6px 4px;color:#fff;cursor:pointer}
+.hero-stage-foot-title{font-family:'Playfair Display',serif;font-size:17px;font-weight:700}
+.hero-stage-foot-sub{font-size:12px;color:rgba(255,255,255,.55);margin-top:2px}
+.hero-stage-arrow{width:38px;height:38px;border-radius:50%;background:var(--red);color:#fff;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;flex-shrink:0;transition:transform .15s}
+.hero-stage-foot:hover .hero-stage-arrow{transform:translateX(3px)}
+.hero-stage-img{width:100%;display:block;border-radius:14px;cursor:pointer;margin-bottom:6px}
+@media(max-width:720px){
+  .hero-stage{padding:10px;border-radius:18px}
+  .hero-mosaic{grid-template-columns:repeat(2,1fr) !important;grid-auto-rows:130px !important;gap:8px}
+  .hero-tile{grid-column:auto !important;grid-row:auto !important}
+  .hero-tile.big{grid-column:span 2 !important;grid-row:span 2 !important}
+  .hero-tile.modd{grid-column:span 2 !important}
+  .hero-cta{width:100%;justify-content:center;margin:1rem 0 1.25rem}
+}
 </style>
 </head>
 <body>
@@ -887,9 +916,9 @@ function render(){
 function goBack(){
   if(view==='brand'){
     const b=getBrand(curBrand);
-    if(b&&b.sid==='fumadores')goFumadores();
-    else if(curBrand&&['celisano','agridulce','smams','sanosinharina','suavipan','nutsbar','molinosala'].includes(curBrand)&&prevView==='sintacc')goSintacc();
+    if(curBrand&&['celisano','agridulce','smams','sanosinharina','suavipan','nutsbar','molinosala'].includes(curBrand)&&prevView==='sintacc')goSintacc();
     else goSection();
+  } else if(view==='sintacc'&&prevView==='section'){goSection();
   } else if(view==='section'||view==='fumadores'||view==='sintacc'||view==='catalogo'||view==='fichas'||view==='presentacion')goHome();
 }
 let prevView='home';
@@ -943,13 +972,13 @@ function renderCatContent(){
 }
 
 function renderCatalogo(){
+  if(activeSecciones().length&&!activeSecciones().some(s=>s.id===catTab))catTab=activeSecciones()[0].id;
   return`<div class="cat-wrap">
     <div class="breadcrumb" onclick="goHome()">← Inicio</div>
     <div class="section-title">Catálogo completo</div>
     <div class="section-rule"></div>
     <div class="cat-tabs">
-      <button class="cat-tab${catTab==='alimentos'?' active':''}" id="cattab-alimentos" onclick="setCatTab('alimentos')">🍬 Alimentos &amp; Snacks</button>
-      <button class="cat-tab${catTab==='fumadores'?' active':''}" id="cattab-fumadores" onclick="setCatTab('fumadores')">📎 Papelería</button>
+      ${activeSecciones().map(s=>`<button class="cat-tab${catTab===s.id?' active':''}" id="cattab-${s.id}" onclick="setCatTab('${s.id}')">${s.emoji} ${s.label}</button>`).join('')}
     </div>
     <div id="cat-content">${renderCatContent()}</div>
   </div>`;
@@ -1134,6 +1163,65 @@ function renderSintacc(){
   </div>`;
 }
 
+/* ── Secciones (rubros): uso interno, el visitante no las ve como divisiones ──
+   Para sumar un rubro nuevo: una línea más acá, y la misma línea en admin.html */
+const SECCIONES=[
+  {id:'alimentos',label:'Alimentos &amp; Snacks',emoji:'🍬'},
+  {id:'fumadores',label:'Papelería',emoji:'📎'},
+  {id:'higiene',label:'Higiene',emoji:'🧴'},
+];
+const secInfo=sid=>SECCIONES.find(s=>s.id===sid)||{id:sid,label:sid,emoji:'🏷️'};
+function activeSecciones(){
+  const used=new Set(brands.filter(b=>b.activo!==false).map(b=>b.sid));
+  const known=SECCIONES.filter(s=>used.has(s.id));
+  const extra=[...used].filter(id=>id&&!SECCIONES.some(s=>s.id===id)).map(secInfo);
+  return known.concat(extra);
+}
+let secFilter='todas';
+
+/* ── Home: collage de marcas destacadas ──
+   Si querés usar una imagen tuya en lugar del collage armado solo, poné su ruta acá (ej: 'img/hero-home.webp') */
+const HERO_IMG='';
+function _hEsc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+function heroTiles(){
+  const withProds=b=>(products[b.id]||[]).some(p=>p.activo!==false&&!p._dup);
+  let list=brands.filter(b=>b.activo!==false&&b.destacada&&withProds(b));
+  if(!list.length)list=brands.filter(b=>b.activo!==false&&withProds(b)).slice(0,5);
+  return list.slice(0,9).map(b=>{
+    const ps=(products[b.id]||[]).filter(p=>p.activo!==false&&!p._dup);
+    const p=ps.find(x=>x.destacado)||ps[0];
+    return{b,p};
+  });
+}
+function heroImgFail(im,bid){
+  const b=getBrand(bid);
+  if(im.dataset.f!=='1'&&b&&b.logo){im.dataset.f='1';im.src=b.logo;return}
+  im.onerror=null;
+  const d=document.createElement('div');
+  d.className='hero-tile-emoji';
+  d.textContent=(b&&b.emoji)||'📦';
+  im.replaceWith(d);
+}
+function renderHeroStage(){
+  const nb=brands.filter(b=>b.activo!==false).length, np=allP().length;
+  const foot=`<div class="hero-stage-foot" onclick="goSection()"><div><div class="hero-stage-foot-title">Entrá a la distribuidora</div><div class="hero-stage-foot-sub">${nb} marcas · ${np} productos</div></div><div class="hero-stage-arrow">→</div></div>`;
+  if(HERO_IMG)return`<div class="hero-stage"><img class="hero-stage-img" src="${HERO_IMG}" alt="PelSAS Distribuidora" onclick="goSection()" onerror="this.style.display='none'">${foot}</div>`;
+  const tiles=heroTiles();
+  if(!tiles.length)return`<div class="hero-stage">${foot}</div>`;
+  const N=tiles.length, big=N>=5, small=N-(big?1:0);
+  let mosaicStyle='', spanLast=1;
+  if(!big){const c=N<=3?N:2;mosaicStyle=` style="grid-template-columns:repeat(${c},1fr);grid-auto-rows:170px"`}
+  else{const rest=small-4;const rem=rest>0?rest%4:0;if(rem)spanLast=5-rem}
+  const html=tiles.map((t,i)=>{
+    const isBig=big&&i===0, isLast=i===N-1;
+    const cls='hero-tile'+(isBig?' big':'')+((isLast&&!isBig&&small%2===1)?' modd':'');
+    const st=(big&&isLast&&spanLast>1)?` style="grid-column:span ${spanLast}"`:'';
+    const src=t.p?getProdImg(t.b.id,t.p.art):(t.b.logo||'');
+    return`<div class="${cls}"${st} onclick="goBrand('${t.b.id}')"><img src="${src}" alt="${_hEsc(t.b.name)}" loading="lazy" onerror="heroImgFail(this,'${t.b.id}')"><div class="hero-tile-name">${_hEsc(t.b.name)}</div></div>`;
+  }).join('');
+  return`<div class="hero-stage"><div class="hero-mosaic"${mosaicStyle}>${html}</div>${foot}</div>`;
+}
+
 function renderHome(){
   return`<div class="home-wrap">
     <div class="hero-split">
@@ -1141,7 +1229,8 @@ function renderHome(){
         <div class="hero-eyebrow">PelSAS · Montevideo</div>
         <div class="hero-title">La app de<br><em>lo que<br>se vende.</em></div>
         <div class="hero-rule"></div>
-        <div class="hero-body">Elegí tu categoría, armá tu pedido y envialo por WhatsApp.</div>
+        <div class="hero-body">Elegí tus marcas, armá tu pedido y envialo por WhatsApp.</div>
+        <button class="hero-cta" onclick="goSection()">Entrar a la distribuidora <span>→</span></button>
         <div class="home-banner pago">
           <div class="home-banner-icon">💳</div>
           <div class="home-banner-texts">
@@ -1155,57 +1244,7 @@ function renderHome(){
         </div>
       </div>
       <div class="hero-cats">
-        <div class="section-eyebrow" style="margin-bottom:.5rem">¿Qué estás buscando?</div>
-        <div class="section-rule-line" style="margin-bottom:1rem"></div>
-        <div class="home-cats-grid">
-          <div class="col-card alimentos" onclick="goSection()">
-            <div class="col-visual">
-              <img src="img/collage-alimentos.webp" alt="Alimentos y Snacks" onerror="this.style.display='none'">
-              <div class="col-cta">Ver catálogo →</div>
-            </div>
-            <div class="col-foot">
-              <div>
-                <div class="col-foot-name">Alimentos &amp; Snacks</div>
-                <div class="col-foot-sub">${alBrands().length} marcas · ${alCount()} productos</div>
-              </div>
-              <div class="col-arrow">→</div>
-            </div>
-          </div>
-          <div class="col-card sintacc" onclick="goSintacc()">
-            <div class="col-visual sintacc-visual">
-              <img src="img/collage-sintacc.webp" alt="Sin TACC / Sin Azúcar" onerror="this.outerHTML='<div class=\\'sintacc-placeholder\\'><div class=\\'sintacc-placeholder-icon\\'>🌿</div><div class=\\'sintacc-placeholder-tags\\'><span class=\\'sintacc-placeholder-tag\\'>Sin gluten</span><span class=\\'sintacc-placeholder-tag\\'>Sin azúcar</span><span class=\\'sintacc-placeholder-tag\\'>Sin lactosa</span></div></div>'">
-              <div class="col-cta" style="background:rgba(58,125,68,.75)">Ver catálogo →</div>
-            </div>
-            <div class="col-foot" style="background:#f0f7f1">
-              <div>
-                <div class="col-foot-name" style="color:#2d6235">Sin TACC / Sin Azúcar</div>
-                <div class="col-foot-sub">${sintaccBrands().length} marcas · ${sintaccCount()} productos</div>
-              </div>
-              <div class="col-arrow" style="background:#3a7d44">→</div>
-            </div>
-          </div>
-          <div class="col-card fumadores" onclick="goFumadores()">
-            <div class="col-visual">
-              <img src="img/collage-papeleria.webp" alt="Papelería" onerror="this.style.display='none'">
-              <div class="fum-visual-inner" style="justify-content:center;width:100%">
-                <div class="fum-vis-block">
-                  <div class="fum-vis-icon">📎</div>
-                  <div class="fum-vis-name">Papelería</div>
-                  <div class="fum-vis-tag">Artículos de oficina</div>
-                </div>
-              </div>
-              <div class="col-cta" style="background:rgba(74,90,112,.75)">Ver catálogo →</div>
-            </div>
-            <div class="col-foot" style="background:#EAEEF3">
-              <div>
-                <div class="col-foot-name" style="color:#4A5A70">Papelería</div>
-                <div class="col-foot-sub">${fumBrands().length} marcas · ${fumCount()} productos</div>
-              </div>
-              <div class="col-arrow" style="background:#4A5A70">→</div>
-            </div>
-          </div>
-        </div>
-
+        ${renderHeroStage()}
       </div>
     </div>
 
@@ -1231,19 +1270,40 @@ function renderHome(){
   </div>`;
 }
 
-function renderSection(){
-  return`<div class="section-wrap">
-    <div class="breadcrumb" onclick="goHome()">← Inicio</div>
-    <div class="section-title">Alimentos &amp; Snacks</div>
-    <div class="section-rule"></div>
-    <div class="section-meta">${alBrands().length} marcas disponibles · precios con IVA incluido</div>
-    <div class="brands-grid">
-      ${alBrands().map(b=>`<div class="brand-tile-lg" onclick="goBrand('${b.id}')">
+function secBrandsList(){
+  return brands.filter(b=>b.activo!==false&&(secFilter==='todas'||b.sid===secFilter));
+}
+function secMetaText(){return secBrandsList().length+' marcas disponibles · precios con IVA incluido'}
+function secBrandsGridHtml(){
+  const list=secBrandsList();
+  if(!list.length)return'<div class="empty-g">No hay marcas en esta sección.</div>';
+  return list.map(b=>`<div class="brand-tile-lg" onclick="goBrand('${b.id}')">
         <img class="btl-logo${b.id==='elements'?' logo-elements':''}" src="${b.logo}" alt="${b.name}" onerror="this.outerHTML='<span class=\\'btl-emoji\\'>${b.emoji}</span>'">
         <div class="btl-name">${b.name}</div>
         <span class="btl-count">${(products[b.id]||[]).length} productos</span>
-      </div>`).join('')}
-    </div>
+      </div>`).join('');
+}
+function secChipsHtml(){
+  const secs=activeSecciones();
+  if(secs.length<2)return'';
+  const chip=(id,label)=>`<button class="fbtn${secFilter===id?' active':''}" onclick="setSecFilter('${id}')">${label}</button>`;
+  return`<div class="filters" id="sec-chips" style="margin-bottom:1.25rem">${chip('todas','Todas')}${secs.map(s=>chip(s.id,s.emoji+' '+s.label)).join('')}${sintaccBrands().length?`<button class="fbtn" onclick="goSintacc()">🌿 Sin TACC / Sin Azúcar</button>`:''}</div>`;
+}
+function setSecFilter(id){
+  secFilter=id;
+  const c=document.getElementById('sec-chips');if(c)c.outerHTML=secChipsHtml();
+  const g=document.getElementById('sec-grid');if(g)g.innerHTML=secBrandsGridHtml();
+  const m=document.getElementById('sec-meta');if(m)m.textContent=secMetaText();
+}
+function renderSection(){
+  if(secFilter!=='todas'&&!activeSecciones().some(s=>s.id===secFilter))secFilter='todas';
+  return`<div class="section-wrap">
+    <div class="breadcrumb" onclick="goHome()">← Inicio</div>
+    <div class="section-title">Nuestras marcas</div>
+    <div class="section-rule"></div>
+    <div class="section-meta" id="sec-meta">${secMetaText()}</div>
+    ${secChipsHtml()}
+    <div class="brands-grid" id="sec-grid">${secBrandsGridHtml()}</div>
   </div>`;
 }
 
@@ -1253,8 +1313,8 @@ function renderBrandPage(){
   const bsubs=Array.isArray(b.subcats)?b.subcats:[];
   const usedC=new Set(ps.filter(p=>p.activo!==false).map(p=>p.cat).filter(Boolean));
   const cats=['todos',...bsubs.filter(c=>usedC.has(c)),...[...usedC].filter(c=>!bsubs.includes(c))];
-  const secLabel=b.sid==='fumadores'?'Papelería':'Alimentos &amp; Snacks';
-  const secFn=b.sid==='fumadores'?'goFumadores()':'goSection()';
+  const secLabel='Marcas';
+  const secFn='goSection()';
   const bName=b.name;const bEmoji=b.emoji;
   return`<div class="section-wrap">
     <div class="breadcrumb" onclick="${secFn}">← ${secLabel} / <span class="bc-active">${b.name}</span></div>
@@ -1374,14 +1434,11 @@ function renderFumadores(){
   </div>`;
 }
 
-function goHome(){view='home';curBrand=null;activeFilter='todos';render()}
+function goHome(){view='home';curBrand=null;activeFilter='todos';secFilter='todas';render()}
 function goSection(){view='section';render()}
 function goBrand(id){view='brand';curBrand=id;activeFilter='todos';render()}
 function goFumadores(){view='fumadores';render()}
-function goMarcas(){
-  if(view==='fumadores'||(view==='brand'&&getBrand(curBrand)?.sid==='fumadores'))goFumadores();
-  else goSection();
-}
+function goMarcas(){goSection()}
 function setF(f,btn){activeFilter=f;document.querySelectorAll('.fbtn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');reGrid()}
 function chQ(id,d){qtys[id]=Math.max(1,(qtys[id]||1)+d);document.querySelectorAll('[id="q'+id+'"]').forEach(el=>{el.textContent=qtys[id]})}
 function addC(id){
