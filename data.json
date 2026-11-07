@@ -6361,6 +6361,34 @@
         "destacado": false,
         "sintacc": false,
         "activo": true
+      },
+      {
+        "id": "jugosbigc_1794048423738",
+        "name": "Jugo Big C Manzana 200cc",
+        "unit": 1,
+        "caja": 1,
+        "cat": "",
+        "art": "9961",
+        "present": "Pack x 18u.",
+        "emoji": "📦",
+        "venta": 2,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true
+      },
+      {
+        "id": "jugosbigc_1794048482034",
+        "name": "Jugo Big C Banana/Frutilla 200cc",
+        "unit": 1,
+        "caja": 1,
+        "cat": "",
+        "art": "9963",
+        "present": "Pack x 18u.",
+        "emoji": "📦",
+        "venta": 2,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true
       }
     ]
   }
