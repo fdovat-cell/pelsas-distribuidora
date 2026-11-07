@@ -278,6 +278,17 @@
         "Papeleria",
         "biromes"
       ]
+    },
+    {
+      "id": "jugosbigc",
+      "sid": "alimentos",
+      "name": "Jugos Big C",
+      "emoji": "📦",
+      "desc": "bigc",
+      "logo": "img/logo-bigc.webp",
+      "activo": true,
+      "sintacc": false,
+      "sinfoto": false
     }
   ],
   "products": {
@@ -6307,6 +6318,7 @@
         "activo": true
       }
     ],
-    "manidori": []
+    "manidori": [],
+    "jugosbigc": []
   }
 }
