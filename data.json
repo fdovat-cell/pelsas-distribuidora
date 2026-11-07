@@ -263,7 +263,7 @@
       "emoji": "📦",
       "desc": "Bombones",
       "logo": "img:logo/bombones.webp",
-      "activo": true
+      "activo": false
     },
     {
       "id": "papeleria",
