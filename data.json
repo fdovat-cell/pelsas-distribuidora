@@ -6550,6 +6550,186 @@
             "cat": "pastillas"
           }
         ]
+      },
+      {
+        "id": "freegells_1794057216288",
+        "name": "Pastillas Freegells Citrus VIT.C x12",
+        "unit": 6.75,
+        "caja": 81,
+        "cat": "",
+        "art": "6370",
+        "present": "Caja x 12 u.",
+        "emoji": "📦",
+        "venta": 2,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true,
+        "extra": [
+          {
+            "b": "golosinas",
+            "cat": "pastillas"
+          }
+        ]
+      },
+      {
+        "id": "freegells_1794057265944",
+        "name": "Pastillas Freegells Eucaliptus Azul x12",
+        "unit": 6.75,
+        "caja": 81,
+        "cat": "",
+        "art": "5500",
+        "present": "Caja x 12 u.",
+        "emoji": "📦",
+        "venta": 2,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true,
+        "extra": [
+          {
+            "b": "golosinas",
+            "cat": "pastillas"
+          }
+        ]
+      },
+      {
+        "id": "freegells_1794057317162",
+        "name": "Pastillas Freegells Extra Fuerte x12",
+        "unit": 6.75,
+        "caja": 81,
+        "cat": "",
+        "art": "5504",
+        "present": "Caja x 12 u.",
+        "emoji": "📦",
+        "venta": 2,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true,
+        "extra": [
+          {
+            "b": "golosinas",
+            "cat": "pastillas"
+          }
+        ]
+      },
+      {
+        "id": "freegells_1794057369761",
+        "name": "Pastillas Freegells Fresh Melón x12",
+        "unit": 6.75,
+        "caja": 81,
+        "cat": "",
+        "art": "5506",
+        "present": "Caja x 12 u.",
+        "emoji": "📦",
+        "venta": 2,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true,
+        "extra": [
+          {
+            "b": "golosinas",
+            "cat": "pastillas"
+          }
+        ]
+      },
+      {
+        "id": "freegells_1794057417385",
+        "name": "Pastillas Freegells Frutilla con Chocolate x12",
+        "unit": 6.75,
+        "caja": 81,
+        "cat": "",
+        "art": "5511",
+        "present": "Caja x 12 u.",
+        "emoji": "📦",
+        "venta": 2,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true,
+        "extra": [
+          {
+            "b": "golosinas",
+            "cat": "pastillas"
+          }
+        ]
+      },
+      {
+        "id": "freegells_1794064350595",
+        "name": "Pastillas Freegells Frutilla y Menta con Crema x12",
+        "unit": 6.75,
+        "caja": 81,
+        "cat": "",
+        "art": "5568",
+        "present": "Caja x 12 u.",
+        "emoji": "📦",
+        "venta": 2,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true,
+        "extra": [
+          {
+            "b": "golosinas",
+            "cat": "pastillas"
+          }
+        ]
+      },
+      {
+        "id": "freegells_1794064401742",
+        "name": "Pastillas Freegells Frutilla y Mentol x12",
+        "unit": 6.75,
+        "caja": 81,
+        "cat": "",
+        "art": "5915",
+        "present": "Caja x 12 u.",
+        "emoji": "📦",
+        "venta": 2,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true,
+        "extra": [
+          {
+            "b": "golosinas",
+            "cat": "pastillas"
+          }
+        ]
+      },
+      {
+        "id": "freegells_1794064463164",
+        "name": "Pastillas Freegells Menta con Chocolate x12",
+        "unit": 6.75,
+        "caja": 81,
+        "cat": "",
+        "art": "5514",
+        "present": "Caja x 12 u.",
+        "emoji": "📦",
+        "venta": 2,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true,
+        "extra": [
+          {
+            "b": "golosinas",
+            "cat": "pastillas"
+          }
+        ]
+      },
+      {
+        "id": "freegells_1794064509799",
+        "name": "Pastillas Freegells Menta x12",
+        "unit": 6.75,
+        "caja": 81,
+        "cat": "",
+        "art": "5503",
+        "present": "Caja x 12 u.",
+        "emoji": "📦",
+        "venta": 2,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true,
+        "extra": [
+          {
+            "b": "golosinas",
+            "cat": "pastillas"
+          }
+        ]
       }
     ]
   }
