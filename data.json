@@ -6510,6 +6510,26 @@
             "cat": "pastillas"
           }
         ]
+      },
+      {
+        "id": "freegells_1794056900194",
+        "name": "Pastillas Freegells 3×1 Morango",
+        "unit": 6.75,
+        "caja": 81,
+        "cat": "",
+        "art": "5509",
+        "present": "",
+        "emoji": "📦",
+        "venta": 2,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true,
+        "extra": [
+          {
+            "b": "golosinas",
+            "cat": "pastillas"
+          }
+        ]
       }
     ]
   }
