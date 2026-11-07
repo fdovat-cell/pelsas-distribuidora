@@ -6518,7 +6518,27 @@
         "caja": 81,
         "cat": "",
         "art": "5509",
-        "present": "",
+        "present": "Caja x 12 u.",
+        "emoji": "📦",
+        "venta": 2,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true,
+        "extra": [
+          {
+            "b": "golosinas",
+            "cat": "pastillas"
+          }
+        ]
+      },
+      {
+        "id": "freegells_1794057140032",
+        "name": "Pastillas Freegells Azedhino Morango x12",
+        "unit": 6.75,
+        "caja": 81,
+        "cat": "",
+        "art": "5517",
+        "present": "Caja x 12 u.",
         "emoji": "📦",
         "venta": 2,
         "destacado": false,
