@@ -292,10 +292,10 @@
     },
     {
       "id": "sak",
-      "sid": "alimentos",
+      "sid": "higiene",
       "name": "Sak",
       "emoji": "📦",
-      "desc": "Limpieza",
+      "desc": "Higiene",
       "logo": "img/logo-sak.webp",
       "activo": true,
       "sintacc": false,
