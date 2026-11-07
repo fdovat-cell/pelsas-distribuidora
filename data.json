@@ -131,7 +131,7 @@
       "emoji": "📦",
       "desc": "Limpieza",
       "logo": "img/logo-sak.webp",
-      "activo": true,
+      "activo": false,
       "sintacc": false,
       "sinfoto": false
     },
