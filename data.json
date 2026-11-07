@@ -6490,6 +6490,26 @@
             "cat": "pastillas"
           }
         ]
+      },
+      {
+        "id": "freegells_1794056460567",
+        "name": "Pastillas Freegells Uva Azedhino x12",
+        "unit": 6.75,
+        "caja": 81,
+        "cat": "",
+        "art": "5515",
+        "present": "Pack x 12u.",
+        "emoji": "📦",
+        "venta": 2,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true,
+        "extra": [
+          {
+            "b": "golosinas",
+            "cat": "pastillas"
+          }
+        ]
       }
     ]
   }
