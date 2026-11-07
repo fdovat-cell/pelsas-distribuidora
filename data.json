@@ -7,7 +7,8 @@
       "emoji": "",
       "desc": "Alfajores artesanales",
       "logo": "img/logo-mazarena.webp",
-      "activo": true
+      "activo": true,
+      "destacada": true
     },
     {
       "id": "celisano",
@@ -37,7 +38,8 @@
         "Panettone Marilan",
         "Turrones Montevergine"
       ],
-      "sinfoto": false
+      "sinfoto": false,
+      "destacada": true
     },
     {
       "id": "bebidasfiestasfrizz",
@@ -70,7 +72,8 @@
         "chocolates",
         "caramelos",
         "chiclets"
-      ]
+      ],
+      "destacada": true
     },
     {
       "id": "freegells",
@@ -92,7 +95,8 @@
       "logo": "img/logo-manidori.webp",
       "activo": true,
       "sintacc": false,
-      "sinfoto": false
+      "sinfoto": false,
+      "destacada": true
     },
     {
       "id": "dori",
@@ -201,7 +205,8 @@
       "desc": "Galletas sin gluten y sin azúcar",
       "logo": "img/logo-smams.webp",
       "activo": true,
-      "sintacc": true
+      "sintacc": true,
+      "destacada": true
     },
     {
       "id": "molinosala",
@@ -267,7 +272,8 @@
       "emoji": "📦",
       "desc": "Encendedores",
       "logo": "img:logo/encendedores.webp",
-      "activo": true
+      "activo": true,
+      "destacada": true
     },
     {
       "id": "edulcorantes",
