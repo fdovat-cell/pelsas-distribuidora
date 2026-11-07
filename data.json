@@ -55,17 +55,6 @@
       ]
     },
     {
-      "id": "mantecolimglogomantecol",
-      "sid": "alimentos",
-      "name": "Mantecol",
-      "emoji": "📦",
-      "desc": "Mantecol",
-      "logo": "img/logo-mantecol.webp",
-      "activo": true,
-      "sintacc": false,
-      "sinfoto": false
-    },
-    {
       "id": "golosinas",
       "sid": "alimentos",
       "name": "Golosinas",
@@ -113,6 +102,17 @@
       "desc": "Golosinas y maní",
       "logo": "img/logo-dori.webp",
       "activo": true
+    },
+    {
+      "id": "mantecolimglogomantecol",
+      "sid": "alimentos",
+      "name": "Mantecol",
+      "emoji": "📦",
+      "desc": "Mantecol",
+      "logo": "img/logo-mantecol.webp",
+      "activo": true,
+      "sintacc": false,
+      "sinfoto": false
     },
     {
       "id": "jugosbigc",
