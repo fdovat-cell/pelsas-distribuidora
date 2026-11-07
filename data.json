@@ -6333,6 +6333,34 @@
         "destacado": false,
         "sintacc": false,
         "activo": true
+      },
+      {
+        "id": "jugosbigc_1794048134297",
+        "name": "Jugo Big C Multifruta 200cc",
+        "unit": 1,
+        "caja": 1,
+        "cat": "",
+        "art": "9947",
+        "present": "Pack x 18u",
+        "emoji": "📦",
+        "venta": 2,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true
+      },
+      {
+        "id": "jugosbigc_1794048200704",
+        "name": "Jugo Big C Pera 200cc",
+        "unit": 1,
+        "caja": 1,
+        "cat": "",
+        "art": "9949",
+        "present": "Pack x 18u.",
+        "emoji": "📦",
+        "venta": 2,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true
       }
     ]
   }
