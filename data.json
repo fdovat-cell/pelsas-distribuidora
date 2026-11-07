@@ -6319,6 +6319,21 @@
       }
     ],
     "manidori": [],
-    "jugosbigc": []
+    "jugosbigc": [
+      {
+        "id": "jugosbigc_1794048031160",
+        "name": "Jugo Big C Naranja 200cc",
+        "unit": 1,
+        "caja": 1,
+        "cat": "",
+        "art": "9946",
+        "present": "Pack x 8u.",
+        "emoji": "📦",
+        "venta": 2,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true
+      }
+    ]
   }
 }
