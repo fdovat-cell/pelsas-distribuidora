@@ -182,17 +182,6 @@
       "sintacc": true
     },
     {
-      "id": "sak",
-      "sid": "higiene",
-      "name": "Sak",
-      "emoji": "📦",
-      "desc": "Higiene",
-      "logo": "img/logo-sak.webp",
-      "activo": true,
-      "sintacc": false,
-      "sinfoto": false
-    },
-    {
       "id": "molinosala",
       "sid": "alimentos",
       "name": "Molinos Ala",
@@ -300,6 +289,17 @@
         "Papeleria",
         "biromes"
       ]
+    },
+    {
+      "id": "sak",
+      "sid": "alimentos",
+      "name": "Sak",
+      "emoji": "📦",
+      "desc": "Limpieza",
+      "logo": "img/logo-sak.webp",
+      "activo": true,
+      "sintacc": false,
+      "sinfoto": false
     }
   ],
   "products": {
