@@ -6417,6 +6417,34 @@
         "destacado": false,
         "sintacc": false,
         "activo": true
+      },
+      {
+        "id": "jugosbigc_1794048654810",
+        "name": "Jugo Big C Pera Light 200cc",
+        "unit": 1,
+        "caja": 1,
+        "cat": "",
+        "art": "9968",
+        "present": "Pack x 18u.",
+        "emoji": "📦",
+        "venta": 2,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true
+      },
+      {
+        "id": "jugosbigc_1794048703843",
+        "name": "Jugo Big C Manzana Light 200cc",
+        "unit": 1,
+        "caja": 1,
+        "cat": "",
+        "art": "9980",
+        "present": "Pack x 18u.",
+        "emoji": "📦",
+        "venta": 1,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true
       }
     ]
   }
