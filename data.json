@@ -5694,13 +5694,19 @@
         "unit": 980,
         "caja": 980,
         "cat": "biromes",
-        "art": "p017",
+        "art": "P017",
         "present": "Caja x 50u",
         "emoji": "📦",
         "venta": 2,
         "destacado": false,
         "sintacc": false,
-        "activo": true
+        "activo": true,
+        "extra": [
+          {
+            "b": "papeleria",
+            "cat": ""
+          }
+        ]
       }
     ],
     "budinespanettonesturrones": [
