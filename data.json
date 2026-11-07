@@ -125,6 +125,17 @@
       "sintacc": false
     },
     {
+      "id": "sak",
+      "sid": "alimentos",
+      "name": "Sak",
+      "emoji": "📦",
+      "desc": "Limpieza",
+      "logo": "img/logo-sak.webp",
+      "activo": true,
+      "sintacc": false,
+      "sinfoto": false
+    },
+    {
       "id": "agridulce",
       "sid": "alimentos",
       "name": "Agridulce",
@@ -289,17 +300,6 @@
         "Papeleria",
         "biromes"
       ]
-    },
-    {
-      "id": "sak",
-      "sid": "alimentos",
-      "name": "Sak",
-      "emoji": "📦",
-      "desc": "Limpieza",
-      "logo": "img/logo-sak.webp",
-      "activo": true,
-      "sintacc": false,
-      "sinfoto": false
     }
   ],
   "products": {
