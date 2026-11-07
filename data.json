@@ -6470,6 +6470,27 @@
       }
     ],
     "sak": [],
-    "freegells": []
+    "freegells": [
+      {
+        "id": "freegells_1794056253665",
+        "name": "Pastillas Freegells Propoleo, Miel y Limón VIT.C x12",
+        "unit": 6.75,
+        "caja": 81,
+        "cat": "",
+        "art": "5823",
+        "present": "Pack x 12u.",
+        "emoji": "📦",
+        "venta": 2,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true,
+        "extra": [
+          {
+            "b": "golosinas",
+            "cat": "pastillas"
+          }
+        ]
+      }
+    ]
   }
 }
