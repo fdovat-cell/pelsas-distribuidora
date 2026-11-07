@@ -710,33 +710,36 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 .back-btn.visible{display:flex}
 .back-btn:hover{background:var(--cream2);border-color:var(--border2)}
 
-/* HOME — collage de marcas destacadas */
+/* HOME — collage polaroid de marcas destacadas */
 .hero-cta{display:inline-flex;align-items:center;gap:10px;background:var(--ink);color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;cursor:pointer;margin-bottom:1.75rem;transition:background .15s,transform .15s;box-shadow:0 6px 18px rgba(26,26,24,.18)}
 .hero-cta:hover{background:var(--red);transform:translateY(-1px)}
-.hero-stage{background:linear-gradient(145deg,#1A1A18 0%,#2A2521 60%,#3a1f1f 100%);border-radius:22px;padding:14px;box-shadow:0 18px 50px rgba(26,26,24,.18);position:relative;overflow:hidden}
-.hero-stage::before{content:'';position:absolute;right:-80px;top:-80px;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(176,32,32,.35),transparent 70%);pointer-events:none}
-.hero-mosaic{position:relative;display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:150px;gap:10px;grid-auto-flow:dense}
-.hero-tile{position:relative;background:#fff;border-radius:14px;overflow:hidden;cursor:pointer;transition:transform .2s,box-shadow .2s}
-.hero-tile:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(0,0,0,.35)}
-.hero-tile.big{grid-column:span 2;grid-row:span 2}
-.hero-tile img{width:100%;height:100%;object-fit:contain;padding:8px 8px 30px;display:block;transition:transform .3s}
-.hero-tile:hover img{transform:scale(1.05)}
-.hero-tile-emoji{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:44px;padding-bottom:22px}
-.hero-tile-name{position:absolute;left:0;right:0;bottom:0;padding:16px 10px 8px;background:linear-gradient(to top,rgba(255,255,255,.97) 55%,rgba(255,255,255,0));font-family:'Playfair Display',serif;font-size:12px;font-weight:700;color:var(--ink);text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.hero-tile.big .hero-tile-name{font-size:16px;padding-bottom:12px}
-.hero-stage-foot{position:relative;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 6px 4px;color:#fff;cursor:pointer}
-.hero-stage-foot-title{font-family:'Playfair Display',serif;font-size:17px;font-weight:700}
-.hero-stage-foot-sub{font-size:12px;color:rgba(255,255,255,.55);margin-top:2px}
-.hero-stage-arrow{width:38px;height:38px;border-radius:50%;background:var(--red);color:#fff;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;flex-shrink:0;transition:transform .15s}
-.hero-stage-foot:hover .hero-stage-arrow{transform:translateX(3px)}
-.hero-stage-img{width:100%;display:block;border-radius:14px;cursor:pointer;margin-bottom:6px}
+.hero-board{position:relative;background:#161615 repeating-linear-gradient(115deg,transparent 0 46px,rgba(255,255,255,.04) 46px 92px);border-radius:22px;padding:24px 20px 76px;box-shadow:0 18px 50px rgba(26,26,24,.2);overflow:hidden}
+.hero-tiles{display:flex;flex-wrap:wrap;justify-content:center;gap:0}
+.hero-tile{position:relative;width:calc(100% / var(--cols) + 12px);margin:-6px;aspect-ratio:1/1.04;background:#fff;border-radius:3px;box-shadow:0 8px 22px rgba(0,0,0,.45);cursor:pointer;transform:rotate(var(--r,0deg));transition:transform .25s,box-shadow .25s}
+.hero-tile:nth-child(6n+1){--r:-3deg}
+.hero-tile:nth-child(6n+2){--r:2.5deg}
+.hero-tile:nth-child(6n+3){--r:-1.5deg}
+.hero-tile:nth-child(6n+4){--r:3.5deg}
+.hero-tile:nth-child(6n+5){--r:-2.5deg}
+.hero-tile:nth-child(6n+6){--r:1.8deg}
+.hero-tile:hover{transform:rotate(0deg) scale(1.05);z-index:5;box-shadow:0 16px 34px rgba(0,0,0,.55)}
+.hero-photo{position:absolute;inset:7px;overflow:hidden;background:#EDE8DF}
+.hero-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;transition:opacity .9s ease}
+.hero-photo img.in{opacity:0}
+.hero-photo img.in.show{opacity:1}
+.hero-tile-emoji{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:44px}
+.hero-tile-name{position:absolute;left:7px;right:7px;bottom:7px;padding:24px 8px 8px;background:linear-gradient(to top,rgba(26,26,24,.82),rgba(26,26,24,0));color:#fff;font-family:'Playfair Display',serif;font-size:13px;font-weight:700;text-align:center;opacity:0;transition:opacity .2s;pointer-events:none}
+.hero-tile:hover .hero-tile-name{opacity:1}
+.hero-pill{position:absolute;left:50%;bottom:16px;transform:translateX(-50%);z-index:10;background:var(--red);color:#fff;border:none;border-radius:30px;padding:12px 24px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;cursor:pointer;box-shadow:0 8px 20px rgba(0,0,0,.4);white-space:nowrap;transition:background .15s}
+.hero-pill:hover{background:var(--red-dark)}
+.hero-board-img{display:block;width:100%;border-radius:12px;cursor:pointer}
 @media(max-width:720px){
-  .hero-stage{padding:10px;border-radius:18px}
-  .hero-mosaic{grid-template-columns:repeat(2,1fr) !important;grid-auto-rows:130px !important;gap:8px}
-  .hero-tile{grid-column:auto !important;grid-row:auto !important}
-  .hero-tile.big{grid-column:span 2 !important;grid-row:span 2 !important}
-  .hero-tile.modd{grid-column:span 2 !important}
+  .hero-board{padding:18px 12px 70px;border-radius:18px;--cols:var(--mcols) !important}
+  .hero-tile:nth-child(n+5){display:none}
   .hero-cta{width:100%;justify-content:center;margin:1rem 0 1.25rem}
+}
+@media(prefers-reduced-motion:reduce){
+  .hero-photo img{transition:none}
 }
 </style>
 </head>
@@ -1179,23 +1182,38 @@ function activeSecciones(){
 }
 let secFilter='todas';
 
-/* ── Home: collage de marcas destacadas ──
-   Si querés usar una imagen tuya en lugar del collage armado solo, poné su ruta acá (ej: 'img/hero-home.webp') */
+/* ── Home: collage polaroid de marcas destacadas (fotos que desfilan) ──
+   HERO_MS: cada cuántos milisegundos cambia UNA foto (una posición por vez). Poné 0 para dejarlo quieto.
+   HERO_MAX: cantidad máxima de marcas en el collage (se toman en el orden del Admin).
+   HERO_IMG: si querés una imagen tuya en lugar del collage armado solo, poné su ruta (ej: 'img/hero-home.webp'). */
+const HERO_MS=5500;
+const HERO_MAX=6;
 const HERO_IMG='';
 function _hEsc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
-function heroTiles(){
-  const withProds=b=>(products[b.id]||[]).some(p=>p.activo!==false&&!p._dup);
-  let list=brands.filter(b=>b.activo!==false&&b.destacada&&withProds(b));
-  if(!list.length)list=brands.filter(b=>b.activo!==false&&withProds(b)).slice(0,5);
-  return list.slice(0,9).map(b=>{
-    const ps=(products[b.id]||[]).filter(p=>p.activo!==false&&!p._dup);
-    const p=ps.find(x=>x.destacado)||ps[0];
-    return{b,p};
-  });
+const heroBad=new Set();
+function heroPool(bid){
+  const ps=(products[bid]||[]).filter(p=>p.activo!==false&&!p._dup&&p.art);
+  const own=ps.filter(p=>hasOwnPhoto.has(p.art));
+  return own.length?own:ps;
+}
+function heroBrands(){
+  const ok=b=>b.activo!==false&&heroPool(b.id).length>0;
+  let list=brands.filter(b=>ok(b)&&b.destacada);
+  if(!list.length)list=brands.filter(ok).slice(0,5);
+  return list.slice(0,HERO_MAX);
+}
+function heroPick(bid,skip){
+  const pool=heroPool(bid).map(p=>getProdImg(bid,p.art)).filter((s,i,a)=>a.indexOf(s)===i&&s!==skip&&!heroBad.has(s));
+  return pool.length?pool[Math.floor(Math.random()*pool.length)]:null;
 }
 function heroImgFail(im,bid){
-  const b=getBrand(bid);
-  if(im.dataset.f!=='1'&&b&&b.logo){im.dataset.f='1';im.src=b.logo;return}
+  heroBad.add(im.getAttribute('src'));
+  const b=getBrand(bid), tile=im.closest('.hero-tile');
+  const n=(+im.dataset.r||0)+1; im.dataset.r=n;
+  let next=null;
+  if(n<=2)next=heroPick(bid,null);
+  else if(n===3&&b&&b.logo)next=b.logo;
+  if(next){im.src=next;if(tile)tile.dataset.cur=next;return}
   im.onerror=null;
   const d=document.createElement('div');
   d.className='hero-tile-emoji';
@@ -1203,23 +1221,56 @@ function heroImgFail(im,bid){
   im.replaceWith(d);
 }
 function renderHeroStage(){
-  const nb=brands.filter(b=>b.activo!==false).length, np=allP().length;
-  const foot=`<div class="hero-stage-foot" onclick="goSection()"><div><div class="hero-stage-foot-title">Entrá a la distribuidora</div><div class="hero-stage-foot-sub">${nb} marcas · ${np} productos</div></div><div class="hero-stage-arrow">→</div></div>`;
-  if(HERO_IMG)return`<div class="hero-stage"><img class="hero-stage-img" src="${HERO_IMG}" alt="PelSAS Distribuidora" onclick="goSection()" onerror="this.style.display='none'">${foot}</div>`;
-  const tiles=heroTiles();
-  if(!tiles.length)return`<div class="hero-stage">${foot}</div>`;
-  const N=tiles.length, big=N>=5, small=N-(big?1:0);
-  let mosaicStyle='', spanLast=1;
-  if(!big){const c=N<=3?N:2;mosaicStyle=` style="grid-template-columns:repeat(${c},1fr);grid-auto-rows:170px"`}
-  else{const rest=small-4;const rem=rest>0?rest%4:0;if(rem)spanLast=5-rem}
-  const html=tiles.map((t,i)=>{
-    const isBig=big&&i===0, isLast=i===N-1;
-    const cls='hero-tile'+(isBig?' big':'')+((isLast&&!isBig&&small%2===1)?' modd':'');
-    const st=(big&&isLast&&spanLast>1)?` style="grid-column:span ${spanLast}"`:'';
-    const src=t.p?getProdImg(t.b.id,t.p.art):(t.b.logo||'');
-    return`<div class="${cls}"${st} onclick="goBrand('${t.b.id}')"><img src="${src}" alt="${_hEsc(t.b.name)}" loading="lazy" onerror="heroImgFail(this,'${t.b.id}')"><div class="hero-tile-name">${_hEsc(t.b.name)}</div></div>`;
+  const pill=`<button class="hero-pill" onclick="goSection()">Entrar a la distribuidora →</button>`;
+  if(HERO_IMG)return`<div class="hero-board"><img class="hero-board-img" src="${HERO_IMG}" alt="PelSAS Distribuidora" onclick="goSection()" onerror="this.style.display='none'">${pill}</div>`;
+  const list=heroBrands();
+  if(!list.length)return`<div class="hero-board">${pill}</div>`;
+  const N=list.length, cols=N<=2?N:(N===4?2:3), mcols=N===1?1:2;
+  const tiles=list.map(b=>{
+    const src=heroPick(b.id,null)||b.logo||'';
+    return`<div class="hero-tile" data-bid="${b.id}" data-cur="${_hEsc(src)}" onclick="goBrand('${b.id}')"><div class="hero-photo"><img src="${_hEsc(src)}" alt="${_hEsc(b.name)}" onerror="heroImgFail(this,'${b.id}')"></div><div class="hero-tile-name">${_hEsc(b.name)}</div></div>`;
   }).join('');
-  return`<div class="hero-stage"><div class="hero-mosaic"${mosaicStyle}>${html}</div>${foot}</div>`;
+  return`<div class="hero-board" id="hero-board" style="--cols:${cols};--mcols:${mcols}" onmouseenter="heroHold(true)" onmouseleave="heroHold(false)" ontouchstart="heroHold(true,2500)"><div class="hero-tiles">${tiles}</div>${pill}</div>`;
+}
+let heroPaused=false,heroHoldT=null,heroIdx=0,heroTimer=null;
+function heroHold(on,ms){
+  clearTimeout(heroHoldT);
+  if(on&&ms){heroPaused=true;heroHoldT=setTimeout(()=>{heroPaused=false},ms)}
+  else heroPaused=!!on;
+}
+function heroSwap(tile){
+  const bid=tile.dataset.bid, src=heroPick(bid,tile.dataset.cur);
+  if(!src)return;
+  const im=new Image();
+  im.onload=()=>{
+    if(!tile.isConnected)return;
+    const box=tile.querySelector('.hero-photo');if(!box)return;
+    const old=box.querySelector('img');
+    const n=document.createElement('img');
+    n.src=src;n.alt=old?old.alt:'';n.className='in';
+    box.appendChild(n);
+    requestAnimationFrame(()=>requestAnimationFrame(()=>n.classList.add('show')));
+    tile.dataset.cur=src;
+    setTimeout(()=>{if(old&&old.parentNode)old.remove();n.classList.remove('in','show')},1200);
+  };
+  im.onerror=()=>heroBad.add(src);
+  im.src=src;
+}
+function heroTick(){
+  if(document.hidden||heroPaused||view!=='home')return;
+  const cp=document.getElementById('cart-panel');
+  if(cp&&cp.classList.contains('open'))return;
+  const all=[...document.querySelectorAll('#hero-board .hero-tile')];
+  if(!all.length)return;
+  const vis=all.filter(t=>t.offsetParent!==null);
+  const tiles=vis.length?vis:all;
+  heroSwap(tiles[heroIdx++%tiles.length]);
+}
+function heroInit(){
+  if(!HERO_MS||heroTimer)return;
+  if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  const mob=window.matchMedia&&matchMedia('(max-width:720px)').matches;
+  heroTimer=setInterval(heroTick,mob?Math.round(HERO_MS*1.5):HERO_MS);
 }
 
 function renderHome(){
@@ -1687,6 +1738,7 @@ if('serviceWorker' in navigator){
 }
 
 initApp();
+heroInit();
 // Panel siempre visible en desktop
 
 </script>

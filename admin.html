@@ -200,6 +200,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 .ord-star{background:none;border:1px solid var(--border);border-radius:8px;width:34px;height:30px;font-size:16px;cursor:pointer;color:var(--light)}
 .ord-star.on{border-color:#E0B000;background:#FFF8DC;color:#C99700}
 .edit-btn:disabled{opacity:.35;cursor:default}
+.ord-over{font-size:11px;color:var(--red);white-space:nowrap}
+.ord-warn{display:none;color:var(--red);font-weight:600}
 </style>
 </head>
 <body>
@@ -398,7 +400,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
     </div>
     <div class="form-row" style="flex-direction:row;align-items:center;gap:8px;">
       <input type="checkbox" id="fb-destacada" style="width:auto;">
-      <label for="fb-destacada" style="margin:0;">⭐ Destacada: aparece en el collage del home</label>
+      <label for="fb-destacada" style="margin:0;">⭐ Destacada: aparece en el collage del home (máx. 6)</label>
     </div>
     <div class="modal-actions">
       <button class="modal-cancel" onclick="closeBrandModal()">Cancelar</button>
@@ -708,16 +710,18 @@ function goTool(t) {
 // ── Orden de marcas y destacadas (home) ──────────────────────────────────────
 function renderOrdList() {
   const n = data.brands.length;
-  return data.brands.map((b, i) => `<div class="ord-row${b.activo===false?' inactive':''}" data-bid="${escAttr(b.id)}"
+  let k = 0;
+  return data.brands.map((b, i) => { const rank = (b.destacada && b.activo !== false) ? ++k : 0; return `<div class="ord-row${b.activo===false?' inactive':''}" data-bid="${escAttr(b.id)}"
       ondragover="ordDragOver(event)" ondragleave="ordDragLeave(event)" ondrop="ordDrop(event)">
       <span class="grip" draggable="true" title="Arrastrá para ordenar" ondragstart="ordDragStart(event)" ondragend="ordDragEnd(event)">⋮⋮</span>
       <span class="ord-n">${i + 1}</span>
       <span class="ord-name">${escHtml(b.emoji || '')} ${escHtml(b.name)}</span>
       <span class="ord-sec">${escHtml(secLabelOf(b.sid))}</span>
+      ${rank > 6 ? '<span class="ord-over">fuera del collage</span>' : ''}
       <button class="ord-star${b.destacada?' on':''}" onclick="ordToggleStar('${escAttr(b.id)}')" title="Destacada en el collage del home">${b.destacada ? '⭐' : '☆'}</button>
       <button class="edit-btn" onclick="ordMove('${escAttr(b.id)}',-1)"${i === 0 ? ' disabled' : ''}>▲</button>
       <button class="edit-btn" onclick="ordMove('${escAttr(b.id)}',1)"${i === n - 1 ? ' disabled' : ''}>▼</button>
-    </div>`).join('');
+    </div>`; }).join('');
 }
 function ordCountDest() { return data.brands.filter(b => b.destacada && b.activo !== false).length; }
 function renderToolOrden() {
@@ -728,7 +732,7 @@ function renderToolOrden() {
     <div style="padding:0 2rem 2rem;max-width:780px">
       <p style="font-size:13px;color:var(--mid);margin-bottom:1rem;line-height:1.6">
         Este es el orden en que se ven las marcas en la tienda, todas juntas. Arrastrá ⋮⋮ o usá las flechas ▲▼.<br>
-        Tocá ⭐ para que una marca aparezca en el collage del home (se muestran hasta 9, en este mismo orden). Hoy hay <strong id="ord-count">${ordCountDest()}</strong> destacadas.<br>
+        Tocá ⭐ para que una marca aparezca en el collage del home: se muestran las <strong>primeras 6</strong>, en este mismo orden, y en cada una van desfilando sus productos. Hoy hay <strong id="ord-count">${ordCountDest()}</strong> destacadas. <span class="ord-warn" id="ord-warn">Las que pasan de 6 quedan fuera del collage.</span><br>
         Los cambios quedan pendientes hasta que apretés <strong>Guardar</strong> arriba a la derecha.
       </p>
       <div id="ord-list">${renderOrdList()}</div>
@@ -739,6 +743,8 @@ function refreshOrd() {
   if (l) l.innerHTML = renderOrdList();
   const c = document.getElementById('ord-count');
   if (c) c.textContent = ordCountDest();
+  const w = document.getElementById('ord-warn');
+  if (w) w.style.display = ordCountDest() > 6 ? 'inline' : 'none';
   renderSidebar();
 }
 let dragOrdId = null;
