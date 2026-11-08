@@ -198,6 +198,15 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 .ord-name{flex:1;font-size:14px;font-weight:500;min-width:0}
 .ord-sec{font-size:11px;color:var(--mid);background:var(--cream2);border-radius:10px;padding:2px 9px;white-space:nowrap}
 .edit-btn:disabled{opacity:.35;cursor:default}
+/* TRAER DE V2 */
+.v2-row{display:flex;align-items:center;gap:10px;background:var(--white);border:1px solid var(--border);border-radius:10px;padding:8px 12px;margin-bottom:6px}
+.v2-row.have{opacity:.5}
+.v2-row img,.v2-noimg{width:46px;height:46px;object-fit:contain;background:#fff;border-radius:6px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.v2-code{font-family:monospace;font-size:12px;color:var(--mid);min-width:64px}
+.v2-desc{flex:1;font-size:13px;min-width:0;line-height:1.35}
+.v2-desc small{color:var(--mid)}
+.v2-price{font-weight:600;font-size:13px;white-space:nowrap}
+.v2-bar{position:sticky;bottom:0;background:var(--cream);border-top:1px solid var(--border);padding:10px 0;margin-top:10px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 </style>
 </head>
 <body>
@@ -373,6 +382,10 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
       <label>Descripción corta</label>
       <input type="text" id="fb-desc" placeholder="Ej: Golosinas y maní">
     </div>
+    <div class="form-row">
+      <label>Enlace externo (opcional)</label>
+      <input type="text" id="fb-url" placeholder="Ej: https://pelsas-papeleria.pages.dev/ (si lo completás, al tocar la marca se abre ese sitio)">
+    </div>
     <div class="form-grid">
       <div class="form-row">
         <label>Emoji</label>
@@ -541,6 +554,9 @@ function renderSidebar() {
     <button class="brand-btn${view==='orden'?' active':''}" onclick="goTool('orden')">
       <span>↕️</span><span>Orden de marcas</span>
     </button>
+    <button class="brand-btn${view==='v2'?' active':''}" onclick="goTool('v2')">
+      <span>📥</span><span>Traer de V2</span>
+    </button>
     <button class="brand-btn${view==='webp'?' active':''}" onclick="goTool('webp')">
       <span>🖼️</span><span>Convertir a WebP</span>
     </button>
@@ -698,6 +714,7 @@ function goTool(t) {
   else if (t === 'fichas') renderToolFichas();
   else if (t === 'modalidad') renderToolModalidad();
   else if (t === 'orden') renderToolOrden();
+  else if (t === 'v2') renderToolV2();
 }
 
 // ── Orden de marcas ──────────────────────────────────────────────────────────
@@ -777,6 +794,177 @@ function ordMove(bid, d) {
   data.brands.splice(j, 0, it);
   markUnsaved();
   refreshOrd();
+}
+
+// ── Traer productos desde V2 (buscador de papelería) ─────────────────────────
+const V2_DATA_URL = 'https://xxlgsipmocwizhafinwr.supabase.co/storage/v1/object/public/catalogo-data/productos.json';
+const V2_IMG_BASE = 'https://xxlgsipmocwizhafinwr.supabase.co/storage/v1/object/public/fotos-productos';
+let v2Cat = null, v2Err = '', v2Q = '', v2OnlyPhoto = true, v2Dest = '', v2Results = [], v2Sel = new Map(), v2Timer = null;
+const v2$ = id => document.getElementById(id);
+const v2Norm = s => String(s == null ? '' : s).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+// Precio por unidad: si V2 trae precio_unitario se usa ese; si no, el precio
+function v2Price(p) { const pu = Number(p.precio_unitario); return pu > 0 ? pu : Number(p.precio); }
+// Entra solo lo activo, en pesos y con precio
+function v2Ok(p) { return !!p && p.codigo != null && p.activo !== false && p.moneda !== 'USD' && v2Price(p) > 0; }
+function v2Img(p) {
+  const f = Array.isArray(p.imagenes) && p.imagenes[0] ? String(p.imagenes[0]) : '';
+  const n = f.replace(/^\/+/, '').split('/').pop();
+  return n ? V2_IMG_BASE + '/' + encodeURIComponent(n) : '';
+}
+function v2Money(n) { return '$ ' + Number(n).toLocaleString('es-UY', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
+function v2HaveArts() {
+  const s = new Set();
+  Object.values(data.products).forEach(ps => (ps || []).forEach(p => { if (p.art != null) s.add(String(p.art)); }));
+  return s;
+}
+async function renderToolV2() {
+  if (!v2Dest || !data.brands.some(b => b.id === v2Dest)) {
+    v2Dest = (data.brands.find(b => b.id === 'papeleria') || data.brands.find(b => b.sid === 'fumadores') || data.brands[0] || {}).id || '';
+  }
+  const opts = data.brands.map(b => `<option value="${escAttr(b.id)}"${b.id === v2Dest ? ' selected' : ''}>${escHtml(b.name)}${b.activo === false ? ' (desactivada)' : ''}</option>`).join('');
+  v2$('content').innerHTML = `
+    <div class="content-hdr"><div class="content-title">📥 Traer de V2</div></div>
+    <div style="padding:0 2rem 2rem;max-width:900px">
+      <p style="font-size:13px;color:var(--mid);margin-bottom:1rem;line-height:1.6">
+        Buscá en el catálogo de V2, tildá los productos y agregalos a una marca. Se traen <strong>por unidad</strong>, con su foto. Los productos en dólares no aparecen.<br>
+        Después de agregar, apretá <strong>Guardar</strong> arriba a la derecha para publicarlos.
+      </p>
+      <div class="form-grid" style="margin-bottom:.5rem">
+        <div class="form-row"><label>Agregar a la marca</label><select id="v2-dest" onchange="v2Dest=this.value;v2Bar()">${opts}</select></div>
+        <div class="form-row"><label>Buscar</label><input type="text" id="v2-q" value="${escAttr(v2Q)}" placeholder="Código, descripción, marca o categoría" oninput="v2Search(this.value)"></div>
+      </div>
+      <label style="font-size:13px;display:flex;gap:6px;align-items:center;margin-bottom:.75rem">
+        <input type="checkbox" id="v2-photo" ${v2OnlyPhoto ? 'checked' : ''} onchange="v2OnlyPhoto=this.checked;v2Render()" style="width:auto"> Solo productos con foto
+      </label>
+      <div id="v2-status" style="font-size:12px;color:var(--mid);margin-bottom:.5rem"></div>
+      <div id="v2-list"></div>
+      <div class="v2-bar" id="v2-bar"></div>
+    </div>`;
+  v2Bar();
+  await v2Load();
+  v2Render();
+}
+async function v2Load() {
+  if (v2Cat) return;
+  const st = v2$('v2-status');
+  if (st) st.textContent = 'Cargando el catálogo de V2…';
+  try {
+    const r = await fetch(V2_DATA_URL, { cache: 'no-store' });
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    const j = await r.json();
+    v2Cat = Array.isArray(j) ? j : (j.productos || []);
+    v2Err = '';
+  } catch (e) {
+    v2Err = 'No pude cargar el catálogo de V2 (' + e.message + '). Revisá la conexión y volvé a abrir esta herramienta.';
+  }
+}
+function v2Search(val) { v2Q = val; clearTimeout(v2Timer); v2Timer = setTimeout(v2Render, 200); }
+function v2Render() {
+  const st = v2$('v2-status'), list = v2$('v2-list');
+  if (!st || !list) return;
+  if (v2Err) { st.textContent = v2Err; list.innerHTML = ''; return; }
+  if (!v2Cat) return;
+  const pool = v2Cat.filter(v2Ok);
+  st.textContent = pool.length + ' productos disponibles en V2 (sin los de dólares).';
+  const q = v2Norm(v2Q).trim();
+  if (q.length < 2) { v2Results = []; list.innerHTML = '<div style="font-size:13px;color:var(--mid);padding:1rem 0">Escribí al menos 2 letras para buscar.</div>'; v2Bar(); return; }
+  const terms = q.split(/\s+/);
+  let res = pool.filter(p => {
+    const hay = v2Norm([p.codigo, p.descripcion, p.categoria, (p.marcas || []).join(' ')].join(' '));
+    return terms.every(t => hay.includes(t));
+  });
+  if (v2OnlyPhoto) res = res.filter(p => v2Img(p));
+  const total = res.length;
+  v2Results = res.slice(0, 80);
+  const have = v2HaveArts();
+  const head = `<div style="font-size:12px;color:var(--mid);margin-bottom:.5rem">${total > 80 ? 'Mostrando 80 de ' + total + '. Afiná la búsqueda para ver el resto.' : total + ' resultados'}</div>`;
+  list.innerHTML = head + v2Results.map((p, i) => {
+    const code = String(p.codigo), has = have.has(code), on = v2Sel.has(code);
+    const im = v2Img(p);
+    return `<div class="v2-row${has ? ' have' : ''}">
+      <input type="checkbox" ${has ? 'disabled' : ''} ${on ? 'checked' : ''} onchange="v2Toggle(${i})" style="width:auto">
+      ${im ? `<img src="${escAttr(im)}" loading="lazy" alt="" onerror="this.style.visibility='hidden'">` : '<span class="v2-noimg">📎</span>'}
+      <span class="v2-code">${escHtml(code)}</span>
+      <span class="v2-desc">${escHtml(p.descripcion || '')}<br><small>${escHtml([p.categoria, (p.marcas || []).join(', ')].filter(Boolean).join(' · '))}</small></span>
+      ${has ? '<span class="ord-sec">ya cargado</span>' : ''}
+      <span class="v2-price">${v2Money(v2Price(p))}</span>
+    </div>`;
+  }).join('');
+  v2Bar();
+}
+function v2Toggle(i) {
+  const p = v2Results[i]; if (!p) return;
+  const c = String(p.codigo);
+  if (v2Sel.has(c)) v2Sel.delete(c); else v2Sel.set(c, p);
+  v2Bar();
+}
+function v2Bar() {
+  const bar = v2$('v2-bar'); if (!bar) return;
+  const b = data.brands.find(x => x.id === v2Dest);
+  const n = v2Sel.size;
+  bar.innerHTML = `<strong style="font-size:13px">${n} seleccionado${n === 1 ? '' : 's'}</strong>
+    <button class="save-btn" onclick="v2Add()"${n ? '' : ' disabled'}>➕ Agregar a ${escHtml(b ? b.name : '…')}</button>
+    <button class="edit-btn" onclick="v2Sel.clear();v2Render()"${n ? '' : ' disabled'}>Vaciar selección</button>
+    <span style="flex:1"></span>
+    <button class="edit-btn" onclick="v2Sync()" title="Actualiza nombre, precio y foto de todo lo que ya trajiste de V2">🔄 Actualizar lo ya traído</button>`;
+}
+function v2Add() {
+  const b = data.brands.find(x => x.id === v2Dest);
+  if (!b) { alert('Elegí la marca de destino'); return; }
+  if (!v2Sel.size) return;
+  if (!Array.isArray(data.products[b.id])) data.products[b.id] = [];
+  const have = v2HaveArts();
+  const ids = new Set();
+  Object.values(data.products).forEach(ps => (ps || []).forEach(p => ids.add(p.id)));
+  let n = 0, skipped = 0;
+  v2Sel.forEach((p, code) => {
+    if (have.has(code)) { skipped++; return; }
+    const base = 'v2_' + code.replace(/[^A-Za-z0-9_-]/g, '_');
+    let id = base, k = 2;
+    while (ids.has(id)) id = base + '_' + (k++);
+    ids.add(id);
+    const price = Math.round(v2Price(p) * 100) / 100;
+    data.products[b.id].push({
+      id, name: String(p.descripcion || code).trim(), unit: price, caja: price,
+      cat: String(p.categoria || '').trim(), art: code, present: 'por unidad', emoji: '📎',
+      venta: 1, activo: true, destacado: false, sintacc: false, v2: true, img: v2Img(p)
+    });
+    n++;
+  });
+  v2Sel.clear();
+  if (n) markUnsaved();
+  let msg = 'Se agregaron ' + n + ' productos a "' + b.name + '".';
+  if (skipped) msg += '\n' + skipped + ' ya estaban cargados y se omitieron.';
+  if (b.activo === false) msg += '\nLa marca está desactivada: activala para que se vea en la tienda.';
+  if (n) msg += '\nApretá Guardar para publicarlos.';
+  alert(msg);
+  renderSidebar();
+  v2Render();
+}
+function v2Sync() {
+  if (!v2Cat) { alert('Todavía no cargó el catálogo de V2.'); return; }
+  const map = new Map();
+  v2Cat.forEach(p => { if (p && p.codigo != null) map.set(String(p.codigo), p); });
+  const changes = [], gone = [];
+  let total = 0;
+  Object.values(data.products).forEach(ps => (ps || []).forEach(p => {
+    if (!p.v2) return;
+    total++;
+    const v = map.get(String(p.art));
+    if (!v || !v2Ok(v)) { gone.push(p.art); return; }
+    const price = Math.round(v2Price(v) * 100) / 100;
+    const name = String(v.descripcion || p.name).trim();
+    const img = v2Img(v);
+    if (p.unit !== price || p.caja !== price || p.name !== name || (p.img || '') !== img) changes.push({ p, price, name, img });
+  }));
+  if (!total) { alert('Todavía no trajiste productos de V2.'); return; }
+  let msg = total + ' productos traídos de V2: ' + changes.length + ' con cambios.';
+  if (gone.length) msg += '\n' + gone.length + ' ya no están en V2 (o pasaron a dólares) y NO se tocan: ' + gone.slice(0, 8).join(', ') + (gone.length > 8 ? '…' : '');
+  if (!changes.length) { alert(msg); return; }
+  if (!confirm(msg + '\n\n¿Actualizar nombre, precio y foto de esos ' + changes.length + '?')) return;
+  changes.forEach(c => { c.p.unit = c.price; c.p.caja = c.price; c.p.name = c.name; c.p.img = c.img; });
+  markUnsaved();
+  alert('Listo: ' + changes.length + ' actualizados. Apretá Guardar para publicarlos.');
 }
 
 // ── Modalidad de venta (revisión masiva) ────────────────────────────────────
@@ -1742,6 +1930,7 @@ function openBrandModal(bid, sid) {
     document.getElementById('fb-id').disabled = true;
     document.getElementById('fb-sid').value = b.sid;
     document.getElementById('fb-desc').value = b.desc || '';
+    document.getElementById('fb-url').value = b.url || '';
     document.getElementById('fb-emoji').value = b.emoji || '';
     document.getElementById('fb-logo').value = b.logo || '';
     document.getElementById('fb-sintacc').checked = !!b.sintacc;
@@ -1754,6 +1943,7 @@ function openBrandModal(bid, sid) {
     document.getElementById('fb-id').disabled = false;
     document.getElementById('fb-sid').value = newBrandSid;
     document.getElementById('fb-desc').value = '';
+    document.getElementById('fb-url').value = '';
     document.getElementById('fb-emoji').value = '📦';
     document.getElementById('fb-logo').value = '';
     document.getElementById('fb-sintacc').checked = false;
@@ -1787,6 +1977,8 @@ function saveBrand() {
   const name = document.getElementById('fb-name').value.trim();
   const sid  = document.getElementById('fb-sid').value;
   const desc = document.getElementById('fb-desc').value.trim();
+  const url = (document.getElementById('fb-url').value || '').trim();
+  if (url && !/^https?:\/\//i.test(url)) { alert('El enlace tiene que empezar con https://'); return; }
   const emoji = document.getElementById('fb-emoji').value.trim() || '📦';
   const sinfoto = document.getElementById('fb-sinfoto').value === '1';
   const logo = normLogo(document.getElementById('fb-logo').value) || 'img/placeholder.webp';
@@ -1797,12 +1989,13 @@ function saveBrand() {
   if (editingBrandId) {
     const b = data.brands.find(x => x.id === editingBrandId);
     Object.assign(b, { name, sid, desc, emoji, logo, sintacc, sinfoto });
+    if (url) b.url = url; else delete b.url;
   } else {
     let id = document.getElementById('fb-id').value.trim();
     id = id ? slugify(id) : slugify(name);
     if (!id) { alert('Ingresá un ID válido para la marca'); return; }
     if (data.brands.some(b => b.id === id)) { alert('Ya existe una marca con ese ID'); return; }
-    data.brands.push({ id, sid, name, emoji, desc, logo, activo: true, sintacc, sinfoto });
+    data.brands.push({ id, sid, name, emoji, desc, logo, activo: true, sintacc, sinfoto, ...(url ? { url } : {}) });
     if (!data.products[id]) data.products[id] = [];
   }
 

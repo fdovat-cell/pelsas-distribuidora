@@ -878,6 +878,8 @@ async function initApp() {
     Object.values(products).flat().forEach(p=>{qtys[p.id]=1});
     pidToBrand={};
     Object.keys(products).forEach(bid=>{(products[bid]||[]).forEach(p=>{if(!p._dup)pidToBrand[p.id]=bid})});
+    buildExtImg();
+    restoreCart();
     render();
   } catch(e) {
     console.error('Error cargando catálogo:', e);
@@ -1110,7 +1112,17 @@ const brandGenImg={
   elements:'img/gen-elements.webp',
 };
 const hasOwnPhoto=new Set(['4000','4001','4002','4003','4004','4005','4006','4007','3000','P001','P002','P003','P004','P005','P006','P007','P008','P009','P010','P011','P012','P013','P014','P015','P016','P017','P018','P019','P020','P021','P022','P023','P024','P025','P026','P027','P028','P029','P030','P031','P032','P033','P034','P035','P036','P037','P038','P039','P040','P041','P042','P043','P044','P045','P046','P047','P048','P049','P050','P051','P052','P053','P054','P055','P056','P057','P058','P059','P060','P061','P062','P063','P064','P065','P066','P067','P068','P069','P070','P071','P072','P073','P074','P075','P076','P077','P078','P079','P080','P081','P082','P083','P084','P085','P086','P087','P088','P089','P090','P091','P092','P093','P094','P095','P096','P097','P098','P099','P100','P101','P102','P103','P104','P105','P106','P107','P108','P109','P110','P111','P112','P113','P114','P115','P116','P117','P118','P119','P120','P121','P122','P123','P124','P125','P126','P127','P128','P129','P130','P131','P132','P133','P134','P135','P136','P137','P138','P139','P140','P141','P142','P143','P144','P145','P146','P147','P148','P149','P150','P151','P152','P153','P154','P155','P156','P157','P158','P159','P160','P161','P162','P163','P164','P165','P166','P167','P168','P169','P170']);
+/* Productos traídos de V2: su foto vive en Supabase (p.img). Un código que ya existe como producto propio no se pisa. */
+let extImg={};
+const artImg=art=>extImg[art]||('img/'+art+'.webp');
+function buildExtImg(){
+  extImg={};
+  const all=Object.values(products).flat();
+  const local=new Set(all.filter(p=>!p.v2&&p.art).map(p=>String(p.art)));
+  all.forEach(p=>{if(p.v2&&p.img&&p.art&&!local.has(String(p.art)))extImg[p.art]=p.img});
+}
 function getProdImg(bid,art){
+  if(extImg[art])return extImg[art];
   if(hasOwnPhoto.has(art))return`img/${art}.webp`;
   if(brandGenImg[bid])return brandGenImg[bid];
   return`img/${art}.webp`;
@@ -1244,7 +1256,7 @@ function secBrandsGridHtml(){
   return list.map(b=>`<div class="brand-tile-lg" onclick="goBrand('${b.id}')">
         <img class="btl-logo${b.id==='elements'?' logo-elements':''}" src="${b.logo}" alt="${b.name}" onerror="this.outerHTML='<span class=\\'btl-emoji\\'>${b.emoji}</span>'">
         <div class="btl-name">${b.name}</div>
-        <span class="btl-count">${(products[b.id]||[]).length} productos</span>
+        <span class="btl-count">${b.url?'Ver catálogo ↗':(products[b.id]||[]).length+' productos'}</span>
       </div>`).join('');
 }
 function secChipsHtml(){
@@ -1358,7 +1370,7 @@ function renderCards(filtered,bid){
     const cartKey=p.id+'_'+modo;
     const inCart=cart[cartKey]>0;
     const isBaja=p.cat==='baja rotacion';
-    const imgSrc=bid?getProdImg(bid,p.art):`img/${p.art}.webp`;
+    const imgSrc=bid?getProdImg(bid,p.art):artImg(p.art);
     const genImg=bid&&brandGenImg[bid]?brandGenImg[bid]:'';
     const onerrorFallback=genImg?`this.onerror=null;this.src='${genImg}'`:`this.onerror=null`;
     const precioMostrado=modo==='unit'?p.unit:p.caja;
@@ -1400,7 +1412,7 @@ function renderFumadores(){
 
 function goHome(){view='home';curBrand=null;activeFilter='todos';secFilter='todas';render()}
 function goSection(){view='section';render()}
-function goBrand(id){view='brand';curBrand=id;activeFilter='todos';render()}
+function goBrand(id){const b=getBrand(id);if(b&&b.url){location.href=b.url;return}view='brand';curBrand=id;activeFilter='todos';render()}
 function goFumadores(){view='fumadores';render()}
 function goMarcas(){goSection()}
 function setF(f,btn){activeFilter=f;document.querySelectorAll('.fbtn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');reGrid()}
@@ -1416,7 +1428,22 @@ function addC(id){
   updateBadge();reGrid();
   if(view==='presentacion')refreshPresGrid();
 }
+function saveCart(){try{sessionStorage.setItem('pel_cart',JSON.stringify(cart))}catch(e){}}
+function restoreCart(){
+  try{
+    const raw=sessionStorage.getItem('pel_cart');if(!raw)return;
+    const saved=JSON.parse(raw)||{};
+    Object.entries(saved).forEach(([k,v])=>{
+      if(!v||!(v.qty>0))return;
+      const p=allP().find(x=>x.id===v.pid);if(!p)return;
+      v.precio=k.endsWith('_unit')?p.unit:p.caja;
+      cart[k]=v;
+    });
+    updateBadge();
+  }catch(e){}
+}
 function updateBadge(){
+  saveCart();
   const n=Object.values(cart).reduce((a,b)=>a+(b.qty||0),0);
   document.getElementById('cart-count').textContent=n;
   const bn=document.getElementById('bn-badge');
@@ -1525,7 +1552,7 @@ function onGSearch(){
     res.innerHTML=matches.map(p=>{
       const b=getBrand(p.bid);
       return'<div class="gsr-item" onmousedown="gsGo(\''+p.bid+'\',\''+p.id+'\')">'
-        +'<div class="gsr-img"><img src="img/'+p.art+'.webp" alt="" onerror="this.parentNode.innerHTML=\''+p.emoji+'\'"></div>'
+        +'<div class="gsr-img"><img src="'+artImg(p.art)+'" alt="" onerror="this.parentNode.innerHTML=\''+p.emoji+'\'"></div>'
         +'<div class="gsr-text"><div class="gsr-name">'+p.name+'</div>'
         +'<div class="gsr-meta">'+b.name+' · Art. '+p.art+'</div></div>'
         +'<div class="gsr-price">'+fmt(p.caja)+'</div>'
@@ -1581,7 +1608,7 @@ function lbReset(){lbScale=1;lbTx=0;lbTy=0;_lbApply()}
 function openLB(art){
   const lb=document.getElementById('lightbox');
   const im=document.getElementById('lb-img');
-  im.src='img/'+art+'.webp';
+  im.src=artImg(art);
   lb.classList.add('open');lbReset();
   document.body.style.overflow='hidden';
 }
