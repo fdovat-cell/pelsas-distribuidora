@@ -711,17 +711,14 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 .back-btn:hover{background:var(--cream2);border-color:var(--border2)}
 
 /* HOME — imagen principal */
-.hero-cta{display:inline-flex;align-items:center;gap:10px;background:var(--ink);color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;cursor:pointer;margin-bottom:1.75rem;transition:background .15s,transform .15s;box-shadow:0 6px 18px rgba(26,26,24,.18)}
-.hero-cta:hover{background:var(--red);transform:translateY(-1px)}
-.hero-board{border-radius:18px;overflow:hidden;box-shadow:0 14px 40px rgba(26,26,24,.18);background:var(--ink);cursor:pointer}
+.hero-board{border-radius:18px;overflow:hidden;box-shadow:0 14px 40px rgba(26,26,24,.14);background:#fff;cursor:pointer}
 .hero-board picture{display:block}
 .hero-board-img{display:block;width:100%;height:auto;aspect-ratio:4/3;background:#ECE6DC;object-fit:cover}
-.hero-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 18px;color:#fff;font-family:'Playfair Display',serif;font-size:17px;font-weight:700}
-.hero-bar-arrow{width:36px;height:36px;border-radius:50%;background:var(--red);display:flex;align-items:center;justify-content:center;font-family:'DM Sans',sans-serif;font-size:16px;flex-shrink:0;transition:transform .15s}
+.hero-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 18px;color:var(--ink);border-top:1px solid rgba(26,26,24,.08);font-family:'Playfair Display',serif;font-size:17px;font-weight:700}
+.hero-bar-arrow{width:36px;height:36px;border-radius:50%;background:var(--red);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'DM Sans',sans-serif;font-size:16px;flex-shrink:0;transition:transform .15s}
 .hero-board:hover .hero-bar-arrow{transform:translateX(3px)}
 @media(max-width:720px){
   .hero-board-img{aspect-ratio:4/5}
-  .hero-cta{display:none}
 }
 </style>
 </head>
@@ -1181,7 +1178,6 @@ function renderHome(){
         <div class="hero-title">La app de<br><em>lo que<br>se vende.</em></div>
         <div class="hero-rule"></div>
         <div class="hero-body">Elegí tus marcas, armá tu pedido y envialo por WhatsApp.</div>
-        <button class="hero-cta" onclick="goSection()">Entrar a la distribuidora <span>→</span></button>
         <div class="home-banner pago">
           <div class="home-banner-icon">💳</div>
           <div class="home-banner-texts">
