@@ -320,6 +320,18 @@
         "biromes"
       ],
       "sinfoto": false
+    },
+    {
+      "id": "marcaspapeleria",
+      "sid": "fumadores",
+      "name": "Marcas Papelería",
+      "emoji": "📦",
+      "desc": "Marcas Papeleria",
+      "logo": "img/logo/marcas-papeleria.webp",
+      "activo": true,
+      "sintacc": false,
+      "sinfoto": false,
+      "url": "https://pelsas-papeleria.pages.dev/"
     }
   ],
   "products": {
@@ -6753,6 +6765,7 @@
           }
         ]
       }
-    ]
+    ],
+    "marcaspapeleria": []
   }
 }
