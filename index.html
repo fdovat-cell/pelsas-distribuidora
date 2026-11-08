@@ -709,6 +709,30 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 .back-btn{background:var(--cream);border:1px solid var(--border);border-radius:8px;width:34px;height:34px;display:none;align-items:center;justify-content:center;cursor:pointer;font-size:16px;color:var(--ink);transition:background .15s,border-color .15s;margin-right:10px;flex-shrink:0}
 .back-btn.visible{display:flex}
 .back-btn:hover{background:var(--cream2);border-color:var(--border2)}
+
+/* HOME — imagen principal */
+.hero-board{border-radius:18px;overflow:hidden;box-shadow:0 14px 40px rgba(26,26,24,.14);background:#fff;cursor:pointer}
+.hero-board picture{display:block}
+.hero-board-img{display:block;width:100%;height:auto;aspect-ratio:4/3;background:#ECE6DC;object-fit:cover}
+.hero-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 18px;color:var(--ink);border-top:1px solid rgba(26,26,24,.08);font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;letter-spacing:.2px}
+.hero-bar-arrow{width:36px;height:36px;border-radius:50%;background:var(--red);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'DM Sans',sans-serif;font-size:16px;flex-shrink:0;transition:transform .15s}
+.hero-board:hover .hero-bar-arrow{transform:translateX(3px)}
+@media(max-width:720px){
+  .hero-board-img{aspect-ratio:1/1}
+}
+
+/* CELULAR: buscador abajo. Cerrado = botón con lupa (espejo del de WhatsApp); abierto = franja sobre el teclado */
+.gs-fab{display:none}
+@media(max-width:720px){
+  .gs-fab{display:flex;position:fixed;left:18px;bottom:calc(78px + env(safe-area-inset-bottom));width:54px;height:54px;border-radius:50%;background:var(--ink);border:none;cursor:pointer;align-items:center;justify-content:center;box-shadow:0 6px 20px rgba(26,26,24,.3);z-index:75;transition:transform .15s}
+  .gs-fab:active{transform:scale(.94)}
+  .gs-fab svg{width:24px;height:24px}
+  .gsearch{display:none;position:fixed;top:auto;left:0;right:0;bottom:0;z-index:85;padding:8px 12px calc(8px + env(safe-area-inset-bottom));border-bottom:0;border-top:1px solid var(--border);box-shadow:0 -6px 20px rgba(26,26,24,.12)}
+  body.gs-open .gsearch{display:block}
+  body.gs-open .bottom-nav,body.gs-open .wa-fab,body.gs-open .gs-fab{display:none}
+  .gsearch-input{font-size:16px}
+  .gsearch-results{top:auto;bottom:calc(100% + 6px);max-height:var(--gs-max,40vh)}
+}
 </style>
 </head>
 <body>
@@ -781,6 +805,10 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 
 <button class="wa-fab" onclick="waConsulta()" aria-label="Consultar por WhatsApp">
   <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.528 5.855L.057 23.428a.75.75 0 00.916.916l5.573-1.471A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.885 0-3.651-.511-5.168-1.401l-.371-.219-3.849 1.016 1.016-3.849-.219-.371A9.953 9.953 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+</button>
+
+<button class="gs-fab" onclick="openGS()" aria-label="Buscar productos">
+  <svg viewBox="0 0 24 24" fill="none"><circle cx="10.5" cy="10.5" r="6.5" stroke="#fff" stroke-width="2.2"/><path d="m15.5 15.5 5 5" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/></svg>
 </button>
 
 <div class="overlay" id="overlay" onclick="toggleCart()"></div>
@@ -887,9 +915,9 @@ function render(){
 function goBack(){
   if(view==='brand'){
     const b=getBrand(curBrand);
-    if(b&&b.sid==='fumadores')goFumadores();
-    else if(curBrand&&['celisano','agridulce','smams','sanosinharina','suavipan','nutsbar','molinosala'].includes(curBrand)&&prevView==='sintacc')goSintacc();
+    if(curBrand&&['celisano','agridulce','smams','sanosinharina','suavipan','nutsbar','molinosala'].includes(curBrand)&&prevView==='sintacc')goSintacc();
     else goSection();
+  } else if(view==='sintacc'&&prevView==='section'){goSection();
   } else if(view==='section'||view==='fumadores'||view==='sintacc'||view==='catalogo'||view==='fichas'||view==='presentacion')goHome();
 }
 let prevView='home';
@@ -943,13 +971,13 @@ function renderCatContent(){
 }
 
 function renderCatalogo(){
+  if(activeSecciones().length&&!activeSecciones().some(s=>s.id===catTab))catTab=activeSecciones()[0].id;
   return`<div class="cat-wrap">
     <div class="breadcrumb" onclick="goHome()">← Inicio</div>
     <div class="section-title">Catálogo completo</div>
     <div class="section-rule"></div>
     <div class="cat-tabs">
-      <button class="cat-tab${catTab==='alimentos'?' active':''}" id="cattab-alimentos" onclick="setCatTab('alimentos')">🍬 Alimentos &amp; Snacks</button>
-      <button class="cat-tab${catTab==='fumadores'?' active':''}" id="cattab-fumadores" onclick="setCatTab('fumadores')">📎 Papelería</button>
+      ${activeSecciones().map(s=>`<button class="cat-tab${catTab===s.id?' active':''}" id="cattab-${s.id}" onclick="setCatTab('${s.id}')">${s.emoji} ${s.label}</button>`).join('')}
     </div>
     <div id="cat-content">${renderCatContent()}</div>
   </div>`;
@@ -1134,6 +1162,31 @@ function renderSintacc(){
   </div>`;
 }
 
+/* ── Secciones (rubros): uso interno, el visitante no las ve como divisiones ──
+   Para sumar un rubro nuevo: una línea más acá, y la misma línea en admin.html */
+const SECCIONES=[
+  {id:'alimentos',label:'Alimentos &amp; Snacks',emoji:'🍬'},
+  {id:'fumadores',label:'Papelería',emoji:'📎'},
+  {id:'higiene',label:'Higiene',emoji:'🧴'},
+];
+const secInfo=sid=>SECCIONES.find(s=>s.id===sid)||{id:sid,label:sid,emoji:'🏷️'};
+function activeSecciones(){
+  const used=new Set(brands.filter(b=>b.activo!==false).map(b=>b.sid));
+  const known=SECCIONES.filter(s=>used.has(s.id));
+  const extra=[...used].filter(id=>id&&!SECCIONES.some(s=>s.id===id)).map(secInfo);
+  return known.concat(extra);
+}
+let secFilter='todas';
+
+/* ── Home: imagen principal ──
+   Dos imágenes: una para celular y otra para compu (el navegador carga solo la que corresponde).
+   Para cambiarlas: subí la nueva al repo (carpeta img/) y ajustá el nombre acá. */
+const HERO_IMG_PC='img/frontpc.webp';
+const HERO_IMG_M='img/front-celular.webp';
+function renderHeroStage(){
+  return`<div class="hero-board" onclick="goSection()"><picture><source media="(max-width:720px)" srcset="${HERO_IMG_M}"><img class="hero-board-img" src="${HERO_IMG_PC}" width="1200" height="900" alt="PelSAS Distribuidora: marcas y productos" fetchpriority="high" onerror="this.closest('picture').style.display='none'"></picture><div class="hero-bar"><span>Entrar a la distribuidora</span><span class="hero-bar-arrow">→</span></div></div>`;
+}
+
 function renderHome(){
   return`<div class="home-wrap">
     <div class="hero-split">
@@ -1141,7 +1194,7 @@ function renderHome(){
         <div class="hero-eyebrow">PelSAS · Montevideo</div>
         <div class="hero-title">La app de<br><em>lo que<br>se vende.</em></div>
         <div class="hero-rule"></div>
-        <div class="hero-body">Elegí tu categoría, armá tu pedido y envialo por WhatsApp.</div>
+        <div class="hero-body">Elegí tus marcas, armá tu pedido y envialo por WhatsApp.</div>
         <div class="home-banner pago">
           <div class="home-banner-icon">💳</div>
           <div class="home-banner-texts">
@@ -1155,57 +1208,7 @@ function renderHome(){
         </div>
       </div>
       <div class="hero-cats">
-        <div class="section-eyebrow" style="margin-bottom:.5rem">¿Qué estás buscando?</div>
-        <div class="section-rule-line" style="margin-bottom:1rem"></div>
-        <div class="home-cats-grid">
-          <div class="col-card alimentos" onclick="goSection()">
-            <div class="col-visual">
-              <img src="img/collage-alimentos.webp" alt="Alimentos y Snacks" onerror="this.style.display='none'">
-              <div class="col-cta">Ver catálogo →</div>
-            </div>
-            <div class="col-foot">
-              <div>
-                <div class="col-foot-name">Alimentos &amp; Snacks</div>
-                <div class="col-foot-sub">${alBrands().length} marcas · ${alCount()} productos</div>
-              </div>
-              <div class="col-arrow">→</div>
-            </div>
-          </div>
-          <div class="col-card sintacc" onclick="goSintacc()">
-            <div class="col-visual sintacc-visual">
-              <img src="img/collage-sintacc.webp" alt="Sin TACC / Sin Azúcar" onerror="this.outerHTML='<div class=\\'sintacc-placeholder\\'><div class=\\'sintacc-placeholder-icon\\'>🌿</div><div class=\\'sintacc-placeholder-tags\\'><span class=\\'sintacc-placeholder-tag\\'>Sin gluten</span><span class=\\'sintacc-placeholder-tag\\'>Sin azúcar</span><span class=\\'sintacc-placeholder-tag\\'>Sin lactosa</span></div></div>'">
-              <div class="col-cta" style="background:rgba(58,125,68,.75)">Ver catálogo →</div>
-            </div>
-            <div class="col-foot" style="background:#f0f7f1">
-              <div>
-                <div class="col-foot-name" style="color:#2d6235">Sin TACC / Sin Azúcar</div>
-                <div class="col-foot-sub">${sintaccBrands().length} marcas · ${sintaccCount()} productos</div>
-              </div>
-              <div class="col-arrow" style="background:#3a7d44">→</div>
-            </div>
-          </div>
-          <div class="col-card fumadores" onclick="goFumadores()">
-            <div class="col-visual">
-              <img src="img/collage-papeleria.webp" alt="Papelería" onerror="this.style.display='none'">
-              <div class="fum-visual-inner" style="justify-content:center;width:100%">
-                <div class="fum-vis-block">
-                  <div class="fum-vis-icon">📎</div>
-                  <div class="fum-vis-name">Papelería</div>
-                  <div class="fum-vis-tag">Artículos de oficina</div>
-                </div>
-              </div>
-              <div class="col-cta" style="background:rgba(74,90,112,.75)">Ver catálogo →</div>
-            </div>
-            <div class="col-foot" style="background:#EAEEF3">
-              <div>
-                <div class="col-foot-name" style="color:#4A5A70">Papelería</div>
-                <div class="col-foot-sub">${fumBrands().length} marcas · ${fumCount()} productos</div>
-              </div>
-              <div class="col-arrow" style="background:#4A5A70">→</div>
-            </div>
-          </div>
-        </div>
-
+        ${renderHeroStage()}
       </div>
     </div>
 
@@ -1231,19 +1234,40 @@ function renderHome(){
   </div>`;
 }
 
-function renderSection(){
-  return`<div class="section-wrap">
-    <div class="breadcrumb" onclick="goHome()">← Inicio</div>
-    <div class="section-title">Alimentos &amp; Snacks</div>
-    <div class="section-rule"></div>
-    <div class="section-meta">${alBrands().length} marcas disponibles · precios con IVA incluido</div>
-    <div class="brands-grid">
-      ${alBrands().map(b=>`<div class="brand-tile-lg" onclick="goBrand('${b.id}')">
+function secBrandsList(){
+  return brands.filter(b=>b.activo!==false&&(secFilter==='todas'||b.sid===secFilter));
+}
+function secMetaText(){return secBrandsList().length+' marcas disponibles · precios con IVA incluido'}
+function secBrandsGridHtml(){
+  const list=secBrandsList();
+  if(!list.length)return'<div class="empty-g">No hay marcas en esta sección.</div>';
+  return list.map(b=>`<div class="brand-tile-lg" onclick="goBrand('${b.id}')">
         <img class="btl-logo${b.id==='elements'?' logo-elements':''}" src="${b.logo}" alt="${b.name}" onerror="this.outerHTML='<span class=\\'btl-emoji\\'>${b.emoji}</span>'">
         <div class="btl-name">${b.name}</div>
         <span class="btl-count">${(products[b.id]||[]).length} productos</span>
-      </div>`).join('')}
-    </div>
+      </div>`).join('');
+}
+function secChipsHtml(){
+  const secs=activeSecciones();
+  if(secs.length<2)return'';
+  const chip=(id,label)=>`<button class="fbtn${secFilter===id?' active':''}" onclick="setSecFilter('${id}')">${label}</button>`;
+  return`<div class="filters" id="sec-chips" style="margin-bottom:1.25rem">${chip('todas','Todas')}${secs.map(s=>chip(s.id,s.emoji+' '+s.label)).join('')}${sintaccBrands().length?`<button class="fbtn" onclick="goSintacc()">🌿 Sin TACC / Sin Azúcar</button>`:''}</div>`;
+}
+function setSecFilter(id){
+  secFilter=id;
+  const c=document.getElementById('sec-chips');if(c)c.outerHTML=secChipsHtml();
+  const g=document.getElementById('sec-grid');if(g)g.innerHTML=secBrandsGridHtml();
+  const m=document.getElementById('sec-meta');if(m)m.textContent=secMetaText();
+}
+function renderSection(){
+  if(secFilter!=='todas'&&!activeSecciones().some(s=>s.id===secFilter))secFilter='todas';
+  return`<div class="section-wrap">
+    <div class="breadcrumb" onclick="goHome()">← Inicio</div>
+    <div class="section-title">Nuestras marcas</div>
+    <div class="section-rule"></div>
+    <div class="section-meta" id="sec-meta">${secMetaText()}</div>
+    ${secChipsHtml()}
+    <div class="brands-grid" id="sec-grid">${secBrandsGridHtml()}</div>
   </div>`;
 }
 
@@ -1253,8 +1277,8 @@ function renderBrandPage(){
   const bsubs=Array.isArray(b.subcats)?b.subcats:[];
   const usedC=new Set(ps.filter(p=>p.activo!==false).map(p=>p.cat).filter(Boolean));
   const cats=['todos',...bsubs.filter(c=>usedC.has(c)),...[...usedC].filter(c=>!bsubs.includes(c))];
-  const secLabel=b.sid==='fumadores'?'Papelería':'Alimentos &amp; Snacks';
-  const secFn=b.sid==='fumadores'?'goFumadores()':'goSection()';
+  const secLabel='Marcas';
+  const secFn='goSection()';
   const bName=b.name;const bEmoji=b.emoji;
   return`<div class="section-wrap">
     <div class="breadcrumb" onclick="${secFn}">← ${secLabel} / <span class="bc-active">${b.name}</span></div>
@@ -1374,14 +1398,11 @@ function renderFumadores(){
   </div>`;
 }
 
-function goHome(){view='home';curBrand=null;activeFilter='todos';render()}
+function goHome(){view='home';curBrand=null;activeFilter='todos';secFilter='todas';render()}
 function goSection(){view='section';render()}
 function goBrand(id){view='brand';curBrand=id;activeFilter='todos';render()}
 function goFumadores(){view='fumadores';render()}
-function goMarcas(){
-  if(view==='fumadores'||(view==='brand'&&getBrand(curBrand)?.sid==='fumadores'))goFumadores();
-  else goSection();
-}
+function goMarcas(){goSection()}
 function setF(f,btn){activeFilter=f;document.querySelectorAll('.fbtn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');reGrid()}
 function chQ(id,d){qtys[id]=Math.max(1,(qtys[id]||1)+d);document.querySelectorAll('[id="q'+id+'"]').forEach(el=>{el.textContent=qtys[id]})}
 function addC(id){
@@ -1513,7 +1534,26 @@ function onGSearch(){
   }
   res.classList.add('visible');
 }
-function onGSBlur(){setTimeout(()=>{const r=document.getElementById('gsresults');if(r)r.classList.remove('visible')},180)}
+function onGSBlur(){setTimeout(()=>{
+  const r=document.getElementById('gsresults');if(r)r.classList.remove('visible');
+  const i=document.getElementById('gsinput');
+  if(!i||document.activeElement!==i){document.body.classList.remove('gs-open');gsKb()}
+},180)}
+/* Celular: abrir la franja de búsqueda y mantenerla pegada arriba del teclado */
+function openGS(){
+  document.body.classList.add('gs-open');
+  const i=document.getElementById('gsinput');
+  if(i)i.focus();
+  gsKb();setTimeout(gsKb,120);setTimeout(gsKb,350);
+}
+function gsKb(){
+  const g=document.querySelector('.gsearch'),v=window.visualViewport;
+  if(!g)return;
+  if(!document.body.classList.contains('gs-open')||!v){g.style.bottom='';g.style.removeProperty('--gs-max');return}
+  g.style.bottom=Math.max(0,Math.round(window.innerHeight-v.height-v.offsetTop))+'px';
+  g.style.setProperty('--gs-max',Math.max(120,Math.round(v.height-130))+'px');
+}
+if(window.visualViewport){visualViewport.addEventListener('resize',gsKb);visualViewport.addEventListener('scroll',gsKb)}
 function clearGS(){
   const inp=document.getElementById('gsinput');
   inp.value='';
