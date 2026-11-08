@@ -718,7 +718,20 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 .hero-bar-arrow{width:36px;height:36px;border-radius:50%;background:var(--red);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'DM Sans',sans-serif;font-size:16px;flex-shrink:0;transition:transform .15s}
 .hero-board:hover .hero-bar-arrow{transform:translateX(3px)}
 @media(max-width:720px){
-  .hero-board-img{aspect-ratio:4/5}
+  .hero-board-img{aspect-ratio:1/1}
+}
+
+/* CELULAR: buscador abajo. Cerrado = botón con lupa (espejo del de WhatsApp); abierto = franja sobre el teclado */
+.gs-fab{display:none}
+@media(max-width:720px){
+  .gs-fab{display:flex;position:fixed;left:18px;bottom:calc(78px + env(safe-area-inset-bottom));width:54px;height:54px;border-radius:50%;background:var(--ink);border:none;cursor:pointer;align-items:center;justify-content:center;box-shadow:0 6px 20px rgba(26,26,24,.3);z-index:75;transition:transform .15s}
+  .gs-fab:active{transform:scale(.94)}
+  .gs-fab svg{width:24px;height:24px}
+  .gsearch{display:none;position:fixed;top:auto;left:0;right:0;bottom:0;z-index:85;padding:8px 12px calc(8px + env(safe-area-inset-bottom));border-bottom:0;border-top:1px solid var(--border);box-shadow:0 -6px 20px rgba(26,26,24,.12)}
+  body.gs-open .gsearch{display:block}
+  body.gs-open .bottom-nav,body.gs-open .wa-fab,body.gs-open .gs-fab{display:none}
+  .gsearch-input{font-size:16px}
+  .gsearch-results{top:auto;bottom:calc(100% + 6px);max-height:var(--gs-max,40vh)}
 }
 </style>
 </head>
@@ -792,6 +805,10 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 
 <button class="wa-fab" onclick="waConsulta()" aria-label="Consultar por WhatsApp">
   <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.528 5.855L.057 23.428a.75.75 0 00.916.916l5.573-1.471A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.885 0-3.651-.511-5.168-1.401l-.371-.219-3.849 1.016 1.016-3.849-.219-.371A9.953 9.953 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+</button>
+
+<button class="gs-fab" onclick="openGS()" aria-label="Buscar productos">
+  <svg viewBox="0 0 24 24" fill="none"><circle cx="10.5" cy="10.5" r="6.5" stroke="#fff" stroke-width="2.2"/><path d="m15.5 15.5 5 5" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/></svg>
 </button>
 
 <div class="overlay" id="overlay" onclick="toggleCart()"></div>
@@ -1517,7 +1534,26 @@ function onGSearch(){
   }
   res.classList.add('visible');
 }
-function onGSBlur(){setTimeout(()=>{const r=document.getElementById('gsresults');if(r)r.classList.remove('visible')},180)}
+function onGSBlur(){setTimeout(()=>{
+  const r=document.getElementById('gsresults');if(r)r.classList.remove('visible');
+  const i=document.getElementById('gsinput');
+  if(!i||document.activeElement!==i){document.body.classList.remove('gs-open');gsKb()}
+},180)}
+/* Celular: abrir la franja de búsqueda y mantenerla pegada arriba del teclado */
+function openGS(){
+  document.body.classList.add('gs-open');
+  const i=document.getElementById('gsinput');
+  if(i)i.focus();
+  gsKb();setTimeout(gsKb,120);setTimeout(gsKb,350);
+}
+function gsKb(){
+  const g=document.querySelector('.gsearch'),v=window.visualViewport;
+  if(!g)return;
+  if(!document.body.classList.contains('gs-open')||!v){g.style.bottom='';g.style.removeProperty('--gs-max');return}
+  g.style.bottom=Math.max(0,Math.round(window.innerHeight-v.height-v.offsetTop))+'px';
+  g.style.setProperty('--gs-max',Math.max(120,Math.round(v.height-130))+'px');
+}
+if(window.visualViewport){visualViewport.addEventListener('resize',gsKb);visualViewport.addEventListener('scroll',gsKb)}
 function clearGS(){
   const inp=document.getElementById('gsinput');
   inp.value='';
