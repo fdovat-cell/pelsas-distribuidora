@@ -271,9 +271,11 @@
       "name": "Encendedores.",
       "emoji": "📦",
       "desc": "Encendedores",
-      "logo": "img:logo/encendedores.webp",
+      "logo": "img/logo-encendedores.webp",
       "activo": true,
-      "destacada": true
+      "destacada": true,
+      "sintacc": false,
+      "sinfoto": false
     },
     {
       "id": "edulcorantes",
