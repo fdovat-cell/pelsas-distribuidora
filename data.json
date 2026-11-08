@@ -308,7 +308,7 @@
     {
       "id": "valman",
       "sid": "fumadores",
-      "name": "Valman",
+      "name": "Papeleria",
       "emoji": "📦",
       "desc": "Papeleria",
       "logo": "img/placeholder.webp",
@@ -318,7 +318,8 @@
         "rollos térmicos",
         "Papeleria",
         "biromes"
-      ]
+      ],
+      "sinfoto": false
     }
   ],
   "products": {
