@@ -710,36 +710,18 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 .back-btn.visible{display:flex}
 .back-btn:hover{background:var(--cream2);border-color:var(--border2)}
 
-/* HOME — collage polaroid de marcas destacadas */
+/* HOME — imagen principal */
 .hero-cta{display:inline-flex;align-items:center;gap:10px;background:var(--ink);color:#fff;border:none;border-radius:10px;padding:14px 26px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;cursor:pointer;margin-bottom:1.75rem;transition:background .15s,transform .15s;box-shadow:0 6px 18px rgba(26,26,24,.18)}
 .hero-cta:hover{background:var(--red);transform:translateY(-1px)}
-.hero-board{position:relative;background:#161615 repeating-linear-gradient(115deg,transparent 0 46px,rgba(255,255,255,.04) 46px 92px);border-radius:22px;padding:24px 20px 76px;box-shadow:0 18px 50px rgba(26,26,24,.2);overflow:hidden}
-.hero-tiles{display:flex;flex-wrap:wrap;justify-content:center;gap:0}
-.hero-tile{position:relative;width:calc(100% / var(--cols) + 12px);margin:-6px;aspect-ratio:1/1.04;background:#fff;border-radius:3px;box-shadow:0 8px 22px rgba(0,0,0,.45);cursor:pointer;transform:rotate(var(--r,0deg));transition:transform .25s,box-shadow .25s}
-.hero-tile:nth-child(6n+1){--r:-3deg}
-.hero-tile:nth-child(6n+2){--r:2.5deg}
-.hero-tile:nth-child(6n+3){--r:-1.5deg}
-.hero-tile:nth-child(6n+4){--r:3.5deg}
-.hero-tile:nth-child(6n+5){--r:-2.5deg}
-.hero-tile:nth-child(6n+6){--r:1.8deg}
-.hero-tile:hover{transform:rotate(0deg) scale(1.05);z-index:5;box-shadow:0 16px 34px rgba(0,0,0,.55)}
-.hero-photo{position:absolute;inset:7px;overflow:hidden;background:#EDE8DF}
-.hero-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;transition:opacity .9s ease}
-.hero-photo img.in{opacity:0}
-.hero-photo img.in.show{opacity:1}
-.hero-tile-emoji{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:44px}
-.hero-tile-name{position:absolute;left:7px;right:7px;bottom:7px;padding:24px 8px 8px;background:linear-gradient(to top,rgba(26,26,24,.82),rgba(26,26,24,0));color:#fff;font-family:'Playfair Display',serif;font-size:13px;font-weight:700;text-align:center;opacity:0;transition:opacity .2s;pointer-events:none}
-.hero-tile:hover .hero-tile-name{opacity:1}
-.hero-pill{position:absolute;left:50%;bottom:16px;transform:translateX(-50%);z-index:10;background:var(--red);color:#fff;border:none;border-radius:30px;padding:12px 24px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;cursor:pointer;box-shadow:0 8px 20px rgba(0,0,0,.4);white-space:nowrap;transition:background .15s}
-.hero-pill:hover{background:var(--red-dark)}
-.hero-board-img{display:block;width:100%;border-radius:12px;cursor:pointer}
+.hero-board{border-radius:18px;overflow:hidden;box-shadow:0 14px 40px rgba(26,26,24,.18);background:var(--ink);cursor:pointer}
+.hero-board picture{display:block}
+.hero-board-img{display:block;width:100%;height:auto;aspect-ratio:4/3;background:#ECE6DC;object-fit:cover}
+.hero-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 18px;color:#fff;font-family:'Playfair Display',serif;font-size:17px;font-weight:700}
+.hero-bar-arrow{width:36px;height:36px;border-radius:50%;background:var(--red);display:flex;align-items:center;justify-content:center;font-family:'DM Sans',sans-serif;font-size:16px;flex-shrink:0;transition:transform .15s}
+.hero-board:hover .hero-bar-arrow{transform:translateX(3px)}
 @media(max-width:720px){
-  .hero-board{padding:18px 12px 70px;border-radius:18px;--cols:var(--mcols) !important}
-  .hero-tile:nth-child(n+5){display:none}
-  .hero-cta{width:100%;justify-content:center;margin:1rem 0 1.25rem}
-}
-@media(prefers-reduced-motion:reduce){
-  .hero-photo img{transition:none}
+  .hero-board-img{aspect-ratio:4/5}
+  .hero-cta{display:none}
 }
 </style>
 </head>
@@ -1182,95 +1164,13 @@ function activeSecciones(){
 }
 let secFilter='todas';
 
-/* ── Home: collage polaroid de marcas destacadas (fotos que desfilan) ──
-   HERO_MS: cada cuántos milisegundos cambia UNA foto (una posición por vez). Poné 0 para dejarlo quieto.
-   HERO_MAX: cantidad máxima de marcas en el collage (se toman en el orden del Admin).
-   HERO_IMG: si querés una imagen tuya en lugar del collage armado solo, poné su ruta (ej: 'img/hero-home.webp'). */
-const HERO_MS=5500;
-const HERO_MAX=6;
-const HERO_IMG='';
-function _hEsc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
-const heroBad=new Set();
-function heroPool(bid){
-  const ps=(products[bid]||[]).filter(p=>p.activo!==false&&!p._dup&&p.art);
-  const own=ps.filter(p=>hasOwnPhoto.has(p.art));
-  return own.length?own:ps;
-}
-function heroBrands(){
-  const ok=b=>b.activo!==false&&heroPool(b.id).length>0;
-  let list=brands.filter(b=>ok(b)&&b.destacada);
-  if(!list.length)list=brands.filter(ok).slice(0,5);
-  return list.slice(0,HERO_MAX);
-}
-function heroPick(bid,skip){
-  const pool=heroPool(bid).map(p=>getProdImg(bid,p.art)).filter((s,i,a)=>a.indexOf(s)===i&&s!==skip&&!heroBad.has(s));
-  return pool.length?pool[Math.floor(Math.random()*pool.length)]:null;
-}
-function heroImgFail(im,bid){
-  heroBad.add(im.getAttribute('src'));
-  const b=getBrand(bid), tile=im.closest('.hero-tile');
-  const n=(+im.dataset.r||0)+1; im.dataset.r=n;
-  let next=null;
-  if(n<=2)next=heroPick(bid,null);
-  else if(n===3&&b&&b.logo)next=b.logo;
-  if(next){im.src=next;if(tile)tile.dataset.cur=next;return}
-  im.onerror=null;
-  const d=document.createElement('div');
-  d.className='hero-tile-emoji';
-  d.textContent=(b&&b.emoji)||'📦';
-  im.replaceWith(d);
-}
+/* ── Home: imagen principal ──
+   Dos imágenes: una para celular y otra para compu (el navegador carga solo la que corresponde).
+   Para cambiarlas: subí la nueva al repo (carpeta img/) y ajustá el nombre acá. */
+const HERO_IMG_PC='img/frontpc.webp';
+const HERO_IMG_M='img/front-celular.webp';
 function renderHeroStage(){
-  const pill=`<button class="hero-pill" onclick="goSection()">Entrar a la distribuidora →</button>`;
-  if(HERO_IMG)return`<div class="hero-board"><img class="hero-board-img" src="${HERO_IMG}" alt="PelSAS Distribuidora" onclick="goSection()" onerror="this.style.display='none'">${pill}</div>`;
-  const list=heroBrands();
-  if(!list.length)return`<div class="hero-board">${pill}</div>`;
-  const N=list.length, cols=N<=2?N:(N===4?2:3), mcols=N===1?1:2;
-  const tiles=list.map(b=>{
-    const src=heroPick(b.id,null)||b.logo||'';
-    return`<div class="hero-tile" data-bid="${b.id}" data-cur="${_hEsc(src)}" onclick="goBrand('${b.id}')"><div class="hero-photo"><img src="${_hEsc(src)}" alt="${_hEsc(b.name)}" onerror="heroImgFail(this,'${b.id}')"></div><div class="hero-tile-name">${_hEsc(b.name)}</div></div>`;
-  }).join('');
-  return`<div class="hero-board" id="hero-board" style="--cols:${cols};--mcols:${mcols}" onmouseenter="heroHold(true)" onmouseleave="heroHold(false)" ontouchstart="heroHold(true,2500)"><div class="hero-tiles">${tiles}</div>${pill}</div>`;
-}
-let heroPaused=false,heroHoldT=null,heroIdx=0,heroTimer=null;
-function heroHold(on,ms){
-  clearTimeout(heroHoldT);
-  if(on&&ms){heroPaused=true;heroHoldT=setTimeout(()=>{heroPaused=false},ms)}
-  else heroPaused=!!on;
-}
-function heroSwap(tile){
-  const bid=tile.dataset.bid, src=heroPick(bid,tile.dataset.cur);
-  if(!src)return;
-  const im=new Image();
-  im.onload=()=>{
-    if(!tile.isConnected)return;
-    const box=tile.querySelector('.hero-photo');if(!box)return;
-    const old=box.querySelector('img');
-    const n=document.createElement('img');
-    n.src=src;n.alt=old?old.alt:'';n.className='in';
-    box.appendChild(n);
-    requestAnimationFrame(()=>requestAnimationFrame(()=>n.classList.add('show')));
-    tile.dataset.cur=src;
-    setTimeout(()=>{if(old&&old.parentNode)old.remove();n.classList.remove('in','show')},1200);
-  };
-  im.onerror=()=>heroBad.add(src);
-  im.src=src;
-}
-function heroTick(){
-  if(document.hidden||heroPaused||view!=='home')return;
-  const cp=document.getElementById('cart-panel');
-  if(cp&&cp.classList.contains('open'))return;
-  const all=[...document.querySelectorAll('#hero-board .hero-tile')];
-  if(!all.length)return;
-  const vis=all.filter(t=>t.offsetParent!==null);
-  const tiles=vis.length?vis:all;
-  heroSwap(tiles[heroIdx++%tiles.length]);
-}
-function heroInit(){
-  if(!HERO_MS||heroTimer)return;
-  if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches)return;
-  const mob=window.matchMedia&&matchMedia('(max-width:720px)').matches;
-  heroTimer=setInterval(heroTick,mob?Math.round(HERO_MS*1.5):HERO_MS);
+  return`<div class="hero-board" onclick="goSection()"><picture><source media="(max-width:720px)" srcset="${HERO_IMG_M}"><img class="hero-board-img" src="${HERO_IMG_PC}" width="1200" height="900" alt="PelSAS Distribuidora: marcas y productos" fetchpriority="high" onerror="this.closest('picture').style.display='none'"></picture><div class="hero-bar"><span>Entrar a la distribuidora</span><span class="hero-bar-arrow">→</span></div></div>`;
 }
 
 function renderHome(){
@@ -1738,7 +1638,6 @@ if('serviceWorker' in navigator){
 }
 
 initApp();
-heroInit();
 // Panel siempre visible en desktop
 
 </script>
