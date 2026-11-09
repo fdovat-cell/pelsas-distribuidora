@@ -9016,6 +9016,34 @@
         "destacado": false,
         "sintacc": false,
         "activo": true
+      },
+      {
+        "id": "jugosbigc_1794264600020",
+        "name": "Jugo Big C Naranja 1 L",
+        "unit": 63,
+        "caja": 756,
+        "cat": "Jugos",
+        "art": "9900",
+        "present": "Caja x 12 u.",
+        "emoji": "📦",
+        "venta": 2,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true
+      },
+      {
+        "id": "jugosbigc_1794264674517",
+        "name": "Jugo Big C Naranja 1 L",
+        "unit": 63,
+        "caja": 756,
+        "cat": "Jugos",
+        "art": "9903",
+        "present": "Caja x 12 u.",
+        "emoji": "📦",
+        "venta": 2,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true
       }
     ],
     "sak": [],
