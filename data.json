@@ -9044,6 +9044,34 @@
         "destacado": false,
         "sintacc": false,
         "activo": true
+      },
+      {
+        "id": "jugosbigc_1794312905967",
+        "name": "Jugo Big C Banana/Frutilla 1 L",
+        "unit": 63,
+        "caja": 756,
+        "cat": "Jugos",
+        "art": "9940",
+        "present": "Caja x 12 u.",
+        "emoji": "📦",
+        "venta": 2,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true
+      },
+      {
+        "id": "jugosbigc_1794312972225",
+        "name": "Jugo Big C Banana/Frutilla 1 L",
+        "unit": 63,
+        "caja": 756,
+        "cat": "Jugos",
+        "art": "9902",
+        "present": "",
+        "emoji": "📦",
+        "venta": 2,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true
       }
     ],
     "sak": [],
