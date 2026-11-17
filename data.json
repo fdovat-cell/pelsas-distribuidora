@@ -228,7 +228,7 @@
       "emoji": "",
       "desc": "Budines zero azúcar",
       "logo": "img/logo-suavipan.webp",
-      "activo": true,
+      "activo": false,
       "sintacc": true
     },
     {
