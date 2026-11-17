@@ -398,7 +398,7 @@
         "caja": 135,
         "emoji": "📦",
         "venta": 1,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false,
         "extra": [
@@ -3128,7 +3128,7 @@
         "venta": 2,
         "destacado": false,
         "sintacc": false,
-        "activo": true
+        "activo": false
       }
     ],
     "bombones": [
