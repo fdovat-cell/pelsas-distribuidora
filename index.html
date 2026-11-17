@@ -1428,10 +1428,10 @@ function addC(id){
   updateBadge();reGrid();
   if(view==='presentacion')refreshPresGrid();
 }
-function saveCart(){try{sessionStorage.setItem('pel_cart',JSON.stringify(cart))}catch(e){}}
+function saveCart(){try{localStorage.setItem('pel_cart',JSON.stringify(cart))}catch(e){}}
 function restoreCart(){
   try{
-    const raw=sessionStorage.getItem('pel_cart');if(!raw)return;
+    const raw=localStorage.getItem('pel_cart');if(!raw)return;
     const saved=JSON.parse(raw)||{};
     Object.entries(saved).forEach(([k,v])=>{
       if(!v||!(v.qty>0))return;
