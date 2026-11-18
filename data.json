@@ -3129,6 +3129,20 @@
         "destacado": false,
         "sintacc": false,
         "activo": false
+      },
+      {
+        "id": "golosinas_1794997564892",
+        "name": "Chicle Buzzy Croc Frutilla x 40 u",
+        "unit": 56.5,
+        "caja": 56.5,
+        "cat": "chiclets",
+        "art": "5225",
+        "present": "Caja x 40u",
+        "emoji": "📦",
+        "venta": 2,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true
       }
     ],
     "bombones": [
