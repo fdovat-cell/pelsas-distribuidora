@@ -3157,6 +3157,20 @@
         "destacado": false,
         "sintacc": false,
         "activo": true
+      },
+      {
+        "id": "golosinas_1794998063296",
+        "name": "Chicle Buzzy Croc Tutti Fruti x 40 u",
+        "unit": 1.41,
+        "caja": 52.5,
+        "cat": "chiclets",
+        "art": "5226",
+        "present": "Caja x 40u",
+        "emoji": "📦",
+        "venta": 2,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true
       }
     ],
     "bombones": [
