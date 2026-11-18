@@ -66,12 +66,12 @@
       "activo": true,
       "subcats": [
         "gomitas",
-        "chupetines",
-        "galletas",
         "pastillas",
+        "chiclets",
+        "galletas",
+        "chupetines",
         "chocolates",
-        "caramelos",
-        "chiclets"
+        "caramelos"
       ],
       "destacada": true
     },
