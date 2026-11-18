@@ -3171,6 +3171,20 @@
         "destacado": false,
         "sintacc": false,
         "activo": true
+      },
+      {
+        "id": "golosinas_1794998242602",
+        "name": "Chicle Buzzy Croc Uva 40 u",
+        "unit": 1.41,
+        "caja": 56.5,
+        "cat": "chiclets",
+        "art": "6489",
+        "present": "Caja x 40u.",
+        "emoji": "📦",
+        "venta": 2,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true
       }
     ],
     "bombones": [
