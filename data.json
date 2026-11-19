@@ -9516,6 +9516,26 @@
             "cat": "caramelos"
           }
         ]
+      },
+      {
+        "id": "mentoscaramelos_1795088007255",
+        "name": "MENTOS Caramelos x12u - Frutilla - Fresa",
+        "unit": 22.5,
+        "caja": 270,
+        "cat": "",
+        "art": "1149",
+        "present": "Caja x 12 u.",
+        "emoji": "📦",
+        "venta": 2,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true,
+        "extra": [
+          {
+            "b": "golosinas",
+            "cat": "caramelos"
+          }
+        ]
       }
     ]
   }
