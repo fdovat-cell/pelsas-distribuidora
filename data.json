@@ -9556,6 +9556,26 @@
             "cat": "caramelos"
           }
         ]
+      },
+      {
+        "id": "mentoscaramelos_1795088525862",
+        "name": "MENTOS Caramelos x12u - Tutti Frutti",
+        "unit": 22.5,
+        "caja": 270,
+        "cat": "",
+        "art": "9759",
+        "present": "Caja x 12 u.",
+        "emoji": "📦",
+        "venta": 2,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true,
+        "extra": [
+          {
+            "b": "golosinas",
+            "cat": "caramelos"
+          }
+        ]
       }
     ]
   }
