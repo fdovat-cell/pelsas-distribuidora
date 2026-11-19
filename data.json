@@ -9496,6 +9496,26 @@
             "cat": "caramelos"
           }
         ]
+      },
+      {
+        "id": "mentoscaramelos_1795087919359",
+        "name": "MENTOS Caramelos x12u - Menta",
+        "unit": 22.5,
+        "caja": 270,
+        "cat": "",
+        "art": "1151",
+        "present": "Caja x 12 u.",
+        "emoji": "📦",
+        "venta": 2,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true,
+        "extra": [
+          {
+            "b": "golosinas",
+            "cat": "caramelos"
+          }
+        ]
       }
     ]
   }
