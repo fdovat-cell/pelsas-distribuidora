@@ -9476,6 +9476,27 @@
       }
     ],
     "marcaspapeleria": [],
-    "mentoscaramelos": []
+    "mentoscaramelos": [
+      {
+        "id": "mentoscaramelos_1795087710457",
+        "name": "MENTOS Caramelos x12u - Frutas",
+        "unit": 22.5,
+        "caja": 270,
+        "cat": "",
+        "art": "1147",
+        "present": "Caja x 12 u.",
+        "emoji": "📦",
+        "venta": 2,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true,
+        "extra": [
+          {
+            "b": "golosinas",
+            "cat": "caramelos"
+          }
+        ]
+      }
+    ]
   }
 }
