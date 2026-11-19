@@ -9576,6 +9576,26 @@
             "cat": "caramelos"
           }
         ]
+      },
+      {
+        "id": "mentoscaramelos_1795088597118",
+        "name": "MENTOS Caramelos x12u - Yogurt Frutilla",
+        "unit": 22.5,
+        "caja": 270,
+        "cat": "",
+        "art": "28533",
+        "present": "Caja x 12 u.",
+        "emoji": "📦",
+        "venta": 2,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true,
+        "extra": [
+          {
+            "b": "golosinas",
+            "cat": "caramelos"
+          }
+        ]
       }
     ]
   }
