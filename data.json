@@ -87,6 +87,17 @@
       "sinfoto": false
     },
     {
+      "id": "mentoscaramelos",
+      "sid": "alimentos",
+      "name": "Mentos",
+      "emoji": "📦",
+      "desc": "Mentos caramelos",
+      "logo": "img/logo-mentos.webp",
+      "activo": true,
+      "sintacc": false,
+      "sinfoto": false
+    },
+    {
       "id": "manidori",
       "sid": "alimentos",
       "name": "Mani Dori/Santa Helena",
@@ -335,17 +346,6 @@
       "sintacc": false,
       "sinfoto": false,
       "url": "https://pelsas-papeleria.pages.dev/"
-    },
-    {
-      "id": "mentoscaramelos",
-      "sid": "alimentos",
-      "name": "Mentos",
-      "emoji": "📦",
-      "desc": "Mentos caramelos",
-      "logo": "img/logo-mentos.webp",
-      "activo": true,
-      "sintacc": false,
-      "sinfoto": false
     }
   ],
   "products": {
