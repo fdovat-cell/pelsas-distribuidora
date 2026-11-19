@@ -8945,7 +8945,22 @@
         "activo": true
       }
     ],
-    "manidori": [],
+    "manidori": [
+      {
+        "id": "manidori_1795085955516",
+        "name": "Maní SANTA HELENA 60grs AMINDUS",
+        "unit": 20,
+        "caja": 600,
+        "cat": "",
+        "art": "4254",
+        "present": "Caja x 30 u.",
+        "emoji": "📦",
+        "venta": 2,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true
+      }
+    ],
     "jugosbigc": [
       {
         "id": "jugosbigc_1794048031160",
