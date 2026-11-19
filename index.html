@@ -775,11 +775,12 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
     <button class="lb-btn" id="lb-wa" onclick="lbToggleShare()" aria-label="Enviar por WhatsApp" style="display:none;width:auto;padding:0 16px;border-radius:22px;font-size:14px;font-weight:600;background:#25D366">Enviar por WhatsApp</button>
   </div>
   <div id="lb-sharebox" style="display:none;position:absolute;bottom:84px;left:50%;transform:translateX(-50%);width:min(92vw,320px);flex-direction:column;gap:8px;background:rgba(0,0,0,.85);padding:12px;border-radius:14px;z-index:3">
-    <button class="lb-btn" style="width:100%;border-radius:10px;font-size:14px;font-weight:600;background:#25D366" onclick="lbSendWA('')">Elegir de mis contactos</button>
+    <button class="lb-btn" style="width:100%;border-radius:10px;font-size:14px;font-weight:600;background:#25D366" onclick="lbShareImg()">Enviar imagen a un contacto</button>
     <div style="display:flex;gap:6px">
       <input id="lb-wa-num" type="tel" inputmode="tel" placeholder="Otro celular: 099 123 456" style="flex:1;min-width:0;height:44px;border-radius:10px;border:0;padding:0 12px;font-size:16px">
       <button class="lb-btn" style="width:auto;padding:0 14px;border-radius:10px;font-size:14px;font-weight:600;background:#25D366" onclick="lbSendNum()">Enviar</button>
     </div>
+    <div style="color:#fff;font-size:11px;opacity:.8;text-align:center">Al número escrito se envía el link de la ficha (WhatsApp no permite adjuntar la imagen a un número no agendado).</div>
   </div>
 </div>
 
@@ -1655,10 +1656,19 @@ function openLBraw(src){
   const im=document.getElementById('lb-img');
   im.src=src;
   lbShareSrc=src;document.getElementById('lb-wa').style.display='';
+  lbShareFile=null;
+  fetch(src).then(r=>r.blob()).then(b=>{if(lbShareSrc===src)lbShareFile=new File([b],'ficha-'+src.split('/').pop(),{type:b.type||'image/jpeg'})}).catch(()=>{});
   lb.classList.add('open');lbReset();
   document.body.style.overflow='hidden';
 }
-let lbShareSrc='';
+let lbShareSrc='',lbShareFile=null;
+function lbShareImg(){
+  if(!lbShareSrc)return;
+  const f=lbShareFile;
+  if(f&&navigator.canShare&&navigator.canShare({files:[f]})){
+    navigator.share({files:[f]}).catch(e=>{if(e&&e.name!=='AbortError')lbSendWA('')});
+  }else lbSendWA('');
+}
 function lbToggleShare(){const b=document.getElementById('lb-sharebox');b.style.display=b.style.display==='flex'?'none':'flex'}
 function lbSendWA(num){
   if(!lbShareSrc)return;
