@@ -431,7 +431,7 @@
       "emoji": "🍼",
       "desc": "Artículos de primera infancia",
       "logo": "img/logo-bebes.webp",
-      "activo": false,
+      "activo": true,
       "sintacc": false,
       "sinfoto": false
     },
