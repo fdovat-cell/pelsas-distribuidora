@@ -316,7 +316,7 @@
       "emoji": "📎",
       "desc": "Artículos de oficina y papelería.",
       "logo": "",
-      "activo": true,
+      "activo": false,
       "sintacc": false
     },
     {
@@ -8297,13 +8297,7 @@
         "venta": 2,
         "destacado": false,
         "sintacc": false,
-        "activo": true,
-        "extra": [
-          {
-            "b": "papeleria",
-            "cat": ""
-          }
-        ]
+        "activo": true
       }
     ],
     "budinespanettonesturrones": [
