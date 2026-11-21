@@ -428,7 +428,6 @@
         "Hogar",
         "Juguetes",
         "Incienso y aromas",
-        "Artículos religiosos",
         "Feng Shui",
         "Papelería",
         "Varios"
@@ -32187,56 +32186,56 @@
         "name": "Colgantes Santos Redondo",
         "unit": 162,
         "caja": 162,
-        "cat": "Artículos religiosos",
+        "cat": "",
         "art": "5825041",
         "present": "por unidad",
         "emoji": "🎁",
         "venta": 1,
         "destacado": false,
         "sintacc": false,
-        "activo": true
+        "activo": false
       },
       {
         "id": "regaleria_5926020",
         "name": "Vela Led Cruz Jesús",
         "unit": 81,
         "caja": 81,
-        "cat": "Artículos religiosos",
+        "cat": "",
         "art": "5926020",
         "present": "por unidad",
         "emoji": "🎁",
         "venta": 1,
         "destacado": false,
         "sintacc": false,
-        "activo": true
+        "activo": false
       },
       {
         "id": "regaleria_5926071",
         "name": "Imán Padre Pío y San Expedito",
         "unit": 61,
         "caja": 61,
-        "cat": "Artículos religiosos",
+        "cat": "",
         "art": "5926071",
         "present": "por unidad",
         "emoji": "🎁",
         "venta": 1,
         "destacado": false,
         "sintacc": false,
-        "activo": true
+        "activo": false
       },
       {
         "id": "regaleria_5926161",
         "name": "Lámpara Cuadrada c/Base Madera",
         "unit": 228,
         "caja": 228,
-        "cat": "Artículos religiosos",
+        "cat": "",
         "art": "5926161",
         "present": "por unidad",
         "emoji": "🎁",
         "venta": 1,
         "destacado": false,
         "sintacc": false,
-        "activo": true
+        "activo": false
       },
       {
         "id": "regaleria_5926015",
