@@ -594,7 +594,9 @@ function renderBrandGroup(label, brands, sid) {
 }
 
 // ── Contenido de marca ────────────────────────────────────────────────────────
+let rowLimit = 100;
 function selectBrand(bid) {
+  rowLimit = 100;
   currentBrand = bid;
   view = 'brand';
   searchQ = '';
@@ -676,8 +678,8 @@ function renderContent() {
             <th>Activo</th>
             <th>Acciones</th>
           </tr></thead>
-          <tbody>${filtered.map(p => renderRow(p, currentBrand)).join('')}</tbody>
-        </table>`
+          <tbody>${filtered.slice(0, rowLimit).map(p => renderRow(p, currentBrand)).join('')}</tbody>
+        </table>${filtered.length > rowLimit ? `<div style="text-align:center;margin:14px 0"><span style="font-size:12px;color:var(--mid);margin-right:10px">Mostrando ${rowLimit} de ${filtered.length}</span><button class="edit-btn" onclick="rowLimit+=200;renderContent()">Mostrar más</button><button class="edit-btn" style="margin-left:6px" onclick="rowLimit=100000;renderContent()">Mostrar todos</button></div>` : ''}`
     }
   `;
 }
@@ -691,7 +693,7 @@ function renderRow(p, bid) {
     ? p.extra.map(e => (data.brands.find(b => b.id === e.b) || {}).name).filter(Boolean).join(', ') : '';
   return `<tr class="${inactive}${isAlias ? ' alias-row' : ''}" id="row-${p.id}${isAlias ? '-' + bid : ''}"${isAlias ? '' : ` data-pid="${p.id}" ondragover="prodDragOver(event)" ondragleave="prodDragLeave(event)" ondrop="prodDrop(event)"`}>
     <td class="drag-cell">${isAlias ? '' : `<span class="grip" draggable="true" title="Arrastrá para cambiar el orden" ondragstart="prodDragStart(event,'${p.id}')" ondragend="prodDragEnd(event)">⋮⋮</span>`}</td>
-    ${brandSinFoto(bid) ? '' : `<td><img class="prod-img" src="img/${p.art}.webp" alt="" onerror="this.outerHTML='<span style=\\'font-size:24px\\'>${p.emoji}</span>'"></td>`}
+    ${brandSinFoto(bid) ? '' : (p.v2 && !p.img ? `<td><span style="font-size:24px">${p.emoji}</span></td>` : `<td><img class="prod-img" loading="lazy" src="${p.v2 ? escAttr(p.img) : 'img/' + p.art + '.webp'}" alt="" onerror="this.outerHTML='<span style=\\'font-size:24px\\'>${p.emoji}</span>'"></td>`)}
     <td><div class="prod-name-cell">${isAlias ? `<span class="alias-tag" title="Mismo artículo cargado en ${escAttr(fromBrand)}">↪ ${escHtml(fromBrand)}</span>` : ''}${alsoIn ? `<span class="alias-tag" title="Este artículo también aparece en: ${escAttr(alsoIn)}">＋ también en ${escHtml(alsoIn)}</span>` : ''}${p.destacado?'<span title="Incluido en Modo Visita">🤝 </span>':''}${p.name}</div></td>
     <td><span class="prod-cat">${escHtml(p.cat||"—")}</span></td>
     <td><span class="art-badge">${p.art}</span></td>
@@ -1620,6 +1622,7 @@ function deleteProduct(pid) {
 }
 
 function onSearch(q) {
+  rowLimit = 100;
   searchQ = q.toLowerCase().trim();
   renderContent();
 }
@@ -1798,7 +1801,7 @@ function getSubcats(bid) {
   return list;
 }
 
-function setSubFilter(s) { subFilter = s; renderContent(); }
+function setSubFilter(s) { subFilter = s; rowLimit = 100; renderContent(); }
 
 let modalBrandId = null;
 function fillCatSelect(selected) {
