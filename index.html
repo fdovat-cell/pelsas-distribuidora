@@ -306,6 +306,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
   overflow:hidden;
 }
 .prod-icon img{width:100%;height:100%;object-fit:contain;display:block;transform:scale(1.18);transform-origin:center;cursor:zoom-in}
+.no-photo{display:flex;align-items:center;justify-content:center;width:100%;height:100%;color:var(--light);background:var(--cream)}
+.cat-prod-card .no-photo{aspect-ratio:1;height:auto}
 
 /* LIGHTBOX */
 .lightbox{position:fixed;inset:0;background:rgba(0,0,0,.94);z-index:200;display:none;align-items:center;justify-content:center;touch-action:none;overflow:hidden}
@@ -968,7 +970,7 @@ function renderCatContent(){
         const k=p.id+'_'+(p.venta===1?'unit':'caja');
         const inCart=cart[k]&&cart[k].qty>0;
         return`<div class="cat-prod-card${free?' free-highlight':''}">
-          <img class="cat-prod-img" src="${getProdImg(b.id,p.art)}" alt="${p.name}" onerror="this.onerror=null;this.src='img/placeholder.webp'" onclick="openLB('img/${p.art}.webp')">
+          ${p.v2&&!p.img?noPhotoHTML:`<img class="cat-prod-img" src="${getProdImg(b.id,p.art)}" alt="${p.name}" onerror="noPhoto(this)" onclick="openLB('img/${p.art}.webp')">`}
           <div class="cat-prod-body">
             <div class="cat-prod-name">${p.name}</div>
             <div class="cat-prod-prices">
@@ -1126,6 +1128,10 @@ const hasOwnPhoto=new Set(['4000','4001','4002','4003','4004','4005','4006','400
 /* Productos traídos de V2: su foto vive en Supabase (p.img). Un código que ya existe como producto propio no se pisa. */
 let extImg={};
 const artImg=art=>extImg[art]||('img/'+art+'.webp');
+/* Sin foto: ícono de clip genérico en vez del texto alternativo cortado */
+const CLIP_SVG='<svg viewBox="0 0 24 24" width="44" height="44" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21.4 11.1l-8.5 8.5a5.5 5.5 0 0 1-7.8-7.8l8.5-8.5a3.7 3.7 0 0 1 5.2 5.2l-8.5 8.5a1.8 1.8 0 0 1-2.6-2.6l7.8-7.8"/></svg>';
+const noPhotoHTML='<span class="no-photo">'+CLIP_SVG+'</span>';
+function noPhoto(img){const w=document.createElement('span');w.className='no-photo';w.innerHTML=CLIP_SVG;img.replaceWith(w)}
 function buildExtImg(){
   extImg={};
   const all=Object.values(products).flat();
@@ -1383,11 +1389,12 @@ function renderCards(filtered,bid){
     const isBaja=p.cat==='baja rotacion';
     const imgSrc=bid?getProdImg(bid,p.art):artImg(p.art);
     const genImg=bid&&brandGenImg[bid]?brandGenImg[bid]:'';
-    const onerrorFallback=genImg?`this.onerror=null;this.src='${genImg}'`:`this.onerror=null`;
+    const onerrorFallback=genImg?`this.onerror=function(){noPhoto(this)};this.src='${genImg}'`:`noPhoto(this)`;
+    const sinFotoV2=!!(p.v2&&!p.img);
     const precioMostrado=modo==='unit'?p.unit:p.caja;
     return`<div class="prod-card${isBaja?' baja-rot':''}" data-pid="${p.id}">
       ${isBaja?'<span class="baja-rot-tag">Consultar disponibilidad</span>':''}
-      <div class="prod-icon"><img src="${imgSrc}" alt="${p.name}" loading="lazy" onclick="openLB('${p.art}')" onerror="${onerrorFallback}"></div>
+      <div class="prod-icon">${sinFotoV2?noPhotoHTML:`<img src="${imgSrc}" alt="${p.name}" loading="lazy" onclick="openLB('${p.art}')" onerror="${onerrorFallback}">`}</div>
       <div class="prod-art">Art. ${p.art}</div>
       <div class="prod-name">${p.name}</div>
       <div class="prod-present">${p.present}</div>

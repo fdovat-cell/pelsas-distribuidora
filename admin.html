@@ -829,6 +829,15 @@ async function renderToolV2() {
         Buscá en el catálogo de V2, tildá los productos y agregalos a una marca. Se traen <strong>por unidad</strong>, con su foto. Los productos en dólares no aparecen.<br>
         Después de agregar, apretá <strong>Guardar</strong> arriba a la derecha para publicarlos.
       </p>
+      <div style="background:var(--white);border:1px dashed var(--mid);border-radius:12px;padding:14px 16px;margin-bottom:1rem">
+        <div style="font-weight:600;font-size:13px;margin-bottom:6px">📋 Importar desde la lista de precios (Excel)</div>
+        <div style="font-size:12px;color:var(--mid);margin-bottom:10px;line-height:1.5">Subí el Excel: se seleccionan todos los productos de V2 cuyo código figure en la columna Código/Artículo de cualquier hoja. Después apretá <strong>Agregar</strong> abajo. Precio y foto se toman de V2.</div>
+        <label style="font-size:13px;display:flex;gap:6px;align-items:center;margin-bottom:8px">
+          <input type="checkbox" id="v2-imp-photo" ${v2ImpPhoto ? 'checked' : ''} onchange="v2ImpPhoto=this.checked" style="width:auto"> Importar solo los que tienen foto
+        </label>
+        <input type="file" id="v2-imp-file" accept=".xlsx,.xlsm,.xls" onchange="v2ImportFile(this)">
+        <div id="v2-imp-status" style="font-size:12px;color:var(--mid);margin-top:8px;line-height:1.5"></div>
+      </div>
       <div class="form-grid" style="margin-bottom:.5rem">
         <div class="form-row"><label>Agregar a la marca</label><select id="v2-dest" onchange="v2Dest=this.value;v2Bar()">${opts}</select></div>
         <div class="form-row"><label>Buscar</label><input type="text" id="v2-q" value="${escAttr(v2Q)}" placeholder="Código, descripción, marca o categoría" oninput="v2Search(this.value)"></div>
@@ -891,6 +900,66 @@ function v2Render() {
     </div>`;
   }).join('');
   v2Bar();
+}
+let v2ImpPhoto = false;
+function v2LoadXLSX() {
+  if (window.XLSX) return Promise.resolve();
+  return new Promise((res, rej) => {
+    const sc = document.createElement('script');
+    sc.src = 'https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js';
+    sc.onload = res;
+    sc.onerror = () => rej(new Error('no pude cargar el lector de Excel'));
+    document.head.appendChild(sc);
+  });
+}
+// Lee el Excel y selecciona todo lo de V2 cuyo código figure en la columna Código/Artículo de cada hoja
+async function v2ImportFile(inp) {
+  const f = inp.files && inp.files[0];
+  const st = v2$('v2-imp-status');
+  if (!f || !st) return;
+  st.textContent = 'Leyendo el Excel…';
+  try {
+    await v2LoadXLSX();
+    if (!v2Cat) await v2Load();
+    if (v2Err || !v2Cat) throw new Error(v2Err || 'el catálogo de V2 no cargó');
+    const wb = XLSX.read(await f.arrayBuffer(), { type: 'array' });
+    const byCode = new Map();
+    v2Cat.forEach(p => { if (p && p.codigo != null) byCode.set(String(p.codigo).trim(), p); });
+    const found = new Set();
+    wb.SheetNames.forEach(name => {
+      const rows = XLSX.utils.sheet_to_json(wb.Sheets[name], { header: 1, raw: true, defval: null });
+      let col = -1, start = 0;
+      for (let i = 0; i < Math.min(rows.length, 12) && col < 0; i++) {
+        for (let j = 0; j < 3; j++) {
+          const h = v2Norm(rows[i] && rows[i][j]).trim();
+          if (h === 'codigo' || h === 'articulo') { col = j; start = i + 1; break; }
+        }
+      }
+      if (col < 0) return;
+      for (let i = start; i < rows.length; i++) {
+        const c = rows[i] && rows[i][col];
+        if (c == null) continue;
+        let k = String(c).trim();
+        if (k.endsWith('.0')) k = k.slice(0, -2);
+        if (byCode.has(k)) found.add(k);
+      }
+    });
+    const have = v2HaveArts();
+    let ready = 0, already = 0, bad = 0, nophoto = 0;
+    found.forEach(k => {
+      const p = byCode.get(k);
+      if (!v2Ok(p)) { bad++; return; }
+      if (have.has(k)) { already++; return; }
+      if (v2ImpPhoto && !v2Img(p)) { nophoto++; return; }
+      v2Sel.set(k, p); ready++;
+    });
+    st.innerHTML = '<strong>' + found.size + '</strong> artículos del Excel están en V2. <strong>' + ready + '</strong> listos para agregar · ' + already + ' ya estaban cargados · ' + bad + ' sin precio o en dólares' + (v2ImpPhoto ? ' · ' + nophoto + ' sin foto' : '') + '.';
+    v2Bar();
+    v2Render();
+  } catch (e) {
+    st.textContent = 'Error: ' + e.message;
+  }
+  inp.value = '';
 }
 function v2Toggle(i) {
   const p = v2Results[i]; if (!p) return;
