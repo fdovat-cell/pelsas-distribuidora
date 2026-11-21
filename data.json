@@ -3274,7 +3274,7 @@
         "caja": 119,
         "emoji": "📎",
         "venta": 1,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -3288,7 +3288,7 @@
         "caja": 245,
         "emoji": "📎",
         "venta": 1,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -3302,7 +3302,7 @@
         "caja": 690,
         "emoji": "📎",
         "venta": 1,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -3316,7 +3316,7 @@
         "caja": 175,
         "emoji": "📎",
         "venta": 2,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -3330,7 +3330,7 @@
         "caja": 67,
         "emoji": "📎",
         "venta": 1,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -3344,7 +3344,7 @@
         "caja": 75.6,
         "emoji": "📎",
         "venta": 2,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -3358,7 +3358,7 @@
         "caja": 94.8,
         "emoji": "📎",
         "venta": 2,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -3372,7 +3372,7 @@
         "caja": 114,
         "emoji": "📎",
         "venta": 2,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -3386,7 +3386,7 @@
         "caja": 132,
         "emoji": "📎",
         "venta": 2,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -3400,7 +3400,7 @@
         "caja": 152.4,
         "emoji": "📎",
         "venta": 2,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -3414,7 +3414,7 @@
         "caja": 119,
         "emoji": "📎",
         "venta": 1,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -3428,7 +3428,7 @@
         "caja": 119,
         "emoji": "📎",
         "venta": 2,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -3442,7 +3442,7 @@
         "caja": 396,
         "emoji": "📎",
         "venta": 2,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -3456,7 +3456,7 @@
         "caja": 476,
         "emoji": "📎",
         "venta": 2,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -3470,7 +3470,7 @@
         "caja": 640,
         "emoji": "📎",
         "venta": 1,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -3523,7 +3523,7 @@
         "caja": 119,
         "emoji": "📎",
         "venta": 1,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -3537,7 +3537,7 @@
         "caja": 119,
         "emoji": "📎",
         "venta": 1,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -3551,7 +3551,7 @@
         "caja": 129,
         "emoji": "📎",
         "venta": 1,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -3565,7 +3565,7 @@
         "caja": 119,
         "emoji": "📎",
         "venta": 1,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -3579,7 +3579,7 @@
         "caja": 119,
         "emoji": "📎",
         "venta": 1,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -3593,7 +3593,7 @@
         "caja": 169,
         "emoji": "📎",
         "venta": 1,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -3607,7 +3607,7 @@
         "caja": 282,
         "emoji": "📎",
         "venta": 2,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -3621,7 +3621,7 @@
         "caja": 256.2,
         "emoji": "📎",
         "venta": 2,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -3635,7 +3635,7 @@
         "caja": 274.5,
         "emoji": "📎",
         "venta": 1,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -3649,7 +3649,7 @@
         "caja": 339,
         "emoji": "📎",
         "venta": 1,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -3663,7 +3663,7 @@
         "caja": 80.4,
         "emoji": "📎",
         "venta": 2,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -3677,7 +3677,7 @@
         "caja": 635,
         "emoji": "📎",
         "venta": 2,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -3691,7 +3691,7 @@
         "caja": 780,
         "emoji": "📎",
         "venta": 1,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -3705,7 +3705,7 @@
         "caja": 68,
         "emoji": "📎",
         "venta": 1,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -3719,7 +3719,7 @@
         "caja": 624,
         "emoji": "📎",
         "venta": 2,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -3733,7 +3733,7 @@
         "caja": 354,
         "emoji": "📎",
         "venta": 2,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -3747,7 +3747,7 @@
         "caja": 462,
         "emoji": "📎",
         "venta": 2,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -3761,7 +3761,7 @@
         "caja": 146.4,
         "emoji": "📎",
         "venta": 2,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -3775,7 +3775,7 @@
         "caja": 156,
         "emoji": "📎",
         "venta": 2,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -3789,7 +3789,7 @@
         "caja": 264,
         "emoji": "📎",
         "venta": 1,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -3803,7 +3803,7 @@
         "caja": 384,
         "emoji": "📎",
         "venta": 2,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -3817,7 +3817,7 @@
         "caja": 476,
         "emoji": "📎",
         "venta": 2,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -3831,7 +3831,7 @@
         "caja": 680,
         "emoji": "📎",
         "venta": 1,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -3845,7 +3845,7 @@
         "caja": 547,
         "emoji": "📎",
         "venta": 1,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -3859,7 +3859,7 @@
         "caja": 165,
         "emoji": "📎",
         "venta": 1,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -3873,7 +3873,7 @@
         "caja": 71.9,
         "emoji": "📎",
         "venta": 1,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -3887,7 +3887,7 @@
         "caja": 85.4,
         "emoji": "📎",
         "venta": 1,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -3901,7 +3901,7 @@
         "caja": 145,
         "emoji": "📎",
         "venta": 1,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -3915,7 +3915,7 @@
         "caja": 190,
         "emoji": "📎",
         "venta": 1,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -3929,7 +3929,7 @@
         "caja": 220,
         "emoji": "📎",
         "venta": 1,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -3943,7 +3943,7 @@
         "caja": 220,
         "emoji": "📎",
         "venta": 1,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -3957,7 +3957,7 @@
         "caja": 360,
         "emoji": "📎",
         "venta": 1,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -3971,7 +3971,7 @@
         "caja": 247,
         "emoji": "📎",
         "venta": 1,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -3985,7 +3985,7 @@
         "caja": 392,
         "emoji": "📎",
         "venta": 1,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -3999,7 +3999,7 @@
         "caja": 546,
         "emoji": "📎",
         "venta": 1,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -4013,7 +4013,7 @@
         "caja": 676,
         "emoji": "📎",
         "venta": 1,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -4079,7 +4079,7 @@
         "caja": 247,
         "emoji": "📎",
         "venta": 1,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -4106,7 +4106,7 @@
         "caja": 192,
         "emoji": "📎",
         "venta": 2,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -4120,7 +4120,7 @@
         "caja": 264,
         "emoji": "📎",
         "venta": 2,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -4134,7 +4134,7 @@
         "caja": 174,
         "emoji": "📎",
         "venta": 2,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -4148,7 +4148,7 @@
         "caja": 250,
         "emoji": "📎",
         "venta": 2,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -4162,7 +4162,7 @@
         "caja": 166,
         "emoji": "📎",
         "venta": 1,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -4176,7 +4176,7 @@
         "caja": 699,
         "emoji": "📎",
         "venta": 2,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -4190,7 +4190,7 @@
         "caja": 252,
         "emoji": "📎",
         "venta": 2,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -4204,7 +4204,7 @@
         "caja": 220,
         "emoji": "📎",
         "venta": 2,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -4218,7 +4218,7 @@
         "caja": 238,
         "emoji": "📎",
         "venta": 2,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -4232,7 +4232,7 @@
         "caja": 340,
         "emoji": "📎",
         "venta": 2,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -4246,7 +4246,7 @@
         "caja": 468,
         "emoji": "📎",
         "venta": 2,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -4260,7 +4260,7 @@
         "caja": 109,
         "emoji": "📎",
         "venta": 1,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -4274,7 +4274,7 @@
         "caja": 215,
         "emoji": "📎",
         "venta": 1,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -4288,7 +4288,7 @@
         "caja": 408,
         "emoji": "📎",
         "venta": 2,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -4302,7 +4302,7 @@
         "caja": 408,
         "emoji": "📎",
         "venta": 2,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -4316,7 +4316,7 @@
         "caja": 252,
         "emoji": "📎",
         "venta": 2,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -4330,7 +4330,7 @@
         "caja": 390,
         "emoji": "📎",
         "venta": 2,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -4344,7 +4344,7 @@
         "caja": 504,
         "emoji": "📎",
         "venta": 2,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -4358,7 +4358,7 @@
         "caja": 1090,
         "emoji": "📎",
         "venta": 2,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -4372,7 +4372,7 @@
         "caja": 1220,
         "emoji": "📎",
         "venta": 2,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -4386,7 +4386,7 @@
         "caja": 59,
         "emoji": "📎",
         "venta": 1,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -4400,7 +4400,7 @@
         "caja": 325,
         "emoji": "📎",
         "venta": 2,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -4414,7 +4414,7 @@
         "caja": 488,
         "emoji": "📎",
         "venta": 2,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -4428,7 +4428,7 @@
         "caja": 553,
         "emoji": "📎",
         "venta": 2,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -4442,7 +4442,7 @@
         "caja": 634,
         "emoji": "📎",
         "venta": 2,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -4456,7 +4456,7 @@
         "caja": 650,
         "emoji": "📎",
         "venta": 2,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -4470,7 +4470,7 @@
         "caja": 151,
         "emoji": "📎",
         "venta": 1,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -4484,7 +4484,7 @@
         "caja": 198,
         "emoji": "📎",
         "venta": 1,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -4498,7 +4498,7 @@
         "caja": 150,
         "emoji": "📎",
         "venta": 2,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -4512,7 +4512,7 @@
         "caja": 220,
         "emoji": "📎",
         "venta": 2,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -4526,7 +4526,7 @@
         "caja": 420,
         "emoji": "📎",
         "venta": 2,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -4540,7 +4540,7 @@
         "caja": 540,
         "emoji": "📎",
         "venta": 2,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -4554,7 +4554,7 @@
         "caja": 1130,
         "emoji": "📎",
         "venta": 2,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -4568,7 +4568,7 @@
         "caja": 1320,
         "emoji": "📎",
         "venta": 2,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -4595,7 +4595,7 @@
         "caja": 636,
         "emoji": "📎",
         "venta": 2,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -4609,7 +4609,7 @@
         "caja": 1110,
         "emoji": "📎",
         "venta": 2,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -4623,7 +4623,7 @@
         "caja": 110,
         "emoji": "📎",
         "venta": 2,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -4637,7 +4637,7 @@
         "caja": 420,
         "emoji": "📎",
         "venta": 2,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -4651,7 +4651,7 @@
         "caja": 340,
         "emoji": "📎",
         "venta": 1,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -4665,7 +4665,7 @@
         "caja": 456,
         "emoji": "📎",
         "venta": 2,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -4679,7 +4679,7 @@
         "caja": 456,
         "emoji": "📎",
         "venta": 2,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -4693,7 +4693,7 @@
         "caja": 390,
         "emoji": "📎",
         "venta": 2,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -4707,7 +4707,7 @@
         "caja": 810,
         "emoji": "📎",
         "venta": 1,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -4721,7 +4721,7 @@
         "caja": 774,
         "emoji": "📎",
         "venta": 2,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -4735,7 +4735,7 @@
         "caja": 336,
         "emoji": "📎",
         "venta": 2,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -4749,7 +4749,7 @@
         "caja": 280,
         "emoji": "📎",
         "venta": 2,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -4763,7 +4763,7 @@
         "caja": 180,
         "emoji": "📎",
         "venta": 2,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -4777,7 +4777,7 @@
         "caja": 193,
         "emoji": "📎",
         "venta": 1,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -4791,7 +4791,7 @@
         "caja": 115.9,
         "emoji": "📎",
         "venta": 1,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -4805,7 +4805,7 @@
         "caja": 230,
         "emoji": "📎",
         "venta": 1,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -4832,7 +4832,7 @@
         "caja": 193.7,
         "emoji": "📎",
         "venta": 1,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -4846,7 +4846,7 @@
         "caja": 265,
         "emoji": "📎",
         "venta": 1,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -4860,7 +4860,7 @@
         "caja": 320,
         "emoji": "📎",
         "venta": 1,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -4874,7 +4874,7 @@
         "caja": 690,
         "emoji": "📎",
         "venta": 1,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -4888,7 +4888,7 @@
         "caja": 85.4,
         "emoji": "📎",
         "venta": 1,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -4902,7 +4902,7 @@
         "caja": 298,
         "emoji": "📎",
         "venta": 1,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -4916,7 +4916,7 @@
         "caja": 132,
         "emoji": "📎",
         "venta": 1,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -4930,7 +4930,7 @@
         "caja": 252,
         "emoji": "📎",
         "venta": 1,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -4997,7 +4997,7 @@
         "caja": 152,
         "emoji": "📎",
         "venta": 1,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -5011,7 +5011,7 @@
         "caja": 262,
         "emoji": "📎",
         "venta": 1,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -5025,7 +5025,7 @@
         "caja": 262,
         "emoji": "📎",
         "venta": 1,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -5039,7 +5039,7 @@
         "caja": 58,
         "emoji": "📎",
         "venta": 1,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -5053,7 +5053,7 @@
         "caja": 106,
         "emoji": "📎",
         "venta": 1,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -5067,7 +5067,7 @@
         "caja": 47,
         "emoji": "📎",
         "venta": 1,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -5081,7 +5081,7 @@
         "caja": 420,
         "emoji": "📎",
         "venta": 2,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -5095,7 +5095,7 @@
         "caja": 237.6,
         "emoji": "📎",
         "venta": 2,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -5109,7 +5109,7 @@
         "caja": 225.4,
         "emoji": "📎",
         "venta": 2,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -5123,7 +5123,7 @@
         "caja": 177.6,
         "emoji": "📎",
         "venta": 2,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -5137,7 +5137,7 @@
         "caja": 171.6,
         "emoji": "📎",
         "venta": 2,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -5151,7 +5151,7 @@
         "caja": 261.6,
         "emoji": "📎",
         "venta": 2,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -5165,7 +5165,7 @@
         "caja": 380.4,
         "emoji": "📎",
         "venta": 2,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -5192,7 +5192,7 @@
         "caja": 456,
         "emoji": "📎",
         "venta": 2,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -5206,7 +5206,7 @@
         "caja": 460,
         "emoji": "📎",
         "venta": 2,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -5220,7 +5220,7 @@
         "caja": 730,
         "emoji": "📎",
         "venta": 2,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -5234,7 +5234,7 @@
         "caja": 198,
         "emoji": "📎",
         "venta": 1,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -5248,7 +5248,7 @@
         "caja": 169,
         "emoji": "📎",
         "venta": 2,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -5262,7 +5262,7 @@
         "caja": 57,
         "emoji": "📎",
         "venta": 1,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -5276,7 +5276,7 @@
         "caja": 69,
         "emoji": "📎",
         "venta": 1,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -5290,7 +5290,7 @@
         "caja": 148,
         "emoji": "📎",
         "venta": 2,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -5304,7 +5304,7 @@
         "caja": 148,
         "emoji": "📎",
         "venta": 2,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -5332,7 +5332,7 @@
         "caja": 427,
         "emoji": "📎",
         "venta": 2,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -5346,7 +5346,7 @@
         "caja": 130.8,
         "emoji": "📎",
         "venta": 2,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -5360,7 +5360,7 @@
         "caja": 825,
         "emoji": "📎",
         "venta": 2,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -5374,7 +5374,7 @@
         "caja": 895,
         "emoji": "📎",
         "venta": 2,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -5388,7 +5388,7 @@
         "caja": 457.5,
         "emoji": "📎",
         "venta": 2,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -5402,7 +5402,7 @@
         "caja": 460,
         "emoji": "📎",
         "venta": 2,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -5416,7 +5416,7 @@
         "caja": 550,
         "emoji": "📎",
         "venta": 2,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -5430,7 +5430,7 @@
         "caja": 440,
         "emoji": "📎",
         "venta": 2,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -5444,7 +5444,7 @@
         "caja": 257.5,
         "emoji": "📎",
         "venta": 2,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -5458,7 +5458,7 @@
         "caja": 315,
         "emoji": "📎",
         "venta": 2,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -5472,7 +5472,7 @@
         "caja": 460,
         "emoji": "📎",
         "venta": 2,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -5486,7 +5486,7 @@
         "caja": 380,
         "emoji": "📎",
         "venta": 2,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -5500,7 +5500,7 @@
         "caja": 335,
         "emoji": "📎",
         "venta": 2,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -5514,7 +5514,7 @@
         "caja": 144,
         "emoji": "📎",
         "venta": 1,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -5528,7 +5528,7 @@
         "caja": 228,
         "emoji": "📎",
         "venta": 2,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -5542,7 +5542,7 @@
         "caja": 545,
         "emoji": "📎",
         "venta": 2,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -5556,7 +5556,7 @@
         "caja": 299,
         "emoji": "📎",
         "venta": 1,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -5570,7 +5570,7 @@
         "caja": 312,
         "emoji": "📎",
         "venta": 2,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -5584,7 +5584,7 @@
         "caja": 228,
         "emoji": "📎",
         "venta": 2,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -5611,7 +5611,7 @@
         "caja": 286.8,
         "emoji": "📎",
         "venta": 2,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
@@ -5625,7 +5625,7 @@
         "caja": 85,
         "emoji": "📎",
         "venta": 1,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
