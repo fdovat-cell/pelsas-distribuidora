@@ -343,8 +343,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 .vid-arrow{width:28px;height:28px;border-radius:50%;background:var(--red);color:#fff;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
 @media(max-width:720px){
   .vid-title{font-size:22px}
-  .vid-grid{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;margin:0 -1rem;padding:0 1rem 8px;-webkit-overflow-scrolling:touch}
-  .vid-card{flex:0 0 78%;scroll-snap-align:start}
+  .vid-grid{display:grid;grid-template-columns:1fr;gap:12px}
 }
 
 /* LIGHTBOX */
