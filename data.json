@@ -420,7 +420,7 @@
       "emoji": "🎁",
       "desc": "Regalería en general",
       "logo": "img/logo-regaleria.webp",
-      "activo": false,
+      "activo": true,
       "sintacc": false,
       "sinfoto": false
     },
