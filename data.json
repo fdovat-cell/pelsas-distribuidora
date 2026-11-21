@@ -316,7 +316,7 @@
       "emoji": "📎",
       "desc": "Artículos de oficina y papelería.",
       "logo": "",
-      "activo": false,
+      "activo": true,
       "sintacc": false
     },
     {
