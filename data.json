@@ -442,7 +442,7 @@
       "emoji": "🧸",
       "desc": "Peluches",
       "logo": "img/logo-peluches.webp",
-      "activo": false,
+      "activo": true,
       "sintacc": false,
       "sinfoto": false
     }
