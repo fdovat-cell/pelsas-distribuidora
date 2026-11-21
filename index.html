@@ -308,6 +308,40 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
 .prod-icon img{width:100%;height:100%;object-fit:contain;display:block;transform:scale(1.18);transform-origin:center;cursor:zoom-in}
 .no-photo{display:flex;align-items:center;justify-content:center;width:100%;height:100%;color:var(--light);background:var(--cream)}
 .cat-prod-card .no-photo{aspect-ratio:1;height:auto}
+.sec-group-hdr{grid-column:1/-1;display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin:18px 0 2px;padding-bottom:6px;border-bottom:1px solid var(--border);cursor:pointer}
+.sec-group-hdr:first-child{margin-top:4px}
+.sec-group-hdr span{font-family:'Playfair Display',serif;font-size:20px;font-weight:900;color:var(--ink)}
+.sec-group-hdr em{font-style:normal;font-size:11px;color:var(--mid);white-space:nowrap}
+.cat-tile{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:12px 10px;text-align:center;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:6px;transition:border-color .15s,transform .15s}
+.cat-tile:hover{border-color:var(--ink);transform:translateY(-1px)}
+.cat-tile-img{width:72px;height:72px;display:flex;align-items:center;justify-content:center;border-radius:8px;background:var(--cream);overflow:hidden}
+.cat-tile-img img{width:100%;height:100%;object-fit:contain;display:block}
+.cat-tile-img svg{width:32px;height:32px;color:var(--light)}
+.cat-tile-name{font-size:12px;font-weight:600;color:var(--ink);line-height:1.25;text-transform:capitalize}
+.cat-tile-n{font-size:10px;color:var(--mid)}
+.pg-more{grid-column:1/-1;text-align:center;padding:10px 0;font-size:12px;color:var(--mid)}
+/* Vidriera de Regalos en el home */
+.vid-wrap{margin:0 0 2rem}
+.vid-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:.9rem}
+.vid-title{font-family:'Playfair Display',serif;font-size:28px;font-weight:900;color:var(--ink);line-height:1.1}
+.vid-sub{font-size:12px;color:var(--mid);margin-top:3px}
+.vid-all{background:none;border:none;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;color:var(--red);cursor:pointer;white-space:nowrap;padding:0}
+.vid-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.vid-card{background:var(--white);border:1px solid var(--border);border-radius:14px;overflow:hidden;cursor:pointer;display:flex;flex-direction:column;transition:border-color .15s,transform .15s,box-shadow .15s}
+.vid-card:hover{border-color:var(--red);transform:translateY(-3px);box-shadow:0 8px 24px rgba(26,26,24,.08)}
+.vid-media{aspect-ratio:3/2;background:var(--cream);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.vid-media img{width:100%;height:100%;object-fit:cover;display:block}
+.vid-media img.contain{object-fit:contain;padding:10px;background:#fff}
+.vid-emoji{font-size:56px}
+.vid-body{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 14px}
+.vid-name{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--ink);line-height:1.2}
+.vid-n{font-size:11px;color:var(--mid);margin-top:2px}
+.vid-arrow{width:28px;height:28px;border-radius:50%;background:var(--red);color:#fff;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+@media(max-width:720px){
+  .vid-title{font-size:22px}
+  .vid-grid{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;margin:0 -1rem;padding:0 1rem 8px;-webkit-overflow-scrolling:touch}
+  .vid-card{flex:0 0 78%;scroll-snap-align:start}
+}
 
 /* LIGHTBOX */
 .lightbox{position:fixed;inset:0;background:rgba(0,0,0,.94);z-index:200;display:none;align-items:center;justify-content:center;touch-action:none;overflow:hidden}
@@ -1197,6 +1231,7 @@ const SECCIONES=[
   {id:'alimentos',label:'Alimentos &amp; Snacks',emoji:'🍬'},
   {id:'fumadores',label:'Papelería',emoji:'📎'},
   {id:'higiene',label:'Higiene',emoji:'🧴'},
+  {id:'regalos',label:'Regalos',emoji:'🎁'},
 ];
 const secInfo=sid=>SECCIONES.find(s=>s.id===sid)||{id:sid,label:sid,emoji:'🏷️'};
 function activeSecciones(){
@@ -1214,6 +1249,29 @@ const HERO_IMG_PC='img/frontpc.webp';
 const HERO_IMG_M='img/front-celular.webp';
 function renderHeroStage(){
   return`<div class="hero-board" onclick="goSection()"><picture><source media="(max-width:720px)" srcset="${HERO_IMG_M}"><img class="hero-board-img" src="${HERO_IMG_PC}" width="1200" height="900" alt="PelSAS Distribuidora: marcas y productos" fetchpriority="high" onerror="this.closest('picture').style.display='none'"></picture><div class="hero-bar"><span>Entrar a la distribuidora</span><span class="hero-bar-arrow">→</span></div></div>`;
+}
+
+/* Vidriera: foto vid-{id}.webp; si no existe usa la portada (logo) y si tampoco, el emoji */
+function vidImgErr(img){
+  if(img.dataset.logo&&!img.dataset.tried){img.dataset.tried='1';img.classList.add('contain');img.src=img.dataset.logo;return}
+  const sp=document.createElement('span');sp.className='vid-emoji';sp.textContent=img.dataset.e||'🎁';img.replaceWith(sp);
+}
+function renderVidriera(){
+  const bs=brands.filter(b=>b.sid==='regalos'&&b.activo!==false);
+  if(!bs.length)return'';
+  const sc=secInfo('regalos');
+  return`<div class="vid-wrap">
+      <div class="vid-head">
+        <div><div class="vid-title">${sc.emoji} ${sc.label}</div><div class="vid-sub">Regalería, bebés y peluches · se suman al mismo pedido</div></div>
+        <button class="vid-all" onclick="secFilter='regalos';goSection()">Ver todo →</button>
+      </div>
+      <div class="vid-grid">${bs.map(b=>{
+        const n=(products[b.id]||[]).filter(p=>p.activo!==false).length;
+        return`<div class="vid-card" onclick="goBrand('${b.id}')">
+          <div class="vid-media"><img src="img/vid-${b.id}.webp" alt="${b.name}" loading="lazy" data-logo="${b.logo||''}" data-e="${b.emoji||'🎁'}" onerror="vidImgErr(this)"></div>
+          <div class="vid-body"><div><div class="vid-name">${b.name}</div><div class="vid-n">${n} producto${n===1?'':'s'}</div></div><span class="vid-arrow">→</span></div>
+        </div>`}).join('')}</div>
+    </div>`;
 }
 
 function renderHome(){
@@ -1253,6 +1311,8 @@ function renderHome(){
       </div>
     </div>
 
+    ${renderVidriera()}
+
     <div class="promo-strip">
       <div class="promo-text">
         <div class="promo-title">Pedidos por WhatsApp, sin complicaciones</div>
@@ -1267,14 +1327,22 @@ function secBrandsList(){
   return brands.filter(b=>b.activo!==false&&(secFilter==='todas'||b.sid===secFilter));
 }
 function secMetaText(){return secBrandsList().length+' marcas disponibles · precios con IVA incluido'}
+function secTileHtml(b){
+  return`<div class="brand-tile-lg" onclick="goBrand('${b.id}')">
+        <img class="btl-logo${b.id==='elements'?' logo-elements':''}" src="${b.logo}" alt="${b.name}" onerror="this.outerHTML='<span class=\\'btl-emoji\\'>${b.emoji}</span>'">
+        <div class="btl-name">${b.name}</div>
+        <span class="btl-count">${b.url?'Ver catálogo ↗':(products[b.id]||[]).filter(p=>p.activo!==false).length+' productos'}</span>
+      </div>`;
+}
 function secBrandsGridHtml(){
   const list=secBrandsList();
   if(!list.length)return'<div class="empty-g">No hay marcas en esta sección.</div>';
-  return list.map(b=>`<div class="brand-tile-lg" onclick="goBrand('${b.id}')">
-        <img class="btl-logo${b.id==='elements'?' logo-elements':''}" src="${b.logo}" alt="${b.name}" onerror="this.outerHTML='<span class=\\'btl-emoji\\'>${b.emoji}</span>'">
-        <div class="btl-name">${b.name}</div>
-        <span class="btl-count">${b.url?'Ver catálogo ↗':(products[b.id]||[]).length+' productos'}</span>
-      </div>`).join('');
+  if(secFilter!=='todas')return list.map(secTileHtml).join('');
+  return activeSecciones().map(sc=>{
+    const bs=list.filter(b=>b.sid===sc.id);
+    if(!bs.length)return'';
+    return`<div class="sec-group-hdr" onclick="setSecFilter('${sc.id}')"><span>${sc.emoji} ${sc.label}</span><em>${bs.length} marcas · ver solo esta sección →</em></div>${bs.map(secTileHtml).join('')}`;
+  }).join('');
 }
 function secChipsHtml(){
   const secs=activeSecciones();
@@ -1306,6 +1374,7 @@ function renderBrandPage(){
   const bsubs=Array.isArray(b.subcats)?b.subcats:[];
   const usedC=new Set(ps.filter(p=>p.activo!==false).map(p=>p.cat).filter(Boolean));
   const cats=['todos',...bsubs.filter(c=>usedC.has(c)),...[...usedC].filter(c=>!bsubs.includes(c))];
+  const manyCats=brandManyCats(curBrand);
   const secLabel='Marcas';
   const secFn='goSection()';
   const bName=b.name;const bEmoji=b.emoji;
@@ -1317,16 +1386,34 @@ function renderBrandPage(){
     <div class="toolbar">
       <div class="search-wrap">
         <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="7" cy="7" r="5" stroke="#B0AA9E" stroke-width="1.5"/><path d="m11 11 3 3" stroke="#B0AA9E" stroke-width="1.5" stroke-linecap="round"/></svg>
-        <input type="text" id="sinput" placeholder="Buscar por nombre o artículo..." oninput="reGrid()">
+        <input type="text" id="sinput" placeholder="Buscar por nombre o artículo..." oninput="catShown=PG_STEP;reGrid()">
       </div>
       <div class="filters">
-        ${cats.map(c=>`<button class="fbtn${activeFilter===c?' active':''}" onclick="setF(this.dataset.f,this)" data-f="${String(c).replace(/&/g,'&amp;').replace(/"/g,'&quot;')}">${c==='baja rotacion'?'consultar disp.':c}</button>`).join('')}
+        ${manyCats?catBarHtml():cats.map(c=>`<button class="fbtn${activeFilter===c?' active':''}" onclick="setF(this.dataset.f,this)" data-f="${String(c).replace(/&/g,'&amp;').replace(/"/g,'&quot;')}">${c==='baja rotacion'?'consultar disp.':c}</button>`).join('')}
       </div>
     </div>
     <div class="${gridCls(curBrand)}" id="pgrid">${gridHtml(getFiltered(ps),curBrand)}</div>
   </div>`;
 }
 
+/* Marcas con muchas categorías (ej. Papelería General): se entra por una grilla de categorías */
+const MANY_CATS=16,PG_STEP=60;
+let catShown=PG_STEP;
+function brandCats(bid){
+  const m=new Map();
+  (products[bid]||[]).forEach(p=>{if(p.activo===false||!p.cat)return;const e=m.get(p.cat)||{n:0,img:''};e.n++;if(!e.img&&p.v2&&p.img)e.img=p.img;m.set(p.cat,e)});
+  return m;
+}
+const brandManyCats=bid=>brandCats(bid).size>MANY_CATS;
+function catTilesHtml(bid){
+  const arr=[...brandCats(bid)].sort((a,b)=>a[0].localeCompare(b[0],'es'));
+  const esc=t=>String(t).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');
+  return arr.map(([c,e])=>`<div class="cat-tile" data-f="${esc(c)}" onclick="setCatF(this.dataset.f)"><div class="cat-tile-img">${e.img?`<img src="${esc(e.img)}" loading="lazy" alt="" onerror="noPhoto(this)">`:CLIP_SVG}</div><div class="cat-tile-name">${esc(c)}</div><div class="cat-tile-n">${e.n} producto${e.n===1?'':'s'}</div></div>`).join('');
+}
+function catBarHtml(){
+  return activeFilter==='todos'?'':`<button class="fbtn" onclick="setCatF('todos')">← Todas las categorías</button><button class="fbtn active" style="text-transform:capitalize">${String(activeFilter).replace(/</g,'&lt;')}</button>`;
+}
+function setCatF(c){activeFilter=c;catShown=PG_STEP;render();window.scrollTo(0,0)}
 function getFiltered(ps){
   const q=((document.getElementById('sinput')||{}).value||'').toLowerCase();
   return ps.filter(p=>{
@@ -1342,6 +1429,13 @@ const cardsFor=bid=>isSinFoto(bid)?renderCardsLista:renderCards;
 const gridCls=bid=>isSinFoto(bid)?'prod-grid lista':'prod-grid';
 function gridHtml(list,bid){
   const fn=cardsFor(bid);
+  if(brandManyCats(bid)){
+    const q=((document.getElementById('sinput')||{}).value||'').trim();
+    if(activeFilter==='todos'&&!q)return catTilesHtml(bid);
+    const shown=list.slice(0,catShown);
+    const more=list.length>catShown?`<div class="pg-more">Mostrando ${catShown} de ${list.length}<br><button class="fbtn" style="margin-top:6px" onclick="catShown+=PG_STEP;reGrid()">Mostrar más</button></div>`:'';
+    return fn(shown,bid)+more;
+  }
   return activeFilter==='todos'?renderCardsGrouped(list,bid,fn,'sub-hdr',true):fn(list,bid);
 }
 function renderCardsLista(filtered,bid){
@@ -1430,7 +1524,7 @@ function renderFumadores(){
 
 function goHome(){view='home';curBrand=null;activeFilter='todos';secFilter='todas';render()}
 function goSection(){view='section';render()}
-function goBrand(id){const b=getBrand(id);if(b&&b.url){location.href=b.url;return}view='brand';curBrand=id;activeFilter='todos';render()}
+function goBrand(id){const b=getBrand(id);if(b&&b.url){location.href=b.url;return}view='brand';curBrand=id;activeFilter='todos';catShown=PG_STEP;render()}
 function goFumadores(){view='fumadores';render()}
 function goMarcas(){goSection()}
 function setF(f,btn){activeFilter=f;document.querySelectorAll('.fbtn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');reGrid()}
