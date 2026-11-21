@@ -412,6 +412,39 @@
       "sintacc": false,
       "sinfoto": false,
       "url": "https://pelsas-papeleria.pages.dev/"
+    },
+    {
+      "id": "regaleria",
+      "sid": "regalos",
+      "name": "Regalería",
+      "emoji": "🎁",
+      "desc": "Regalería en general",
+      "logo": "img/logo-regaleria.webp",
+      "activo": false,
+      "sintacc": false,
+      "sinfoto": false
+    },
+    {
+      "id": "bebes",
+      "sid": "regalos",
+      "name": "Bebés y primera infancia",
+      "emoji": "🍼",
+      "desc": "Artículos de primera infancia",
+      "logo": "img/logo-bebes.webp",
+      "activo": false,
+      "sintacc": false,
+      "sinfoto": false
+    },
+    {
+      "id": "peluches",
+      "sid": "regalos",
+      "name": "Peluches",
+      "emoji": "🧸",
+      "desc": "Peluches",
+      "logo": "img/logo-peluches.webp",
+      "activo": false,
+      "sintacc": false,
+      "sinfoto": false
     }
   ],
   "products": {
@@ -30344,6 +30377,24 @@
             "cat": "caramelos"
           }
         ]
+      }
+    ],
+    "regaleria": [],
+    "bebes": [],
+    "peluches": [
+      {
+        "id": "peluches_1795272405235",
+        "name": "Pingüino",
+        "unit": 98,
+        "caja": 98,
+        "cat": "",
+        "art": "3722",
+        "present": "X UNIDAD",
+        "emoji": "📦",
+        "venta": 1,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true
       }
     ]
   }
