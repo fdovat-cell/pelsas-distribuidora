@@ -306,6 +306,10 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
   overflow:hidden;
 }
 .prod-icon img{width:100%;height:100%;object-fit:contain;display:block;transform:scale(1.18);transform-origin:center;cursor:zoom-in}
+/* Marcas con fotos apaisadas (Bebés, Peluches): tarjetas más anchas y foto más grande */
+.prod-grid.wide{grid-template-columns:repeat(auto-fill,minmax(270px,1fr))}
+.prod-grid.wide .prod-icon{height:auto;aspect-ratio:8/5}
+.prod-grid.wide .prod-icon img{transform:scale(1.25)}
 .no-photo{display:flex;align-items:center;justify-content:center;width:100%;height:100%;color:var(--light);background:var(--cream)}
 .cat-prod-card .no-photo{aspect-ratio:1;height:auto}
 .sec-group-hdr{grid-column:1/-1;display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin:18px 0 2px;padding-bottom:6px;border-bottom:1px solid var(--border);cursor:pointer}
@@ -572,6 +576,9 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
   .prod-grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
   .prod-card{padding:.75rem;gap:7px;border-radius:11px}
   .prod-icon{height:170px;font-size:42px;border-radius:8px}
+  .prod-grid.wide{grid-template-columns:repeat(2,1fr)}
+  .prod-grid.wide .prod-icon{height:auto;aspect-ratio:4/3}
+  .prod-grid.wide .prod-icon img{object-fit:cover;transform:scale(1.12)}
   .prod-art{font-size:9px}
   .prod-name{font-size:12px;line-height:1.25}
   .prod-present{font-size:10px}
@@ -1299,6 +1306,8 @@ function renderHome(){
       </div>
     </div>
 
+    ${renderVidriera()}
+
     <div class="home-mobile-only home-mobile-pago" style="background:var(--cream);border:1px solid var(--border);border-radius:14px;display:none;align-items:center;gap:14px;padding:14px 18px;margin-bottom:1.5rem;">
       <div class="home-banner-icon">💳</div>
       <div class="home-banner-texts">
@@ -1310,8 +1319,6 @@ function renderHome(){
         </div>
       </div>
     </div>
-
-    ${renderVidriera()}
 
     <div class="promo-strip">
       <div class="promo-text">
@@ -1426,7 +1433,8 @@ function getFiltered(ps){
 
 const isSinFoto=bid=>!!(getBrand(bid)||{}).sinfoto;
 const cardsFor=bid=>isSinFoto(bid)?renderCardsLista:renderCards;
-const gridCls=bid=>isSinFoto(bid)?'prod-grid lista':'prod-grid';
+const WIDE_BRANDS=['bebes','peluches'];
+const gridCls=bid=>isSinFoto(bid)?'prod-grid lista':('prod-grid'+(WIDE_BRANDS.includes(bid)?' wide':''));
 function gridHtml(list,bid){
   const fn=cardsFor(bid);
   if(brandManyCats(bid)){
