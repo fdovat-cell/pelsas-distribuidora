@@ -375,6 +375,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);m
           <option value="alimentos">Alimentos &amp; Snacks</option>
           <option value="fumadores">Papelería</option>
           <option value="higiene">Higiene</option>
+          <option value="regalos">Regalos</option>
         </select>
       </div>
     </div>
@@ -534,7 +535,26 @@ const SECCIONES = [
   { id: 'alimentos', label: 'Alimentos', emoji: '🍬' },
   { id: 'fumadores', label: 'Papelería', emoji: '📌' },
   { id: 'higiene',   label: 'Higiene',   emoji: '🧴' },
+  { id: 'regalos',   label: 'Regalos',   emoji: '🎁' },
 ];
+// Crea de una vez las 3 áreas de Regalos (desactivadas hasta que tengan productos y foto)
+function createRegalos() {
+  if (data.brands.some(b => b.sid === 'regalos')) return;
+  const nuevas = [
+    { id: 'regaleria', name: 'Regalería',               emoji: '🎁', desc: 'Regalería en general' },
+    { id: 'bebes',     name: 'Bebés y primera infancia', emoji: '🍼', desc: 'Artículos de primera infancia' },
+    { id: 'peluches',  name: 'Peluches',                emoji: '🧸', desc: 'Peluches' },
+  ];
+  nuevas.forEach(n => {
+    if (data.brands.some(b => b.id === n.id)) return;
+    data.brands.push({ id: n.id, sid: 'regalos', name: n.name, emoji: n.emoji, desc: n.desc,
+      logo: 'img/logo-' + n.id + '.webp', activo: false, sintacc: false, sinfoto: false });
+    if (!Array.isArray(data.products[n.id])) data.products[n.id] = [];
+  });
+  markUnsaved();
+  renderSidebar();
+  alert('Se crearon Regalería, Bebés y primera infancia y Peluches (desactivadas).\nSubí las fotos de portada, cargá los productos y activá cada una.\nApretá Guardar para publicar.');
+}
 function seccionesEnUso() {
   const used = new Set(data.brands.map(b => b.sid));
   const known = SECCIONES.filter(s => used.has(s.id));
@@ -551,6 +571,9 @@ function renderSidebar() {
     <button class="brand-btn" onclick="openBrandModal(null,'alimentos')">
       <span>➕</span><span>Nueva marca</span>
     </button>
+    ${data.brands.some(b => b.sid === 'regalos') ? '' : `<button class="brand-btn" onclick="createRegalos()">
+      <span>🎁</span><span>Crear sección Regalos</span>
+    </button>`}
     <button class="brand-btn${view==='orden'?' active':''}" onclick="goTool('orden')">
       <span>↕️</span><span>Orden de marcas</span>
     </button>
