@@ -322,7 +322,7 @@ function cut(g,t,w){
 }
 function resumenImg(pl){
   try{
-    var W=800,PAD=32,RH=36,n=pl.items.length;
+    var W=800,PAD=32,RH=58,n=pl.items.length;
     var H=230+n*RH+(pl.nota?36:0);
     var c=document.createElement('canvas');c.width=W;c.height=H;
     var g=c.getContext('2d');if(!g)return '';
@@ -336,9 +336,11 @@ function resumenImg(pl){
     if(pl.nota){g.fillText(cut(g,'Nota: '+pl.nota,W-2*PAD),PAD,y);y+=30}
     y+=8;g.fillStyle='#1A1A18';g.fillRect(PAD,y,W-2*PAD,2);y+=30;
     pl.items.forEach(function(it){
-      g.fillStyle='#1A1A18';g.textAlign='left';
+      g.font='20px Helvetica,Arial,sans-serif';g.fillStyle='#1A1A18';g.textAlign='left';
       g.fillText(cut(g,it.qty+' × '+it.name,W-2*PAD-150),PAD,y);
       g.textAlign='right';g.fillText(fmt(it.sub),W-PAD,y);
+      var d2=[];if(it.art)d2.push('Art. '+it.art);if(it.present)d2.push(it.present);
+      if(d2.length){g.font='15px Helvetica,Arial,sans-serif';g.fillStyle='#7A7468';g.textAlign='left';g.fillText(cut(g,d2.join(' · '),W-2*PAD-150),PAD,y+21)}
       y+=RH;
     });
     y+=2;g.fillStyle='#1A1A18';g.fillRect(PAD,y-22,W-2*PAD,2);y+=22;
@@ -350,7 +352,7 @@ function mailText(pl){
   var t=['Pedido PelSAS','Cliente: '+pl.cliente,'Fecha: '+pl._f];
   if(pl.nota)t.push('Nota: '+pl.nota);
   t.push('');
-  pl.items.forEach(function(it){t.push(it.qty+' x '+it.name+' (Art. '+it.art+') - '+fmt(it.sub))});
+  pl.items.forEach(function(it){t.push(it.qty+' x '+it.name+' (Art. '+it.art+(it.present?' · '+it.present:'')+') - '+fmt(it.sub))});
   t.push('');t.push('Total: '+fmt(pl.total));
   return t.join('\n');
 }
@@ -360,7 +362,7 @@ function viewRevisar(){
   var h='<a class="back" href="#pedido">‹ Volver a editar</a><h1>Revisar pedido</h1>'+msgHtml()+
     '<p><b>Cliente:</b> '+esc(pl.cliente)+(pl.nota?'<br><b>Nota:</b> '+esc(pl.nota):'')+'</p>';
   pl.items.forEach(function(it){
-    h+='<div class="row"><div class="inf"><div class="nm2">'+it.qty+' × '+esc(it.name)+'</div><div class="sub">Art. '+esc(it.art)+'</div></div><div class="pr" style="display:block"><b>'+fmt(it.sub)+'</b></div></div>';
+    h+='<div class="row"><div class="inf"><div class="nm2">'+it.qty+' × '+esc(it.name)+'</div><div class="sub">Art. '+esc(it.art)+(it.present?' · '+esc(it.present):'')+'</div></div><div class="pr" style="display:block"><b>'+fmt(it.sub)+'</b></div></div>';
   });
   h+='<div class="tot">Total '+fmt(pl.total)+'</div>'+
     '<button class="btn red" id="bsend" data-act="enviar">Enviar pedido</button>'+

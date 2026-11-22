@@ -97,7 +97,7 @@ async function estado(id,e){
 }
 
 function lienzo(p){
-  const W=800,PAD=32,RH=36,n=p.items.length,H=230+n*RH+(p.nota?36:0);
+  const W=800,PAD=32,RH=58,n=p.items.length,H=230+n*RH+(p.nota?36:0);
   const c=document.createElement('canvas');c.width=W;c.height=H;const g=c.getContext('2d');
   const cut=(t,w)=>{if(g.measureText(t).width<=w)return t;while(t.length>1&&g.measureText(t+'…').width>w)t=t.slice(0,-1);return t+'…'};
   g.fillStyle='#fff';g.fillRect(0,0,W,H);
@@ -107,7 +107,12 @@ function lienzo(p){
   g.fillText('Fecha: '+fecha(p.creado),PAD,y);y+=30;
   if(p.nota){g.fillText(cut('Nota: '+p.nota,W-2*PAD),PAD,y);y+=30}
   y+=8;g.fillStyle='#1A1A18';g.fillRect(PAD,y,W-2*PAD,2);y+=30;
-  p.items.forEach(it=>{g.textAlign='left';g.fillText(cut(it.qty+' × '+it.name,W-2*PAD-150),PAD,y);g.textAlign='right';g.fillText(fmt(it.sub),W-PAD,y);y+=RH});
+  p.items.forEach(it=>{
+    g.font='20px Helvetica,Arial,sans-serif';g.fillStyle='#1A1A18';g.textAlign='left';
+    g.fillText(cut(it.qty+' × '+it.name,W-2*PAD-150),PAD,y);g.textAlign='right';g.fillText(fmt(it.sub),W-PAD,y);
+    const d2=[];if(it.art)d2.push('Art. '+it.art);if(it.present)d2.push(it.present);
+    if(d2.length){g.font='15px Helvetica,Arial,sans-serif';g.fillStyle='#7A7468';g.textAlign='left';g.fillText(cut(d2.join(' · '),W-2*PAD-150),PAD,y+21)}
+    y+=RH});
   y+=2;g.fillRect(PAD,y-22,W-2*PAD,2);y+=22;
   g.font='bold 28px Georgia,serif';g.textAlign='right';g.fillText('Total '+fmt(p.total),W-PAD,y);
   return c;
