@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>PelSAS · Pedidos del iPad</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#F5F0E8;color:#1A1A18;font:16px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+header{background:#1A1A18;color:#F5F0E8;padding:12px 18px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+header h1{font:bold 22px Georgia,serif;margin:0;flex:1}
+main{max-width:900px;margin:0 auto;padding:16px}
+button,.btn{font:inherit;border:0;border-radius:8px;padding:10px 16px;background:#1A1A18;color:#fff;cursor:pointer}
+button.red{background:#B02020}
+button.ghost{background:#fff;color:#1A1A18;border:1px solid #C8C2B4}
+input{font:inherit;width:100%;padding:12px;border:1px solid #C8C2B4;border-radius:8px;margin-bottom:12px;background:#fff}
+.card{background:#fff;border:1px solid #D8D2C6;border-radius:10px;margin-bottom:12px;overflow:hidden}
+.card.nuevo{border-left:6px solid #B02020}
+.card.procesado{border-left:6px solid #3B7D3B;opacity:.85}
+.card.anulado{border-left:6px solid #999;opacity:.6}
+.hd{padding:12px 14px;display:flex;gap:12px;align-items:center;cursor:pointer}
+.hd .c{flex:1;min-width:0}
+.hd b{font-size:18px}
+.hd small{color:#7A7468;display:block}
+.tag{font-size:13px;padding:3px 10px;border-radius:12px;background:#F8EDED;color:#8A1818}
+.procesado .tag{background:#E8F1E5;color:#245024}.anulado .tag{background:#eee;color:#555}
+.bd{display:none;padding:0 14px 14px;border-top:1px solid #EDE8DF}
+.card.open .bd{display:block}
+table{width:100%;border-collapse:collapse;margin:10px 0}
+td{padding:6px 4px;border-bottom:1px solid #EDE8DF;vertical-align:top}
+td:last-child{text-align:right;white-space:nowrap}
+.acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.tabs{display:flex;gap:8px;margin:0 0 14px;flex-wrap:wrap}
+.msg{padding:12px;border-radius:8px;background:#F8EDED;color:#8A1818;margin-bottom:12px}
+.muted{color:#7A7468}
+</style>
+</head>
+<body>
+<header><h1>Pedidos del iPad</h1><span id="who" class="muted"></span><button class="ghost" id="rf" style="display:none">Actualizar</button><button class="ghost" id="out" style="display:none">Salir</button></header>
+<main id="m"></main>
+<script>
+/* ===== CONFIGURACION ===== */
+const SUPA_URL='https://xxlgsipmocwizhafinwr.supabase.co';
+const SUPA_KEY='sb_publishable_tdrE1iMSnvMIMUGLnHz4wg_6r070C_H';   // la misma clave anon que en ipad.html
+/* ========================= */
+const SK='pelsas_pedidos_sesion';
+let ses=null, rows=[], filtro='nuevo', abiertos={}, msg='', timer=null;
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const fmt=n=>'$'+Number(n).toLocaleString('es-UY',{minimumFractionDigits:2,maximumFractionDigits:2});
+const fecha=t=>new Date(t).toLocaleString('es-UY',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'});
+
+async function api(path,opt={},auth=true){
+  const h={apikey:SUPA_KEY,'Content-Type':'application/json',...(opt.headers||{})};
+  if(auth&&ses)h.Authorization='Bearer '+ses.access_token;
+  return fetch(SUPA_URL+path,{...opt,headers:h});
+}
+async function login(email,pass){
+  const r=await api('/auth/v1/token?grant_type=password',{method:'POST',body:JSON.stringify({email,password:pass})},false);
+  const j=await r.json();
+  if(!r.ok)throw new Error(j.error_description||j.msg||'No se pudo entrar');
+  ses={access_token:j.access_token,refresh_token:j.refresh_token,email:j.user&&j.user.email};
+  localStorage.setItem(SK,JSON.stringify(ses));
+}
+async function refresh(){
+  if(!ses)return false;
+  const r=await api('/auth/v1/token?grant_type=refresh_token',{method:'POST',body:JSON.stringify({refresh_token:ses.refresh_token})},false);
+  if(!r.ok)return false;
+  const j=await r.json();
+  ses={access_token:j.access_token,refresh_token:j.refresh_token,email:ses.email};
+  localStorage.setItem(SK,JSON.stringify(ses));return true;
+}
+async function call(path,opt){
+  let r=await api(path,opt);
+  if(r.status===401&&await refresh())r=await api(path,opt);
+  if(r.status===401){logout();throw new Error('La sesión venció. Entrá de nuevo.')}
+  return r;
+}
+function logout(){ses=null;localStorage.removeItem(SK);clearInterval(timer);render()}
+
+async function cargar(){
+  try{
+    const r=await call('/rest/v1/pedidos_ipad?select=*&order=creado.desc&limit=200');
+    if(!r.ok)throw new Error('Error '+r.status);
+    rows=await r.json();msg='';
+  }catch(e){msg=e.message}
+  render();
+}
+async function estado(id,e){
+  try{
+    const r=await call('/rest/v1/pedidos_ipad?id=eq.'+id,{method:'PATCH',headers:{Prefer:'return=minimal'},body:JSON.stringify({estado:e})});
+    if(!r.ok)throw new Error('No se pudo actualizar ('+r.status+')');
+    const o=rows.find(x=>x.id===id);if(o)o.estado=e;msg='';
+  }catch(er){msg=er.message}
+  render();
+}
+
+function lienzo(p){
+  const W=800,PAD=32,RH=36,n=p.items.length,H=230+n*RH+(p.nota?36:0);
+  const c=document.createElement('canvas');c.width=W;c.height=H;const g=c.getContext('2d');
+  const cut=(t,w)=>{if(g.measureText(t).width<=w)return t;while(t.length>1&&g.measureText(t+'…').width>w)t=t.slice(0,-1);return t+'…'};
+  g.fillStyle='#fff';g.fillRect(0,0,W,H);
+  g.fillStyle='#1A1A18';g.font='bold 34px Georgia,serif';g.fillText('PelSAS · Pedido',PAD,58);
+  g.font='20px Helvetica,Arial,sans-serif';g.fillStyle='#3D3B36';let y=98;
+  g.fillText(cut('Cliente: '+p.cliente,W-2*PAD),PAD,y);y+=30;
+  g.fillText('Fecha: '+fecha(p.creado),PAD,y);y+=30;
+  if(p.nota){g.fillText(cut('Nota: '+p.nota,W-2*PAD),PAD,y);y+=30}
+  y+=8;g.fillStyle='#1A1A18';g.fillRect(PAD,y,W-2*PAD,2);y+=30;
+  p.items.forEach(it=>{g.textAlign='left';g.fillText(cut(it.qty+' × '+it.name,W-2*PAD-150),PAD,y);g.textAlign='right';g.fillText(fmt(it.sub),W-PAD,y);y+=RH});
+  y+=2;g.fillRect(PAD,y-22,W-2*PAD,2);y+=22;
+  g.font='bold 28px Georgia,serif';g.textAlign='right';g.fillText('Total '+fmt(p.total),W-PAD,y);
+  return c;
+}
+async function imagen(id){
+  const p=rows.find(x=>x.id===id);if(!p)return;
+  const blob=await new Promise(r=>lienzo(p).toBlob(r,'image/png'));
+  const nombre='pedido-'+p.id+'-'+p.cliente.replace(/[^\w]+/g,'_')+'.png';
+  const f=new File([blob],nombre,{type:'image/png'});
+  if(navigator.canShare&&navigator.canShare({files:[f]})){
+    try{await navigator.share({files:[f],title:'Pedido '+p.cliente});return}catch(e){if(e.name==='AbortError')return}
+  }
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=nombre;a.click();
+}
+
+function card(p){
+  const open=abiertos[p.id];
+  const it=p.items.map(i=>`<tr><td>${i.qty} × ${esc(i.name)}<br><small class="muted">Art. ${esc(i.art)} · ${esc(i.present||'')}</small></td><td>${fmt(i.sub)}</td></tr>`).join('');
+  const bt=p.estado==='nuevo'
+    ?`<button class="red" data-e="procesado" data-id="${p.id}">Marcar procesado</button><button class="ghost" data-e="anulado" data-id="${p.id}">Anular</button>`
+    :`<button class="ghost" data-e="nuevo" data-id="${p.id}">Volver a “nuevo”</button>`;
+  return `<div class="card ${p.estado}${open?' open':''}"><div class="hd" data-t="${p.id}"><div class="c"><b>${esc(p.cliente)}</b><small>#${p.id} · ${fecha(p.creado)} · ${p.items.length} ítems</small></div><b>${fmt(p.total)}</b><span class="tag">${p.estado}</span></div>
+  <div class="bd">${p.nota?`<p><b>Nota:</b> ${esc(p.nota)}</p>`:''}<table>${it}</table><div class="acts"><button data-i="${p.id}">Imagen del pedido</button>${bt}</div></div></div>`;
+}
+function render(){
+  const m=$('m');$('who').textContent=ses?ses.email||'':'';$('out').style.display=$('rf').style.display=ses?'':'none';
+  if(SUPA_KEY.startsWith('PEGAR')){m.innerHTML='<div class="msg">Falta pegar la clave anon de Supabase dentro de pedidos.html.</div>';return}
+  if(!ses){
+    m.innerHTML=`${msg?`<div class="msg">${esc(msg)}</div>`:''}<h2>Entrar</h2><input id="em" type="email" placeholder="Mail" autocomplete="username"><input id="pw" type="password" placeholder="Contraseña" autocomplete="current-password"><button class="red" id="go">Entrar</button>`;
+    $('go').onclick=async()=>{try{await login($('em').value.trim(),$('pw').value);msg='';await cargar();timer=setInterval(cargar,30000)}catch(e){msg=e.message;render()}};
+    return;
+  }
+  const n=e=>rows.filter(r=>r.estado===e).length;
+  const tabs=['nuevo','procesado','anulado','todos'].map(t=>`<button class="${filtro===t?'':'ghost'}" data-f="${t}">${t[0].toUpperCase()+t.slice(1)}${t==='todos'?'':' ('+n(t)+')'}</button>`).join('');
+  const lista=rows.filter(r=>filtro==='todos'||r.estado===filtro);
+  m.innerHTML=`${msg?`<div class="msg">${esc(msg)}</div>`:''}<div class="tabs">${tabs}</div>${lista.length?lista.map(card).join(''):'<p class="muted">No hay pedidos en esta lista.</p>'}`;
+}
+document.addEventListener('click',e=>{
+  const t=e.target.closest('[data-f],[data-t],[data-e],[data-i]');if(!t)return;
+  if(t.dataset.f){filtro=t.dataset.f;render()}
+  else if(t.dataset.e)estado(+t.dataset.id,t.dataset.e);
+  else if(t.dataset.i)imagen(+t.dataset.i);
+  else if(t.dataset.t){abiertos[t.dataset.t]=!abiertos[t.dataset.t];render()}
+});
+$('out').onclick=logout;$('rf').onclick=cargar;
+try{ses=JSON.parse(localStorage.getItem(SK)||'null')}catch(e){}
+render();
+if(ses){cargar();timer=setInterval(cargar,30000)}
+</script>
+</body>
+</html>
