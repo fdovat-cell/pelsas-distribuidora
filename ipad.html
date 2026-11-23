@@ -109,7 +109,7 @@ var SUPA_KEY='sb_publishable_tdrE1iMSnvMIMUGLnHz4wg_6r070C_H';   /* Supabase > S
 
 var STORE='pelsas_ipad_pedido_v1';
 var PAGE=30;
-var IMG='img-ipad/p/', BIMG='img-ipad/b/';
+var IMG='img-ipad/p/', BIMG='img-ipad/b/', IMGV='?v=2';
 var SECCIONES=[['alimentos','Alimentos'],['fumadores','Fumadores'],['regalos','Regalos']];
 
 var brands=[], P={}, BYID={}, ALL=[];
@@ -129,6 +129,7 @@ function fmt(n){
   var a=Math.abs(n).toFixed(2).split('.');
   return (n<0?'-':'')+'$'+a[0].replace(/\B(?=(\d{3})+(?!\d))/g,'.')+','+a[1];
 }
+function seguro(a){return String(a).replace(/[^A-Za-z0-9_.-]/g,'_')}
 function cap(s){s=String(s||'');return s.charAt(0).toUpperCase()+s.slice(1)}
 function pad(n){return n<10?'0'+n:''+n}
 function fechaStr(){var d=new Date();return pad(d.getDate())+'/'+pad(d.getMonth()+1)+'/'+d.getFullYear()+' '+pad(d.getHours())+':'+pad(d.getMinutes())}
@@ -216,7 +217,7 @@ function stepper(id,q){
     '<button class="plus" data-act="plus" data-id="'+esc(id)+'">+</button></div>';
 }
 function photo(p){
-  return '<button class="ph" data-zoom="'+esc(p.art)+'" data-name="'+esc(p.name)+'"><img src="'+IMG+encodeURIComponent(p.art)+'.jpg" alt="" onerror="phErr(this)"></button>';
+  return '<button class="ph" data-zoom="'+esc(p.art)+'" data-name="'+esc(p.name)+'"><img src="'+IMG+seguro(p.art)+'.jpg'+IMGV+'" alt="" onerror="phErr(this)"></button>';
 }
 function subline(p){
   var s=[];if(p.art)s.push('Art. '+esc(p.art));if(p.present)s.push(esc(p.present));
@@ -227,7 +228,7 @@ function rowHtml(p){
   var sec='';
   if(p.caja!==p.unit)sec=p.venta===1?'Pack: '+fmt(p.caja):'Unidad: '+fmt(p.unit);
   return '<div class="fc'+(q?' in':'')+'" data-row="'+esc(p.id)+'"><div class="fci">'+
-    '<div class="fph" data-zoom="'+esc(p.art)+'" data-name="'+esc(p.name)+'"><img src="'+IMG+encodeURIComponent(p.art)+'.jpg" alt="" onerror="phErr(this)"></div>'+
+    '<div class="fph" data-zoom="'+esc(p.art)+'" data-name="'+esc(p.name)+'"><img src="'+IMG+seguro(p.art)+'.jpg'+IMGV+'" alt="" onerror="phErr(this)"></div>'+
     (p.art?'<div class="fart">Art. '+esc(p.art)+'</div>':'')+
     '<div class="fnm">'+esc(p.name)+'</div>'+
     (p.present?'<div class="fpk">'+esc(p.present)+'</div>':'')+
@@ -487,7 +488,7 @@ document.addEventListener('click',function(e){
   if(t){UI.cat=t.getAttribute('data-cat');UI.shown=PAGE;route(true);return}
   t=up(e.target,'data-zoom');
   if(t){
-    $('zimg').src=IMG+encodeURIComponent(t.getAttribute('data-zoom'))+'.jpg';
+    $('zimg').src=IMG+seguro(t.getAttribute('data-zoom'))+'.jpg'+IMGV;
     $('zcap').textContent=t.getAttribute('data-name')||'';
     $('zoom').style.display='block';return;
   }
