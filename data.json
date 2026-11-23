@@ -144,6 +144,17 @@
       ]
     },
     {
+      "id": "jugosenpolvo",
+      "sid": "alimentos",
+      "name": "Jugos en polvo",
+      "emoji": "📦",
+      "desc": "Jugos en polvo",
+      "logo": "img/logo-jugosenpolvo.webp",
+      "activo": true,
+      "sintacc": false,
+      "sinfoto": false
+    },
+    {
       "id": "barquilandia",
       "sid": "alimentos",
       "name": "Barquilandia",
@@ -451,17 +462,6 @@
       "emoji": "🧸",
       "desc": "Peluches",
       "logo": "img/logo-peluches.webp",
-      "activo": true,
-      "sintacc": false,
-      "sinfoto": false
-    },
-    {
-      "id": "jugosenpolvo",
-      "sid": "alimentos",
-      "name": "Jugos en polvo",
-      "emoji": "📦",
-      "desc": "Jugos en polvo",
-      "logo": "img/logo-jugosenpolvo.webp",
       "activo": true,
       "sintacc": false,
       "sinfoto": false
@@ -35921,6 +35921,35 @@
         "activo": true
       }
     ],
-    "jugosenpolvo": []
+    "jugosenpolvo": [
+      {
+        "id": "jugosenpolvo_1795462295006",
+        "name": "Jugo CLiGHT 1LT X 20 sobres",
+        "unit": 26.8,
+        "caja": 536,
+        "cat": "",
+        "art": "7315",
+        "present": "caja x 20u.",
+        "emoji": "📦",
+        "venta": 2,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true
+      },
+      {
+        "id": "jugosenpolvo_1795462378121",
+        "name": "Jugo Jazz 2.25L x 20 sobres",
+        "unit": 15.45,
+        "caja": 309,
+        "cat": "",
+        "art": "963",
+        "present": "Caja x 20 u.",
+        "emoji": "📦",
+        "venta": 2,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true
+      }
+    ]
   }
 }
