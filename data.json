@@ -454,6 +454,17 @@
       "activo": true,
       "sintacc": false,
       "sinfoto": false
+    },
+    {
+      "id": "jugosenpolvo",
+      "sid": "alimentos",
+      "name": "Jugos en polvo",
+      "emoji": "📦",
+      "desc": "Jugos en polvo",
+      "logo": "img/logo-jugosenpolvo.webp",
+      "activo": true,
+      "sintacc": false,
+      "sinfoto": false
     }
   ],
   "products": {
@@ -35909,6 +35920,7 @@
         "sintacc": false,
         "activo": true
       }
-    ]
+    ],
+    "jugosenpolvo": []
   }
 }
