@@ -35949,6 +35949,34 @@
         "destacado": false,
         "sintacc": false,
         "activo": true
+      },
+      {
+        "id": "jugosenpolvo_1795462493248",
+        "name": "Jugo Rinde2 20u.",
+        "unit": 29.5,
+        "caja": 590,
+        "cat": "",
+        "art": "8795",
+        "present": "Caja x 20u.",
+        "emoji": "📦",
+        "venta": 2,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true
+      },
+      {
+        "id": "jugosenpolvo_1795462590495",
+        "name": "Jugo Tang x 20u.",
+        "unit": 19.95,
+        "caja": 399,
+        "cat": "",
+        "art": "9645",
+        "present": "Caja x 20u",
+        "emoji": "📦",
+        "venta": 2,
+        "destacado": false,
+        "sintacc": false,
+        "activo": true
       }
     ]
   }
