@@ -65,29 +65,11 @@ label{display:block;font-weight:bold;margin:4px 0 6px}
 #bar{position:fixed;left:0;right:0;bottom:0;background:#1A1A18;color:#fff;padding:10px 18px;z-index:20;display:none}
 #bar .btn{float:right;margin:0;padding:11px 20px}
 #bar span{display:block;line-height:44px;font-size:18px}
-#zoom{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.88);z-index:50;display:none;text-align:center}
+#zoom{cursor:pointer;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.88);z-index:50;display:none;text-align:center}
 #zoom img{max-width:94%;max-height:78%;margin-top:36px;background:#fff;border-radius:8px}
+#zx{position:absolute;top:10px;right:12px;width:52px;height:52px;border:0;border-radius:26px;background:#fff;color:#1A1A18;font-size:36px;line-height:52px;padding:0;z-index:2}
 #zoom p{color:#fff;margin:14px 20px;font-size:17px}
 @media (max-width:640px){.pr{display:none}.ph{width:72px;height:72px}}
-.grid{font-size:0;margin:0 -6px}
-.fc{display:inline-block;vertical-align:top;width:33.333%;padding:6px;font-size:16px}
-.fci{background:#fff;border:1px solid #D8D2C6;border-radius:12px;padding:12px}
-.fc.in .fci{border-color:#B02020;background:#FBF3F3}
-.fph{position:relative;display:block;width:100%;height:0;padding-bottom:100%;background:#EDE8DF;border-radius:8px;overflow:hidden}
-.fph img{position:absolute;top:50%;left:50%;-webkit-transform:translate(-50%,-50%);transform:translate(-50%,-50%);max-width:100%;max-height:100%}
-.fph .noph{position:absolute;top:48%;left:0;right:0;text-align:center}
-.fart{margin:12px 0 4px;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:#7A7468}
-.fnm{font:bold 18px/1.25 Georgia,"Times New Roman",serif;min-height:45px}
-.fpk{font-size:14px;color:#7A7468;margin-top:4px}
-.fpr{margin-top:8px}
-.fpr b{font-size:26px}
-.fpr small{font-size:14px;color:#7A7468}
-.fsec{font-size:14px;color:#4A4740;margin-top:2px}
-.fci .stp{display:block;margin-top:12px;text-align:center}
-.fci .stp button{width:52px;height:52px}
-.fci .stp input{width:70px;height:52px}
-@media (max-width:899px){.fc{width:50%}}
-@media (max-width:420px){.fc{width:100%}}
 </style>
 </head>
 <body>
@@ -98,7 +80,7 @@ label{display:block;font-weight:bold;margin:4px 0 6px}
 </div>
 <div id="app"><div id="view"><p>Cargando catálogo…</p></div></div>
 <div id="bar"></div>
-<div id="zoom"><img id="zimg" alt=""><p id="zcap"></p></div>
+<div id="zoom" onclick="closeZoom()"><button id="zx" onclick="closeZoom()">&times;</button><img id="zimg" alt=""><p id="zcap"></p></div>
 
 <script>
 (function(){
@@ -207,6 +189,7 @@ function build(d){
 }
 
 /* ---------- piezas de pantalla ---------- */
+window.closeZoom=function(){$('zoom').style.display='none'};
 window.phErr=function(i){var s=document.createElement('span');s.className='noph';s.textContent='Sin foto';if(i.parentNode)i.parentNode.replaceChild(s,i)};
 window.bErr=function(i){var s=document.createElement('span');s.textContent=i.getAttribute('data-e')||'📦';if(i.parentNode)i.parentNode.replaceChild(s,i)};
 
@@ -226,20 +209,15 @@ function rowHtml(p){
   var q=qtyOf(p.id),pr=unitPrice(p),modo=p.venta===1?'unidad':'pack';
   var sec='';
   if(p.caja!==p.unit)sec=p.venta===1?'Pack: '+fmt(p.caja):'Unidad: '+fmt(p.unit);
-  return '<div class="fc'+(q?' in':'')+'" data-row="'+esc(p.id)+'"><div class="fci">'+
-    '<div class="fph" data-zoom="'+esc(p.art)+'" data-name="'+esc(p.name)+'"><img src="'+IMG+encodeURIComponent(p.art)+'.jpg" alt="" onerror="phErr(this)"></div>'+
-    (p.art?'<div class="fart">Art. '+esc(p.art)+'</div>':'')+
-    '<div class="fnm">'+esc(p.name)+'</div>'+
-    (p.present?'<div class="fpk">'+esc(p.present)+'</div>':'')+
-    '<div class="fpr"><b>'+fmt(pr)+'</b> <small>/ '+modo+'</small></div>'+
-    (sec?'<div class="fsec">'+sec+'</div>':'')+
-    stepper(p.id,q)+'</div></div>';
+  return '<div class="row'+(q?' in':'')+'" data-row="'+esc(p.id)+'">'+photo(p)+
+    '<div class="inf"><div class="nm2">'+esc(p.name)+'</div><div class="sub">'+subline(p)+'</div></div>'+
+    '<div class="pr"><b>'+fmt(pr)+'</b><small>por '+modo+'</small>'+(sec?'<small>'+sec+'</small>':'')+'</div>'+
+    stepper(p.id,q)+'</div>';
 }
 function listHtml(list){
   if(!list.length)return '<p>No hay productos para mostrar.</p>';
-  var h='<div class="grid">',n=Math.min(UI.shown,list.length);
+  var h='',n=Math.min(UI.shown,list.length);
   for(var i=0;i<n;i++)h+=rowHtml(list[i]);
-  h+='</div>';
   if(list.length>n)h+='<div class="more">Mostrando '+n+' de '+list.length+'<br><button class="btn ghost" data-act="more" style="margin-top:10px">Mostrar más</button></div>';
   return h;
 }
@@ -250,9 +228,7 @@ function msgHtml(){
 
 /* ---------- vistas ---------- */
 function tile(b){
-  var u=b.url;
-  if(u&&u.indexOf('papeleria')>-1)u='https://pelsas-papeleria.pages.dev/ipad-papeleria.html';
-  var href=u?esc(u):'#m/'+encodeURIComponent(b.id);
+  var href=b.url?esc(b.url):'#m/'+encodeURIComponent(b.id);
   return '<div class="bt"><a href="'+href+'"><div class="im"><img src="'+BIMG+encodeURIComponent(b.id)+'.jpg" alt="" data-e="'+esc(b.emoji||'📦')+'" onerror="bErr(this)"></div>'+
     '<div class="nm">'+esc(b.name)+'</div><div class="ds">'+esc(b.desc||'')+'&nbsp;</div></a></div>';
 }
@@ -324,7 +300,7 @@ function cut(g,t,w){
 }
 function resumenImg(pl){
   try{
-    var W=800,PAD=32,RH=58,n=pl.items.length;
+    var W=800,PAD=32,RH=36,n=pl.items.length;
     var H=230+n*RH+(pl.nota?36:0);
     var c=document.createElement('canvas');c.width=W;c.height=H;
     var g=c.getContext('2d');if(!g)return '';
@@ -338,11 +314,9 @@ function resumenImg(pl){
     if(pl.nota){g.fillText(cut(g,'Nota: '+pl.nota,W-2*PAD),PAD,y);y+=30}
     y+=8;g.fillStyle='#1A1A18';g.fillRect(PAD,y,W-2*PAD,2);y+=30;
     pl.items.forEach(function(it){
-      g.font='20px Helvetica,Arial,sans-serif';g.fillStyle='#1A1A18';g.textAlign='left';
+      g.fillStyle='#1A1A18';g.textAlign='left';
       g.fillText(cut(g,it.qty+' × '+it.name,W-2*PAD-150),PAD,y);
       g.textAlign='right';g.fillText(fmt(it.sub),W-PAD,y);
-      var d2=[];if(it.art)d2.push('Art. '+it.art);if(it.present)d2.push(it.present);
-      if(d2.length){g.font='15px Helvetica,Arial,sans-serif';g.fillStyle='#7A7468';g.textAlign='left';g.fillText(cut(g,d2.join(' · '),W-2*PAD-150),PAD,y+21)}
       y+=RH;
     });
     y+=2;g.fillStyle='#1A1A18';g.fillRect(PAD,y-22,W-2*PAD,2);y+=22;
@@ -354,7 +328,7 @@ function mailText(pl){
   var t=['Pedido PelSAS','Cliente: '+pl.cliente,'Fecha: '+pl._f];
   if(pl.nota)t.push('Nota: '+pl.nota);
   t.push('');
-  pl.items.forEach(function(it){t.push(it.qty+' x '+it.name+' (Art. '+it.art+(it.present?' · '+it.present:'')+') - '+fmt(it.sub))});
+  pl.items.forEach(function(it){t.push(it.qty+' x '+it.name+' (Art. '+it.art+') - '+fmt(it.sub))});
   t.push('');t.push('Total: '+fmt(pl.total));
   return t.join('\n');
 }
@@ -364,7 +338,7 @@ function viewRevisar(){
   var h='<a class="back" href="#pedido">‹ Volver a editar</a><h1>Revisar pedido</h1>'+msgHtml()+
     '<p><b>Cliente:</b> '+esc(pl.cliente)+(pl.nota?'<br><b>Nota:</b> '+esc(pl.nota):'')+'</p>';
   pl.items.forEach(function(it){
-    h+='<div class="row"><div class="inf"><div class="nm2">'+it.qty+' × '+esc(it.name)+'</div><div class="sub">Art. '+esc(it.art)+(it.present?' · '+esc(it.present):'')+'</div></div><div class="pr" style="display:block"><b>'+fmt(it.sub)+'</b></div></div>';
+    h+='<div class="row"><div class="inf"><div class="nm2">'+it.qty+' × '+esc(it.name)+'</div><div class="sub">Art. '+esc(it.art)+'</div></div><div class="pr" style="display:block"><b>'+fmt(it.sub)+'</b></div></div>';
   });
   h+='<div class="tot">Total '+fmt(pl.total)+'</div>'+
     '<button class="btn red" id="bsend" data-act="enviar">Enviar pedido</button>'+
@@ -445,7 +419,7 @@ function refreshRows(id){
     if(rows[i].getAttribute('data-row')!==id)continue;
     var q=qtyOf(id),inp=rows[i].querySelector('.qin');
     if(inp)inp.value=q;
-    rows[i].className=(rows[i].className.indexOf('fc')===0?'fc':'row')+(q?' in':'');
+    rows[i].className='row'+(q?' in':'');
   }
 }
 function changed(id){
