@@ -109,7 +109,7 @@ var SUPA_KEY='sb_publishable_tdrE1iMSnvMIMUGLnHz4wg_6r070C_H';   /* Supabase > S
 
 var STORE='pelsas_ipad_pedido_v1';
 var PAGE=30;
-var IMG='img-ipad/p/', BIMG='img-ipad/b/', IMGV='?v=2';
+var IMG='img-ipad/p/', BIMG='img-ipad/b/', IMGV='?v=2', BIMGV='?v=3';
 var SECCIONES=[['alimentos','Alimentos'],['fumadores','Fumadores'],['regalos','Regalos']];
 
 var brands=[], P={}, BYID={}, ALL=[];
@@ -254,7 +254,7 @@ function tile(b){
   var u=b.url;
   if(u&&u.indexOf('papeleria')>-1)u='https://pelsas-papeleria.pages.dev/ipad-papeleria.html';
   var href=u?esc(u):'#m/'+encodeURIComponent(b.id);
-  return '<div class="bt"><a href="'+href+'"><div class="im"><img src="'+BIMG+encodeURIComponent(b.id)+'.jpg" alt="" data-e="'+esc(b.emoji||'📦')+'" onerror="bErr(this)"></div>'+
+  return '<div class="bt"><a href="'+href+'"><div class="im"><img src="'+BIMG+seguro(b.id)+'.jpg'+BIMGV+'" alt="" data-e="'+esc(b.emoji||'📦')+'" onerror="bErr(this)"></div>'+
     '<div class="nm">'+esc(b.name)+'</div><div class="ds">'+esc(b.desc||'')+'&nbsp;</div></a></div>';
 }
 function viewHome(){
