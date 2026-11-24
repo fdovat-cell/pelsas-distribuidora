@@ -451,7 +451,7 @@
       "emoji": "🍼",
       "desc": "Artículos de primera infancia",
       "logo": "img/logo-bebes.webp",
-      "activo": true,
+      "activo": false,
       "sintacc": false,
       "sinfoto": false
     },
@@ -462,7 +462,7 @@
       "emoji": "🧸",
       "desc": "Peluches",
       "logo": "img/logo-peluches.webp",
-      "activo": true,
+      "activo": false,
       "sintacc": false,
       "sinfoto": false
     },
