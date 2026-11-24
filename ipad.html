@@ -65,7 +65,8 @@ label{display:block;font-weight:bold;margin:4px 0 6px}
 #bar{position:fixed;left:0;right:0;bottom:0;background:#1A1A18;color:#fff;padding:10px 18px;z-index:20;display:none}
 #bar .btn{float:right;margin:0;padding:11px 20px}
 #bar span{display:block;line-height:44px;font-size:18px}
-#zoom{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.88);z-index:50;display:none;text-align:center}
+#zoom{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.88);z-index:50;display:none;text-align:center;cursor:pointer}
+#zx{position:absolute;top:12px;right:12px;width:52px;height:52px;border:0;border-radius:26px;background:#fff;color:#1A1A18;font-size:32px;line-height:1;padding:0;z-index:2;cursor:pointer}
 #zoom img{max-width:94%;max-height:78%;margin-top:36px;background:#fff;border-radius:8px}
 #zoom p{color:#fff;margin:14px 20px;font-size:17px}
 @media (max-width:640px){.pr{display:none}.ph{width:72px;height:72px}}
@@ -98,7 +99,7 @@ label{display:block;font-weight:bold;margin:4px 0 6px}
 </div>
 <div id="app"><div id="view"><p>Cargando catálogo…</p></div></div>
 <div id="bar"></div>
-<div id="zoom"><img id="zimg" alt=""><p id="zcap"></p></div>
+<div id="zoom"><button id="zx" aria-label="Cerrar">×</button><img id="zimg" alt=""><p id="zcap"></p></div>
 
 <script>
 (function(){
