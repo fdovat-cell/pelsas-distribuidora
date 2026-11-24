@@ -465,6 +465,17 @@
       "activo": true,
       "sintacc": false,
       "sinfoto": false
+    },
+    {
+      "id": "phiphitoys",
+      "sid": "regalos",
+      "name": "Phi Phi Toys",
+      "emoji": "📦",
+      "desc": "Juguetes y peluches",
+      "logo": "img/logo-phiphitoys.webp",
+      "activo": true,
+      "sintacc": false,
+      "sinfoto": false
     }
   ],
   "products": {
@@ -35978,6 +35989,7 @@
         "sintacc": false,
         "activo": true
       }
-    ]
+    ],
+    "phiphitoys": []
   }
 }
