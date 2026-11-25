@@ -37934,7 +37934,7 @@
         "present": "caja x 27 u",
         "emoji": "📦",
         "venta": 1,
-        "activo": true,
+        "activo": false,
         "destacado": false,
         "sintacc": false
       },
